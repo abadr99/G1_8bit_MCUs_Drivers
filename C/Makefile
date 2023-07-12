@@ -35,7 +35,7 @@ build: $(OBJS)
 	avr-objcopy -j .text -j .data -O ihex $(ELF_TARGET) $(HEX_TARGET)
 	@echo "\n[Makefile] : Compiled successfully."
 
-%.o : %.cpp
+%.o : %.c
 	@$(CC) $(CCFLAGS) $(INC) -c $< -o $@
 	@$(eval SOURCES_CTR=$(shell echo $$(($(SOURCES_CTR)+1))))
 	@printf '\033[2K\r%s' "[Makefile] : [$(SOURCES_CTR)/$(words $(SOURCES))] $<"
