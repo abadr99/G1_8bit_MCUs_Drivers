@@ -8,7 +8,7 @@ typedef enum  {
     kPORTC,
     kPORTD
    
-}PORT_t;
+}port_t;
 
 typedef enum  {
     kPIN0,
@@ -18,20 +18,20 @@ typedef enum  {
     kPIN5,
     kPIN6,
     kPIN7
-}PIN_t;
+}pin_t;
 
 typedef enum  {
     kLow,
     kHigh
-}STATE_t;
+}state_t;
 
 typedef enum  {
     kInput,
     kOutput
-}DIRECTION_t;
+}direction_t;
 
 
-Error_t GPIO_SetPinDirection(PORT_t port,PIN_t pin , DIRECTION_t direction);
-Error_t GPIO_SetPinValue(PORT_t PortNumber , PIN_t PinNumber , STATE_t PintVoltageLevel);
+error_t GPIO_SetPinDirection(port_t port,pin_t pin , direction_t direction);
+error_t GPIO_SetPinValue(port_t PortNumber , pin_t PinNumber , state_t PintVoltageLevel);
 
 #endif /* _GPIO_H_ */

@@ -6,11 +6,9 @@ typedef signed   char sint8_t;
 
 typedef enum
 { 
-	NoError ,
-	FunctioParameterError 
-}Error_t;
+	kNoError ,
+	kFunctioParameterError 
+}error_t;
 
-#define SET_BIT(_Reg , _BitNum) ( _Reg |=  (1<<_BitNum))
-#define CLR_BIT(_Reg , _BitNum) ( _Reg &= ~(1<<_BitNum))
 
 #endif //_types_H_

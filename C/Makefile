@@ -38,7 +38,7 @@ build: $(OBJS)
 %.o : %.c
 	@$(CC) $(CCFLAGS) $(INC) -c $< -o $@
 	@$(eval SOURCES_CTR=$(shell echo $$(($(SOURCES_CTR)+1))))
-	printf '\033[2K\r%s' "[Makefile] : [$(SOURCES_CTR)/$(words $(SOURCES))] $<"
+	@printf '\033[2K\r%s' "[Makefile] : [$(SOURCES_CTR)/$(words $(SOURCES))] $<"
 
 upload: $(HEX)
 	@$(AVRDUDE) -c $(AVRDUDE_PROGRAMMER) -p $(AVRDUDE_MCU) -P $(AVRDUDE_PORT) -U flash:w:$(TARGET).hex:i

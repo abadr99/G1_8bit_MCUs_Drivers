@@ -1,13 +1,14 @@
 #include "../../common/Types.h"
+#include "../../common/Utils.h"
 #include "../../common/Config.h"
 #include "../../common/Registes.h"
 #include "GPIOPrivate.h"
 #include "GPIO.h"
 
 
-Error_t GPIO_SetPinDirection(PORT_t PortNumber , PIN_t PinNumber , DIRECTION_t Direction)
+error_t GPIO_SetPinDirection(port_t PortNumber , pin_t PinNumber , direction_t Direction)
 {
-	Error_t LocReturnError = NoError ;
+	error_t Ret_ErrorState = kNoError ;
 	/* Make sure that the Port number and Pin nuber are in the valid range */
 	if(PortNumber <= kPORTD && PinNumber <= kPIN7 ) 
 	{
@@ -33,16 +34,16 @@ Error_t GPIO_SetPinDirection(PORT_t PortNumber , PIN_t PinNumber , DIRECTION_t D
 		}
 	}else
 	{
-		LocReturnError = FunctioParameterError  ; 
+		Ret_ErrorState = kFunctioParameterError  ; 
 	} 
 
-	return LocReturnError ; 
+	return Ret_ErrorState ; 
 }
 
-Error_t GPIO_SetPinValue(PORT_t PortNumber , PIN_t PinNumber , STATE_t PintVoltageLevel)
+error_t GPIO_SetPinValue(port_t PortNumber , pin_t PinNumber , state_t PintVoltageLevel)
 {
 	/* Make sure that the Port number and Pin nuber are in the valid range */
-	Error_t LocReturnError = NoError ;
+	error_t Ret_ErrorState = kNoError ;
 	if(PortNumber <= kPORTD && PinNumber <= kPIN7 ) 
 	{
 		if(PintVoltageLevel ==kHigh)
@@ -67,7 +68,7 @@ Error_t GPIO_SetPinValue(PORT_t PortNumber , PIN_t PinNumber , STATE_t PintVolta
 		}
 	}else
 	{
-		LocReturnError = FunctioParameterError  ; 
+		Ret_ErrorState = kFunctioParameterError  ; 
 	}
-	return LocReturnError ; 
+	return Ret_ErrorState ; 
 }
