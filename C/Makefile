@@ -1,8 +1,8 @@
 CC:= avr-gcc
 MCU:= atmega32a
-CLK:= 16000000
+CLK:= 8000000
 
-CCFLAGS:= -g -Wall -DF_CPU=$(CLK) -mmcu=$(MCU)
+CCFLAGS:= -g -Wall -DF_CPU=$(CLK) -mmcu=$(MCU) -gdwarf-2
 
 
 TARGET:= avr
@@ -23,7 +23,7 @@ ELF_TARGET:=$(TARGET).elf
 AVRDUDE = avrdude
 AVRDUDE_PROGRAMMER = usbasp
 AVRDUDE_MCU = m32
-AVRDUDE_PORT = /dev/ttyACM0
+AVRDUDE_PORT = /dev/ACM0
 
 
 .PHONY: all clean build 
@@ -32,20 +32,21 @@ all:build
 
 build: $(OBJS)
 	@$(CC) $(CCFLAGS) $(OBJS) -o $(ELF_TARGET)
-	avr-objcopy -j .text -j .data -O ihex $(ELF_TARGET) $(HEX_TARGET)
+	@avr-objcopy -j .text -j .data -O ihex $(ELF_TARGET) $(HEX_TARGET)
 	@echo "\n[Makefile] : Compiled successfully."
 
 %.o : %.c
 	@$(CC) $(CCFLAGS) $(INC) -c $< -o $@
 	@$(eval SOURCES_CTR=$(shell echo $$(($(SOURCES_CTR)+1))))
-	@printf '\033[2K\r%s' "[Makefile] : [$(SOURCES_CTR)/$(words $(SOURCES))] $<"
+	printf '\033[2K\r%s' "[Makefile] : [$(SOURCES_CTR)/$(words $(SOURCES))] $<"
 
 upload: $(HEX)
-	$(AVRDUDE) -c $(AVRDUDE_PROGRAMMER) -p $(AVRDUDE_MCU) -P $(AVRDUDE_PORT) -U flash:w:$(TARGET).hex:i
+	@$(AVRDUDE) -c $(AVRDUDE_PROGRAMMER) -p $(AVRDUDE_MCU) -P $(AVRDUDE_PORT) -U flash:w:$(TARGET).hex:i
 clean:
 	@find . -name "*.o" -type f -delete
 	@rm -rf *.o
 	@rm -rf *.bin
 	@rm -rf *.exe
+	@rm -rf *.elf
 	@rm -rf *.hex
 	@rm -rf avr

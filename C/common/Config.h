@@ -3,6 +3,10 @@
 
 #define AVR     (1)
 #define PIC     (2)
-// #define MCU_TYPE AVR,PIC
+/**
+ * OPTIONS: 
+ *          AVR  PIC
+ */
+#define MCU_TYPE  AVR
 
 #endif // CONFIG_H_H
