@@ -1,5 +1,7 @@
-#include "Config.h"
-#if MCU_TYPE == AVR
+#ifndef _REGISTERS_H_
+#define _REGISTERS_H_
+
+#if MCU_TYPE == _AVR
     #define SREG    (*((uint8_t *)0x5F))
     #define PORTA_REG  *((volatile uint8_t *)0x3B)
     #define DDRA_REG   *((volatile uint8_t *)0x3A)
@@ -19,6 +21,8 @@
     #define PIND_REG   *((volatile uint8_t *)0x30)
 
 
-    #elif MCU_TYPE == PIC
+#elif MCU_TYPE == _PIC
     #define TRISA   (*((uint8_t *)0xF92))
 #endif  // MCU_TYPE
+
+#endif //_REGISTERS_H_
