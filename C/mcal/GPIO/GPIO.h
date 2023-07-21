@@ -14,6 +14,7 @@ typedef enum  {
     kPIN0,
     kPIN1,
     kPIN2,
+    kPIN3,
     kPIN4,
     kPIN5,
     kPIN6,
