@@ -12,11 +12,11 @@ OBJCOPY=xc8-bin2hex
 
 
 # Compiler options
-CFLAGS=-mcpu=pic18f4520 -O2
+CFLAGS=-mcpu=pic16f877a -O2
 CFLAGS+=-Iinclude
 
 # Linker options
-LDFLAGS=-mcpu=pic18f4520
+LDFLAGS=-mcpu=pic16f877a
 LDFLAGS+=-Wl,-Llib
 LDFLAGS+=-Wl,-Map=output.map
 
