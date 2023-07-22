@@ -9,7 +9,7 @@
 error_t GPIO_SetPinDirection(port_t PortNumber , pin_t PinNumber , direction_t Direction)
 {
 	error_t Ret_ErrorState = kNoError ;
-	/* Make sure that the Port number and Pin nuber are in the valid range */
+	/* Make sure that the Port number and Pin number are in the valid range */
 	if(PortNumber <= kPORTD && PinNumber <= kPIN7 ) 
 	{
 		if(Direction == kOutput)
@@ -48,7 +48,7 @@ error_t GPIO_SetPinDirection(port_t PortNumber , pin_t PinNumber , direction_t D
 
 error_t GPIO_SetPinValue(port_t PortNumber , pin_t PinNumber , state_t PintVoltageLevel)
 {
-	/* Make sure that the Port number and Pin nuber are in the valid range */
+	/* Make sure that the Port number and Pin number are in the valid range */
 	error_t Ret_ErrorState = kNoError ;
 	if(PortNumber <= kPORTD && PinNumber <= kPIN7 ) 
 	{
