@@ -16,10 +16,10 @@ error_t GPIO_SetPinDirection(port_t PortNumber , pin_t PinNumber , direction_t D
 		{
 			switch(PortNumber)
 			{
-				case kPORTA : SET_DIR_OUTPUT(GPIO_DIRECTION_REGA , PinNumber); break;
-				case kPORTB : SET_DIR_OUTPUT(GPIO_DIRECTION_REGB , PinNumber); break;
-				case kPORTC : SET_DIR_OUTPUT(GPIO_DIRECTION_REGC , PinNumber); break;
-				case kPORTD : SET_DIR_OUTPUT(GPIO_DIRECTION_REGD , PinNumber); break;
+				case kPORTA : SET_DIR_OUTPUT(GPIOA_DIR_REG , PinNumber); break;
+				case kPORTB : SET_DIR_OUTPUT(GPIOB_DIR_REG , PinNumber); break;
+				case kPORTC : SET_DIR_OUTPUT(GPIOC_DIR_REG , PinNumber); break;
+				case kPORTD : SET_DIR_OUTPUT(GPIOD_DIR_REG , PinNumber); break;
 				#if MCU_TYPE == _PIC
 				case kPORTE : SET_DIR_OUTPUT(GPIO_DIRECTION_REGE , PinNumber); break;
 				#endif
@@ -29,10 +29,10 @@ error_t GPIO_SetPinDirection(port_t PortNumber , pin_t PinNumber , direction_t D
 		{
 			switch(PortNumber)
 			{
-				case kPORTA : SET_DIR_INPUT(GPIO_DIRECTION_REGA , PinNumber); break;
-				case kPORTB : SET_DIR_INPUT(GPIO_DIRECTION_REGB , PinNumber); break;
-				case kPORTC : SET_DIR_INPUT(GPIO_DIRECTION_REGC , PinNumber); break;
-				case kPORTD : SET_DIR_INPUT(GPIO_DIRECTION_REGD , PinNumber); break;
+				case kPORTA : SET_DIR_INPUT(GPIOA_DIR_REG , PinNumber); break;
+				case kPORTB : SET_DIR_INPUT(GPIOB_DIR_REG , PinNumber); break;
+				case kPORTC : SET_DIR_INPUT(GPIOC_DIR_REG , PinNumber); break;
+				case kPORTD : SET_DIR_INPUT(GPIOD_DIR_REG , PinNumber); break;
 				#if MCU_TYPE == _PIC
 				case kPORTE : SET_DIR_INPUT(GPIO_DIRECTION_REGE , PinNumber); break;
 				#endif
@@ -56,10 +56,10 @@ error_t GPIO_SetPinValue(port_t PortNumber , pin_t PinNumber , state_t PintVolta
 		{
 			switch(PortNumber)
 			{
-				case kPORTA : SET_BIT(GPIO_OUTPUT_REGA , PinNumber); break;
-				case kPORTB : SET_BIT(GPIO_OUTPUT_REGB , PinNumber); break;
-				case kPORTC : SET_BIT(GPIO_OUTPUT_REGC , PinNumber); break;
-				case kPORTD : SET_BIT(GPIO_OUTPUT_REGD , PinNumber); break;
+				case kPORTA : SET_BIT(GPIOA_OUT_REG , PinNumber); break;
+				case kPORTB : SET_BIT(GPIOB_OUT_REG , PinNumber); break;
+				case kPORTC : SET_BIT(GPIOC_OUT_REG , PinNumber); break;
+				case kPORTD : SET_BIT(GPIOD_OUT_REG , PinNumber); break;
 				#if MCU_TYPE == _PIC
 				case kPORTE : SET_BIT(GPIO_OUTPUT_REGE , PinNumber); break;
 				#endif
@@ -69,10 +69,10 @@ error_t GPIO_SetPinValue(port_t PortNumber , pin_t PinNumber , state_t PintVolta
 		{
 			switch(PortNumber)
 			{
-				case kPORTA : CLR_BIT(GPIO_OUTPUT_REGA , PinNumber); break;
-				case kPORTB : CLR_BIT(GPIO_OUTPUT_REGB , PinNumber); break;
-				case kPORTC : CLR_BIT(GPIO_OUTPUT_REGC , PinNumber); break;
-				case kPORTD : CLR_BIT(GPIO_OUTPUT_REGD , PinNumber); break;
+				case kPORTA : CLR_BIT(GPIOA_OUT_REG , PinNumber); break;
+				case kPORTB : CLR_BIT(GPIOB_OUT_REG , PinNumber); break;
+				case kPORTC : CLR_BIT(GPIOC_OUT_REG , PinNumber); break;
+				case kPORTD : CLR_BIT(GPIOD_OUT_REG , PinNumber); break;
 				#if MCU_TYPE == _PIC
 				case kPORTE : CLR_BIT(GPIO_OUTPUT_REGE , PinNumber); break;
 				#endif
