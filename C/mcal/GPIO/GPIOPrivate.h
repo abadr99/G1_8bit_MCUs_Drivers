@@ -19,6 +19,7 @@
 #define GPIOB_OUT_REG        (PORTB_REG)
 #define GPIOC_OUT_REG        (PORTC_REG)
 #define GPIOD_OUT_REG        (PORTD_REG)
+#define GPIO_LAST_REG          (kPORTD)
 
 #elif MCU_TTPE == _PIC
 
@@ -36,12 +37,13 @@
 #define GPIOB_IN_REG      (PORTB_REG)
 #define GPIOC_IN_REG      (PORTC_REG)
 #define GPIOD_IN_REG      (PORTD_REG)
-#define GPIO_INPUT_REGE      (PORTE_REG)
+#define GPIO_INPUT_REGE   (PORTE_REG)
 #define GPIOA_OUT_REG     (LATA_REG)
 #define GPIOB_OUT_REG     (LATB_REG)
 #define GPIOC_OUT_REG     (LATC_REG)
 #define GPIOD_OUT_REG     (LATD_REG)
-#define GPIO_OUTPUT_REGE     (LATE_REG)
+#define GPIO_OUTPUT_REGE  (LATE_REG)
+#define GPIO_LAST_REG      (kPORTE)
 #endif //MCU_TYPE
 
 #endif //_GPIO_PRIVATE_H_

@@ -10,7 +10,7 @@ error_t GPIO_SetPinDirection(port_t PortNumber , pin_t PinNumber , direction_t D
 {
 	error_t Ret_ErrorState = kNoError ;
 	/* Make sure that the Port number and Pin number are in the valid range */
-	if(PortNumber <= kPORTD && PinNumber <= kPIN7 ) 
+	if(PortNumber <= GPIO_LAST_REG  && PinNumber <= kPIN7 ) 
 	{
 		if(Direction == kOutput)
 		{
@@ -50,7 +50,7 @@ error_t GPIO_SetPinValue(port_t PortNumber , pin_t PinNumber , state_t PintVolta
 {
 	/* Make sure that the Port number and Pin number are in the valid range */
 	error_t Ret_ErrorState = kNoError ;
-	if(PortNumber <= kPORTD && PinNumber <= kPIN7 ) 
+	if(PortNumber <= GPIO_LAST_REG  && PinNumber <= kPIN7 ) 
 	{
 		if(PintVoltageLevel ==kHigh)
 		{
@@ -89,7 +89,7 @@ error_t GPIO_GetPinValue(port_t PortNumber , pin_t PinNumber,state_t * state)
  
  error_t Ret_ErrorState = kNoError ; 
    /* Make sure that the Port number and Pin number are in the valid range */ 
-   if(PortNumber <= kPORTD  && PinNumber <= kPIN7 ) 
+   if(PortNumber <= GPIO_LAST_REG   && PinNumber <= kPIN7 ) 
    { 
     switch(PortNumber) 
     { 
@@ -114,14 +114,14 @@ error_t GPIO_SetPortDirection(port_t PortNumber, uint8_t direction)
 { 
  error_t Ret_ErrorState = kNoError ; 
   /* Make sure that the Port number is in the valid range */ 
-  if(PortNumber <= kPORTD ) 
+  if(PortNumber <= GPIO_LAST_REG  ) 
   { 
  
     switch(PortNumber) 
     { 
      case kPORTA : GPIOA_DIR_REG =direction; break; 
      case kPORTB : GPIOB_DIR_REG =direction; break; 
-     case kPORTC : GPIOC_DIR_REG  =direction; break; 
+     case kPORTC : GPIOC_DIR_REG =direction; break; 
      case kPORTD : GPIOD_DIR_REG =direction; break; 
 	  #if MCU_TYPE == _PIC
 	  case kPORTE : GPIO_DIRECTION_REGE =direction; break; 
@@ -139,14 +139,14 @@ error_t GPIO_SetPortValue(port_t PortNumber, uint8_t PintVoltageLevel)
 { 
  /* Make sure that the Port number is in the valid range */ 
  error_t Ret_ErrorState = kNoError ; 
- if(PortNumber <= kPORTD ) 
+ if(PortNumber <= GPIO_LAST_REG  ) 
  { 
    switch(PortNumber) 
    { 
     case kPORTA : GPIOA_OUT_REG =PintVoltageLevel; break; 
     case kPORTB : GPIOB_OUT_REG =PintVoltageLevel; break; 
-    case kPORTC : GPIOC_OUT_REG  =PintVoltageLevel; break; 
-    case kPORTD : GPIOD_OUT_REG  =PintVoltageLevel;break; 
+    case kPORTC : GPIOC_OUT_REG =PintVoltageLevel; break; 
+    case kPORTD : GPIOD_OUT_REG =PintVoltageLevel; break; 
 	#if MCU_TYPE == _PIC
 	case kPORTE : GPIO_DIRECTION_REGE =PintVoltageLevel; break;
 	#endif
@@ -163,16 +163,16 @@ error_t GPIO_GetPortValue(port_t PortNumber ,uint8_t * state)
  
  /* Make sure that the Port number is in the valid range */ 
   error_t Ret_ErrorState = kNoError ; 
-  if(PortNumber <= kPORTD ) 
+  if(PortNumber <= GPIO_LAST_REG  ) 
   { 
     switch(PortNumber) 
     { 
-     case kPORTA : *state= GPIOA_IN_REG ; break; 
-     case kPORTB : *state=GPIOB_IN_REG ;break; 
-     case kPORTC : *state=GPIOC_IN_REG; break; 
-     case kPORTD : *state=GPIOD_IN_REG; break; 
+     case kPORTA : *state=GPIOA_IN_REG ; break; 
+     case kPORTB : *state=GPIOB_IN_REG ; break; 
+     case kPORTC : *state=GPIOC_IN_REG ; break; 
+     case kPORTD : *state=GPIOD_IN_REG ; break; 
 	 #if MCU_TYPE == _PIC
-	  case kPORTE : *state =GPIO_INPUT_REGE; break; 
+	 case kPORTE : *state =GPIO_INPUT_REGE; break; 
 	  #endif
     } 
  

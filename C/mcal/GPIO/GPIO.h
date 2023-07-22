@@ -6,7 +6,8 @@ typedef enum  {
     kPORTA,
     kPORTB,
     kPORTC,
-    kPORTD
+    kPORTD,
+    kPORTE
    
 }port_t;
 
