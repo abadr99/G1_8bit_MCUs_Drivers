@@ -14,6 +14,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: configure
+      run: chmod +x  ./configure.sh
       run: sh ./configure.sh
     - name: Building C Version
       run: make -C C
