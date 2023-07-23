@@ -1,7 +1,7 @@
 #ifndef _REGISTERS_H_
 #define _REGISTERS_H_
 
-#if MCU_TYPE == _AVR
+#if MCU_TYPE == AVR
     #define SREG       *((volatile uint8_t *)0x5F)
     #define DDRA_REG   *((volatile uint8_t *)0x3A)
     #define DDRB_REG   *((volatile uint8_t *)0x37)
@@ -17,7 +17,7 @@
     #define PORTD_REG  *((volatile uint8_t *)0x32)
 
 
-#elif MCU_TYPE == _PIC
+#elif MCU_TYPE == PIC
     #define TRISA_REG   *((volatile uint8_t *)0xF92)
     #define TRISB_REG   *((volatile uint8_t *)0xF93)
     #define TRISC_REG   *((volatile uint8_t *)0xF94)

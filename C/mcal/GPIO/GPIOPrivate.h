@@ -1,7 +1,8 @@
 #ifndef _GPIO_PRIVATE_H_
 #define _GPIO_PRIVATE_H_
 
-#if MCU_TYPE == _AVR
+#define GPIO_LAST_PIN        (kPIN7)
+#if MCU_TYPE == AVR
 /* -------------- DEFINE SOME HELPER FUNCTION SPECIFIC FOR AVR -------------- */
 #define SET_DIR_OUTPUT(_Reg , _BitNum)  SET_BIT(_Reg , _BitNum)
 #define SET_DIR_INPUT(_Reg , _BitNum)   CLR_BIT(_Reg , _BitNum)
@@ -19,9 +20,9 @@
 #define GPIOB_OUT_REG        (PORTB_REG)
 #define GPIOC_OUT_REG        (PORTC_REG)
 #define GPIOD_OUT_REG        (PORTD_REG)
-#define GPIO_LAST_REG          (kPORTD)
+#define GPIO_LAST_REG        (kPORTD)
 
-#elif MCU_TTPE == _PIC
+#elif MCU_TTPE == PIC
 
 /* -------------- DEFINE SOME HELPER FUNCTION SPECIFIC FOR PIC -------------- */
 #define SET_DIR_OUTPUT(_Reg , _BitNum)  CLR_BIT(_Reg , _BitNum)
