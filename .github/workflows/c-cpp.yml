@@ -13,6 +13,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: configure
+      run: sh ./configure.sh
     - name: Building C Version
       run: make -C C
     - name: make check
