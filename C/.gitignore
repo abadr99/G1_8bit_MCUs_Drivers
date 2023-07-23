@@ -4,4 +4,5 @@
 *.elf
 *.hex
 avr
-../.vscode/
+pic
+../.vscode
