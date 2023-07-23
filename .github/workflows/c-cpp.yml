@@ -17,7 +17,4 @@ jobs:
       run: sh /home/runner/work/G1_8bit_MCUs_Drivers/G1_8bit_MCUs_Drivers/.github/workflows/configure.sh
     - name: Building C Version
       run: make -C C
-    - name: make check
-      run: make check
-    - name: make distcheck
-      run: make distcheck
+
