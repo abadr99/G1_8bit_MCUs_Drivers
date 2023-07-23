@@ -2,12 +2,12 @@
 #define _GPIO_PRIVATE_H_
 
 #define GPIO_LAST_PIN        (kPIN7)
-#if MCU_TYPE == AVR
-/* -------------- DEFINE SOME HELPER FUNCTION SPECIFIC FOR AVR -------------- */
+#if MCU_TYPE == _AVR
+/* -------------- DEFINE SOME HELPER FUNCTION SPECIFIC FOR _AVR -------------- */
 #define SET_DIR_OUTPUT(_Reg , _BitNum)  SET_BIT(_Reg , _BitNum)
 #define SET_DIR_INPUT(_Reg , _BitNum)   CLR_BIT(_Reg , _BitNum)
 
-/* -------------- DEFINE SOME HELPER MACROS SPECIFIC FOR AVR -------------- */
+/* -------------- DEFINE SOME HELPER MACROS SPECIFIC FOR _AVR -------------- */
 #define GPIOA_DIR_REG        (DDRA_REG)
 #define GPIOB_DIR_REG        (DDRB_REG)
 #define GPIOC_DIR_REG        (DDRC_REG)
@@ -22,13 +22,13 @@
 #define GPIOD_OUT_REG        (PORTD_REG)
 #define GPIO_LAST_REG        (kPORTD)
 
-#elif MCU_TTPE == PIC
+#elif MCU_TTPE == _PIC
 
-/* -------------- DEFINE SOME HELPER FUNCTION SPECIFIC FOR PIC -------------- */
+/* -------------- DEFINE SOME HELPER FUNCTION SPECIFIC FOR _PIC -------------- */
 #define SET_DIR_OUTPUT(_Reg , _BitNum)  CLR_BIT(_Reg , _BitNum)
 #define  SET_DIR_INPUT(_Reg , _BitNum)  SET_BIT(_Reg , _BitNum)
 
-/* -------------- DEFINE SOME HELPER MACROS SPECIFIC FOR PIC -------------- */
+/* -------------- DEFINE SOME HELPER MACROS SPECIFIC FOR _PIC -------------- */
 #define GPIOA_DIR_REG  (ATRISA_REG)    
 #define GPIOB_DIR_REG  (ATRISB_REG)
 #define GPIOC_DIR_REG  (ATRISC_REG)

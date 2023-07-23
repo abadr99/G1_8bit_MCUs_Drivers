@@ -7,7 +7,7 @@ typedef enum  {
     kPORTB,
     kPORTC,
     kPORTD,
-    #if MCU_TYPE == PIC
+    #if MCU_TYPE == _PIC
     kPORTE
    #endif
 }port_t;
