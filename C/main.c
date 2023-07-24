@@ -9,7 +9,7 @@ int main() {
     while(1) {
         GPIO_SetPinValue(ORTD , kPIN7 , kHigh);
         _delay_ms(500);
-        GPIO_SetPinValue(kPORTD , kPIN7 , kLow);
+        GPIO_SetPinValue(kPTD , kPIN7 , kLow);
         _delay_ms(500);
     }
 }
