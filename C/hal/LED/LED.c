@@ -1,5 +1,5 @@
-#include "C/common/Types.h"
-#include "C/mcal/GPIO/GPIO.h"
+#include "../../common/Types.h"
+#include "../../mcal/GPIO/GPIO.h"
 #include "LED.h"
 
 void LED_Init(LED_t LED_Type)
