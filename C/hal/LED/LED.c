@@ -2,29 +2,41 @@
 #include "../../mcal/GPIO/GPIO.h"
 #include "LED.h"
 
-void LED_Init(LED_t LED_Type)
+void LED_Init(LED_t* pLED_Configration)
 {
-    GPIO_SetPinDirection(LED_Type.Port,LED_Type.Pin,kOutput);
+    GPIO_SetPinDirection(pLED_Configration->Port,pLED_Configration->Pin,kOutput);
 }
-void LED_LedOn(LED_t LED_Type)
+error_t LED_TurnOn(LED_t* pLED_Configration)
 {
-    if(LED_Type.ActiveState == LED_ACTIVE_HIGH)
+    error_t Ret_ErrorState = kNoError ;
+    if(pLED_Configration->ActiveState == kHigh)
     {
-        GPIO_SetPinValue(LED_Type.Port,LED_Type.Pin,kHigh);
+        GPIO_SetPinValue(pLED_Configration->Port,pLED_Configration->Pin,kHigh);
     }
-    else if(LED_Type.ActiveState == LED_ACTIVE_LOW)
+    else if(pLED_Configration->ActiveState == kLow)
     {
-        GPIO_SetPinValue(LED_Type.Port,LED_Type.Pin,kLow);
+        GPIO_SetPinValue(pLED_Configration->Port,pLED_Configration->Pin,kLow);
     }
+    else
+    {
+        Ret_ErrorState = kFunctioParameterError  ;
+    }
+    return Ret_ErrorState;
 }
-void LED_LedOff(LED_t LED_Type)
+error_t LED_TurnOff(LED_t* pLED_Configration)
 {
-   if(LED_Type.ActiveState == LED_ACTIVE_HIGH)
+    error_t Ret_ErrorState = kNoError ;
+   if(pLED_Configration->ActiveState == kHigh)
     {
-        GPIO_SetPinValue(LED_Type.Port,LED_Type.Pin,kLow);
+        GPIO_SetPinValue(pLED_Configration->Port,pLED_Configration->Pin,kLow);
     }
-    else if(LED_Type.ActiveState == LED_ACTIVE_LOW)
+    else if(pLED_Configration->ActiveState == kLow)
     {
-        GPIO_SetPinValue(LED_Type.Port,LED_Type.Pin,kHigh);
+        GPIO_SetPinValue(pLED_Configration->Port,pLED_Configration->Pin,kHigh);
     } 
+    else
+    {
+        Ret_ErrorState = kFunctioParameterError  ;
+    }
+    return Ret_ErrorState;
 }

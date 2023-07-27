@@ -4,13 +4,13 @@
 #include "hal/LED/LED.h"
 int main() {
     
-LED_t LED1={LED_PORTA,LED_PIN0,LED_ACTIVE_HIGH};
-  LED_Init(LED1);
+LED_t LED1={kPORTA,kPIN0,kHigh};
+  LED_Init(&LED1);
   while(1)
   {
-    LED_LedOn(LED1);
+    LED_TurnOn(&LED1);
     _delay_ms(500);
-    LED_LedOff(LED1);
+    LED_TurnOff(&LED1);
     _delay_ms(500);
   }
 }
