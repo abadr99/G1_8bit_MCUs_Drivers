@@ -3,8 +3,8 @@
 
 typedef enum
 {
-    ActiveLow,
-    ActiveHigh,
+    kLedActiveLow,
+    kLedActiveHigh,
 }LedState_t;
 
 typedef struct 
