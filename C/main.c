@@ -4,7 +4,7 @@
 #include "hal/LED/LED.h"
 int main() {
     
-LED_t LED1={kPORTA,kPIN0,kHigh};
+LED_t LED1={kPORTA,kPIN0,ActiveHigh};
   LED_Init(&LED1);
   while(1)
   {

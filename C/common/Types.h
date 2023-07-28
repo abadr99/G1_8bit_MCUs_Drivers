@@ -25,15 +25,7 @@ typedef enum  {
     kPIN7
 }pin_t;
 
-typedef enum  {
-    kLow,
-    kHigh
-}state_t;
 
-typedef enum  {
-    kInput,
-    kOutput
-}direction_t;
 
 // typedef unsigned short uint16_t;
 // typedef signed   short sint16_t;

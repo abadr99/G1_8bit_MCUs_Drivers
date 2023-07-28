@@ -1,6 +1,16 @@
 #ifndef _GPIO_H_
 #define _GPIO_H_
 
+typedef enum  {
+    kLow,
+    kHigh
+}state_t;
+
+typedef enum  {
+    kInput,
+    kOutput
+}direction_t;
+
 
 error_t GPIO_SetPinDirection(port_t pPortNumber,pin_t pin , direction_t direction);
 error_t GPIO_SetPinValue(port_t PortNumber , pin_t PinNumber , state_t PintVoltageLevel);
