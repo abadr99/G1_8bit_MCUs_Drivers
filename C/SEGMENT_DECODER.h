@@ -1,6 +1,6 @@
-#ifndef LCD_H_
-#define LCD_H_
-//#include "Types.h"
+#ifndef SEG_H_
+#define SEG_H_
+#include "Types.h"
 #include "../../mcal/GPIO/GPIO.h"
 #define TOTAL_DECODER_PINS  4
 #define MAX_NUM 9
@@ -21,4 +21,4 @@ error_t SEGMENT_DECODER_SET( sevenSegDecoder_t * seven_segment,uint8_t number);
 
 
 
-#endif /* LCD_H_ */
+#endif /* SEG_H_ */
