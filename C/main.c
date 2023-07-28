@@ -1,15 +1,16 @@
 #include <util/delay.h>
 #include "common/Types.h"
 #include "common/Utils.h"
-#include "mcal/GPIO/GPIO.h"
-
+#include "hal/LED/LED.h"
 int main() {
     
-    GPIO_SetPinDirection(kPORTD , kPIN7 , kOutput); // 0
-    while(1) {
-        GPIO_SetPinValue(kPORTD , kPIN7 , kHigh);
-        _delay_ms(500);
-        GPIO_SetPinValue(kPORTD , kPIN7 , kLow);
-        _delay_ms(500);
-    }
+LED_t LED1={kPORTA,kPIN0,kLedActiveHigh};
+  LED_Init(&LED1);
+  while(1)
+  {
+    LED_TurnOn(&LED1);
+    _delay_ms(500);
+    LED_TurnOff(&LED1);
+    _delay_ms(500);
+  }
 }
