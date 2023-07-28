@@ -35,6 +35,9 @@ build: $(OBJS)
 	@avr-objcopy -j .text -j .data -O ihex $(ELF_TARGET) $(HEX_TARGET)
 	@echo "\n[Makefile] : Compiled successfully."
 
+style-check:
+	
+
 %.o : %.c
 	@$(CC) $(CCFLAGS) $(INC) -c $< -o $@
 	@$(eval SOURCES_CTR=$(shell echo $$(($(SOURCES_CTR)+1))))
