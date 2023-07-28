@@ -1,18 +1,16 @@
 #include <util/delay.h>
 #include "common/Types.h"
 #include "common/Utils.h"
-#include "hal/LED/LED.h"
-
-int main()
-{
-  LED_t LED1={kPORTA, kPIN0, kLedActiveHigh};
-  LED_Init(&LED1);
-  while (1)
+#include "hal/Buzzer/Buzzer.h"
+int main() {
+    
+Buzzer_t Buzzer1={kPORTA,kPIN0,kBuzzerActiveHigh};
+  Buzzer_Init(&Buzzer1);
+  while(1)
   {
-    // this is a comment
-    LED_TurnOn(&LED1);
+    Buzzer_TurnOn(&Buzzer1);
     _delay_ms(500);
-    LED_TurnOff(&LED1);
+    Buzzer_TurnOff(&Buzzer1);
     _delay_ms(500);
   }
 }
