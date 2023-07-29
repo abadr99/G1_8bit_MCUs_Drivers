@@ -1,6 +1,6 @@
 #include "SEGMENT_DECODER.h"
-//#include "Types.h"
-
+#include "Types.h"
+#include "../../mcal/GPIO/GPIO.h"
 error_t SEGMENT_DECODER_INIT(sevenSegDecoder_t * pSevenSeg)
 {
     error_t Ret_ErrorState = kNoError ;
