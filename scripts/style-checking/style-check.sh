@@ -1,8 +1,8 @@
 # !/bin/bash
-# sh style-check.sh path-to-root-of-source-files
+# sh style-check.sh path-to-root-of-source-files path to vera rules
 
-if [ $# -lt 1 ]; then
-    echo "Usage: $0 <Path to root directory of source and header files>"
+if [ $# -lt 2 ]; then
+    echo "Usage: $0 <Path to root directory of source and header files> <path to vera rules>"
     exit 1
 fi
 
@@ -14,5 +14,5 @@ vera++ -R L001 -R L003 -R L004 -R L005 -R L006 -R F001 -R F002 -R T001 -R T002 -
        -e\
        -S\
        -s\
-       --root ./rules-scripts\
+       --root ${2}\
         ${FILES}
