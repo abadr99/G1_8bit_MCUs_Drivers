@@ -1,7 +1,8 @@
-#include "SEVEN_SEGMENT.h"
-#include "Types.h"
-#include "../../mcal/GPIO/GPIO.h"
 
+#include "Types.h"
+#include "Utils.h"
+#include "../../mcal/GPIO/GPIO.h"
+#include "sevenSegment.h" 
 error_t SEVEN_SEGMENT_INIT(sevenSegment_t * pSevenSeg)
 {
     error_t Ret_ErrorState = kNoError ;
@@ -57,20 +58,14 @@ error_t SEVEN_SEGMENT_SET(sevenSegment_t * pSevenSeg,uint8_t number)
 
 }
 void SetNumber(sevenSegment_t * pSevenSeg,uint8_t number)
-{
-    uint8_t i=0;
-while(number!=0)
-{
-    uint8_t val=number%10;
-    switch (val)
+{state_t state;
+    for(uint8_t i =0;i<9;i++)
     {
-        case 0:GPIO_SetPinValue(pSevenSeg->segment[i].port_number,pSevenSeg->segment[i].pin_number,kLow);
-        break;
-        case 1:GPIO_SetPinValue(pSevenSeg->segment[i].port_number,pSevenSeg->segment[i].pin_number,kHigh);
-        break;
+        if (GET_BIT(number,i)==0) state=kLow;
+        else state= kHigh;
+        GPIO_SetPinValue(pSevenSeg->segment[i].port_number,pSevenSeg->segment[i].pin_number,state);
+       
     }
 
-i++;
-number/=10;
-}
+
 }
