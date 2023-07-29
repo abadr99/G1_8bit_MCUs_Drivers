@@ -36,7 +36,7 @@ build: $(OBJS)
 	@echo "\n[Makefile] : Compiled successfully."
 
 style-check:
-	@sh $(STYLE_CHECK_SCRIPT) .
+	@sh $(STYLE_CHECK_SCRIPT) . ../scripts/style-checking/rules-scripts
 
 %.o : %.c
 	@$(CC) $(CCFLAGS) $(INC) -c $< -o $@
