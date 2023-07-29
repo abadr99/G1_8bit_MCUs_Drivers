@@ -24,7 +24,7 @@ AVRDUDE = avrdude
 AVRDUDE_PROGRAMMER = usbasp
 AVRDUDE_MCU = m32
 AVRDUDE_PORT = /dev/ACM0
-
+STYLE_CHECK_SCRIPT = ../scripts/style-checking/style-check.sh
 
 .PHONY: all clean build 
 
@@ -34,6 +34,9 @@ build: $(OBJS)
 	@$(CC) $(CCFLAGS) $(OBJS) -o $(ELF_TARGET)
 	@avr-objcopy -j .text -j .data -O ihex $(ELF_TARGET) $(HEX_TARGET)
 	@echo "\n[Makefile] : Compiled successfully."
+
+style-check:
+	@sh $(STYLE_CHECK_SCRIPT) .
 
 %.o : %.c
 	@$(CC) $(CCFLAGS) $(INC) -c $< -o $@

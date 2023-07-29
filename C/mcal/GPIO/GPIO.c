@@ -8,7 +8,7 @@
 
 error_t GPIO_SetPinDirection(port_t PortNumber , pin_t PinNumber , direction_t Direction)
 {
-	error_t Ret_ErrorState = kNoError ;
+	error_t Ret_ErrorState = kNoError;
 	/* Make sure that the Port number and Pin number are in the valid range */
 	if(PortNumber <= GPIO_LAST_REG  && PinNumber <= GPIO_LAST_PIN ) 
 	{

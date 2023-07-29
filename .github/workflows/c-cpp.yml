@@ -13,8 +13,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: configure
+    - name: Configure
       run: sh /home/runner/work/G1_8bit_MCUs_Drivers/G1_8bit_MCUs_Drivers/.github/workflows/configure.sh
     - name: Building C Version
-      run: make -C C
-
+      run: make build -C C
+    - name: Clean
+      run: sh /home/runner/work/G1_8bit_MCUs_Drivers/G1_8bit_MCUs_Drivers/.github/workflows/clean.sh 
