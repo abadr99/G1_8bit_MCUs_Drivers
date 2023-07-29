@@ -3,7 +3,7 @@
 #include "Utils.h"
 #include "../../mcal/GPIO/GPIO.h"
 #include "sevenSegment.h" 
-error_t SEVEN_SEGMENT_INIT(sevenSegment_t * pSevenSeg)
+error_t SevenSegmentInit(sevenSegment_t * pSevenSeg)
 {
     error_t Ret_ErrorState = kNoError ;
 	/* Make sure that the sevenSegment_t is  valid */
@@ -21,7 +21,7 @@ error_t SEVEN_SEGMENT_INIT(sevenSegment_t * pSevenSeg)
     return Ret_ErrorState;
 
 }
-error_t SEVEN_SEGMENT_SET(sevenSegment_t * pSevenSeg,uint8_t number)
+error_t SevenSegmentSet(sevenSegment_t * pSevenSeg,uint8_t number)
 {
     error_t Ret_ErrorState = kNoError ;
     if(pSevenSeg!= NULL && number<=MAX_NUM) 

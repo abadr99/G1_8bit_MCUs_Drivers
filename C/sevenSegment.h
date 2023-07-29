@@ -29,7 +29,7 @@ typedef struct
  sevenSegPin_t segment[TOTAL_PINS];
 }sevenSegment_t;
 
-error_t SEVEN_SEGMENT_INIT(sevenSegment_t* pSevenSeg);
-error_t SEVEN_SEGMENT_SET(sevenSegment_t * pSevenSeg, uint8_t number);
+error_t SevenSegmentInit(sevenSegment_t* pSevenSeg);
+error_t SevenSegmentSet(sevenSegment_t * pSevenSeg, uint8_t number);
 void SetNumber(sevenSegment_t * pSevenSeg, uint8_t number);
 #endif /* SEVEN_H_ */
