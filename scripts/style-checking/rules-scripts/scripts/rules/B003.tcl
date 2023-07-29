@@ -1,5 +1,5 @@
 #!/usr/bin/tclsh
-# All user defined data types must be ended with `_t`
+# We have to use std types such as uint16_t, int32_t, ..
 
 foreach f [getSourceFileNames] {
     set lineNumber 1
