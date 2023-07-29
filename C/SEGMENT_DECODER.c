@@ -19,16 +19,16 @@ error_t SEGMENT_DECODER_INIT(sevenSegDecoder_t * pSevenSeg)
     return Ret_ErrorState;
 
 }
-error_t SEGMENT_DECODER_SET( sevenSegDecoder_t* sevenSegDecoder_t,uint8_t number)
+error_t SEGMENT_DECODER_SET( sevenSegDecoder_t* pSevenSeg,uint8_t number)
 {
     error_t Ret_ErrorState = kNoError ;
 	/* Make sure that the sevenSegDecoder_t is  valid  and numbedr is in range*/
-	if(sevenSegDecoder_t != NULL && number<=MAX_NUM) 
+	if(pSevenSeg!= NULL && number<=MAX_NUM) 
 	{
-        GPIO_SetPinValue(sevenSegDecoder_t->segment[0].port_name,sevenSegDecoder_t->segment[0].pin_name, number & 0x01);
-        GPIO_SetPinValue(sevenSegDecoder_t->segment[1].port_name,sevenSegDecoder_t->segment[1].pin_name,(number >>1) & 0x01);
-        GPIO_SetPinValue(sevenSegDecoder_t->segment[2].port_name,sevenSegDecoder_t->segment[2].pin_name,(number >>2) & 0x01);
-        GPIO_SetPinValue(sevenSegDecoder_t->segment[3].port_name,sevenSegDecoder_t->segment[3].pin_name,(number >>3) & 0x01);
+        GPIO_SetPinValue(pSevenSeg->segment[0].port_name,pSevenSeg->segment[0].pin_name, number & 0x01);
+        GPIO_SetPinValue(pSevenSeg->segment[1].port_name,pSevenSeg->segment[1].pin_name,(number >>1) & 0x01);
+        GPIO_SetPinValue(pSevenSeg->segment[2].port_name,pSevenSeg->segment[2].pin_name,(number >>2) & 0x01);
+        GPIO_SetPinValue(pSevenSeg->segment[3].port_name,pSevenSeg->segment[3].pin_name,(number >>3) & 0x01);
     }
     else
     {
