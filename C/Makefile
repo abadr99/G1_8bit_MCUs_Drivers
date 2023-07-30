@@ -28,7 +28,7 @@ STYLE_CHECK_SCRIPT = ../scripts/style-checking/style-check.sh
 
 .PHONY: all clean build 
 
-all:build
+all:build style-check
 
 build: $(OBJS)
 	@$(CC) $(CCFLAGS) $(OBJS) -o $(ELF_TARGET)
@@ -36,6 +36,7 @@ build: $(OBJS)
 	@echo "\n[Makefile] : Compiled successfully."
 
 style-check:
+	@echo -n "[Style-check] : "
 	@sh $(STYLE_CHECK_SCRIPT) . ../scripts/style-checking/rules-scripts
 
 %.o : %.c
