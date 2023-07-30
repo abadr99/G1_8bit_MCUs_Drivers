@@ -27,4 +27,4 @@ jobs:
       - name: Style-Checking
         run: make style-check -C C
       - name: Clean
-        run: sh /home/runner/work/G1_8bit_MCUs_Drivers/G1_8bit_MCUs_Drivers/.github/workflows/clean.sh 
+        run: sudo apt remove vera++
