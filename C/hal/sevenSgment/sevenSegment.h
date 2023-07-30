@@ -18,16 +18,14 @@
 #define EIGHT 0x7F
 #define NINE 0x6F
 
-typedef struct 
-{
+typedef struct {
     port_t port_number;
     pin_t pin_number;
-}sevenSegPin_t;
+               }sevenSegPin_t;
 
-typedef struct 
-{
+typedef struct {
  sevenSegPin_t segment[TOTAL_PINS];
-}sevenSegment_t;
+               }sevenSegment_t;
 
 error_t SevenSegmentInit(sevenSegment_t* pSevenSeg);
 error_t SevenSegmentSet(sevenSegment_t * pSevenSeg, uint8_t number);
