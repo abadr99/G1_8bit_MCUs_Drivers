@@ -1,5 +1,6 @@
 #!/usr/bin/tclsh
-# All user defined data types must be ended with `_t`
+# All defined macros should be upper case and value is surrounded by parentheses
+# #define MACRO_NAME (value)
 
 foreach f [getSourceFileNames] {
     set lineNumber 1
@@ -7,6 +8,9 @@ foreach f [getSourceFileNames] {
 
         if [regexp {\#define\s+[a-z]+} $line] {
             report $f $lineNumber "All defined macros should be uppercase"
+        }
+        if [regexp {\#define\s+[A-Z0-9]+\s+[0-9a-zA-z]+} $line] {
+            report $f $lineNumber "Macro value should be surrounded by parentheses"
         }
         incr lineNumber
     }
