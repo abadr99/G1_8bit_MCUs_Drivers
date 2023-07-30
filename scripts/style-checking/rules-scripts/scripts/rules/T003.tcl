@@ -5,12 +5,10 @@ set keywords {
     case
     class
     delete
-    enum
     explicit
     extern
     goto
     new
-    struct
     union
     using
 }
