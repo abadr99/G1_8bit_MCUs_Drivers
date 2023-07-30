@@ -1,18 +1,16 @@
-#ifndef _BUZZER_H_
-#define _BUZZER_H_
+#ifndef BUZZER_H_
+#define BUZZER_H
 
-typedef enum
-{
+typedef enum {
     kBuzzerActiveLow,
     kBuzzerActiveHigh,
-}BuzzerState_t;
+             }BuzzerState_t;
 
-typedef struct 
-{
+typedef struct {
     port_t Port;
     pin_t Pin;
     BuzzerState_t ActiveState;
-}Buzzer_t;
+               }Buzzer_t;
 
 void Buzzer_Init(Buzzer_t* pBuzzer);
 error_t Buzzer_TurnOn(Buzzer_t* pBuzzer);

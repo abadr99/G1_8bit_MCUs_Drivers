@@ -1,5 +1,5 @@
-#ifndef _REGISTERS_H_
-#define _REGISTERS_H_
+#ifndef REGISTERS_H
+#define REGISTERS_H
 
 #if MCU_TYPE == _AVR
     #define SREG       *((volatile uint8_t *)0x5F)
