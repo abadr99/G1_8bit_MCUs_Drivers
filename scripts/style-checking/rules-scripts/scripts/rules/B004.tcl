@@ -1,7 +1,5 @@
 #!/usr/bin/tclsh
-# Check if the variables :
-# 1. doesn't contain underscores 
-# 2. begin with lowercase 
+# Check if the variables : (1) Doesn't contain underscores   (2) begin with lowercase 
 
 foreach f [getSourceFileNames] {
     set lineNumber 1
