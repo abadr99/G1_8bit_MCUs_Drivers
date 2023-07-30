@@ -4,39 +4,39 @@
 
 void LED_Init(LED_t* pLED)
 {
-    GPIO_SetPinDirection(pLED->Port,pLED->Pin,kOutput);
+    GPIO_SetPinDirection(pLED->Port, pLED->Pin, kOutput);
 }
 error_t LED_TurnOn(LED_t* pLED)
 {
-    error_t Ret_ErrorState = kNoError ;
-    if(pLED->ActiveState == kLedActiveHigh)
+    error_t Ret_ErrorState = kNoError;
+    if (pLED->ActiveState == kLedActiveHigh)
     {
-        GPIO_SetPinValue(pLED->Port,pLED->Pin,kHigh);
+        GPIO_SetPinValue(pLED->Port, pLED->Pin, kHigh);
     }
-    else if(pLED->ActiveState == kLedActiveLow)
+    else if (pLED->ActiveState == kLedActiveLow)
     {
-        GPIO_SetPinValue(pLED->Port,pLED->Pin,kLow);
+        GPIO_SetPinValue(pLED->Port, pLED->Pin, kLow);
     }
     else
     {
-        Ret_ErrorState = kFunctioParameterError  ;
+        Ret_ErrorState = kFunctioParameterError;
     }
     return Ret_ErrorState;
 }
 error_t LED_TurnOff(LED_t* pLED)
 {
-    error_t Ret_ErrorState = kNoError ;
-   if(pLED->ActiveState == kLedActiveHigh)
+    error_t Ret_ErrorState = kNoError;
+   if (pLED->ActiveState == kLedActiveHigh)
     {
-        GPIO_SetPinValue(pLED->Port,pLED->Pin,kLow);
+        GPIO_SetPinValue(pLED->Port, pLED->Pin, kLow);
     }
-    else if(pLED->ActiveState == kLedActiveLow)
+    else if (pLED->ActiveState == kLedActiveLow)
     {
-        GPIO_SetPinValue(pLED->Port,pLED->Pin,kHigh);
-    } 
+        GPIO_SetPinValue(pLED->Port, pLED->Pin, kHigh);
+    }
     else
     {
-        Ret_ErrorState = kFunctioParameterError  ;
+        Ret_ErrorState = kFunctioParameterError;
     }
     return Ret_ErrorState;
 }
