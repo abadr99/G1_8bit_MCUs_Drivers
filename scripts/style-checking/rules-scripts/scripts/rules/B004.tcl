@@ -1,5 +1,5 @@
 #!/usr/bin/tclsh
-# Check if the variables : (1) Doesn't contain underscores   (2) begin with lowercase 
+# Check if the variables : (1) Doesn't contain underscores   (2) begin with lowercase and function name start with uppercase
 
 foreach f [getSourceFileNames] {
     set lineNumber 1
@@ -12,6 +12,9 @@ foreach f [getSourceFileNames] {
         }
         if [regexp {(char|([a-zA-Z0-9]+_t))\s+[A-Z][a-zA-Z0-9]+\s*(\;|\=|\))} $line] {
             report $f $lineNumber "Variables names should start with lowercase"
+        }
+        if [regexp {(char|([a-zA-Z0-9]+_t)|void)\s+[a-z][a-zA-Z0-9]+\s*(\()} $line] {
+            report $f $lineNumber "Functions names should start with uppercase"
         }
         incr lineNumber
     }
