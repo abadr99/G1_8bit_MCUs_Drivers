@@ -1,7 +1,9 @@
 #include <util/delay.h>
 #include "common/Types.h"
 #include "common/Utils.h"
-#include "mcal/GPIO/GPIO.h"
+#include "hal/Buzzer/Buzzer.h"
+int main()
+{
 
 void Test_SetPinDirection_SetPinValue();
 void Test_SetPortDirection_SetPortValue();
@@ -12,7 +14,7 @@ int main(void) {
 
     while(1) 
     {
-        Test_SetPinDirection_SetPinValue();
+        Test_git SetPinDirection_SetPinValue();
         Test_SetPortDirection_SetPortValue();
         Test_GetPinValue();
         Test_GetPortValue();
