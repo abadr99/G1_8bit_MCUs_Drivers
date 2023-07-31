@@ -1,21 +1,21 @@
-#ifndef _types_H_
-#define _types_H_
+#ifndef Types_H_
+#define Types_H_
 
 #define NULL ((void*)0)
 typedef unsigned char uint8_t;
 typedef signed   char sint8_t;
 
-typedef enum  {
+typedef enum {
     kPORTA,
     kPORTB,
     kPORTC,
     kPORTD,
-    #if MCU_TYPE == _PIC
+    #if MCU_TYPE == PIC
     kPORTE
    #endif
-}port_t;
+             }port_t;
 
-typedef enum  {
+typedef enum {
     kPIN0,
     kPIN1,
     kPIN2,
@@ -24,18 +24,15 @@ typedef enum  {
     kPIN5,
     kPIN6,
     kPIN7
-}pin_t;
-
-
+             }pin_t;
 
 // typedef unsigned short uint16_t;
 // typedef signed   short sint16_t;
 
-typedef enum
-{ 
-	kNoError ,
-	kFunctioParameterError 
-}error_t;
- 
+typedef enum {
+	kNoError,
+    kFunctioParameterError
+             }error_t;
+
 
 #endif //_types_H_

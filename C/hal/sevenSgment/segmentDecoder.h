@@ -10,7 +10,7 @@ typedef struct {
                }sevenSegPin_t;
 
 typedef struct {
- sevenSegPin_t segment[TOTAL_DECODER_PINS];  
+ sevenSegPin_t segment[TOTAL_DECODER_PINS];
                }sevenSegDecoder_t;
 
 error_t SEGMENT_DECODER_INIT(sevenSegDecoder_t * pSevenSeg);
