@@ -1,5 +1,5 @@
-#ifndef PB_H
-#define PB_H
+#ifndef PushButton_H
+#define PushButton_H
 
 typedef enum {
     kNotPressed,
@@ -16,8 +16,8 @@ typedef struct {
     port_t Port;
     pin_t Pin;
     PullState_t State;
-               }PB_t;
+               }PushButton_t;
 
-void PB_Init(PB_t* pPB);
-PressedState_t PB_GetPressed(PB_t* pPB);
+void PushButton_Init(PushButton_t* pPB);
+PressedState_t PushButton_GetValue(PushButton_t* pPB);
 #endif

@@ -3,4 +3,4 @@ mcal/GPIO
 hal/LED
 hal/Buzzer
 
-hal/PB
+hal/PushButton
