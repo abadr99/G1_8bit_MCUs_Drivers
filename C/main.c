@@ -9,9 +9,8 @@ int main()
   while (1)
   {
     Relay_TurnOn(&Relay1);
-    _delay_ms(2000);
+    //_delay_ms(2000);
     Relay_TurnOff(&Relay1);
-    _delay_ms(2000);
+    //_delay_ms(2000);
   }
-  
 }
