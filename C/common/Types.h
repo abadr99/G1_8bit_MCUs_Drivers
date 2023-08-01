@@ -4,6 +4,7 @@
 typedef unsigned char uint8_t;
 typedef signed   char sint8_t;
 
+#define NULL ((void*)0)
 typedef enum {
     kPORTA,
     kPORTB,
