@@ -4,39 +4,39 @@
 
 void Buzzer_Init(Buzzer_t* pBuzzer)
 {
-    GPIO_SetPinDirection(pBuzzer->Port, pBuzzer->Pin, kOutput);
+    GPIO_SetPinDirection(pBuzzer->port, pBuzzer->pin, kOutput);
 }
 error_t Buzzer_TurnOn(Buzzer_t* pBuzzer)
 {
-    error_t Ret_ErrorState = kNoError;
-    if (pBuzzer->ActiveState == kBuzzerActiveHigh)
+    error_t retErrorState = kNoError;
+    if (pBuzzer->activeState == kBuzzerActiveHigh)
     {
-        GPIO_SetPinValue(pBuzzer->Port, pBuzzer->Pin, kHigh);
+        GPIO_SetPinValue(pBuzzer->port, pBuzzer->pin, kHigh);
     }
-    else if (pBuzzer->ActiveState == kBuzzerActiveLow)
+    else if (pBuzzer->activeState == kBuzzerActiveLow)
     {
-        GPIO_SetPinValue(pBuzzer->Port, pBuzzer->Pin, kLow);
+        GPIO_SetPinValue(pBuzzer->port, pBuzzer->pin, kLow);
     }
     else
     {
-        Ret_ErrorState = kFunctioParameterError;
+        retErrorState = kFunctioParameterError;
     }
-    return Ret_ErrorState;
+    return retErrorState;
 }
 error_t Buzzer_TurnOff(Buzzer_t* pBuzzer)
 {
-    error_t Ret_ErrorState = kNoError;
-   if (pBuzzer->ActiveState == kBuzzerActiveHigh)
+    error_t retErrorState = kNoError;
+   if (pBuzzer->activeState == kBuzzerActiveHigh)
     {
-        GPIO_SetPinValue(pBuzzer->Port, pBuzzer->Pin, kLow);
+        GPIO_SetPinValue(pBuzzer->port, pBuzzer->pin, kLow);
     }
-    else if (pBuzzer->ActiveState == kBuzzerActiveLow)
+    else if (pBuzzer->activeState == kBuzzerActiveLow)
     {
-        GPIO_SetPinValue(pBuzzer->Port, pBuzzer->Pin, kHigh);
+        GPIO_SetPinValue(pBuzzer->port, pBuzzer->pin, kHigh);
     }
     else
     {
-        Ret_ErrorState = kFunctioParameterError;
+        retErrorState = kFunctioParameterError;
     }
-    return Ret_ErrorState;
+    return retErrorState;
 }
