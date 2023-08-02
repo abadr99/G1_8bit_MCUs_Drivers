@@ -4,27 +4,27 @@
 
 error_t PIR_Init(PIR_t* pPIR)
 {
-    error_t Ret_ErrorState = kNoError;
+    error_t retErrorState = kNoError;
     if (pPIR!=NULL)
     {
-    GPIO_SetPinDirection(pPIR->Port, pPIR->Pin, kInput);
+    GPIO_SetPinDirection(pPIR->port, pPIR->pin, kInput);
     }
     else
  {
-  Ret_ErrorState = kFunctioParameterError;
+  retErrorState = kFunctioParameterError;
  }
- return Ret_ErrorState;
+ return retErrorState;
 }
 error_t PIR_GetVal(PIR_t* pPIR, state_t * state)
 {
-    error_t Ret_ErrorState = kNoError;
+    error_t retErrorState = kNoError;
     if (pPIR!=NULL)
     {
-     GPIO_GetPinValue(pPIR->Port, pPIR->Pin, state);
+     GPIO_GetPinValue(pPIR->port, pPIR->pin, state);
     }
     else
     {
-  Ret_ErrorState = kFunctioParameterError;
- }
- return Ret_ErrorState;
+  retErrorState = kFunctioParameterError;
+    }
+ return retErrorState;
 }
