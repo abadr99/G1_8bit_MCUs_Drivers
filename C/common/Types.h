@@ -3,6 +3,9 @@
 
 typedef unsigned char uint8_t;
 typedef signed   char sint8_t;
+typedef unsigned short int  uint16;
+typedef signed short int    sint16;
+typedef float f32_t;
 
 typedef enum {
     kPORTA,

@@ -183,3 +183,65 @@ error_t GPIO_GetPortValue(port_t PortNumber, uint8_t * state)
   }
   return Ret_ErrorState;
 }
+
+error_t GPIO_SetLowNibbleValue(port_t PortNumber, uint8_t Value)
+{
+	error_t LocReturnError = kNoError;
+	/* This line to make sure that the high nibble in port value will not change */
+	Value &= 0X0F;
+	switch (PortNumber)
+	{
+		case kPORTA : GPIOA_OUT_REG &= 0XF0; GPIOA_OUT_REG |= Value;  break;
+		case kPORTB : GPIOB_OUT_REG &= 0XF0; GPIOB_OUT_REG |= Value;  break;
+		case kPORTC : GPIOC_OUT_REG &= 0XF0; GPIOC_OUT_REG |= Value;  break;
+		case kPORTD : GPIOD_OUT_REG &= 0XF0; GPIOD_OUT_REG |= Value;  break;
+		default:      LocReturnError = kFunctioParameterError;  break;
+	}
+	return LocReturnError;
+}
+error_t GPIO_SetHighNibbleValue(port_t PortNumber, uint8_t Value)
+{
+	error_t LocReturnError = kNoError;
+	/* This line to make sure that the Low nibble in port value will not change */
+	Value &= 0XF0;
+	switch (PortNumber)
+	{
+		case kPORTA : GPIOA_OUT_REG &= 0X0F; GPIOA_OUT_REG |= Value;  break;
+		case kPORTB : GPIOB_OUT_REG &= 0X0F; GPIOB_OUT_REG |= Value;  break;
+		case kPORTC : GPIOC_OUT_REG &= 0X0F; GPIOC_OUT_REG |= Value;  break;
+		case kPORTD : GPIOD_OUT_REG &= 0X0F; GPIOD_OUT_REG |= Value;  break;
+		default:      LocReturnError = kFunctioParameterError;  break;
+	}
+	return LocReturnError;
+}
+
+error_t GPIO_SetLowNibbleDirection(port_t PortNumber, uint8_t Direction)
+{
+	error_t LocReturnError = kNoError;
+	/* This line to make sure that the high nibble in port value will not change */
+	Direction &= 0X0F;
+	switch (PortNumber)
+	{
+		case kPORTA : GPIOA_DIR_REG &= 0XF0; GPIOA_DIR_REG |= Direction;  break;
+		case kPORTB : GPIOB_DIR_REG &= 0XF0; GPIOB_DIR_REG |= Direction;  break;
+		case kPORTC : GPIOC_DIR_REG &= 0XF0; GPIOC_DIR_REG |= Direction;  break;
+		case kPORTD : GPIOD_DIR_REG &= 0XF0; GPIOD_DIR_REG |= Direction;  break;
+		default:      LocReturnError = kFunctioParameterError;  break;
+	}
+	return LocReturnError;
+}
+error_t GPIO_SetHighNibbleDirection(port_t PortNumber, uint8_t Direction)
+{
+	error_t LocReturnError = kNoError;
+	/* This line to make sure that the high nibble in port value will not change */
+	Direction &= 0XF0;
+	switch (PortNumber)
+	{
+		case kPORTA : GPIOA_DIR_REG &= 0X0F; GPIOA_DIR_REG |= Direction;  break;
+		case kPORTB : GPIOB_DIR_REG &= 0X0F; GPIOB_DIR_REG |= Direction;  break;
+		case kPORTC : GPIOC_DIR_REG &= 0X0F; GPIOC_DIR_REG |= Direction;  break;
+		case kPORTD : GPIOD_DIR_REG &= 0X0F; GPIOD_DIR_REG |= Direction;  break;
+		default:      LocReturnError = kFunctioParameterError;  break;
+	}
+	return LocReturnError;
+}
