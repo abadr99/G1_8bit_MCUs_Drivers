@@ -19,7 +19,7 @@ error_t LED_TurnOn(LED_t* pLED)
     }
     else
     {
-        retErrorState = kFunctioParameterError;
+        retErrorState = kFunctionParameterError;
     }
     return retErrorState;
 }
@@ -36,7 +36,7 @@ error_t LED_TurnOff(LED_t* pLED)
     }
     else
     {
-        retErrorState = kFunctioParameterError;
+        retErrorState = kFunctionParameterError;
     }
     return retErrorState;
 }
