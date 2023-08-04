@@ -4,40 +4,40 @@
 
 error_t Relay_Init(Relay_t* pRelay)
 {
-    error_t Ret_ErrorState = kNoError;
+    error_t retErrorState = kNoError;
     if (pRelay != NULL_ptr)
     {
-        GPIO_SetPinDirection(pRelay->Port, pRelay->Pin, kOutput);
+        GPIO_SetPinDirection(pRelay->port, pRelay->pin, kOutput);
     }
     else
     {
-        Ret_ErrorState = kFunctioParameterError;
+        retErrorState = kFunctionParameterError;
     }
-    return Ret_ErrorState;
+    return retErrorState;
 }
 error_t Relay_TurnOn(Relay_t* pRelay)
 {
-    error_t Ret_ErrorState = kNoError;
+    error_t retErrorState = kNoError;
     if (pRelay != NULL_ptr)
     {
-        GPIO_SetPinValue(pRelay->Port, pRelay->Pin, kHigh);
+        GPIO_SetPinValue(pRelay->port, pRelay->pin, kHigh);
     }
     else
     {
-        Ret_ErrorState = kFunctioParameterError;
+        retErrorState = kFunctionParameterError;
     }
-    return Ret_ErrorState;
+    return retErrorState;
 }
 error_t Relay_TurnOff(Relay_t* pRelay)
 {
-    error_t Ret_ErrorState = kNoError;
+    error_t retErrorState = kNoError;
     if (pRelay != NULL_ptr)
     {
-        GPIO_SetPinValue(pRelay->Port, pRelay->Pin, kLow);
+        GPIO_SetPinValue(pRelay->port, pRelay->pin, kLow);
     }
     else
     {
-        Ret_ErrorState = kFunctioParameterError;
+        retErrorState = kFunctionParameterError;
     }
-    return Ret_ErrorState;
+    return retErrorState;
 }
