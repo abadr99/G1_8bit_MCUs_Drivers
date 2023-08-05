@@ -9,7 +9,8 @@ typedef float f32_t;
 
 #define NULL_ptr ((void*)0)
 
-typedef enum {
+typedef enum
+{
     kPORTA,
     kPORTB,
     kPORTC,
@@ -17,9 +18,10 @@ typedef enum {
     #if MCU_TYPE == PIC
     kPORTE
    #endif
-             }port_t;
+}port_t;
 
-typedef enum {
+typedef enum
+{
     kPIN0,
     kPIN1,
     kPIN2,
@@ -28,15 +30,16 @@ typedef enum {
     kPIN5,
     kPIN6,
     kPIN7
-             }pin_t;
+}pin_t;
 
 // typedef unsigned short uint16_t;
 // typedef signed   short sint16_t;
 
-typedef enum {
+typedef enum
+{
 	kNoError,
-    kFunctioParameterError
-             }error_t;
+    kFunctionParameterError
+}error_t;
 
 
 #endif //_types_H_
