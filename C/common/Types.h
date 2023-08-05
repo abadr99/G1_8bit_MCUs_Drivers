@@ -7,6 +7,8 @@ typedef unsigned short int  uint16;
 typedef signed short int    sint16;
 typedef float f32_t;
 
+#define NULL_ptr ((void*)0)
+
 typedef enum {
     kPORTA,
     kPORTB,

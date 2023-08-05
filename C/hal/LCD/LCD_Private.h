@@ -38,9 +38,9 @@
 #define LCD_HIGH_NIBBLE 0xF
 #define LCD_LOW_NIBBLE  0x0
 
-static void LCD_SendFallingEndgPulse(void);
-static void LCD_SendData(uint8_t Data);
-static void LCD_SendCommand(uint8_t Command);
+static error_t LCD_SendFallingEndgPulse(lcd_t *pLcdConfig);
+static error_t LCD_SendData(lcd_t *pLcdConfig, uint8_t Data);
+static error_t LCD_SendCommand(lcd_t *pLcdConfig, uint8_t Command);
 
 
 #endif /* HAL_LCD_PRIVATE_H_ */

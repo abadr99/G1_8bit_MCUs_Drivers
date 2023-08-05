@@ -1,6 +1,13 @@
 #ifndef HAL_LCD_INTERFACE_H_
 #define HAL_LCD_INTERFACE_H_
 
+#define LCD_8Bit        8
+#define LCD_4Bit        4
+
+#define LCD_HIGH_NIBBLE 0xF
+#define LCD_LOW_NIBBLE  0x0
+
+
 #define LCD_ROW_1  1
 #define LCD_ROW_2  2
 
@@ -21,12 +28,37 @@
 #define LCD_COL_15 15
 #define LCD_COL_16 16
 
-void LCD_Init(void);
-void LCD_ClearScreen(void);
-void LCD_SendtChar(uint8_t Ch);
-void LCD_SendString(uint8_t str[]);
-void LCD_StoreCustomChar(uint8_t pChar_Arr[], uint8_t Location);
-void LCD_SendCustomChar(uint8_t Location, uint8_t Row_Num, uint8_t Col_Num);
+/**
+ * @brief                  : This Data Type To Configure LCD[Port ,Pins ,Mode]
+ * @param  kLcdMode        : [LCD_8Bit , LCD_4Bit]
+ * @param  kLcdDataPort    : [kPORTA --> kPORTD]
+ * @param  kLcdControlPort : [kPORTA --> kPORTD]
+ * @param  KRS_PinNum      : [kPIN0  --> kPIN7]
+ * @param  KRW_PinNum      : [kPIN0  --> kPIN7]
+ * @param  KEN_PinNum      : [kPIN0  --> kPIN7]
+ * @param kLcd_4bitDataPin : [LCD_HIGH_NIBBLE , LCD_LOW_NIBBLE]
+ */
+typedef struct {
+
+    uint8_t kLcdMode;
+    port_t  kLcdDataPort;
+    port_t  kLcdControlPort;
+    pin_t   KRS_PinNum;
+    pin_t   KRW_PinNum;
+    pin_t   KEN_PinNum;
+    uint8_t kLcd_4bitDataPin;
+
+               }lcd_t;
+
+error_t LCD_Init(lcd_t *pLcdConfig);
+error_t LCD_ClearScreen(lcd_t *pLcdConfig);
+error_t LCD_SendtChar(lcd_t *pLcdConfig, uint8_t Ch);
+error_t LCD_SendString(lcd_t *pLcdConfig, uint8_t str[]);
+error_t LCD_StoreCustomChar(lcd_t *pLcdConfig, uint8_t pChar_Arr[],
+                                                    uint8_t Location);
+
+error_t LCD_SendCustomChar(lcd_t *pLcdConfig, uint8_t Location,
+                                            uint8_t Row_Num, uint8_t Col_Num);
 /**
  * @brief             :this function used to set cursor position
  *                      to display your data in s specific position
@@ -34,22 +66,22 @@ void LCD_SendCustomChar(uint8_t Location, uint8_t Row_Num, uint8_t Col_Num);
  * @param Row_Num     :Row_Num    --> [LCD_ROW_1 , LCD_ROW_2]
  * @param Column_Num  :Column_Num --> [LCD_COL_1 , LCD_COL_2 ... LCD_COL_16]
  */
-void LCD_SetPosition(uint8_t Row_Num, uint8_t Column_Num);
+error_t LCD_SetPosition(lcd_t *pLcdConfig, uint8_t Row_Num, uint8_t Column_Num);
 
-void LCD_SendNumber(sint16 Num);
-void LCD_SendFloat(f32_t Num);
+error_t LCD_SendNumber(lcd_t *pLcdConfig, sint16 Num);
+error_t LCD_SendFloat(lcd_t *pLcdConfig, f32_t Num);
 
-void LCD_EnableCursor(void);
-void LCD_DisableCursor(void);
+error_t LCD_EnableCursor(lcd_t *pLcdConfig);
+error_t LCD_DisableCursor(lcd_t *pLcdConfig);
 
-void LCD_ShiftRight(void);
-void LCD_ShiftLeft(void);
+error_t LCD_ShiftRight(lcd_t *pLcdConfig);
+error_t LCD_ShiftLeft(lcd_t *pLcdConfig);
 
-void LCD_Display_On(void);
-void LCD_Display_Off(void);
+error_t LCD_Display_On(lcd_t *pLcdConfig);
+error_t LCD_Display_Off(lcd_t *pLcdConfig);
 
-void LCD_Blink_On(void);
-void LCD_Blink_Off(void);
+error_t LCD_Blink_On(lcd_t *pLcdConfig);
+error_t LCD_Blink_Off(lcd_t *pLcdConfig);
 
 
 #endif /* HAL_LCD_INTERFACE_H_ */
