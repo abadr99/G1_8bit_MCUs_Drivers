@@ -4,22 +4,22 @@
 
 void PushButton_Init(PushButton_t* pPB)
 {
-    GPIO_SetPinDirection(pPB->Port, pPB->Pin, pPB->State);
+    GPIO_SetPinDirection(pPB->port, pPB->pin, pPB->state);
 }
 
 PressedState_t PushButton_GetValue(PushButton_t* pPB)
 {
-    state_t PinValue = 0;
-  PressedState_t PressState = 0;
-  if ((pPB->State == kIntPullUp)|| (pPB->State == kExtPullUp))
+    state_t pinValue = 0;
+  PressedState_t pressState = 0;
+  if ((pPB->state == kIntPullUp)|| (pPB->state == kExtPullUp))
   {
-    GPIO_GetPinValue(pPB->Port, pPB->Pin, &PinValue);
-    PressState = PinValue == kHigh ? kNotPressed : kPressed;
+    GPIO_GetPinValue(pPB->port, pPB->pin, &pinValue);
+    pressState = pinValue == kHigh ? kNotPressed : kPressed;
   }
-  else if (pPB->State == kPullDown)
+  else if (pPB->state == kPullDown)
   {
-    GPIO_GetPinValue(pPB->Port, pPB->Pin, &PinValue);
-    PressState = PinValue == kHigh ? kPressed : kNotPressed;
+    GPIO_GetPinValue(pPB->port, pPB->pin, &pinValue);
+    pressState = pinValue == kHigh ? kPressed : kNotPressed;
   }
-  return PressState;
+  return pressState;
 }
