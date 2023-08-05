@@ -19,7 +19,7 @@ error_t Buzzer_TurnOn(Buzzer_t* pBuzzer)
     }
     else
     {
-        retErrorState = kFunctioParameterError;
+        retErrorState = kFunctionParameterError;
     }
     return retErrorState;
 }
@@ -36,7 +36,7 @@ error_t Buzzer_TurnOff(Buzzer_t* pBuzzer)
     }
     else
     {
-        retErrorState = kFunctioParameterError;
+        retErrorState = kFunctionParameterError;
     }
     return retErrorState;
 }

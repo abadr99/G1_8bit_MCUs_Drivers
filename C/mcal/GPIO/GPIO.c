@@ -41,7 +41,7 @@ error_t GPIO_SetPinDirection(port_t portNumber, pin_t pinNumber,
 		}
 	}else
 	{
-		retErrorState = kFunctioParameterError;
+		retErrorState = kFunctionParameterError;
 	}
 
 	return retErrorState;
@@ -82,7 +82,7 @@ error_t GPIO_SetPinValue(port_t portNumber, pin_t pinNumber,
 		}
 	}else
 	{
-		retErrorState = kFunctioParameterError;
+		retErrorState = kFunctionParameterError;
 	}
 	return retErrorState;
 }
@@ -105,7 +105,7 @@ error_t GPIO_GetPinValue(port_t portNumber, pin_t pinNumber, state_t * state)
    }
    else
    {
-     retErrorState = kFunctioParameterError;
+     retErrorState = kFunctionParameterError;
    }
 
     return retErrorState;
@@ -131,7 +131,7 @@ error_t GPIO_SetPortDirection(port_t portNumber, uint8_t direction)
 
   }else
   {
-   retErrorState = kFunctioParameterError;
+   retErrorState = kFunctionParameterError;
   }
 
   return retErrorState;
@@ -155,7 +155,7 @@ error_t GPIO_SetPortValue(port_t portNumber, uint8_t pintVoltageLevel)
 
  }else
  {
-  retErrorState = kFunctioParameterError;
+  retErrorState = kFunctionParameterError;
  }
  return retErrorState;
 }
@@ -179,7 +179,7 @@ error_t GPIO_GetPortValue(port_t portNumber, uint8_t * state)
 
   }else
   {
-   retErrorState = kFunctioParameterError;
+   retErrorState = kFunctionParameterError;
   }
   return retErrorState;
 }
