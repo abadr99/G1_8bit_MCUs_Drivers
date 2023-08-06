@@ -13,17 +13,17 @@ error_t LCD_Init(lcd_t *pLcdConfig)
 	{
 		/* SET Direction for LCD control  pins --> OUTPUT */
 		GPIO_SetPinDirection(pLcdConfig->kLcdControlPort,
-										pLcdConfig->KRS_PinNum, kOutput );
+										pLcdConfig->rsPin, kOutput );
 
 		GPIO_SetPinDirection(pLcdConfig->kLcdControlPort,
-										pLcdConfig->KRW_PinNum, kOutput );
+										pLcdConfig->rwPin, kOutput );
 
 		GPIO_SetPinDirection(pLcdConfig->kLcdControlPort,
-										pLcdConfig->KEN_PinNum, kOutput );
+										pLcdConfig->enPin, kOutput );
 
 		if (pLcdConfig->kLcdMode == LCD_8Bit)
 		{
-			/* SET Direction for LCD Data  pins --> OUTPUT */
+			/* SET Direction for LCD data  pins --> OUTPUT */
 			GPIO_SetPortDirection(pLcdConfig->kLcdDataPort, kOutput_PORT);
 
 			_delay_ms(50);
@@ -42,7 +42,7 @@ error_t LCD_Init(lcd_t *pLcdConfig)
 		}
 		else if (pLcdConfig->kLcdMode == LCD_4Bit)
 		{
-			/* SET Direction for LCD Data  pins --> OUTPUT */
+			/* SET Direction for LCD data  pins --> OUTPUT */
 			if (pLcdConfig->kLcd_4bitDataPin == LCD_HIGH_NIBBLE )
 			{
 				GPIO_SetHighNibbleDirection(pLcdConfig->kLcdDataPort, kOutput_PORT);
@@ -70,81 +70,81 @@ error_t LCD_Init(lcd_t *pLcdConfig)
 
 	}else
 	{
-		kErrorState = kFunctioParameterError;
+		kErrorState = kFunctionParameterError;
 	}
 	return kErrorState;
 
 }
 
 
-static error_t LCD_SendData(lcd_t *pLcdConfig, uint8_t Data)
+static error_t LCD_SendData(lcd_t *pLcdConfig, uint8_t data)
 {
 	error_t kErrorState = kNoError;
 	if (pLcdConfig != NULL_ptr)
 	{
 		/* Set RS to 1 and RW to 0  */
-		GPIO_SetPinValue(pLcdConfig->kLcdControlPort, pLcdConfig->KRS_PinNum, kHigh );
-		GPIO_SetPinValue(pLcdConfig->kLcdControlPort, pLcdConfig->KRW_PinNum, kLow  );
+		GPIO_SetPinValue(pLcdConfig->kLcdControlPort, pLcdConfig->rsPin, kHigh );
+		GPIO_SetPinValue(pLcdConfig->kLcdControlPort, pLcdConfig->rwPin, kLow  );
 
 		if (pLcdConfig->kLcdMode == LCD_8Bit)
 		{
-			/* Send Data to the LCD Port */
-			GPIO_SetPortValue(pLcdConfig->kLcdDataPort, Data);
+			/* Send data to the LCD Port */
+			GPIO_SetPortValue(pLcdConfig->kLcdDataPort, data);
 			LCD_SendFallingEndgPulse(pLcdConfig);
 		}
 		else if (pLcdConfig->kLcdMode == LCD_4Bit)
 		{
 			if (pLcdConfig->kLcd_4bitDataPin == LCD_HIGH_NIBBLE )
 			{
-				GPIO_SetHighNibbleValue(pLcdConfig->kLcdDataPort, Data);
+				GPIO_SetHighNibbleValue(pLcdConfig->kLcdDataPort, data);
 				LCD_SendFallingEndgPulse(pLcdConfig);
-				GPIO_SetHighNibbleValue(pLcdConfig->kLcdDataPort, (Data<<4) );
+				GPIO_SetHighNibbleValue(pLcdConfig->kLcdDataPort, (data<<4) );
 				LCD_SendFallingEndgPulse(pLcdConfig);
 			}
 			else if (pLcdConfig->kLcd_4bitDataPin == LCD_LOW_NIBBLE )
 			{
-				GPIO_SetLowNibbleValue(pLcdConfig->kLcdDataPort, (Data>>4) );
+				GPIO_SetLowNibbleValue(pLcdConfig->kLcdDataPort, (data>>4) );
 				LCD_SendFallingEndgPulse(pLcdConfig);
-				GPIO_SetLowNibbleValue(pLcdConfig->kLcdDataPort, Data);
+				GPIO_SetLowNibbleValue(pLcdConfig->kLcdDataPort, data);
 				LCD_SendFallingEndgPulse(pLcdConfig);
 			}
 		}
 
 	}else
 	{
-		kErrorState = kFunctioParameterError;
+		kErrorState = kFunctionParameterError;
 	}
 	return kErrorState;
 }
-static error_t LCD_SendCommand(lcd_t *pLcdConfig, uint8_t Command)
+static error_t LCD_SendCommand(lcd_t *pLcdConfig, uint8_t command)
 {
 	error_t kErrorState = kNoError;
 	if (pLcdConfig != NULL_ptr)
 	{
 		/* Set RS to 0 and RW to 0  */
-		GPIO_SetPinValue(pLcdConfig->kLcdControlPort, pLcdConfig->KRS_PinNum, kLow );
-		GPIO_SetPinValue(pLcdConfig->kLcdControlPort, pLcdConfig->KRW_PinNum, kLow );
+		GPIO_SetPinValue(pLcdConfig->kLcdControlPort, pLcdConfig->rsPin, kLow );
+		GPIO_SetPinValue(pLcdConfig->kLcdControlPort, pLcdConfig->rwPin, kLow );
 
 		if (pLcdConfig->kLcdMode == LCD_8Bit)
 		{
-			/* Send Command to the LCD Port */
-			GPIO_SetPortValue(pLcdConfig->kLcdDataPort, Command);
+			/* Send command to the LCD Port */
+			GPIO_SetPortValue(pLcdConfig->kLcdDataPort, command);
 			LCD_SendFallingEndgPulse(pLcdConfig);
 		}
 		else if (pLcdConfig->kLcdMode == LCD_4Bit)
 		{
 			if (pLcdConfig->kLcd_4bitDataPin == LCD_HIGH_NIBBLE )
 			{
-				GPIO_SetHighNibbleValue(pLcdConfig->kLcdDataPort, Command);
+				GPIO_SetHighNibbleValue(pLcdConfig->kLcdDataPort, command);
 				LCD_SendFallingEndgPulse(pLcdConfig);
-				GPIO_SetHighNibbleValue(pLcdConfig->kLcdDataPort, (Command<<4));
+				GPIO_SetHighNibbleValue(pLcdConfig->kLcdDataPort, (command<<4));
 				LCD_SendFallingEndgPulse(pLcdConfig);
 			}
 			else if (pLcdConfig->kLcd_4bitDataPin == LCD_LOW_NIBBLE )
 			{
-				GPIO_SetLowNibbleValue(pLcdConfig->kLcdDataPort, (Command>>4) );
+				GPIO_SetLowNibbleValue(pLcdConfig->kLcdDataPort, (command>>4) );
 				LCD_SendFallingEndgPulse(pLcdConfig);
-				GPIO_SetLowNibbleValue(pLcdConfig->kLcdDataPort, Command);
+				GPIO_SetLowNibbleValue(pLcdConfig->kLcdDataPort, command);
 				LCD_SendFallingEndgPulse(pLcdConfig);
 			}
 		}
@@ -152,7 +152,7 @@ static error_t LCD_SendCommand(lcd_t *pLcdConfig, uint8_t Command)
 	}
 	else
 	{
-		kErrorState = kFunctioParameterError;
+		kErrorState = kFunctionParameterError;
 	}
 	return kErrorState;
 	
@@ -162,14 +162,14 @@ static error_t LCD_SendFallingEndgPulse(lcd_t *pLcdConfig)
 	error_t kErrorState = kNoError;
 	if (pLcdConfig != NULL_ptr)
 	{
-		GPIO_SetPinValue(pLcdConfig->kLcdControlPort, pLcdConfig->KEN_PinNum, kHigh );
+		GPIO_SetPinValue(pLcdConfig->kLcdControlPort, pLcdConfig->enPin, kHigh );
 		_delay_ms(1);
-		GPIO_SetPinValue(pLcdConfig->kLcdControlPort, pLcdConfig->KEN_PinNum, kLow );
+		GPIO_SetPinValue(pLcdConfig->kLcdControlPort, pLcdConfig->enPin, kLow );
 		_delay_ms(1);
 
 	}else
 	{
-		kErrorState = kFunctioParameterError;
+		kErrorState = kFunctionParameterError;
 	}
 	return kErrorState;
 
@@ -184,20 +184,20 @@ error_t LCD_ClearScreen(lcd_t *pLcdConfig)
 
 	}else
 	{
-		kErrorState = kFunctioParameterError;
+		kErrorState = kFunctionParameterError;
 	}
 	return kErrorState;
 }
 
-error_t LCD_SendtChar(lcd_t *pLcdConfig, uint8_t Ch)
+error_t LCD_SendChar(lcd_t *pLcdConfig, uint8_t character)
 {
 	error_t kErrorState = kNoError;
 	if (pLcdConfig != NULL_ptr)
 	{
-		LCD_SendData(pLcdConfig, Ch);
+		LCD_SendData(pLcdConfig, character);
 	}else
 	{
-		kErrorState = kFunctioParameterError;
+		kErrorState = kFunctionParameterError;
 	}
 	return kErrorState;
 }
@@ -207,15 +207,15 @@ error_t LCD_SendString(lcd_t *pLcdConfig, uint8_t str[])
 	error_t kErrorState = kNoError;
 	if (pLcdConfig != NULL_ptr)
 	{
-		uint8_t Iterator =  0;
-		while (str[Iterator]!= '\0')
+		uint8_t iterator =  0;
+		while (str[iterator]!= '\0')
 		{
-			LCD_SendData(pLcdConfig, str[Iterator++]);
+			LCD_SendData(pLcdConfig, str[iterator++]);
 		}
 		
 	}else
 	{
-		kErrorState = kFunctioParameterError;
+		kErrorState = kFunctionParameterError;
 	}
 	return kErrorState;
 }
@@ -225,38 +225,38 @@ error_t LCD_SetPosition(lcd_t *pLcdConfig, uint8_t Row_Num, uint8_t Column_Num)
 	error_t kErrorState = kNoError;
 	if (pLcdConfig != NULL_ptr)
 	{
-		uint8_t LocCommand;
-		/* if the user enter invaled location AC will point to
+		uint8_t command;
+		/* if the user enter invalid location AC will point to
 			the first place in DDRAM (0, 0 )  */
 		if (Row_Num>LCD_ROW_2 || Row_Num<LCD_ROW_1||
 										Column_Num>LCD_COL_16 || Column_Num<LCD_COL_1)
 		{
-			LocCommand =  LCD_DDRAM_START;
+			command =  LCD_DDRAM_START;
 		}
 		else if (Row_Num == LCD_ROW_1 )
 		{
-			LocCommand = LCD_DDRAM_START + Column_Num -1;
+			command = LCD_DDRAM_START + Column_Num -1;
 		}
 		else if (Row_Num == LCD_ROW_2 )
 		{
-			LocCommand = LCD_DDRAM_START + 64 +  Column_Num -1;
+			command = LCD_DDRAM_START + 64 +  Column_Num -1;
 		}
-		LCD_SendCommand(pLcdConfig, LocCommand);
+		LCD_SendCommand(pLcdConfig, command);
 		_delay_ms(1);
 	}else
 	{
-		kErrorState = kFunctioParameterError;
+		kErrorState = kFunctionParameterError;
 	}
 	return kErrorState;
 }
-error_t LCD_SendNumber(lcd_t *pLcdConfig, sint16 Num)
+error_t LCD_SendNumber(lcd_t *pLcdConfig, sint16 number)
 {
 	error_t kErrorState = kNoError;
 	if (pLcdConfig != NULL_ptr)
 	{
 	
-		sint16 Loc_Temp = Num;
-		uint8_t Iterator = 0;
+		sint16 Loc_Temp = number;
+		uint8_t iterator = 0;
 		uint8_t Iterator_2 = 0;
 		uint8_t Negative_Flag = 0;
 		char numArr[5] = {0};
@@ -264,79 +264,79 @@ error_t LCD_SendNumber(lcd_t *pLcdConfig, sint16 Num)
 			but the number will be stored in reverse order in the array
 				so we need to reverse this array again
 		 */
-		if (Num==0)
+		if (number==0)
 		{
-			LCD_SendtChar(pLcdConfig, '0');
+			LCD_SendChar(pLcdConfig, '0');
 
 		}
-		if (Num<0)
+		if (number<0)
 		{
-			Num = Num * (-1);
+			number = number * (-1);
 			Negative_Flag = 1;
 		}
-		while (Num != 0 )
+		while (number != 0 )
 		{
-			Loc_Temp = Num % 10;
-			numArr[Iterator++] = ( Loc_Temp + '0' );
-			Num = Num / 10;
+			Loc_Temp = number % 10;
+			numArr[iterator++] = ( Loc_Temp + '0' );
+			number = number / 10;
 		}
 		/* Revers numArr */
-		for (Iterator_2 = 0; Iterator_2 < Iterator/2; Iterator_2++)
+		for (Iterator_2 = 0; Iterator_2 < iterator/2; Iterator_2++)
 		{
 			char temp = numArr[Iterator_2];
-			numArr[Iterator_2 ] = numArr[Iterator-Iterator_2-1];
-			numArr[Iterator-Iterator_2-1] = temp;
+			numArr[Iterator_2 ] = numArr[iterator-Iterator_2-1];
+			numArr[iterator-Iterator_2-1] = temp;
 		}
 
-		for (Iterator_2 = 0; Iterator_2 < Iterator; Iterator_2++ )
+		for (Iterator_2 = 0; Iterator_2 < iterator; Iterator_2++ )
 		{
 			if (Negative_Flag)
 			{
-				LCD_SendtChar(pLcdConfig, '-');
+				LCD_SendChar(pLcdConfig, '-');
 				Negative_Flag = 0;
 			}
-			LCD_SendtChar(pLcdConfig, numArr[Iterator_2]);
+			LCD_SendChar(pLcdConfig, numArr[Iterator_2]);
 		}
 	}else
 	{
-		kErrorState = kFunctioParameterError;
+		kErrorState = kFunctionParameterError;
 	}
 	return kErrorState;
 }
-error_t LCD_SendFloat(lcd_t *pLcdConfig, f32_t Num)
+error_t LCD_SendFloat(lcd_t *pLcdConfig, f32_t number)
 {
 	error_t kErrorState = kNoError;
 	if (pLcdConfig != NULL_ptr)
 	{
-		float Fraction_Part = Num - (uint32_t)Num;
-		uint16 Real_Part = Num;
+		float Fraction_Part = number - (uint32_t)number;
+		uint16 Real_Part = number;
 		Fraction_Part *=1000;
 		LCD_SendNumber(pLcdConfig, Real_Part);
-		LCD_SendtChar(pLcdConfig, '.');
+		LCD_SendChar(pLcdConfig, '.');
 		LCD_SendNumber(pLcdConfig, (uint16)Fraction_Part);
 		
 	}else
 	{
-		kErrorState = kFunctioParameterError;
+		kErrorState = kFunctionParameterError;
 	}
 	return kErrorState;
 }
 error_t LCD_StoreCustomChar(lcd_t *pLcdConfig, uint8_t pChar_Arr[],
-														uint8_t Location)
+														uint8_t location)
 {
 	error_t kErrorState = kNoError;
 	if (pLcdConfig != NULL_ptr)
 	{
-		uint8_t Iterator;
+		uint8_t iterator;
 
 		/* 1- Make AC point to CGRAM */
-		LCD_SendCommand(pLcdConfig, LCD_CGRAM_START + Location*8 );
+		LCD_SendCommand(pLcdConfig, LCD_CGRAM_START + location*8 );
 
 		/* 2- Copy Character from byte 0 to byte 7
 		   To CGRAM and it Automatically will be copied to the DDRAM */
-		for (Iterator = 0; Iterator<8; Iterator++)
+		for (iterator = 0; iterator<8; iterator++)
 		{
-			LCD_SendData(pLcdConfig, pChar_Arr[Iterator]);
+			LCD_SendData(pLcdConfig, pChar_Arr[iterator]);
 		}
 
 		/* 2- Back To DDRAM */
@@ -344,21 +344,21 @@ error_t LCD_StoreCustomChar(lcd_t *pLcdConfig, uint8_t pChar_Arr[],
 	}
 	else
 	{
-		kErrorState = kFunctioParameterError;
+		kErrorState = kFunctionParameterError;
 	}
 	return kErrorState;
 }
-error_t LCD_SendCustomChar(lcd_t *pLcdConfig, uint8_t Location,
+error_t LCD_SendCustomChar(lcd_t *pLcdConfig, uint8_t location,
 											uint8_t Row_Num, uint8_t Col_Num)
 {
 	error_t kErrorState = kNoError;
 	if (pLcdConfig != NULL_ptr)
 	{
 		LCD_SetPosition(pLcdConfig, Row_Num, Col_Num);
-		LCD_SendData(pLcdConfig, Location);
+		LCD_SendData(pLcdConfig, location);
 	}else
 	{
-		kErrorState = kFunctioParameterError;
+		kErrorState = kFunctionParameterError;
 	}
 	return kErrorState;
 
@@ -373,7 +373,7 @@ error_t LCD_EnableCursor(lcd_t *pLcdConfig)
 		LCD_SendCommand(pLcdConfig, LCD_DISPLAY_ON_CURSOR_ON);
 	}else
 	{
-		kErrorState = kFunctioParameterError;
+		kErrorState = kFunctionParameterError;
 	}
 	return kErrorState;
 }
@@ -386,7 +386,7 @@ error_t LCD_DisableCursor(lcd_t *pLcdConfig)
 		LCD_SendCommand(pLcdConfig, LCD_DISPLAY_ON_CURSOR_OFF);
 	}else
 	{
-		kErrorState = kFunctioParameterError;
+		kErrorState = kFunctionParameterError;
 	}
 	return kErrorState;
 	
@@ -400,7 +400,7 @@ error_t LCD_ShiftRight(lcd_t *pLcdConfig)
 		LCD_SendCommand(pLcdConfig, LCD_SHIFT_RIGHT);
 	}else
 	{
-		kErrorState = kFunctioParameterError;
+		kErrorState = kFunctionParameterError;
 	}
 	return kErrorState;
 	
@@ -413,7 +413,7 @@ error_t LCD_ShiftLeft(lcd_t *pLcdConfig)
 		LCD_SendCommand(pLcdConfig, LCD_SHIFT_LEFT);
 	}else
 	{
-		kErrorState = kFunctioParameterError;
+		kErrorState = kFunctionParameterError;
 	}
 	return kErrorState;
 }
@@ -427,7 +427,7 @@ error_t LCD_Display_On(lcd_t *pLcdConfig)
 		LCD_SendCommand(pLcdConfig, LCD_DISPLAY_ON_CURSOR_OFF);
 	}else
 	{
-		kErrorState = kFunctioParameterError;
+		kErrorState = kFunctionParameterError;
 	}
 	return kErrorState;
 }
@@ -439,7 +439,7 @@ error_t LCD_Display_Off(lcd_t *pLcdConfig)
 		LCD_SendCommand(pLcdConfig, LCD_DISPLAY_OFF_CURSOR_OFF);
 	}else
 	{
-		kErrorState = kFunctioParameterError;
+		kErrorState = kFunctionParameterError;
 	}
 	return kErrorState;
 }
@@ -453,7 +453,7 @@ error_t LCD_Blink_On(lcd_t *pLcdConfig)
 		
 	}else
 	{
-		kErrorState = kFunctioParameterError;
+		kErrorState = kFunctionParameterError;
 	}
 	return kErrorState;
 }
@@ -466,7 +466,7 @@ error_t LCD_Blink_Off(lcd_t *pLcdConfig)
 		LCD_SendCommand(pLcdConfig, LCD_BLINK_OFF);
 	}else
 	{
-		kErrorState = kFunctioParameterError;
+		kErrorState = kFunctionParameterError;
 	}
 	return kErrorState;
 	

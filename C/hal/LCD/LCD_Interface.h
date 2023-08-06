@@ -33,9 +33,9 @@
  * @param  kLcdMode        : [LCD_8Bit , LCD_4Bit]
  * @param  kLcdDataPort    : [kPORTA --> kPORTD]
  * @param  kLcdControlPort : [kPORTA --> kPORTD]
- * @param  KRS_PinNum      : [kPIN0  --> kPIN7]
- * @param  KRW_PinNum      : [kPIN0  --> kPIN7]
- * @param  KEN_PinNum      : [kPIN0  --> kPIN7]
+ * @param  rsPin      : [kPIN0  --> kPIN7]
+ * @param  rwPin      : [kPIN0  --> kPIN7]
+ * @param  enPin      : [kPIN0  --> kPIN7]
  * @param kLcd_4bitDataPin : [LCD_HIGH_NIBBLE , LCD_LOW_NIBBLE]
  */
 typedef struct {
@@ -43,21 +43,21 @@ typedef struct {
     uint8_t kLcdMode;
     port_t  kLcdDataPort;
     port_t  kLcdControlPort;
-    pin_t   KRS_PinNum;
-    pin_t   KRW_PinNum;
-    pin_t   KEN_PinNum;
+    pin_t   rsPin;
+    pin_t   rwPin;
+    pin_t   enPin;
     uint8_t kLcd_4bitDataPin;
 
                }lcd_t;
 
 error_t LCD_Init(lcd_t *pLcdConfig);
 error_t LCD_ClearScreen(lcd_t *pLcdConfig);
-error_t LCD_SendtChar(lcd_t *pLcdConfig, uint8_t Ch);
+error_t LCD_SendChar(lcd_t *pLcdConfig, uint8_t character);
 error_t LCD_SendString(lcd_t *pLcdConfig, uint8_t str[]);
 error_t LCD_StoreCustomChar(lcd_t *pLcdConfig, uint8_t pChar_Arr[],
-                                                    uint8_t Location);
+                                                    uint8_t location);
 
-error_t LCD_SendCustomChar(lcd_t *pLcdConfig, uint8_t Location,
+error_t LCD_SendCustomChar(lcd_t *pLcdConfig, uint8_t location,
                                             uint8_t Row_Num, uint8_t Col_Num);
 /**
  * @brief             :this function used to set cursor position
@@ -68,8 +68,8 @@ error_t LCD_SendCustomChar(lcd_t *pLcdConfig, uint8_t Location,
  */
 error_t LCD_SetPosition(lcd_t *pLcdConfig, uint8_t Row_Num, uint8_t Column_Num);
 
-error_t LCD_SendNumber(lcd_t *pLcdConfig, sint16 Num);
-error_t LCD_SendFloat(lcd_t *pLcdConfig, f32_t Num);
+error_t LCD_SendNumber(lcd_t *pLcdConfig, sint16 number);
+error_t LCD_SendFloat(lcd_t *pLcdConfig, f32_t number);
 
 error_t LCD_EnableCursor(lcd_t *pLcdConfig);
 error_t LCD_DisableCursor(lcd_t *pLcdConfig);

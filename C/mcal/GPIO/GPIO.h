@@ -26,9 +26,9 @@ error_t GPIO_SetPortValue(port_t portNumber, uint8_t pintVoltageLevel);
 error_t GPIO_GetPortValue(port_t portNumber, uint8_t * state);
 
 
-error_t GPIO_SetLowNibbleValue(port_t PortNumber, uint8_t Value);
-error_t GPIO_SetHighNibbleValue(port_t PortNumber, uint8_t Value);
+error_t GPIO_SetLowNibbleValue(port_t portNumber, uint8_t value);
+error_t GPIO_SetHighNibbleValue(port_t portNumber, uint8_t value);
 
-error_t GPIO_SetHighNibbleDirection(port_t PortNumber, uint8_t Direction);
-error_t GPIO_SetLowNibbleDirection(port_t PortNumber, uint8_t Direction);
+error_t GPIO_SetHighNibbleDirection(port_t portNumber, uint8_t direction);
+error_t GPIO_SetLowNibbleDirection(port_t portNumber, uint8_t direction);
 #endif /* _GPIO_H_ */

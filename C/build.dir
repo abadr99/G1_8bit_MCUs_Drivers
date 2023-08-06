@@ -2,9 +2,5 @@ common
 mcal/GPIO
 hal/LED
 hal/Buzzer
-<<<<<<< HEAD
 hal/LCD
-=======
-
 hal/PushButton
->>>>>>> 3ca1c67776725ce7ab1a3307a6fd2ca81cd15654
