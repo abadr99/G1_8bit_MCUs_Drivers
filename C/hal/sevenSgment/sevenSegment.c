@@ -4,26 +4,26 @@
 #include "sevenSegment.h"
 error_t SevenSegmentInit(sevenSegment_t*pSevenSeg)
 {
-    error_t Ret_ErrorState = kNoError;
+    error_t retErrorState = kNoError;
 	/* Make sure that the sevenSegment_t is  valid */
 	if (pSevenSeg!= NULL)
 {
         for (uint8_t i = 0 ; i < TOTAL_PINS  ; i++)
         {
-           GPIO_SetPinDirection(pSevenSeg->segment[i].port_number,
-           pSevenSeg->segment[i].pin_number, kOutput);
+           GPIO_SetPinDirection(pSevenSeg->segment[i].port,
+           pSevenSeg->segment[i].pin, kOutput);
         }
 }
     else
     {
-        error_t Ret_ErrorState = kFunctioParameterError;
+        error_t retErrorState = kFunctionParameterError;
     }
-    return Ret_ErrorState;
+    return retErrorState;
 
 }
 error_t SevenSegmentSet(sevenSegment_t * pSevenSeg, uint8_t number)
 {
-    error_t Ret_ErrorState = kNoError;
+    error_t retErrorState = kNoError;
     if (pSevenSeg!= NULL && number<=MAX_NUM)
 {
     switch (number)
@@ -53,17 +53,15 @@ error_t SevenSegmentSet(sevenSegment_t * pSevenSeg, uint8_t number)
 }
     else
     {
-        error_t Ret_ErrorState = kFunctioParameterError;
+        error_t retErrorState = kFunctionParameterError;
     }
-    return Ret_ErrorState;
+    return retErrorState;
 }
 void SetNumber(sevenSegment_t * pSevenSeg, uint8_t number)
 {state_t state;
-    for (uint8_t i =0;i<9;i++)
+    for (uint8_t i =0;i<TOTAL_PINS;i++)
     {
-        if (GET_BIT(number, i)==0) {state=kLow;}
-        else {state= kHigh;}
-        GPIO_SetPinValue(pSevenSeg->segment[i].port_number,
-        pSevenSeg->segment[i].pin_number, state);
+        GPIO_SetPinValue(pSevenSeg->segment[i].port,
+        pSevenSeg->segment[i].pin, GET_BIT(number, i));
     }
 }
