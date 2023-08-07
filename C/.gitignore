@@ -6,3 +6,4 @@
 avr
 pic
 ../.vscode
+doxygen-documents/*
