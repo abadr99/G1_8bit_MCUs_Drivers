@@ -1,5 +1,5 @@
 #!/usr/bin/tclsh
-# Line cannot be too long < NOTE : USE //IGNORE-STYLE_CHECK[L004] to ignore checking >
+# Line cannot be too long < NOTE : USE //IGNORE-STYLE-CHECK[L004] to ignore checking >
 set maxLength [getParameter "max-line-length" 100]
 set pattern {\/\/IGNORE\-STYLE\-CHECK\[L004\]}
 
