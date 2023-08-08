@@ -17,6 +17,6 @@ typedef struct keypad_t
 
 
 error_t Keypad_Init(keypad_t * pKeypad);
-uint8_t Keypad_GetPressedButton(void);
+uint8_t Keypad_GetPressedButton(keypad_t * pKeypad);
 
 #endif
