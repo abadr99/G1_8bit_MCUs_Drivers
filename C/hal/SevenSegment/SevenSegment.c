@@ -1,7 +1,7 @@
 #include "../../common/Types.h"
 #include "../../common/Utils.h"
 #include "../../mcal/GPIO/GPIO.h"
-#include "sevenSegment.h"
+#include "SevenSegment.h"
 error_t SevenSegmentInit(sevenSegment_t*pSevenSeg)
 {
     error_t retErrorState = kNoError;

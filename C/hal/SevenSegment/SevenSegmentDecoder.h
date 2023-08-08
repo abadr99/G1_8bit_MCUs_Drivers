@@ -28,7 +28,7 @@ typedef struct
  * which is a struct from type sevenSegDecoder_t
  * @return error_t to handle error cases
  */
-error_t SegmentDecoderInit(sevenSegDecoder_t * pSevenSeg);
+error_t SevenSegmentDecoder_Init(sevenSegDecoder_t * pSevenSeg);
 /**
  * @brief This Function is used to set the seven segment to specific number
  * @param pSevenSeg pointer to the seven segment decoder
@@ -36,6 +36,6 @@ error_t SegmentDecoderInit(sevenSegDecoder_t * pSevenSeg);
  * @param number the number you want to set seven segment to
  * @return error_t handle error cases
  */
-error_t SegmentDecoderSet( sevenSegDecoder_t * pSevenSeg, uint8_t number);
+error_t SevenSegmentDecoder_Set( sevenSegDecoder_t * pSevenSeg, uint8_t number);
 
 #endif /* SEG_H_ */
