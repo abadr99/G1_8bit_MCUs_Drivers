@@ -5,17 +5,17 @@
 int main(void)
 {
 
-  DcMotor_t DcMotor={kPORTA, kPIN0, kPIN1};
-  DcMotor_Init(&DcMotor);
+  DcMotor_t dcMotor={kPORTA, kPIN0, kPIN1};
+  DcMotor_Init(&dcMotor);
   while (1)
   {
-      DcMotor_ClockWise(&DcMotor);
+      DcMotor_ClockWise(&dcMotor);
       _delay_ms(2000);
-      DcMotor_Stop(&DcMotor);
+      DcMotor_Stop(&dcMotor);
       _delay_ms(500);
-      DcMotor_AntiClockWise(&DcMotor);
+      DcMotor_AntiClockWise(&dcMotor);
       _delay_ms(2000);
-      DcMotor_Stop(&DcMotor);
+      DcMotor_Stop(&dcMotor);
       _delay_ms(500);
   }
 }

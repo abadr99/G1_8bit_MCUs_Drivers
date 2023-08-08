@@ -5,57 +5,57 @@
 
 error_t DcMotor_Init(DcMotor_t * pDcMotor)
 {
-    error_t Ret_ErrorState = kNoError;
+    error_t retErrorState = kNoError;
     if (pDcMotor != NULL)
     {
-        GPIO_SetPinDirection(pDcMotor->port, pDcMotor->IN1, kOutput);
-        GPIO_SetPinDirection(pDcMotor->port, pDcMotor->IN2, kOutput);
+        GPIO_SetPinDirection(pDcMotor->port, pDcMotor->pin1, kOutput);
+        GPIO_SetPinDirection(pDcMotor->port, pDcMotor->pin2, kOutput);
     }
     else
     {
-        Ret_ErrorState = kFunctioParameterError;
+        retErrorState = kFunctionParameterError;
     }
-    return Ret_ErrorState;
+    return retErrorState;
 }
 error_t DcMotor_ClockWise(DcMotor_t * pDcMotor)
 {
-    error_t Ret_ErrorState = kNoError;
+    error_t retErrorState = kNoError;
     if (pDcMotor != NULL)
     {
-        GPIO_SetPinValue(pDcMotor->port, pDcMotor->IN1, kHigh);
-        GPIO_SetPinValue(pDcMotor->port, pDcMotor->IN2, kLow);
+        GPIO_SetPinValue(pDcMotor->port, pDcMotor->pin1, kHigh);
+        GPIO_SetPinValue(pDcMotor->port, pDcMotor->pin2, kLow);
     }
     else
     {
-        Ret_ErrorState = kFunctioParameterError;
+        retErrorState = kFunctionParameterError;
     }
-    return Ret_ErrorState;
+    return retErrorState;
 }
 error_t DcMotor_AntiClockWise(DcMotor_t * pDcMotor)
 {
-    error_t Ret_ErrorState = kNoError;
+    error_t retErrorState = kNoError;
     if (pDcMotor != NULL)
     {
-        GPIO_SetPinValue(pDcMotor->port, pDcMotor->IN1, kLow);
-        GPIO_SetPinValue(pDcMotor->port, pDcMotor->IN2, kHigh);
+        GPIO_SetPinValue(pDcMotor->port, pDcMotor->pin1, kLow);
+        GPIO_SetPinValue(pDcMotor->port, pDcMotor->pin2, kHigh);
     }
     else
     {
-        Ret_ErrorState = kFunctioParameterError;
+        retErrorState = kFunctionParameterError;
     }
-    return Ret_ErrorState;
+    return retErrorState;
 }
 error_t DcMotor_Stop(DcMotor_t * pDcMotor)
 {
-    error_t Ret_ErrorState = kNoError;
+    error_t retErrorState = kNoError;
     if (pDcMotor != NULL)
     {
-        GPIO_SetPinValue(pDcMotor->port, pDcMotor->IN1, kLow);
-        GPIO_SetPinValue(pDcMotor->port, pDcMotor->IN2, kLow);
+        GPIO_SetPinValue(pDcMotor->port, pDcMotor->pin1, kLow);
+        GPIO_SetPinValue(pDcMotor->port, pDcMotor->pin2, kLow);
     }
     else
     {
-        Ret_ErrorState = kFunctioParameterError;
+        retErrorState = kFunctionParameterError;
     }
-    return Ret_ErrorState;
+    return retErrorState;
 }
