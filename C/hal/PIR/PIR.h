@@ -1,14 +1,14 @@
 #ifndef PIR_H_
 #define PIR_H
 /**
- * @brief pIR_t: is the data type to define the PIR sensor
- *        port  : for avr [kPORTA ... kPORTD], for pic [kPORTA ... kPORTE]
- *        pin   : [kPIN0 ... kPIN7]
+ *  A structure to represent PIR
  */
 typedef struct
 {
-    port_t port;
-    pin_t pin;
+    /*@{*/
+    port_t port;/**< the port number */
+    pin_t pin; /**< the pin number*/
+    /*@}*/
 }PIR_t;
 
 
