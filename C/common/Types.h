@@ -1,8 +1,8 @@
 #ifndef Types_H_
 #define Types_H_
 
-typedef unsigned char uint8_t;
-typedef signed   char sint8_t;
+typedef unsigned char uint8_t;                  //IGNORE-STYLE-CHECK[B004]
+typedef signed   char sint8_t;                  //IGNORE-STYLE-CHECK[B004]
 
 typedef enum
 {
