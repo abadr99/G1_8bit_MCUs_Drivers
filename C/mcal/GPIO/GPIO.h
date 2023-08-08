@@ -20,5 +20,6 @@ error_t GPIO_GetPinValue(port_t portNumber, pin_t pinNumber, state_t * state);
 error_t GPIO_SetPortDirection(port_t portNumber, uint8_t portValue);
 error_t GPIO_SetPortValue(port_t portNumber, uint8_t pintVoltageLevel);
 error_t GPIO_GetPortValue(port_t portNumber, uint8_t * state);
+error_t GPIO_SetPinPullup(port_t portNumber, pin_t pinNumber);
 
 #endif /* _GPIO_H_ */
