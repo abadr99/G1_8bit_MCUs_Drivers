@@ -43,9 +43,9 @@ void Test_GetPinValue()
 {
     GPIO_SetPinDirection(kPORTA, kPIN1, kInput);
     GPIO_SetPinDirection(kPORTA, kPIN2, kOutput);
-    state_t pin_state;
-    GPIO_GetPinValue(kPORTA, kPIN1, &pin_state);
-    if (pin_state==kHigh)
+    state_t pinState;
+    GPIO_GetPinValue(kPORTA, kPIN1, &pinState);
+    if (pinState==kHigh)
     {
         GPIO_SetPinValue(kPORTA, kPIN2, kHigh);
         _delay_ms(500);
@@ -57,9 +57,9 @@ void Test_GetPortValue()
 {
     GPIO_SetPortDirection(kPORTC, 0);
     GPIO_SetPinDirection(kPORTA, kPIN3, kOutput);
-    uint8_t port_state;
-    GPIO_GetPortValue(kPORTC, &port_state);
-   if (port_state==0xff)
+    uint8_t portState;
+    GPIO_GetPortValue(kPORTC, &portState);
+   if (portState==0xff)
     {
         GPIO_SetPinValue(kPORTA, kPIN3, kHigh);
         _delay_ms(500);
