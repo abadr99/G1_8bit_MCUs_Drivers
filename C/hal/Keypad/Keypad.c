@@ -1,5 +1,6 @@
 #include "../../common/Types.h"
 #include "../../mcal/GPIO/GPIO.h"
+#include "Config.h"
 #include "Keypad.h"
 
 

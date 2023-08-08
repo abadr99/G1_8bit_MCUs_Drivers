@@ -1,27 +1,30 @@
 #ifndef KEYPAD_H_
 #define KEYPAD_H_
-#include "Config.h"
+
 
 #define NOTPRESSED (0xff)
 
 /**
- * @brief  keyadPin_t: is the data type to define the keypad pin
- *         port  : for avr [kPORTA ... kPORTD], for pic [kPORTA ... kPORTE]
- *         pin   : [kPIN0 ... kPIN7]
+ * A structure to represent keypadPin
  */
 typedef struct keyadPin_t
 {
-    port_t port;
-    pin_t pin;
+    /*@{*/
+    port_t port;/**< the port number */
+    pin_t pin;/**< the pin number*/
+    /*@}*/
 }keypadPin_t;
 /**
- * @brief keypad_t:is the data type to define the keypad as
- * two arrays one for columuns and the other for rows.
+ * A structure to represent keypad
  */
 typedef struct keypad_t
 {
+    /*@{*/
+    /**< array of keypadPin_t represents rows */
     keypadPin_t Keypad_RowArr[Keypad_numberOfRows];
+    /**< array of keypadPin_t represents columns */
     keypadPin_t Keypad_COLArr[Keypad_numberOfCols];
+    /*@}*/
 }keypad_t;
  /**
   * @brief This Function is used to initialize the keypad
