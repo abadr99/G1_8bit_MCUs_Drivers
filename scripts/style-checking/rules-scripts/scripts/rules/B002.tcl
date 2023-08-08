@@ -9,7 +9,7 @@ foreach f [getSourceFileNames] {
         if [regexp {\#define\s+[a-z]+} $line] {
             report $f $lineNumber "All defined macros should be uppercase"
         }
-        if [regexp {\#define\s+[A-Z0-9]+\s+[0-9a-zA-z]+} $line] {
+        if [regexp {\#define\s+[A-Z0-9\_]+\s+[0-9a-zA-z\_]+} $line] {
             report $f $lineNumber "Macro value should be surrounded by parentheses"
         }
         incr lineNumber
