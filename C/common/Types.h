@@ -4,7 +4,6 @@
 typedef unsigned char uint8_t;                  //IGNORE-STYLE-CHECK[B004]
 typedef signed   char sint8_t;                  //IGNORE-STYLE-CHECK[B004]
 
-#define NULL ((void*)0)
 typedef enum
 {
     kPORTA,
