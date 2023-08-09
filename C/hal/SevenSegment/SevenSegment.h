@@ -23,8 +23,8 @@
 typedef struct
 {
     /*@{*/
-    port_t port;/**< the port number*/
-    pin_t pin;/**< the pin number*/
+    port_t port; /**< the port number*/
+    pin_t pin;   /**< the pin number*/
     /*@}*/
 }sevenSegPin_t;
 /**

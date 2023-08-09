@@ -1,8 +1,6 @@
 #ifndef SEG_H_
 #define SEG_H_
-#include "../../common/Types.h"
-#include "../../common/Utils.h"
-#include "../../mcal/GPIO/GPIO.h"
+
 
 #define TOTAL_DECODER_PINS  (4)
 #define MAX_NUM (9)

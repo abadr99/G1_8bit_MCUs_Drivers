@@ -1,3 +1,6 @@
+#include "../../common/Types.h"
+#include "../../common/Utils.h"
+#include "../../mcal/GPIO/GPIO.h"
 #include "SevenSegmentDecoder.h"
 
 
