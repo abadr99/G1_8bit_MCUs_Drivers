@@ -13,13 +13,13 @@ error_t LCD_Init(lcd_t *pLcdConfig)
 	{
 		/* SET Direction for LCD control  pins --> OUTPUT */
 		GPIO_SetPinDirection(pLcdConfig->kLcdControlPort,
-										pLcdConfig->rsPin, kOutput );
+										pLcdConfig->kRS_PinNum, kOutput );
 
 		GPIO_SetPinDirection(pLcdConfig->kLcdControlPort,
-										pLcdConfig->rwPin, kOutput );
+										pLcdConfig->kRW_PinNum, kOutput );
 
 		GPIO_SetPinDirection(pLcdConfig->kLcdControlPort,
-										pLcdConfig->enPin, kOutput );
+										pLcdConfig->kEN_PinNum, kOutput );
 
 		if (pLcdConfig->kLcdMode == LCD_8Bit)
 		{
@@ -83,8 +83,8 @@ static error_t LCD_SendData(lcd_t *pLcdConfig, uint8_t data)
 	if (pLcdConfig != NULL_ptr)
 	{
 		/* Set RS to 1 and RW to 0  */
-		GPIO_SetPinValue(pLcdConfig->kLcdControlPort, pLcdConfig->rsPin, kHigh );
-		GPIO_SetPinValue(pLcdConfig->kLcdControlPort, pLcdConfig->rwPin, kLow  );
+		GPIO_SetPinValue(pLcdConfig->kLcdControlPort, pLcdConfig->kRS_PinNum, kHigh );
+		GPIO_SetPinValue(pLcdConfig->kLcdControlPort, pLcdConfig->kRW_PinNum, kLow  );
 
 		if (pLcdConfig->kLcdMode == LCD_8Bit)
 		{
@@ -122,8 +122,8 @@ static error_t LCD_SendCommand(lcd_t *pLcdConfig, uint8_t command)
 	if (pLcdConfig != NULL_ptr)
 	{
 		/* Set RS to 0 and RW to 0  */
-		GPIO_SetPinValue(pLcdConfig->kLcdControlPort, pLcdConfig->rsPin, kLow );
-		GPIO_SetPinValue(pLcdConfig->kLcdControlPort, pLcdConfig->rwPin, kLow );
+		GPIO_SetPinValue(pLcdConfig->kLcdControlPort, pLcdConfig->kRS_PinNum, kLow );
+		GPIO_SetPinValue(pLcdConfig->kLcdControlPort, pLcdConfig->kRW_PinNum, kLow );
 
 		if (pLcdConfig->kLcdMode == LCD_8Bit)
 		{
@@ -162,9 +162,9 @@ static error_t LCD_SendFallingEndgPulse(lcd_t *pLcdConfig)
 	error_t kErrorState = kNoError;
 	if (pLcdConfig != NULL_ptr)
 	{
-		GPIO_SetPinValue(pLcdConfig->kLcdControlPort, pLcdConfig->enPin, kHigh );
+		GPIO_SetPinValue(pLcdConfig->kLcdControlPort, pLcdConfig->kEN_PinNum, kHigh );
 		_delay_ms(1);
-		GPIO_SetPinValue(pLcdConfig->kLcdControlPort, pLcdConfig->enPin, kLow );
+		GPIO_SetPinValue(pLcdConfig->kLcdControlPort, pLcdConfig->kEN_PinNum, kLow );
 		_delay_ms(1);
 
 	}else
@@ -207,10 +207,10 @@ error_t LCD_SendString(lcd_t *pLcdConfig, uint8_t str[])
 	error_t kErrorState = kNoError;
 	if (pLcdConfig != NULL_ptr)
 	{
-		uint8_t iterator =  0;
-		while (str[iterator]!= '\0')
+		uint8_t iterator1 =  0;
+		while (str[iterator1]!= '\0')
 		{
-			LCD_SendData(pLcdConfig, str[iterator++]);
+			LCD_SendData(pLcdConfig, str[iterator1++]);
 		}
 		
 	}else
@@ -220,7 +220,7 @@ error_t LCD_SendString(lcd_t *pLcdConfig, uint8_t str[])
 	return kErrorState;
 }
 
-error_t LCD_SetPosition(lcd_t *pLcdConfig, uint8_t Row_Num, uint8_t Column_Num)
+error_t LCD_SetPosition(lcd_t *pLcdConfig, uint8_t kRowNum, uint8_t kColumnNum)
 {
 	error_t kErrorState = kNoError;
 	if (pLcdConfig != NULL_ptr)
@@ -228,18 +228,18 @@ error_t LCD_SetPosition(lcd_t *pLcdConfig, uint8_t Row_Num, uint8_t Column_Num)
 		uint8_t command;
 		/* if the user enter invalid location AC will point to
 			the first place in DDRAM (0, 0 )  */
-		if (Row_Num>LCD_ROW_2 || Row_Num<LCD_ROW_1||
-										Column_Num>LCD_COL_16 || Column_Num<LCD_COL_1)
+		if (kRowNum>LCD_ROW_2 || kRowNum<LCD_ROW_1||
+										kColumnNum>LCD_COL_16 || kColumnNum<LCD_COL_1)
 		{
 			command =  LCD_DDRAM_START;
 		}
-		else if (Row_Num == LCD_ROW_1 )
+		else if (kRowNum == LCD_ROW_1 )
 		{
-			command = LCD_DDRAM_START + Column_Num -1;
+			command = LCD_DDRAM_START + kColumnNum -1;
 		}
-		else if (Row_Num == LCD_ROW_2 )
+		else if (kRowNum == LCD_ROW_2 )
 		{
-			command = LCD_DDRAM_START + 64 +  Column_Num -1;
+			command = LCD_DDRAM_START + 64 +  kColumnNum -1;
 		}
 		LCD_SendCommand(pLcdConfig, command);
 		_delay_ms(1);
@@ -256,9 +256,9 @@ error_t LCD_SendNumber(lcd_t *pLcdConfig, sint16 number)
 	{
 	
 		sint16 Loc_Temp = number;
-		uint8_t iterator = 0;
-		uint8_t Iterator_2 = 0;
-		uint8_t Negative_Flag = 0;
+		uint8_t iterator1 = 0;
+		uint8_t iterator2 = 0;
+		uint8_t negativeFlag = 0;
 		char numArr[5] = {0};
 		/* Store Number in numArr as a string
 			but the number will be stored in reverse order in the array
@@ -272,30 +272,30 @@ error_t LCD_SendNumber(lcd_t *pLcdConfig, sint16 number)
 		if (number<0)
 		{
 			number = number * (-1);
-			Negative_Flag = 1;
+			negativeFlag = 1;
 		}
 		while (number != 0 )
 		{
 			Loc_Temp = number % 10;
-			numArr[iterator++] = ( Loc_Temp + '0' );
+			numArr[iterator1++] = ( Loc_Temp + '0' );
 			number = number / 10;
 		}
 		/* Revers numArr */
-		for (Iterator_2 = 0; Iterator_2 < iterator/2; Iterator_2++)
+		for (iterator2 = 0; iterator2 < iterator1/2; iterator2++)
 		{
-			char temp = numArr[Iterator_2];
-			numArr[Iterator_2 ] = numArr[iterator-Iterator_2-1];
-			numArr[iterator-Iterator_2-1] = temp;
+			char temp = numArr[iterator2];
+			numArr[iterator2 ] = numArr[iterator1-iterator2-1];
+			numArr[iterator1-iterator2-1] = temp;
 		}
 
-		for (Iterator_2 = 0; Iterator_2 < iterator; Iterator_2++ )
+		for (iterator2 = 0; iterator2 < iterator1; iterator2++ )
 		{
-			if (Negative_Flag)
+			if (negativeFlag)
 			{
 				LCD_SendChar(pLcdConfig, '-');
-				Negative_Flag = 0;
+				negativeFlag = 0;
 			}
-			LCD_SendChar(pLcdConfig, numArr[Iterator_2]);
+			LCD_SendChar(pLcdConfig, numArr[iterator2]);
 		}
 	}else
 	{
@@ -327,16 +327,16 @@ error_t LCD_StoreCustomChar(lcd_t *pLcdConfig, uint8_t pChar_Arr[],
 	error_t kErrorState = kNoError;
 	if (pLcdConfig != NULL_ptr)
 	{
-		uint8_t iterator;
+		uint8_t iterator1;
 
 		/* 1- Make AC point to CGRAM */
 		LCD_SendCommand(pLcdConfig, LCD_CGRAM_START + location*8 );
 
 		/* 2- Copy Character from byte 0 to byte 7
 		   To CGRAM and it Automatically will be copied to the DDRAM */
-		for (iterator = 0; iterator<8; iterator++)
+		for (iterator1 = 0; iterator1<8; iterator1++)
 		{
-			LCD_SendData(pLcdConfig, pChar_Arr[iterator]);
+			LCD_SendData(pLcdConfig, pChar_Arr[iterator1]);
 		}
 
 		/* 2- Back To DDRAM */
@@ -349,12 +349,12 @@ error_t LCD_StoreCustomChar(lcd_t *pLcdConfig, uint8_t pChar_Arr[],
 	return kErrorState;
 }
 error_t LCD_SendCustomChar(lcd_t *pLcdConfig, uint8_t location,
-											uint8_t Row_Num, uint8_t Col_Num)
+											uint8_t kRowNum, uint8_t kColumnNum)
 {
 	error_t kErrorState = kNoError;
 	if (pLcdConfig != NULL_ptr)
 	{
-		LCD_SetPosition(pLcdConfig, Row_Num, Col_Num);
+		LCD_SetPosition(pLcdConfig, kRowNum, kColumnNum);
 		LCD_SendData(pLcdConfig, location);
 	}else
 	{
