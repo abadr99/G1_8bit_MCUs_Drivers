@@ -4,3 +4,4 @@ hal/LED
 hal/Buzzer
 
 hal/PushButton
+hal/PIR

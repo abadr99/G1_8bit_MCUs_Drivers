@@ -11,7 +11,7 @@ error_t PIR_Init(PIR_t* pPIR)
     }
     else
  {
-  retErrorState = kFunctioParameterError;
+  retErrorState = kFunctionParameterError;
  }
  return retErrorState;
 }
@@ -24,7 +24,7 @@ error_t PIR_GetVal(PIR_t* pPIR, state_t * state)
     }
     else
     {
-  retErrorState = kFunctioParameterError;
+  retErrorState = kFunctionParameterError;
     }
  return retErrorState;
 }
