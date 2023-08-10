@@ -1,10 +1,9 @@
 #ifndef Types_H_
 #define Types_H_
-
+#define NULL ((void*)0)
 typedef unsigned char uint8_t;                  //IGNORE-STYLE-CHECK[B004]
 typedef signed   char sint8_t;                  //IGNORE-STYLE-CHECK[B004]
 
-#define NULL ((void*)0)
 typedef enum
 {
     kPORTA,
