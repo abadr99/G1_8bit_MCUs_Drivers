@@ -4,6 +4,7 @@
 
 #define TOTAL_DECODER_PINS  (4)
 #define MAX_NUM (9)
+
 /**
  * A structure to represent seven segment decoder pin
  */
@@ -14,6 +15,7 @@ typedef struct
     pin_t pin;/**< the pin number*/
     /*@}*/
 }sevenSegPin_t;
+
 /**
  * A structure to represent seven segment
  */
@@ -23,6 +25,7 @@ typedef struct
      sevenSegPin_t segment[TOTAL_DECODER_PINS];/**< array of sevenSegPin_t*/
     /*@{*/
 }sevenSegDecoder_t;
+
 /**
  * @brief This Function is used to initialize the seven segment
  * @param pSevenSeg pointer to the seven segment decoder
@@ -33,6 +36,7 @@ typedef struct
  *                   if the Parameter isn't correct
  */
 error_t SevenSegmentDecoder_Init(sevenSegDecoder_t * pSevenSeg);
+
 /**
  * @brief This Function is used to set the seven segment to specific number
  * @param pSevenSeg pointer to the seven segment decoder

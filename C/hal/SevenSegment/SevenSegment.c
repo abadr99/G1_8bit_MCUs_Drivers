@@ -2,7 +2,8 @@
 #include "../../common/Utils.h"
 #include "../../mcal/GPIO/GPIO.h"
 #include "SevenSegment.h"
-error_t SevenSegmentInit(sevenSegment_t*pSevenSeg)
+
+error_t SevenSegment_Init(sevenSegment_t*pSevenSeg)
 {
     error_t retErrorState = kNoError;
 	/* Make sure that the sevenSegment_t is  valid */
@@ -21,7 +22,8 @@ error_t SevenSegmentInit(sevenSegment_t*pSevenSeg)
     return retErrorState;
 
 }
-error_t SevenSegmentSet(sevenSegment_t * pSevenSeg, uint8_t number)
+
+error_t SevenSegment_Set(sevenSegment_t * pSevenSeg, uint8_t number)
 {
     error_t retErrorState = kNoError;
     if (pSevenSeg!= NULL && number<=MAX_NUM)
@@ -66,11 +68,13 @@ error_t SevenSegmentSet(sevenSegment_t * pSevenSeg, uint8_t number)
     }
     return retErrorState;
 }
-void SetNumber(sevenSegment_t * pSevenSeg, uint8_t number)
+
+static void SetNumber(sevenSegment_t * pSevenSeg, uint8_t number)
 {
     for (uint8_t i =0;i<TOTAL_PINS;i++)
     {
         GPIO_SetPinValue(pSevenSeg->segment[i].port,
-        pSevenSeg->segment[i].pin, GET_BIT(number, i));
+                         pSevenSeg->segment[i].pin, 
+                         GET_BIT(number, i));
     }
 }
