@@ -5,3 +5,4 @@ hal/Buzzer
 hal/LCD
 hal/DC_Motor
 hal/PushButton
+hal/PIR
