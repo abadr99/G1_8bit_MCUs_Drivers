@@ -74,7 +74,7 @@ static void SetNumber(sevenSegment_t * pSevenSeg, uint8_t number)
     for (uint8_t i =0;i<TOTAL_PINS;i++)
     {
         GPIO_SetPinValue(pSevenSeg->segment[i].port,
-                         pSevenSeg->segment[i].pin, 
+                         pSevenSeg->segment[i].pin,
                          GET_BIT(number, i));
     }
 }
