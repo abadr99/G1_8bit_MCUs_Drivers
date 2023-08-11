@@ -3,4 +3,5 @@ mcal/GPIO
 hal/LED
 hal/Buzzer
 hal/LCD
+hal/DC_Motor
 hal/PushButton
