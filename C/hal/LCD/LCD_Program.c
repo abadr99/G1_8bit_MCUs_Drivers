@@ -9,7 +9,7 @@
 error_t LCD_Init(lcd_t *pLcdConfig)
 {
 	error_t kErrorState = kNoError;
-	if (pLcdConfig != NULL_ptr)
+	if (pLcdConfig != NULL_PTR)
 	{
 		/* SET Direction for LCD control  pins --> OUTPUT */
 		GPIO_SetPinDirection(pLcdConfig->kLcdControlPort,
@@ -80,7 +80,7 @@ error_t LCD_Init(lcd_t *pLcdConfig)
 static error_t LCD_SendData(lcd_t *pLcdConfig, uint8_t data)
 {
 	error_t kErrorState = kNoError;
-	if (pLcdConfig != NULL_ptr)
+	if (pLcdConfig != NULL_PTR)
 	{
 		/* Set RS to 1 and RW to 0  */
 		GPIO_SetPinValue(pLcdConfig->kLcdControlPort, pLcdConfig->kRS_PinNum, kHigh );
@@ -119,7 +119,7 @@ static error_t LCD_SendData(lcd_t *pLcdConfig, uint8_t data)
 static error_t LCD_SendCommand(lcd_t *pLcdConfig, uint8_t command)
 {
 	error_t kErrorState = kNoError;
-	if (pLcdConfig != NULL_ptr)
+	if (pLcdConfig != NULL_PTR)
 	{
 		/* Set RS to 0 and RW to 0  */
 		GPIO_SetPinValue(pLcdConfig->kLcdControlPort, pLcdConfig->kRS_PinNum, kLow );
@@ -160,7 +160,7 @@ static error_t LCD_SendCommand(lcd_t *pLcdConfig, uint8_t command)
 static error_t LCD_SendFallingEndgPulse(lcd_t *pLcdConfig)
 {
 	error_t kErrorState = kNoError;
-	if (pLcdConfig != NULL_ptr)
+	if (pLcdConfig != NULL_PTR)
 	{
 		GPIO_SetPinValue(pLcdConfig->kLcdControlPort, pLcdConfig->kEN_PinNum, kHigh );
 		_delay_ms(1);
@@ -177,7 +177,7 @@ static error_t LCD_SendFallingEndgPulse(lcd_t *pLcdConfig)
 error_t LCD_ClearScreen(lcd_t *pLcdConfig)
 {
 	error_t kErrorState = kNoError;
-	if (pLcdConfig != NULL_ptr)
+	if (pLcdConfig != NULL_PTR)
 	{
 		LCD_SendCommand(pLcdConfig, LCD_CLEAR_SCREEN);
 		_delay_ms(1);
@@ -192,7 +192,7 @@ error_t LCD_ClearScreen(lcd_t *pLcdConfig)
 error_t LCD_SendChar(lcd_t *pLcdConfig, uint8_t character)
 {
 	error_t kErrorState = kNoError;
-	if (pLcdConfig != NULL_ptr)
+	if (pLcdConfig != NULL_PTR)
 	{
 		LCD_SendData(pLcdConfig, character);
 	}else
@@ -205,7 +205,7 @@ error_t LCD_SendChar(lcd_t *pLcdConfig, uint8_t character)
 error_t LCD_SendString(lcd_t *pLcdConfig, uint8_t str[])
 {
 	error_t kErrorState = kNoError;
-	if (pLcdConfig != NULL_ptr)
+	if (pLcdConfig != NULL_PTR)
 	{
 		uint8_t iterator1 =  0;
 		while (str[iterator1]!= '\0')
@@ -223,7 +223,7 @@ error_t LCD_SendString(lcd_t *pLcdConfig, uint8_t str[])
 error_t LCD_SetPosition(lcd_t *pLcdConfig, uint8_t kRowNum, uint8_t kColumnNum)
 {
 	error_t kErrorState = kNoError;
-	if (pLcdConfig != NULL_ptr)
+	if (pLcdConfig != NULL_PTR)
 	{
 		uint8_t command;
 		/* if the user enter invalid location AC will point to
@@ -252,7 +252,7 @@ error_t LCD_SetPosition(lcd_t *pLcdConfig, uint8_t kRowNum, uint8_t kColumnNum)
 error_t LCD_SendNumber(lcd_t *pLcdConfig, sint16 number)
 {
 	error_t kErrorState = kNoError;
-	if (pLcdConfig != NULL_ptr)
+	if (pLcdConfig != NULL_PTR)
 	{
 	
 		sint16 Loc_Temp = number;
@@ -306,7 +306,7 @@ error_t LCD_SendNumber(lcd_t *pLcdConfig, sint16 number)
 error_t LCD_SendFloat(lcd_t *pLcdConfig, f32_t number)
 {
 	error_t kErrorState = kNoError;
-	if (pLcdConfig != NULL_ptr)
+	if (pLcdConfig != NULL_PTR)
 	{
 		float Fraction_Part = number - (uint32_t)number;
 		uint16 Real_Part = number;
@@ -325,7 +325,7 @@ error_t LCD_StoreCustomChar(lcd_t *pLcdConfig, uint8_t pChar_Arr[],
 														uint8_t location)
 {
 	error_t kErrorState = kNoError;
-	if (pLcdConfig != NULL_ptr)
+	if (pLcdConfig != NULL_PTR)
 	{
 		uint8_t iterator1;
 
@@ -352,7 +352,7 @@ error_t LCD_SendCustomChar(lcd_t *pLcdConfig, uint8_t location,
 											uint8_t kRowNum, uint8_t kColumnNum)
 {
 	error_t kErrorState = kNoError;
-	if (pLcdConfig != NULL_ptr)
+	if (pLcdConfig != NULL_PTR)
 	{
 		LCD_SetPosition(pLcdConfig, kRowNum, kColumnNum);
 		LCD_SendData(pLcdConfig, location);
@@ -368,7 +368,7 @@ error_t LCD_SendCustomChar(lcd_t *pLcdConfig, uint8_t location,
 error_t LCD_EnableCursor(lcd_t *pLcdConfig)
 {
 	error_t kErrorState = kNoError;
-	if (pLcdConfig != NULL_ptr)
+	if (pLcdConfig != NULL_PTR)
 	{
 		LCD_SendCommand(pLcdConfig, LCD_DISPLAY_ON_CURSOR_ON);
 	}else
@@ -381,7 +381,7 @@ error_t LCD_EnableCursor(lcd_t *pLcdConfig)
 error_t LCD_DisableCursor(lcd_t *pLcdConfig)
 {
 	error_t kErrorState = kNoError;
-	if (pLcdConfig != NULL_ptr)
+	if (pLcdConfig != NULL_PTR)
 	{
 		LCD_SendCommand(pLcdConfig, LCD_DISPLAY_ON_CURSOR_OFF);
 	}else
@@ -395,7 +395,7 @@ error_t LCD_DisableCursor(lcd_t *pLcdConfig)
 error_t LCD_ShiftRight(lcd_t *pLcdConfig)
 {
 	error_t kErrorState = kNoError;
-	if (pLcdConfig != NULL_ptr)
+	if (pLcdConfig != NULL_PTR)
 	{
 		LCD_SendCommand(pLcdConfig, LCD_SHIFT_RIGHT);
 	}else
@@ -408,7 +408,7 @@ error_t LCD_ShiftRight(lcd_t *pLcdConfig)
 error_t LCD_ShiftLeft(lcd_t *pLcdConfig)
 {
 	error_t kErrorState = kNoError;
-	if (pLcdConfig != NULL_ptr)
+	if (pLcdConfig != NULL_PTR)
 	{
 		LCD_SendCommand(pLcdConfig, LCD_SHIFT_LEFT);
 	}else
@@ -422,7 +422,7 @@ error_t LCD_ShiftLeft(lcd_t *pLcdConfig)
 error_t LCD_Display_On(lcd_t *pLcdConfig)
 {
 	error_t kErrorState = kNoError;
-	if (pLcdConfig != NULL_ptr)
+	if (pLcdConfig != NULL_PTR)
 	{
 		LCD_SendCommand(pLcdConfig, LCD_DISPLAY_ON_CURSOR_OFF);
 	}else
@@ -434,7 +434,7 @@ error_t LCD_Display_On(lcd_t *pLcdConfig)
 error_t LCD_Display_Off(lcd_t *pLcdConfig)
 {
 	error_t kErrorState = kNoError;
-	if (pLcdConfig != NULL_ptr)
+	if (pLcdConfig != NULL_PTR)
 	{
 		LCD_SendCommand(pLcdConfig, LCD_DISPLAY_OFF_CURSOR_OFF);
 	}else
@@ -447,7 +447,7 @@ error_t LCD_Display_Off(lcd_t *pLcdConfig)
 error_t LCD_Blink_On(lcd_t *pLcdConfig)
 {
 	error_t kErrorState = kNoError;
-	if (pLcdConfig != NULL_ptr)
+	if (pLcdConfig != NULL_PTR)
 	{
 		LCD_SendCommand(pLcdConfig, LCD_BLINK_ON);
 		
@@ -461,7 +461,7 @@ error_t LCD_Blink_On(lcd_t *pLcdConfig)
 error_t LCD_Blink_Off(lcd_t *pLcdConfig)
 {
 	error_t kErrorState = kNoError;
-	if (pLcdConfig != NULL_ptr)
+	if (pLcdConfig != NULL_PTR)
 	{
 		LCD_SendCommand(pLcdConfig, LCD_BLINK_OFF);
 	}else

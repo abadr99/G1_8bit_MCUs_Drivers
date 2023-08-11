@@ -8,7 +8,7 @@ typedef float f32_t;                            //IGNORE-STYLE-CHECK[B004]
 typedef unsigned short int  uint16;
 typedef signed short int    sint16;
 
-#define NULL_ptr ((void*)0)
+#define NULL_PTR ((void*)0)
 
 #ifndef NULL
 #define NULL ((void*)0)
