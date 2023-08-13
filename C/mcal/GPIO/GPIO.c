@@ -213,7 +213,7 @@ error_t GPIO_SetPinPullup(port_t portNumber, pin_t pinNumber)
 		retErrorState = kFunctionParameterError;
 	}
 	return retErrorState;
-
+}
 error_t GPIO_SetLowNibbleValue(port_t portNumber, uint8_t value)
 {
 	error_t kErrorState = kNoError;
