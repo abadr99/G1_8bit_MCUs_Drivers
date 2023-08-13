@@ -26,9 +26,17 @@ AVRDUDE_MCU = m32
 AVRDUDE_PORT = /dev/ACM0
 STYLE_CHECK_SCRIPT = ../scripts/style-checking/style-check.sh
 
+# ---- DOXYGEN OPTIONS
+DOXYGEN_SCRIPT = ../scripts/doxygen/doxygen.sh
+TREAT_WARN_AS_ERROR = YES
+TREAT_WARN_AS_WARN = NO
+DOXYGEN_CONFIG = ./doxygen.cnf
+
 .PHONY: all clean build 
 
 all:build style-check
+	@echo -n "[Doxygen] : "
+	@sh $(DOXYGEN_SCRIPT) $(DOXYGEN_CONFIG) $(TREAT_WARN_AS_WARN)
 
 build: $(OBJS)
 	@$(CC) $(CCFLAGS) $(OBJS) -o $(ELF_TARGET)
@@ -38,6 +46,10 @@ build: $(OBJS)
 style-check:
 	@echo -n "[Style-check] : "
 	@sh $(STYLE_CHECK_SCRIPT) . ../scripts/style-checking/rules-scripts
+
+doxygen:
+	@echo -n "[Doxygen] : "
+	@sh $(DOXYGEN_SCRIPT) $(DOXYGEN_CONFIG) $(TREAT_WARN_AS_ERROR)
 
 %.o : %.c
 	@$(CC) $(CCFLAGS) $(INC) -c $< -o $@
