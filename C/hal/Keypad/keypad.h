@@ -3,7 +3,7 @@
 
 
 #define NOTPRESSED (0xff)
-#define MAXROW      (6)
+#define MAXROW      (4)
 #define MAXCOL      (6)
 /**
  * A structure to represent keypadPin
