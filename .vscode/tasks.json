@@ -1,0 +1,77 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "cppbuild",
+			"label": "C: avr-gcc build",
+			"command": "make",
+			"args": [
+				"-C",
+				"../C",
+				"build" 
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build",
+			"detail": "compiler: /usr/bin/avr-gcc"
+		},
+		{
+			"type": "cppbuild",
+			"label": "C: avr-gcc clean",
+			"command": "make",
+			"args": [
+				"-C",
+				"../C",
+				"clean" 
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build",
+			"detail": "compiler: /usr/bin/avr-gcc"
+		},
+		{
+			"type": "cppbuild",
+			"label": "C: avr-gcc style-check",
+			"command": "make",
+			"args": [
+				"-C",
+				"../C",
+				"style-check" 
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build",
+			"detail": "compiler: /usr/bin/avr-gcc"
+		},
+		{
+			"type": "cppbuild",
+			"label": "C: avr-gcc upload",
+			"command": "make",
+			"args": [
+				"-C",
+				"../C",
+				"upload" 
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build",
+			"detail": "compiler: /usr/bin/avr-gcc"
+		},
+	]
+}
