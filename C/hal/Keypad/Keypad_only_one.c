@@ -1,14 +1,8 @@
 #include "../../common/Types.h"
 #include "../../mcal/GPIO/GPIO.h"
-#include "keypadConfig.h"
+#include "Keypad_config_only_one.h"
 #include "Keypad_only_one.h"
 
-uint8_t keypadButtons[Keypad_numberOfRows]
-                     [Keypad_numberOfCols] = {{'1', '2', '3'},
-                                              {'4', '5', '6'},
-                                              {'7', '8', '9'},
-                                              {'*', '0', '#'}
-                                             };
 error_t Keypad_Init(keypad_t * pKeypad)
 {
     error_t retErrorState = kNoError;
