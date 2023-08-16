@@ -1,12 +1,9 @@
 /**
- * @file   :GIC_Program.c
- * @author :
+ * @file   GIC_Program.c
+ * @author :Mohamed Refat
  * @brief  :This file contain the implementation of GIC function
  * @version:0.1
  * @date   :2023-08-16
- *
- * @copyright Copyright (c) 2023
- *
  */
 #include "../../common/Types.h"
 #include "../../common/Registes.h"

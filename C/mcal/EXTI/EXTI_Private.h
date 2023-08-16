@@ -1,12 +1,9 @@
 /**
- * @file   :EXTI_Private.h
- * @author :
+ * @file   EXTI_Private.h
+ * @author :Mohamed Refat
  * @brief  :This file contain private macros and interfaces
  * @version: 0.1
  * @date   : 2023-08-16
- *
- * @copyright Copyright (c) 2023
- *
  */
 #ifndef MCAL_EXTI_PRIVATE_H_
 #define MCAL_EXTI_PRIVATE_H_

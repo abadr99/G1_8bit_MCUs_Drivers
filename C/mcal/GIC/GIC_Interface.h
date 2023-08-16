@@ -1,13 +1,10 @@
 /**
- * @file   : GIC_Interface.h
- * @author :
+ * @file   GIC_Interface.h
+ * @author :Mohamed Refat
  * @brief  : This file contain the prototype of the
  *              Global Interrupt Control (GIC)
  * @version:0.1
  * @date   :2023-08-16
- *
- * @copyright Copyright (c) 2023
- *
  */
 #ifndef MCAL_GIC_INTERFACE_H_
 #define MCAL_GIC_INTERFACE_H_
