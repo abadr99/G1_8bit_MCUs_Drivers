@@ -10,12 +10,14 @@
  */
 #include "../../common/Types.h"
 #include "../../common/Registes.h"
-#include "GIC_Privete.h"
+#include "../../common/Utils.h"
+#include "GIC_Private.h"
 #include "GIC_Interface.h"
 
 error_t GIC_voidGlobalInterruptControl(uint8_t copyControl)
 {
 	error_t kErrorState = kNoError;
+	#if MCU_TYPE == _AVR
 	switch (copyControl)
 	{
 		case GLOBAL_INTERRUPT_ENABLE  : SET_BIT(SREG_REG, SREG_I); break;
@@ -23,5 +25,6 @@ error_t GIC_voidGlobalInterruptControl(uint8_t copyControl)
 
 		default: kErrorState = kNoError;	break;
 	}
+	#endif
 	return kFunctionParameterError;
 }

@@ -9,9 +9,10 @@
  *
  */
 #include "../../common/Types.h"
+#include "../../common/Utils.h"
 #include "../../common/Registes.h"
-#include "EXTI_Interface.h"
 #include "EXTI_Private.h"
+#include "EXTI_Interface.h"
 
 
 void (*EXTI_pCallBackFun[3]) (void) = {NULL_PTR};
@@ -19,6 +20,7 @@ void (*EXTI_pCallBackFun[3]) (void) = {NULL_PTR};
 error_t EXTI_InterruptEnable (uint8_t kInterruptSource)
 {
     error_t kErrorState = kNoError;
+    #if MCU_TYPE == _AVR
     switch (kInterruptSource)
     {
         case EXTI_INT0 : SET_BIT(GICR_REG, GICR_INT0); break;
@@ -27,11 +29,13 @@ error_t EXTI_InterruptEnable (uint8_t kInterruptSource)
 
         default: kErrorState = kFunctionParameterError;
     }
+    #endif
     return kErrorState;
 }
 error_t EXTI_InterruptDisable(uint8_t kInterruptSource)
 {
     error_t kErrorState = kNoError;
+    #if MCU_TYPE == _AVR
     switch (kInterruptSource)
     {
         case EXTI_INT0 : CLR_BIT(GICR_REG, GICR_INT0); break;
@@ -40,12 +44,14 @@ error_t EXTI_InterruptDisable(uint8_t kInterruptSource)
 
         default: kErrorState = kFunctionParameterError;
     }
+    #endif
     return kErrorState;
 }
 
 error_t EXTI_SetSenseControl (uint8_t kInterruptSource, uint8_t kSenseControl)
 {
     error_t kErrorState = kNoError;
+    #if MCU_TYPE ==_AVR
     if (kInterruptSource == EXTI_INT0  )
     {
         switch (kSenseControl)
@@ -111,11 +117,13 @@ error_t EXTI_SetSenseControl (uint8_t kInterruptSource, uint8_t kSenseControl)
     {
         kErrorState = kFunctionParameterError;
     }
+    #endif
     return kErrorState;
 }
 error_t EXTI_SetCallBackFun  (uint8_t kInterruptSource, void (*pFun)(void))
 {
     error_t kErrorState = kNoError;
+    #if MCU_TYPE ==_AVR
     if (pFun != NULL_PTR)
     {
         switch (kInterruptSource)
@@ -130,7 +138,7 @@ error_t EXTI_SetCallBackFun  (uint8_t kInterruptSource, void (*pFun)(void))
     {
         kErrorState = kFunctionParameterError;
     }
-
+    #endif
     return kErrorState;
 }
 /* ISR Implementation   */
