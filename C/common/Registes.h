@@ -15,6 +15,11 @@
     #define PORTB_REG  *((volatile uint8_t *)0x38)
     #define PORTC_REG  *((volatile uint8_t *)0x35)
     #define PORTD_REG  *((volatile uint8_t *)0x32)
+    #define SREG_REG   *((volatile uint8_t* )0x5F)
+    #define GICR_REG   *((volatile uint8_t *)0X5B)
+    #define GIFR_REG   *((volatile uint8_t *)0X5A)
+    #define MCUCR_REG  *((volatile uint8_t *)0X55)
+    #define MCUCSR_REG *((volatile uint8_t *)0X54)
 
 
 #elif MCU_TYPE == _PIC
