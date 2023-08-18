@@ -1,0 +1,359 @@
+../avr.elf 0x0000: ,__vector_default              JMP 66 __trampolines_start,__trampolines_end,__dtors_end,__init,__ctors_start,__dtors_start,__ctors_end 
+../avr.elf 0x0000: ,__vector_default              CPU-waitstate
+../avr.elf 0x0000: ,__vector_default              CPU-waitstate
+../avr.elf 0x0066: __trampolines_start,__trampolines_end,__dtors_end,__init,__ctors_start,__dtors_start,__ctors_end EOR R1, R1 SREG=[------Z-] 
+../avr.elf 0x0068: __trampolines_start,__trampolines_end,__dtors_end,__init,__ctors_start,__dtors_start,__ctors_end+0x1 OUT 0x3f, R1 
+../avr.elf 0x006a: __trampolines_start,__trampolines_end,__dtors_end,__init,__ctors_start,__dtors_start,__ctors_end+0x2 LDI R28, 0x5f 
+../avr.elf 0x006c: __trampolines_start,__trampolines_end,__dtors_end,__init,__ctors_start,__dtors_start,__ctors_end+0x3 LDI R29, 0x08 
+../avr.elf 0x006e: __trampolines_start,__trampolines_end,__dtors_end,__init,__ctors_start,__dtors_start,__ctors_end+0x4 OUT 0x3e, R29 SP=0x800 
+../avr.elf 0x0070: __trampolines_start,__trampolines_end,__dtors_end,__init,__ctors_start,__dtors_start,__ctors_end+0x5 OUT 0x3d, R28 SP=0x85f 
+../avr.elf 0x0072: __trampolines_start,__trampolines_end,__dtors_end,__init,__ctors_start,__dtors_start,__ctors_end+0x6 CALL 0x280e SP=0x85e 0x3b SP=0x85d 0x0 
+../avr.elf 0x0072: __trampolines_start,__trampolines_end,__dtors_end,__init,__ctors_start,__dtors_start,__ctors_end+0x6 CPU-waitstate
+../avr.elf 0x0072: __trampolines_start,__trampolines_end,__dtors_end,__init,__ctors_start,__dtors_start,__ctors_end+0x6 CPU-waitstate
+../avr.elf 0x0072: __trampolines_start,__trampolines_end,__dtors_end,__init,__ctors_start,__dtors_start,__ctors_end+0x6 CPU-waitstate
+../avr.elf 0x280e: main                           LDI R20, 0x01 
+../avr.elf 0x2810: main+0x1                       LDI R21, 0x00 
+../avr.elf 0x2812: main+0x2                       LDI R22, 0x00 
+../avr.elf 0x2814: main+0x3                       LDI R23, 0x00 
+../avr.elf 0x2816: main+0x4                       LDI R24, 0x00 
+../avr.elf 0x2818: main+0x5                       LDI R25, 0x00 
+../avr.elf 0x281a: main+0x6                       CALL 0x7e SP=0x85c 0xf SP=0x85b 0x14 
+../avr.elf 0x281a: main+0x6                       CPU-waitstate
+../avr.elf 0x281a: main+0x6                       CPU-waitstate
+../avr.elf 0x281a: main+0x6                       CPU-waitstate
+../avr.elf 0x007e: GPIO_SetPinDirection           CPI R24, 0x04 SREG=[--HS-N-C] 
+../avr.elf 0x0080: GPIO_SetPinDirection+0x1       CPC R25, R1 SREG=[--HS-N-C] 
+../avr.elf 0x0082: GPIO_SetPinDirection+0x2       BRCC ->0x0040 GPIO_SetPinDirection+0x23      
+../avr.elf 0x0084: GPIO_SetPinDirection+0x3       CPI R22, 0x08 SREG=[--HS-N-C] 
+../avr.elf 0x0086: GPIO_SetPinDirection+0x4       CPC R23, R1 SREG=[--HS-N-C] 
+../avr.elf 0x0088: GPIO_SetPinDirection+0x5       BRCC ->0x003a GPIO_SetPinDirection+0x23      
+../avr.elf 0x008a: GPIO_SetPinDirection+0x6       CPI R20, 0x01 SREG=[------Z-] 
+../avr.elf 0x008c: GPIO_SetPinDirection+0x7       CPC R21, R1 SREG=[------Z-] 
+../avr.elf 0x008e: GPIO_SetPinDirection+0x8       BREQ ->0x0040 GPIO_SetPinDirection+0x29      
+../avr.elf 0x008e: GPIO_SetPinDirection+0x8       CPU-waitstate
+../avr.elf 0x00d0: GPIO_SetPinDirection+0x29      CPI R24, 0x02 SREG=[--HS-N-C] 
+../avr.elf 0x00d2: GPIO_SetPinDirection+0x2a      CPC R25, R1 SREG=[--HS-N-C] 
+../avr.elf 0x00d4: GPIO_SetPinDirection+0x2b      BRNE ->0x0002 GPIO_SetPinDirection+0x2d      
+../avr.elf 0x00d4: GPIO_SetPinDirection+0x2b      CPU-waitstate
+../avr.elf 0x00d8: GPIO_SetPinDirection+0x2d      CPI R24, 0x03 SREG=[--HS-N-C] 
+../avr.elf 0x00da: GPIO_SetPinDirection+0x2e      CPC R25, R1 SREG=[--HS-N-C] 
+../avr.elf 0x00dc: GPIO_SetPinDirection+0x2f      BREQ ->0x0078 GPIO_SetPinDirection+0x6c      
+../avr.elf 0x00de: GPIO_SetPinDirection+0x30      CPI R24, 0x01 SREG=[--HS-N-C] 
+../avr.elf 0x00e0: GPIO_SetPinDirection+0x31      CPC R25, R1 SREG=[--HS-N-C] 
+../avr.elf 0x00e2: GPIO_SetPinDirection+0x32      BREQ ->0x0014 GPIO_SetPinDirection+0x3d      
+../avr.elf 0x00e4: GPIO_SetPinDirection+0x33      IN R24, 0x1a 
+../avr.elf 0x00e6: GPIO_SetPinDirection+0x34      RJMP ea 
+../avr.elf 0x00e6: GPIO_SetPinDirection+0x34      CPU-waitstate
+../avr.elf 0x00ea: GPIO_SetPinDirection+0x36      DEC R22 SREG=[--HS-N-C] 
+../avr.elf 0x00ec: GPIO_SetPinDirection+0x37      BRPL ->0xfffa GPIO_SetPinDirection+0x35      
+../avr.elf 0x00ee: GPIO_SetPinDirection+0x38      OR R20, R24 SREG=[--H----C] 
+../avr.elf 0x00f0: GPIO_SetPinDirection+0x39      OUT 0x1a, R20 
+../avr.elf 0x00f2: GPIO_SetPinDirection+0x3a      LDI R24, 0x00 
+../avr.elf 0x00f4: GPIO_SetPinDirection+0x3b      LDI R25, 0x00 
+../avr.elf 0x00f6: GPIO_SetPinDirection+0x3c      RET SP=0x85c 0x14 SP=0x85d 0xf 
+../avr.elf 0x00f6: GPIO_SetPinDirection+0x3c      CPU-waitstate
+../avr.elf 0x00f6: GPIO_SetPinDirection+0x3c      CPU-waitstate
+../avr.elf 0x00f6: GPIO_SetPinDirection+0x3c      CPU-waitstate
+../avr.elf 0x281e: main+0x8                       LDI R20, 0x00 
+../avr.elf 0x2820: main+0x9                       LDI R21, 0x00 
+../avr.elf 0x2822: main+0xa                       LDI R22, 0x01 
+../avr.elf 0x2824: main+0xb                       LDI R23, 0x00 
+../avr.elf 0x2826: main+0xc                       LDI R24, 0x00 
+../avr.elf 0x2828: main+0xd                       LDI R25, 0x00 
+../avr.elf 0x282a: main+0xe                       CALL 0x7e SP=0x85c 0x17 SP=0x85b 0x14 
+../avr.elf 0x282a: main+0xe                       CPU-waitstate
+../avr.elf 0x282a: main+0xe                       CPU-waitstate
+../avr.elf 0x282a: main+0xe                       CPU-waitstate
+../avr.elf 0x007e: GPIO_SetPinDirection           CPI R24, 0x04 SREG=[--HS-N-C] 
+../avr.elf 0x0080: GPIO_SetPinDirection+0x1       CPC R25, R1 SREG=[--HS-N-C] 
+../avr.elf 0x0082: GPIO_SetPinDirection+0x2       BRCC ->0x0040 GPIO_SetPinDirection+0x23      
+../avr.elf 0x0084: GPIO_SetPinDirection+0x3       CPI R22, 0x08 SREG=[--HS-N-C] 
+../avr.elf 0x0086: GPIO_SetPinDirection+0x4       CPC R23, R1 SREG=[--HS-N-C] 
+../avr.elf 0x0088: GPIO_SetPinDirection+0x5       BRCC ->0x003a GPIO_SetPinDirection+0x23      
+../avr.elf 0x008a: GPIO_SetPinDirection+0x6       CPI R20, 0x01 SREG=[--HS-N-C] 
+../avr.elf 0x008c: GPIO_SetPinDirection+0x7       CPC R21, R1 SREG=[--HS-N-C] 
+../avr.elf 0x008e: GPIO_SetPinDirection+0x8       BREQ ->0x0040 GPIO_SetPinDirection+0x29      
+../avr.elf 0x0090: GPIO_SetPinDirection+0x9       OR R20, R21 SREG=[--H---ZC] 
+../avr.elf 0x0092: GPIO_SetPinDirection+0xa       BRNE ->0x0036 GPIO_SetPinDirection+0x26      
+../avr.elf 0x0094: GPIO_SetPinDirection+0xb       CPI R24, 0x02 SREG=[--HS-N-C] 
+../avr.elf 0x0096: GPIO_SetPinDirection+0xc       CPC R25, R1 SREG=[--HS-N-C] 
+../avr.elf 0x0098: GPIO_SetPinDirection+0xd       BRNE ->0x0002 GPIO_SetPinDirection+0xf       
+../avr.elf 0x0098: GPIO_SetPinDirection+0xd       CPU-waitstate
+../avr.elf 0x009c: GPIO_SetPinDirection+0xf       CPI R24, 0x03 SREG=[--HS-N-C] 
+../avr.elf 0x009e: GPIO_SetPinDirection+0x10      CPC R25, R1 SREG=[--HS-N-C] 
+../avr.elf 0x00a0: GPIO_SetPinDirection+0x11      BRNE ->0x0002 GPIO_SetPinDirection+0x13      
+../avr.elf 0x00a0: GPIO_SetPinDirection+0x11      CPU-waitstate
+../avr.elf 0x00a4: GPIO_SetPinDirection+0x13      CPI R24, 0x01 SREG=[--HS-N-C] 
+../avr.elf 0x00a6: GPIO_SetPinDirection+0x14      CPC R25, R1 SREG=[--HS-N-C] 
+../avr.elf 0x00a8: GPIO_SetPinDirection+0x15      BREQ ->0x0062 GPIO_SetPinDirection+0x47      
+../avr.elf 0x00aa: GPIO_SetPinDirection+0x16      IN R18, 0x1a 
+../avr.elf 0x00ac: GPIO_SetPinDirection+0x17      LDI R24, 0x01 
+../avr.elf 0x00ae: GPIO_SetPinDirection+0x18      LDI R25, 0x00 
+../avr.elf 0x00b0: GPIO_SetPinDirection+0x19      RJMP b4 
+../avr.elf 0x00b0: GPIO_SetPinDirection+0x19      CPU-waitstate
+../avr.elf 0x00b4: GPIO_SetPinDirection+0x1b      DEC R22 SREG=[--H---ZC] 
+../avr.elf 0x00b6: GPIO_SetPinDirection+0x1c      BRPL ->0xfffa GPIO_SetPinDirection+0x1a      
+../avr.elf 0x00b6: GPIO_SetPinDirection+0x1c      CPU-waitstate
+../avr.elf 0x00b2: GPIO_SetPinDirection+0x1a      ADD R24, R24 SREG=[--------] 
+../avr.elf 0x00b4: GPIO_SetPinDirection+0x1b      DEC R22 SREG=[---S-N--] 
+../avr.elf 0x00b6: GPIO_SetPinDirection+0x1c      BRPL ->0xfffa GPIO_SetPinDirection+0x1a      
+../avr.elf 0x00b8: GPIO_SetPinDirection+0x1d      COM R24 SREG=[---S-N-C] 
+../avr.elf 0x00ba: GPIO_SetPinDirection+0x1e      AND R24, R18 SREG=[------ZC] 
+../avr.elf 0x00bc: GPIO_SetPinDirection+0x1f      OUT 0x1a, R24 
+../avr.elf 0x00be: GPIO_SetPinDirection+0x20      LDI R24, 0x00 
+../avr.elf 0x00c0: GPIO_SetPinDirection+0x21      LDI R25, 0x00 
+../avr.elf 0x00c2: GPIO_SetPinDirection+0x22      RET SP=0x85c 0x14 SP=0x85d 0x17 
+../avr.elf 0x00c2: GPIO_SetPinDirection+0x22      CPU-waitstate
+../avr.elf 0x00c2: GPIO_SetPinDirection+0x22      CPU-waitstate
+../avr.elf 0x00c2: GPIO_SetPinDirection+0x22      CPU-waitstate
+../avr.elf 0x282e: main+0x10                      LDI R20, 0x01 
+../avr.elf 0x2830: main+0x11                      LDI R21, 0x00 
+../avr.elf 0x2832: main+0x12                      LDI R22, 0x02 
+../avr.elf 0x2834: main+0x13                      LDI R23, 0x00 
+../avr.elf 0x2836: main+0x14                      LDI R24, 0x00 
+../avr.elf 0x2838: main+0x15                      LDI R25, 0x00 
+../avr.elf 0x283a: main+0x16                      CALL 0x7e SP=0x85c 0x1f SP=0x85b 0x14 
+../avr.elf 0x283a: main+0x16                      CPU-waitstate
+../avr.elf 0x283a: main+0x16                      CPU-waitstate
+../avr.elf 0x283a: main+0x16                      CPU-waitstate
+../avr.elf 0x007e: GPIO_SetPinDirection           CPI R24, 0x04 SREG=[--HS-N-C] 
+../avr.elf 0x0080: GPIO_SetPinDirection+0x1       CPC R25, R1 SREG=[--HS-N-C] 
+../avr.elf 0x0082: GPIO_SetPinDirection+0x2       BRCC ->0x0040 GPIO_SetPinDirection+0x23      
+../avr.elf 0x0084: GPIO_SetPinDirection+0x3       CPI R22, 0x08 SREG=[--HS-N-C] 
+../avr.elf 0x0086: GPIO_SetPinDirection+0x4       CPC R23, R1 SREG=[--HS-N-C] 
+../avr.elf 0x0088: GPIO_SetPinDirection+0x5       BRCC ->0x003a GPIO_SetPinDirection+0x23      
+../avr.elf 0x008a: GPIO_SetPinDirection+0x6       CPI R20, 0x01 SREG=[------Z-] 
+../avr.elf 0x008c: GPIO_SetPinDirection+0x7       CPC R21, R1 SREG=[------Z-] 
+../avr.elf 0x008e: GPIO_SetPinDirection+0x8       BREQ ->0x0040 GPIO_SetPinDirection+0x29      
+../avr.elf 0x008e: GPIO_SetPinDirection+0x8       CPU-waitstate
+../avr.elf 0x00d0: GPIO_SetPinDirection+0x29      CPI R24, 0x02 SREG=[--HS-N-C] 
+../avr.elf 0x00d2: GPIO_SetPinDirection+0x2a      CPC R25, R1 SREG=[--HS-N-C] 
+../avr.elf 0x00d4: GPIO_SetPinDirection+0x2b      BRNE ->0x0002 GPIO_SetPinDirection+0x2d      
+../avr.elf 0x00d4: GPIO_SetPinDirection+0x2b      CPU-waitstate
+../avr.elf 0x00d8: GPIO_SetPinDirection+0x2d      CPI R24, 0x03 SREG=[--HS-N-C] 
+../avr.elf 0x00da: GPIO_SetPinDirection+0x2e      CPC R25, R1 SREG=[--HS-N-C] 
+../avr.elf 0x00dc: GPIO_SetPinDirection+0x2f      BREQ ->0x0078 GPIO_SetPinDirection+0x6c      
+../avr.elf 0x00de: GPIO_SetPinDirection+0x30      CPI R24, 0x01 SREG=[--HS-N-C] 
+../avr.elf 0x00e0: GPIO_SetPinDirection+0x31      CPC R25, R1 SREG=[--HS-N-C] 
+../avr.elf 0x00e2: GPIO_SetPinDirection+0x32      BREQ ->0x0014 GPIO_SetPinDirection+0x3d      
+../avr.elf 0x00e4: GPIO_SetPinDirection+0x33      IN R24, 0x1a 
+../avr.elf 0x00e6: GPIO_SetPinDirection+0x34      RJMP ea 
+../avr.elf 0x00e6: GPIO_SetPinDirection+0x34      CPU-waitstate
+../avr.elf 0x00ea: GPIO_SetPinDirection+0x36      DEC R22 SREG=[--H----C] 
+../avr.elf 0x00ec: GPIO_SetPinDirection+0x37      BRPL ->0xfffa GPIO_SetPinDirection+0x35      
+../avr.elf 0x00ec: GPIO_SetPinDirection+0x37      CPU-waitstate
+../avr.elf 0x00e8: GPIO_SetPinDirection+0x35      ADD R20, R20 SREG=[--------] 
+../avr.elf 0x00ea: GPIO_SetPinDirection+0x36      DEC R22 SREG=[------Z-] 
+../avr.elf 0x00ec: GPIO_SetPinDirection+0x37      BRPL ->0xfffa GPIO_SetPinDirection+0x35      
+../avr.elf 0x00ec: GPIO_SetPinDirection+0x37      CPU-waitstate
+../avr.elf 0x00e8: GPIO_SetPinDirection+0x35      ADD R20, R20 SREG=[--------] 
+../avr.elf 0x00ea: GPIO_SetPinDirection+0x36      DEC R22 SREG=[---S-N--] 
+../avr.elf 0x00ec: GPIO_SetPinDirection+0x37      BRPL ->0xfffa GPIO_SetPinDirection+0x35      
+../avr.elf 0x00ee: GPIO_SetPinDirection+0x38      OR R20, R24 SREG=[--------] 
+../avr.elf 0x00f0: GPIO_SetPinDirection+0x39      OUT 0x1a, R20 
+../avr.elf 0x00f2: GPIO_SetPinDirection+0x3a      LDI R24, 0x00 
+../avr.elf 0x00f4: GPIO_SetPinDirection+0x3b      LDI R25, 0x00 
+../avr.elf 0x00f6: GPIO_SetPinDirection+0x3c      RET SP=0x85c 0x14 SP=0x85d 0x1f 
+../avr.elf 0x00f6: GPIO_SetPinDirection+0x3c      CPU-waitstate
+../avr.elf 0x00f6: GPIO_SetPinDirection+0x3c      CPU-waitstate
+../avr.elf 0x00f6: GPIO_SetPinDirection+0x3c      CPU-waitstate
+../avr.elf 0x283e: main+0x18                      LDI R20, 0x00 
+../avr.elf 0x2840: main+0x19                      LDI R21, 0x00 
+../avr.elf 0x2842: main+0x1a                      LDI R22, 0x03 
+../avr.elf 0x2844: main+0x1b                      LDI R23, 0x00 
+../avr.elf 0x2846: main+0x1c                      LDI R24, 0x00 
+../avr.elf 0x2848: main+0x1d                      LDI R25, 0x00 
+../avr.elf 0x284a: main+0x1e                      CALL 0x7e SP=0x85c 0x27 SP=0x85b 0x14 
+../avr.elf 0x284a: main+0x1e                      CPU-waitstate
+../avr.elf 0x284a: main+0x1e                      CPU-waitstate
+../avr.elf 0x284a: main+0x1e                      CPU-waitstate
+../avr.elf 0x007e: GPIO_SetPinDirection           CPI R24, 0x04 SREG=[--HS-N-C] 
+../avr.elf 0x0080: GPIO_SetPinDirection+0x1       CPC R25, R1 SREG=[--HS-N-C] 
+../avr.elf 0x0082: GPIO_SetPinDirection+0x2       BRCC ->0x0040 GPIO_SetPinDirection+0x23      
+../avr.elf 0x0084: GPIO_SetPinDirection+0x3       CPI R22, 0x08 SREG=[--HS-N-C] 
+../avr.elf 0x0086: GPIO_SetPinDirection+0x4       CPC R23, R1 SREG=[--HS-N-C] 
+../avr.elf 0x0088: GPIO_SetPinDirection+0x5       BRCC ->0x003a GPIO_SetPinDirection+0x23      
+../avr.elf 0x008a: GPIO_SetPinDirection+0x6       CPI R20, 0x01 SREG=[--HS-N-C] 
+../avr.elf 0x008c: GPIO_SetPinDirection+0x7       CPC R21, R1 SREG=[--HS-N-C] 
+../avr.elf 0x008e: GPIO_SetPinDirection+0x8       BREQ ->0x0040 GPIO_SetPinDirection+0x29      
+../avr.elf 0x0090: GPIO_SetPinDirection+0x9       OR R20, R21 SREG=[--H---ZC] 
+../avr.elf 0x0092: GPIO_SetPinDirection+0xa       BRNE ->0x0036 GPIO_SetPinDirection+0x26      
+../avr.elf 0x0094: GPIO_SetPinDirection+0xb       CPI R24, 0x02 SREG=[--HS-N-C] 
+../avr.elf 0x0096: GPIO_SetPinDirection+0xc       CPC R25, R1 SREG=[--HS-N-C] 
+../avr.elf 0x0098: GPIO_SetPinDirection+0xd       BRNE ->0x0002 GPIO_SetPinDirection+0xf       
+../avr.elf 0x0098: GPIO_SetPinDirection+0xd       CPU-waitstate
+../avr.elf 0x009c: GPIO_SetPinDirection+0xf       CPI R24, 0x03 SREG=[--HS-N-C] 
+../avr.elf 0x009e: GPIO_SetPinDirection+0x10      CPC R25, R1 SREG=[--HS-N-C] 
+../avr.elf 0x00a0: GPIO_SetPinDirection+0x11      BRNE ->0x0002 GPIO_SetPinDirection+0x13      
+../avr.elf 0x00a0: GPIO_SetPinDirection+0x11      CPU-waitstate
+../avr.elf 0x00a4: GPIO_SetPinDirection+0x13      CPI R24, 0x01 SREG=[--HS-N-C] 
+../avr.elf 0x00a6: GPIO_SetPinDirection+0x14      CPC R25, R1 SREG=[--HS-N-C] 
+../avr.elf 0x00a8: GPIO_SetPinDirection+0x15      BREQ ->0x0062 GPIO_SetPinDirection+0x47      
+../avr.elf 0x00aa: GPIO_SetPinDirection+0x16      IN R18, 0x1a 
+../avr.elf 0x00ac: GPIO_SetPinDirection+0x17      LDI R24, 0x01 
+../avr.elf 0x00ae: GPIO_SetPinDirection+0x18      LDI R25, 0x00 
+../avr.elf 0x00b0: GPIO_SetPinDirection+0x19      RJMP b4 
+../avr.elf 0x00b0: GPIO_SetPinDirection+0x19      CPU-waitstate
+../avr.elf 0x00b4: GPIO_SetPinDirection+0x1b      DEC R22 SREG=[--H----C] 
+../avr.elf 0x00b6: GPIO_SetPinDirection+0x1c      BRPL ->0xfffa GPIO_SetPinDirection+0x1a      
+../avr.elf 0x00b6: GPIO_SetPinDirection+0x1c      CPU-waitstate
+../avr.elf 0x00b2: GPIO_SetPinDirection+0x1a      ADD R24, R24 SREG=[--------] 
+../avr.elf 0x00b4: GPIO_SetPinDirection+0x1b      DEC R22 SREG=[--------] 
+../avr.elf 0x00b6: GPIO_SetPinDirection+0x1c      BRPL ->0xfffa GPIO_SetPinDirection+0x1a      
+../avr.elf 0x00b6: GPIO_SetPinDirection+0x1c      CPU-waitstate
+../avr.elf 0x00b2: GPIO_SetPinDirection+0x1a      ADD R24, R24 SREG=[--------] 
+../avr.elf 0x00b4: GPIO_SetPinDirection+0x1b      DEC R22 SREG=[------Z-] 
+../avr.elf 0x00b6: GPIO_SetPinDirection+0x1c      BRPL ->0xfffa GPIO_SetPinDirection+0x1a      
+../avr.elf 0x00b6: GPIO_SetPinDirection+0x1c      CPU-waitstate
+../avr.elf 0x00b2: GPIO_SetPinDirection+0x1a      ADD R24, R24 SREG=[--------] 
+../avr.elf 0x00b4: GPIO_SetPinDirection+0x1b      DEC R22 SREG=[---S-N--] 
+../avr.elf 0x00b6: GPIO_SetPinDirection+0x1c      BRPL ->0xfffa GPIO_SetPinDirection+0x1a      
+../avr.elf 0x00b8: GPIO_SetPinDirection+0x1d      COM R24 SREG=[---S-N-C] 
+../avr.elf 0x00ba: GPIO_SetPinDirection+0x1e      AND R24, R18 SREG=[------ZC] 
+../avr.elf 0x00bc: GPIO_SetPinDirection+0x1f      OUT 0x1a, R24 
+../avr.elf 0x00be: GPIO_SetPinDirection+0x20      LDI R24, 0x00 
+../avr.elf 0x00c0: GPIO_SetPinDirection+0x21      LDI R25, 0x00 
+../avr.elf 0x00c2: GPIO_SetPinDirection+0x22      RET SP=0x85c 0x14 SP=0x85d 0x27 
+../avr.elf 0x00c2: GPIO_SetPinDirection+0x22      CPU-waitstate
+../avr.elf 0x00c2: GPIO_SetPinDirection+0x22      CPU-waitstate
+../avr.elf 0x00c2: GPIO_SetPinDirection+0x22      CPU-waitstate
+../avr.elf 0x284e: main+0x20                      LDI R20, 0x01 
+../avr.elf 0x2850: main+0x21                      LDI R21, 0x00 
+../avr.elf 0x2852: main+0x22                      LDI R22, 0x04 
+../avr.elf 0x2854: main+0x23                      LDI R23, 0x00 
+../avr.elf 0x2856: main+0x24                      LDI R24, 0x00 
+../avr.elf 0x2858: main+0x25                      LDI R25, 0x00 
+../avr.elf 0x285a: main+0x26                      CALL 0x7e SP=0x85c 0x2f SP=0x85b 0x14 
+../avr.elf 0x285a: main+0x26                      CPU-waitstate
+../avr.elf 0x285a: main+0x26                      CPU-waitstate
+../avr.elf 0x285a: main+0x26                      CPU-waitstate
+../avr.elf 0x007e: GPIO_SetPinDirection           CPI R24, 0x04 SREG=[--HS-N-C] 
+../avr.elf 0x0080: GPIO_SetPinDirection+0x1       CPC R25, R1 SREG=[--HS-N-C] 
+../avr.elf 0x0082: GPIO_SetPinDirection+0x2       BRCC ->0x0040 GPIO_SetPinDirection+0x23      
+../avr.elf 0x0084: GPIO_SetPinDirection+0x3       CPI R22, 0x08 SREG=[--HS-N-C] 
+../avr.elf 0x0086: GPIO_SetPinDirection+0x4       CPC R23, R1 SREG=[--HS-N-C] 
+../avr.elf 0x0088: GPIO_SetPinDirection+0x5       BRCC ->0x003a GPIO_SetPinDirection+0x23      
+../avr.elf 0x008a: GPIO_SetPinDirection+0x6       CPI R20, 0x01 SREG=[------Z-] 
+../avr.elf 0x008c: GPIO_SetPinDirection+0x7       CPC R21, R1 SREG=[------Z-] 
+../avr.elf 0x008e: GPIO_SetPinDirection+0x8       BREQ ->0x0040 GPIO_SetPinDirection+0x29      
+../avr.elf 0x008e: GPIO_SetPinDirection+0x8       CPU-waitstate
+../avr.elf 0x00d0: GPIO_SetPinDirection+0x29      CPI R24, 0x02 SREG=[--HS-N-C] 
+../avr.elf 0x00d2: GPIO_SetPinDirection+0x2a      CPC R25, R1 SREG=[--HS-N-C] 
+../avr.elf 0x00d4: GPIO_SetPinDirection+0x2b      BRNE ->0x0002 GPIO_SetPinDirection+0x2d      
+../avr.elf 0x00d4: GPIO_SetPinDirection+0x2b      CPU-waitstate
+../avr.elf 0x00d8: GPIO_SetPinDirection+0x2d      CPI R24, 0x03 SREG=[--HS-N-C] 
+../avr.elf 0x00da: GPIO_SetPinDirection+0x2e      CPC R25, R1 SREG=[--HS-N-C] 
+../avr.elf 0x00dc: GPIO_SetPinDirection+0x2f      BREQ ->0x0078 GPIO_SetPinDirection+0x6c      
+../avr.elf 0x00de: GPIO_SetPinDirection+0x30      CPI R24, 0x01 SREG=[--HS-N-C] 
+../avr.elf 0x00e0: GPIO_SetPinDirection+0x31      CPC R25, R1 SREG=[--HS-N-C] 
+../avr.elf 0x00e2: GPIO_SetPinDirection+0x32      BREQ ->0x0014 GPIO_SetPinDirection+0x3d      
+../avr.elf 0x00e4: GPIO_SetPinDirection+0x33      IN R24, 0x1a 
+../avr.elf 0x00e6: GPIO_SetPinDirection+0x34      RJMP ea 
+../avr.elf 0x00e6: GPIO_SetPinDirection+0x34      CPU-waitstate
+../avr.elf 0x00ea: GPIO_SetPinDirection+0x36      DEC R22 SREG=[--H----C] 
+../avr.elf 0x00ec: GPIO_SetPinDirection+0x37      BRPL ->0xfffa GPIO_SetPinDirection+0x35      
+../avr.elf 0x00ec: GPIO_SetPinDirection+0x37      CPU-waitstate
+../avr.elf 0x00e8: GPIO_SetPinDirection+0x35      ADD R20, R20 SREG=[--------] 
+../avr.elf 0x00ea: GPIO_SetPinDirection+0x36      DEC R22 SREG=[--------] 
+../avr.elf 0x00ec: GPIO_SetPinDirection+0x37      BRPL ->0xfffa GPIO_SetPinDirection+0x35      
+../avr.elf 0x00ec: GPIO_SetPinDirection+0x37      CPU-waitstate
+../avr.elf 0x00e8: GPIO_SetPinDirection+0x35      ADD R20, R20 SREG=[--------] 
+../avr.elf 0x00ea: GPIO_SetPinDirection+0x36      DEC R22 SREG=[--------] 
+../avr.elf 0x00ec: GPIO_SetPinDirection+0x37      BRPL ->0xfffa GPIO_SetPinDirection+0x35      
+../avr.elf 0x00ec: GPIO_SetPinDirection+0x37      CPU-waitstate
+../avr.elf 0x00e8: GPIO_SetPinDirection+0x35      ADD R20, R20 SREG=[--------] 
+../avr.elf 0x00ea: GPIO_SetPinDirection+0x36      DEC R22 SREG=[------Z-] 
+../avr.elf 0x00ec: GPIO_SetPinDirection+0x37      BRPL ->0xfffa GPIO_SetPinDirection+0x35      
+../avr.elf 0x00ec: GPIO_SetPinDirection+0x37      CPU-waitstate
+../avr.elf 0x00e8: GPIO_SetPinDirection+0x35      ADD R20, R20 SREG=[--H-----] 
+../avr.elf 0x00ea: GPIO_SetPinDirection+0x36      DEC R22 SREG=[--HS-N--] 
+../avr.elf 0x00ec: GPIO_SetPinDirection+0x37      BRPL ->0xfffa GPIO_SetPinDirection+0x35      
+../avr.elf 0x00ee: GPIO_SetPinDirection+0x38      OR R20, R24 SREG=[--H-----] 
+../avr.elf 0x00f0: GPIO_SetPinDirection+0x39      OUT 0x1a, R20 
+../avr.elf 0x00f2: GPIO_SetPinDirection+0x3a      LDI R24, 0x00 
+../avr.elf 0x00f4: GPIO_SetPinDirection+0x3b      LDI R25, 0x00 
+../avr.elf 0x00f6: GPIO_SetPinDirection+0x3c      RET SP=0x85c 0x14 SP=0x85d 0x2f 
+../avr.elf 0x00f6: GPIO_SetPinDirection+0x3c      CPU-waitstate
+../avr.elf 0x00f6: GPIO_SetPinDirection+0x3c      CPU-waitstate
+../avr.elf 0x00f6: GPIO_SetPinDirection+0x3c      CPU-waitstate
+../avr.elf 0x285e: main+0x28                      LDI R20, 0x00 
+../avr.elf 0x2860: main+0x29                      LDI R21, 0x00 
+../avr.elf 0x2862: main+0x2a                      LDI R22, 0x05 
+../avr.elf 0x2864: main+0x2b                      LDI R23, 0x00 
+../avr.elf 0x2866: main+0x2c                      LDI R24, 0x00 
+../avr.elf 0x2868: main+0x2d                      LDI R25, 0x00 
+../avr.elf 0x286a: main+0x2e                      CALL 0x7e SP=0x85c 0x37 SP=0x85b 0x14 
+../avr.elf 0x286a: main+0x2e                      CPU-waitstate
+../avr.elf 0x286a: main+0x2e                      CPU-waitstate
+../avr.elf 0x286a: main+0x2e                      CPU-waitstate
+../avr.elf 0x007e: GPIO_SetPinDirection           CPI R24, 0x04 SREG=[--HS-N-C] 
+../avr.elf 0x0080: GPIO_SetPinDirection+0x1       CPC R25, R1 SREG=[--HS-N-C] 
+../avr.elf 0x0082: GPIO_SetPinDirection+0x2       BRCC ->0x0040 GPIO_SetPinDirection+0x23      
+../avr.elf 0x0084: GPIO_SetPinDirection+0x3       CPI R22, 0x08 SREG=[--HS-N-C] 
+../avr.elf 0x0086: GPIO_SetPinDirection+0x4       CPC R23, R1 SREG=[--HS-N-C] 
+../avr.elf 0x0088: GPIO_SetPinDirection+0x5       BRCC ->0x003a GPIO_SetPinDirection+0x23      
+../avr.elf 0x008a: GPIO_SetPinDirection+0x6       CPI R20, 0x01 SREG=[--HS-N-C] 
+../avr.elf 0x008c: GPIO_SetPinDirection+0x7       CPC R21, R1 SREG=[--HS-N-C] 
+../avr.elf 0x008e: GPIO_SetPinDirection+0x8       BREQ ->0x0040 GPIO_SetPinDirection+0x29      
+../avr.elf 0x0090: GPIO_SetPinDirection+0x9       OR R20, R21 SREG=[--H---ZC] 
+../avr.elf 0x0092: GPIO_SetPinDirection+0xa       BRNE ->0x0036 GPIO_SetPinDirection+0x26      
+../avr.elf 0x0094: GPIO_SetPinDirection+0xb       CPI R24, 0x02 SREG=[--HS-N-C] 
+../avr.elf 0x0096: GPIO_SetPinDirection+0xc       CPC R25, R1 SREG=[--HS-N-C] 
+../avr.elf 0x0098: GPIO_SetPinDirection+0xd       BRNE ->0x0002 GPIO_SetPinDirection+0xf       
+../avr.elf 0x0098: GPIO_SetPinDirection+0xd       CPU-waitstate
+../avr.elf 0x009c: GPIO_SetPinDirection+0xf       CPI R24, 0x03 SREG=[--HS-N-C] 
+../avr.elf 0x009e: GPIO_SetPinDirection+0x10      CPC R25, R1 SREG=[--HS-N-C] 
+../avr.elf 0x00a0: GPIO_SetPinDirection+0x11      BRNE ->0x0002 GPIO_SetPinDirection+0x13      
+../avr.elf 0x00a0: GPIO_SetPinDirection+0x11      CPU-waitstate
+../avr.elf 0x00a4: GPIO_SetPinDirection+0x13      CPI R24, 0x01 SREG=[--HS-N-C] 
+../avr.elf 0x00a6: GPIO_SetPinDirection+0x14      CPC R25, R1 SREG=[--HS-N-C] 
+../avr.elf 0x00a8: GPIO_SetPinDirection+0x15      BREQ ->0x0062 GPIO_SetPinDirection+0x47      
+../avr.elf 0x00aa: GPIO_SetPinDirection+0x16      IN R18, 0x1a 
+../avr.elf 0x00ac: GPIO_SetPinDirection+0x17      LDI R24, 0x01 
+../avr.elf 0x00ae: GPIO_SetPinDirection+0x18      LDI R25, 0x00 
+../avr.elf 0x00b0: GPIO_SetPinDirection+0x19      RJMP b4 
+../avr.elf 0x00b0: GPIO_SetPinDirection+0x19      CPU-waitstate
+../avr.elf 0x00b4: GPIO_SetPinDirection+0x1b      DEC R22 SREG=[--H----C] 
+../avr.elf 0x00b6: GPIO_SetPinDirection+0x1c      BRPL ->0xfffa GPIO_SetPinDirection+0x1a      
+../avr.elf 0x00b6: GPIO_SetPinDirection+0x1c      CPU-waitstate
+../avr.elf 0x00b2: GPIO_SetPinDirection+0x1a      ADD R24, R24 SREG=[--------] 
+../avr.elf 0x00b4: GPIO_SetPinDirection+0x1b      DEC R22 SREG=[--------] 
+../avr.elf 0x00b6: GPIO_SetPinDirection+0x1c      BRPL ->0xfffa GPIO_SetPinDirection+0x1a      
+../avr.elf 0x00b6: GPIO_SetPinDirection+0x1c      CPU-waitstate
+../avr.elf 0x00b2: GPIO_SetPinDirection+0x1a      ADD R24, R24 SREG=[--------] 
+../avr.elf 0x00b4: GPIO_SetPinDirection+0x1b      DEC R22 SREG=[--------] 
+../avr.elf 0x00b6: GPIO_SetPinDirection+0x1c      BRPL ->0xfffa GPIO_SetPinDirection+0x1a      
+../avr.elf 0x00b6: GPIO_SetPinDirection+0x1c      CPU-waitstate
+../avr.elf 0x00b2: GPIO_SetPinDirection+0x1a      ADD R24, R24 SREG=[--------] 
+../avr.elf 0x00b4: GPIO_SetPinDirection+0x1b      DEC R22 SREG=[--------] 
+../avr.elf 0x00b6: GPIO_SetPinDirection+0x1c      BRPL ->0xfffa GPIO_SetPinDirection+0x1a      
+../avr.elf 0x00b6: GPIO_SetPinDirection+0x1c      CPU-waitstate
+../avr.elf 0x00b2: GPIO_SetPinDirection+0x1a      ADD R24, R24 SREG=[--H-----] 
+../avr.elf 0x00b4: GPIO_SetPinDirection+0x1b      DEC R22 SREG=[--H---Z-] 
+../avr.elf 0x00b6: GPIO_SetPinDirection+0x1c      BRPL ->0xfffa GPIO_SetPinDirection+0x1a      
+../avr.elf 0x00b6: GPIO_SetPinDirection+0x1c      CPU-waitstate
+../avr.elf 0x00b2: GPIO_SetPinDirection+0x1a      ADD R24, R24 SREG=[--------] 
+../avr.elf 0x00b4: GPIO_SetPinDirection+0x1b      DEC R22 SREG=[---S-N--] 
+../avr.elf 0x00b6: GPIO_SetPinDirection+0x1c      BRPL ->0xfffa GPIO_SetPinDirection+0x1a      
+../avr.elf 0x00b8: GPIO_SetPinDirection+0x1d      COM R24 SREG=[---S-N-C] 
+../avr.elf 0x00ba: GPIO_SetPinDirection+0x1e      AND R24, R18 SREG=[------ZC] 
+../avr.elf 0x00bc: GPIO_SetPinDirection+0x1f      OUT 0x1a, R24 
+../avr.elf 0x00be: GPIO_SetPinDirection+0x20      LDI R24, 0x00 
+../avr.elf 0x00c0: GPIO_SetPinDirection+0x21      LDI R25, 0x00 
+../avr.elf 0x00c2: GPIO_SetPinDirection+0x22      RET SP=0x85c 0x14 SP=0x85d 0x37 
+../avr.elf 0x00c2: GPIO_SetPinDirection+0x22      CPU-waitstate
+../avr.elf 0x00c2: GPIO_SetPinDirection+0x22      CPU-waitstate
+../avr.elf 0x00c2: GPIO_SetPinDirection+0x22      CPU-waitstate
+../avr.elf 0x286e: main+0x30                      LDI R24, 0xca 
+../avr.elf 0x2870: main+0x31                      STS 0x12, R24 
+../avr.elf 0x2870: main+0x31                      CPU-waitstate
+../avr.elf 0x2874: main+0x33                      LDI R24, 0x00 
+../avr.elf 0x2876: main+0x34                      LDI R25, 0x00 
+../avr.elf 0x2878: main+0x35                      RET SP=0x85e 0x0 SP=0x85f 0x3b 
+../avr.elf 0x2878: main+0x35                      CPU-waitstate
+../avr.elf 0x2878: main+0x35                      CPU-waitstate
+../avr.elf 0x2878: main+0x35                      CPU-waitstate
+../avr.elf 0x0076: __trampolines_start,__trampolines_end,__dtors_end,__init,__ctors_start,__dtors_start,__ctors_end+0x8 JMP 2c04 exit,_exit                     
+../avr.elf 0x0076: __trampolines_start,__trampolines_end,__dtors_end,__init,__ctors_start,__dtors_start,__ctors_end+0x8 CPU-waitstate
+../avr.elf 0x0076: __trampolines_start,__trampolines_end,__dtors_end,__init,__ctors_start,__dtors_start,__ctors_end+0x8 CPU-waitstate
+../avr.elf 0x2c04: exit,_exit                     
