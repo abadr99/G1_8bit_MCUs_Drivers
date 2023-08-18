@@ -20,8 +20,8 @@ error_t GIC_voidGlobalInterruptControl(uint8_t copyControl)
 		case GLOBAL_INTERRUPT_ENABLE  : SET_BIT(SREG_REG, SREG_I); break;
 		case GLOBAL_INTERRUPT_DISABLE : CLR_BIT(SREG_REG, SREG_I); break;
 
-		default: kErrorState = kNoError;	break;
+		default: kErrorState = kFunctionParameterError;	break;
 	}
 	#endif
-	return kFunctionParameterError;
+	return kErrorState;
 }
