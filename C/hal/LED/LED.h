@@ -16,9 +16,9 @@ typedef enum
  */
 typedef struct
 {
-    port_t port;
-    pin_t pin;
-    LedState_t activeState;
+    port_t port;            /**< the port number*/
+    pin_t pin;              /**< the pin number*/
+    LedState_t activeState; /**< the led state*/
 }LED_t;
 /**
  * @brief This Function is used to initialize the LED
