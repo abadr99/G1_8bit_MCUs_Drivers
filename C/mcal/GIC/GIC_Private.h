@@ -11,4 +11,7 @@
 
 #define SREG_I (7)
 
+#define INTCON_GIE   (7)    /**<Global Interrupt Enable bit*/
+#define INTCON_PEIE  (6)    /**<Peripheral Interrupt Enable bit*/
+
 #endif /* MCAL_GIC_GIE_PRIVATE_H_ */

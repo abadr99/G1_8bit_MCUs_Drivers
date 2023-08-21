@@ -38,6 +38,9 @@
     #define LATC_REG    *((volatile uint8_t *)0xF8B)
     #define LATD_REG    *((volatile uint8_t *)0xF8C)
     #define LATE_REG    *((volatile uint8_t *)0xF8D)
+    #define INTCON_REG   *((volatile uint8_t *)0xFF2)
+    #define INTCON2_REG  *((volatile uint8_t *)0xFF1)
+    #define INTCON3_REG  *((volatile uint8_t *)0xFF0)
 
 
 #endif  // MCU_TYPE
