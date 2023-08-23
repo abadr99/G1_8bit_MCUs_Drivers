@@ -4,6 +4,10 @@
 
 void LED_Init(LED_t* pLED)
 {
+    if (pLED->activeState == kLedActiveLow)
+    {
+        LED_TurnOff(pLED);
+    }
     GPIO_SetPinDirection(pLED->port, pLED->pin, kOutput);
 }
 error_t LED_TurnOn(LED_t* pLED)

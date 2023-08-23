@@ -4,6 +4,10 @@
 
 void Buzzer_Init(Buzzer_t* pBuzzer)
 {
+    if (pBuzzer->activeState == kBuzzerActiveLow)
+    {
+        Buzzer_TurnOff(pBuzzer);
+    }
     GPIO_SetPinDirection(pBuzzer->port, pBuzzer->pin, kOutput);
 }
 error_t Buzzer_TurnOn(Buzzer_t* pBuzzer)
