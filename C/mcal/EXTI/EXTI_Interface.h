@@ -12,7 +12,6 @@
 #define EXTI_INT0 (0)
 #define EXTI_INT1 (1)
 #define EXTI_INT2 (2)
-#define EXTI_RB   (3)
 
 #define EXTI_FALLING_EDGE (4)
 #define EXTI_RISING_EDGE  (5)
