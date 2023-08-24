@@ -19,22 +19,6 @@
 #define EXTI_LOW_LEVEL    (6)
 #define EXTI_ON_CHANGE    (7)
 
-#define INTCON_RBIF        (0)      /**<RB Port Change Interrupt Flag bit*/
-#define INTCON_INT0F       (1)      /**<INT0 External Interrupt Flag bit*/
-#define INTCON_RBIE        (3)      /**<RB Port Change Interrupt Enable bit*/
-#define INTCON_INT0E       (4)      /**<INT0 External Interrupt Enable bit*/
-
-#define INTCON2_INTRBIP    (0)      /**<RB Port Change Interrupt Priority bit*/
-#define INTCON2_INTEDG2    (4)      /**<External Interrupt 2 Edge Select bit*/
-#define INTCON2_INTEDG1    (5)      /**<External Interrupt 1 Edge Select bit*/
-#define INTCON2_INTEDG0    (6)      /**<External Interrupt 0 Edge Select bit*/
-
-#define INTCON3_INT1IF     (0)      /**<INT1 External Interrupt Flag bit*/
-#define INTCON3_INT2IF     (1)      /**<INT2 External Interrupt Flag bit*/
-#define INTCON3_INT1IE     (3)      /**<INT1 External Interrupt Enable bit*/
-#define INTCON3_INT2IE     (4)      /**<INT2 External Interrupt Enable bit*/
-#define INTCON3_INT1IP     (6)      /**<INT1 External Interrupt Priority bit*/
-#define INTCON3_INT2IP     (7)      /**<INT2 External Interrupt Priority bit*/
 
 error_t EXTI_InterruptEnable (uint8_t kInterruptSource);
 /**
