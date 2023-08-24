@@ -256,4 +256,3 @@ void __vector_3(void)
         EXTI_pCallBackFun[2]();
     }
 }
-

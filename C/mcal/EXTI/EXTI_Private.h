@@ -29,9 +29,9 @@
 #define INTCON_INT0E       (4)      /**<INT0 External Interrupt Enable bit*/
 
 #define INTCON2_RBIP       (0)      /**<RB Port Change Interrupt Priority bit*/
-#define INTCON2_INTEDG2    (4)      /**<External Interrupt INT2 Edge Select bit*/
-#define INTCON2_INTEDG1    (5)      /**<External Interrupt INT1 Edge Select bit*/
-#define INTCON2_INTEDG0    (6)      /**<External Interrupt INT0 Edge Select bit*/
+#define INTCON2_INTEDG2    (4)      /**<External Interrupt 2 Edge Select bit*/
+#define INTCON2_INTEDG1    (5)      /**<External Interrupt 1 Edge Select bit*/
+#define INTCON2_INTEDG0    (6)      /**<External Interrupt 0 Edge Select bit*/
 
 #define INTCON3_INT1IF     (0)      /**<INT1 External Interrupt Flag bit*/
 #define INTCON3_INT2IF     (1)      /**<INT2 External Interrupt Flag bit*/
