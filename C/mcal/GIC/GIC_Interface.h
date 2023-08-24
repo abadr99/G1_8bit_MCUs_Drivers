@@ -12,6 +12,8 @@
 #define GLOBAL_INTERRUPT_ENABLE   (1)
 #define GLOBAL_INTERRUPT_DISABLE  (0)
 
+#define Priority_INTERRUPT_ENABLE   (1)
+#define Priority_INTERRUPT_DISABLE  (0)
 /**
  * @brief  : This function is used to enable Global Interrupt
  *
@@ -23,5 +25,6 @@
  *                   kFunctionParameterError -->Error in function parameter
  */
 error_t GIC_voidGlobalInterruptControl(uint8_t copyControl);
+error_t GIC_voidPriorityInterruptControl(uint8_t copyControl);
 
 #endif /* MCAL_GIC_INTERFACE_H_ */

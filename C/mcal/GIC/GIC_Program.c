@@ -8,8 +8,8 @@
 #include "../../common/Types.h"
 #include "../../common/Registes.h"
 #include "../../common/Utils.h"
-#include "GIC_Private.h"
 #include "GIC_Interface.h"
+#include "GIC_Private.h"
 
 error_t GIC_voidGlobalInterruptControl(uint8_t copyControl)
 {
@@ -24,16 +24,46 @@ error_t GIC_voidGlobalInterruptControl(uint8_t copyControl)
 	}
 	
 	#elif MCU_TYPE == _PIC
-    switch (copyControl)
+	if (Priority_Pin == Priority_INTERRUPT_ENABLE)
 	{
-		case GLOBAL_INTERRUPT_ENABLE  : SET_BIT(INTCON_REG, INTCON_GIE);
-                                        SET_BIT(INTCON_REG, INTCON_PEIE);
-										break;
-        case GLOBAL_INTERRUPT_DISABLE : CLR_BIT(INTCON_REG, INTCON_GIE);
-										CLR_BIT(INTCON_REG, INTCON_PEIE);
-                                        break;
-        default: kErrorState = kFunctionParameterError; break;
+    	switch (copyControl)
+		{
+			case GLOBAL_INTERRUPT_ENABLE  : SET_BIT(INTCON_REG, INTCON_GIEH);
+    	                                    SET_BIT(INTCON_REG, INTCON_GIEL);
+											break;
+    	    case GLOBAL_INTERRUPT_DISABLE : CLR_BIT(INTCON_REG, INTCON_GIEH);
+											CLR_BIT(INTCON_REG, INTCON_GIEL);
+    	                                    break;
+    	    default: kErrorState = kFunctionParameterError; break;
+		}
+	}
+	else if (Priority_Pin == Priority_INTERRUPT_DISABLE)
+	{
+		switch (copyControl)
+		{
+			case GLOBAL_INTERRUPT_ENABLE  : SET_BIT(INTCON_REG, INTCON_GIE);
+    	                                    SET_BIT(INTCON_REG, INTCON_PEIE);
+											break;
+    	    case GLOBAL_INTERRUPT_DISABLE : CLR_BIT(INTCON_REG, INTCON_GIE);
+											CLR_BIT(INTCON_REG, INTCON_PEIE);
+    	                                    break;
+    	    default: kErrorState = kFunctionParameterError; break;
+		}
 	}
 	#endif
 	return kErrorState;
 }
+#if MCU_TYPE == _PIC
+error_t GIC_voidPriorityInterruptControl(uint8_t copyControl)
+{
+	error_t kErrorState = kNoError;
+	switch (copyControl)
+	{
+		case Priority_INTERRUPT_ENABLE  : SET_BIT(RCON_REG, RCON_IPEN); break;
+		case Priority_INTERRUPT_DISABLE : CLR_BIT(RCON_REG, RCON_IPEN); break;
+		default: kErrorState = kFunctionParameterError; break;
+	}
+
+	return kErrorState;
+}
+#endif

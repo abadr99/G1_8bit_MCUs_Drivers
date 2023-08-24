@@ -164,6 +164,7 @@ error_t EXTI_SetSenseControl (uint8_t kInterruptSource, uint8_t kSenseControl)
             default: kErrorState = kFunctionParameterError;             break;
         }
     }
+
     #endif
 
     return kErrorState;
@@ -255,3 +256,4 @@ void __vector_3(void)
         EXTI_pCallBackFun[2]();
     }
 }
+
