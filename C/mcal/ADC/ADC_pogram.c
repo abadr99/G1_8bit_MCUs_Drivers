@@ -1,3 +1,4 @@
+#include "../../common/Config.h"
 #include "../../common/Types.h"
 #include "../../common/Utils.h"
 #include "../../common/Registes.h"
@@ -25,8 +26,8 @@ error_t  ADC_Init ()
     CLR_BIT(ADMUX_REG, ADMUX_ADLAR);
     #else
     kErrorState = kFunctionParameterError;
-    #endif   
-    return  kErrorState ;
+    #endif
+    return kErrorState;
 }
 void ADC_ENABLE()
 {
