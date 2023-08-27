@@ -5,6 +5,7 @@
  * @version:0.1
  * @date   :2023-08-16
  */
+#include "../../common/Config.h"
 #include "../../common/Types.h"
 #include "../../common/Utils.h"
 #include "../../common/Registes.h"
@@ -95,7 +96,7 @@ error_t EXTI_SetSenseControl (uint8_t kInterruptSource, uint8_t kSenseControl)
                 break;
 
             case EXTI_RISING_EDGE:
-                ET_BIT(MCUCR_REG, MCUCR_ISC10);
+                SET_BIT(MCUCR_REG, MCUCR_ISC10);
                 SET_BIT(MCUCR_REG, MCUCR_ISC11);
                 break;
 

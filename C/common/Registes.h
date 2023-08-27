@@ -20,6 +20,12 @@
     #define GIFR_REG   *((volatile uint8_t *)0X5A)
     #define MCUCR_REG  *((volatile uint8_t *)0X55)
     #define MCUCSR_REG *((volatile uint8_t *)0X54)
+    #define ADCSRA_REG *((volatile uint8_t *)0X26)
+    #define ADMUX_REG  *((volatile uint8_t *)0X27)
+    #define ADCH_REG   *((volatile uint8_t *)0X25)
+    #define ADCL_REG   *((volatile uint8_t *)0X24)
+    #define SFIOR_REG  *((volatile uint8_t *)0X50)
+    #define ADC_DATA_REG *((volatile uint16 *)0X24)
 
 
 #elif MCU_TYPE == _PIC
