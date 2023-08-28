@@ -2,7 +2,7 @@
 #define MCAL_ADC_CINFIG_H_
 
 #define ADC_VREF (AREF)
-#define ADC_ADJUSTMENT (LEFT_ADJUSTMENT)
-
+#define ADC_ADJUSTMENT (LEFT_ADJUSMENT)
+#define TIMEOUT (6)
 
 #endif //MCAL_ADC_CONFIG_H_

@@ -41,7 +41,8 @@ typedef enum
 typedef enum
 {
 	kNoError,
-    kFunctionParameterError
+    kFunctionParameterError,
+    kTimeoutError
 }error_t;
 
 
