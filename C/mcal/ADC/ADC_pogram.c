@@ -114,4 +114,3 @@ error_t StartConvASynch(uint8_t channel, uint16* result, void (*function)(void))
     }
     return kErrorState;
 }
-                                                                                                                                                                                                            
