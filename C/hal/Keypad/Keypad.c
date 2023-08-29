@@ -27,7 +27,7 @@ error_t Keypad_Initiate(keypad_t * pKeypad)
         {
             GPIO_SetPinValue(pKeypad->Keypad_COLArr[i].port,
                              pKeypad->Keypad_COLArr[i].pin,
-                             kHigh);
+                             kLow);
         }
     }else
     {
@@ -41,12 +41,12 @@ uint8_t Keypad_GetPressedKey(keypad_t * pKeypad, uint8_t keypadButtons[MAXROW][M
     uint8_t rowCount;
     uint8_t colCount;
     state_t buttonValue;
-    state_t buttonIsPressed = kLow;
+    state_t buttonIsPressed = kHigh;
     for (colCount = 0; colCount<pKeypad->numOfCol; colCount++)
     {
         GPIO_SetPinValue(pKeypad->Keypad_COLArr[colCount].port,
                          pKeypad->Keypad_COLArr[colCount].pin,
-                         kLow);
+                         kHigh);
         for (rowCount = 0; rowCount < pKeypad->numOfRow; rowCount++)
         {
             GPIO_GetPinValue(pKeypad->Keypad_RowArr[rowCount].port,
@@ -66,7 +66,7 @@ uint8_t Keypad_GetPressedKey(keypad_t * pKeypad, uint8_t keypadButtons[MAXROW][M
         }
         GPIO_SetPinValue(pKeypad->Keypad_COLArr[colCount].port,
                          pKeypad->Keypad_COLArr[colCount].pin,
-                         kHigh);
+                         kLow);
     }
     return retValueButton;
 }
