@@ -9,12 +9,21 @@ error_t Keypad_Initiate(keypad_t * pKeypad)
     if (pKeypad != NULL)
     {
         uint8_t i;
-        /*--------Set Rows Pin as Pullup Pin-------------*/
-        for (i = 0; i < pKeypad->numOfRow; i++)
+        /*--------Set Rows Pin as Pullup Pin if AVR-------------*/
+        #if MCU_TYPE == _AVR
+        for (i = 0; i < Keypad_numberOfRows; i++)
         {
             GPIO_SetPinPullup(pKeypad->Keypad_RowArr[i].port,
                               pKeypad->Keypad_RowArr[i].pin);
         }
+        /*--------Set Rows Pin as input  Pin if PIC-------------*/
+        #elif MCU_TYPE == _PIC
+        for (i = 0; i < Keypad_numberOfRows; i++)
+        {
+            GPIO_SetPinDirection(pKeypad->Keypad_RowArr[i].port,
+                              pKeypad->Keypad_RowArr[i].pin);
+        }
+        #endif
         /*--------Set Columns Pin as Output Pin---------*/
         for (i = 0; i < pKeypad->numOfCol; i++)
         {
@@ -27,7 +36,7 @@ error_t Keypad_Initiate(keypad_t * pKeypad)
         {
             GPIO_SetPinValue(pKeypad->Keypad_COLArr[i].port,
                              pKeypad->Keypad_COLArr[i].pin,
-                             kLow);
+                             kHigh);
         }
     }else
     {
@@ -41,12 +50,12 @@ uint8_t Keypad_GetPressedKey(keypad_t * pKeypad, uint8_t keypadButtons[MAXROW][M
     uint8_t rowCount;
     uint8_t colCount;
     state_t buttonValue;
-    state_t buttonIsPressed = kHigh;
+    state_t buttonIsPressed = kLow;
     for (colCount = 0; colCount<pKeypad->numOfCol; colCount++)
     {
         GPIO_SetPinValue(pKeypad->Keypad_COLArr[colCount].port,
                          pKeypad->Keypad_COLArr[colCount].pin,
-                         kHigh);
+                         kLow);
         for (rowCount = 0; rowCount < pKeypad->numOfRow; rowCount++)
         {
             GPIO_GetPinValue(pKeypad->Keypad_RowArr[rowCount].port,
@@ -66,7 +75,7 @@ uint8_t Keypad_GetPressedKey(keypad_t * pKeypad, uint8_t keypadButtons[MAXROW][M
         }
         GPIO_SetPinValue(pKeypad->Keypad_COLArr[colCount].port,
                          pKeypad->Keypad_COLArr[colCount].pin,
-                         kLow);
+                         kHigh);
     }
     return retValueButton;
 }
