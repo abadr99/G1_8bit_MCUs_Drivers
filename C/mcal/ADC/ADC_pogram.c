@@ -21,11 +21,9 @@ error_t ADC_Init (void)
     #elif ADC_VREF == ADC_INTERNAL_2_56
         SET_BIT(ADMUX_REG, ADMUX_REFS0);
         SET_BIT(ADMUX_REG, ADMUX_REFS1);
-    
-    #else 
+    #else
         kErrorState = kFunctionParameterError;
-    #endif   
-
+    #endif
     /* Select ADC Right/Left Adjust */
     #if ADC_ADJUSTMENT == LEFT_ADJUSTMENT
         SET_BIT(ADMUX_REG, ADMUX_ADLAR);
@@ -34,11 +32,9 @@ error_t ADC_Init (void)
     #else
         kErrorState = kFunctionParameterError;
     #endif
-
     /* Select Prescaler */
     ADCSRA_REG &= ADC_PRE_MASK;
     ADCSRA_REG |= ADC_PRESCALER;
-
     return kErrorState;
 }
 
@@ -119,7 +115,8 @@ error_t ADC_GetResultSynch(uint8_t channel, uint16* result)
     }
     return kErrorState;
 }
-error_t ADC_StartConvASynch(uint8_t channel, uint16* result, void (*function)(void))
+error_t ADC_StartConvASynch(uint8_t channel, uint16* result,
+                            void (*function)(void))
 {
     error_t kErrorState = kNoError;
     if (result!=NULL)

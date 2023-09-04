@@ -6,7 +6,7 @@
 #include "hal/LCD/LCD_Interface.h"
 int main()
 {
-  lcd_t lcd = {LCD_4Bit ,kPORTC, kPORTA, kPIN0, kPIN1, kPIN2, LCD_HIGH_NIBBLE};
+  lcd_t lcd = {LCD_4Bit, kPORTC, kPORTA, kPIN0, kPIN1, kPIN2, LCD_HIGH_NIBBLE};
   uint16 digitalValue = 0;
   uint16 analogValue = 0;
   LCD_Init(&lcd);
@@ -16,7 +16,7 @@ int main()
   GIC_voidGlobalInterruptControl(GLOBAL_INTERRUPT_ENABLE);
   while (1)
   {
-    ADC_GetResultSynch(ADC_CHANNEL4 , &digitalValue);
+    ADC_GetResultSynch(ADC_CHANNEL4, &digitalValue);
     analogValue = (digitalValue * 5000LU) / (1024);
     LCD_SendNumber(&lcd, analogValue);
     _delay_ms(100);
