@@ -1,8 +1,15 @@
+#include "../../common/Config.h"
 #include "../../common/Types.h"
 #include "../../mcal/GPIO/GPIO.h"
 #include "Keypad_config_only_one.h"
 #include "Keypad_only_one.h"
-
+#include <util/delay.h>
+uint8_t keypadButtons[Keypad_numberOfRows]
+                     [Keypad_numberOfCols] = {{'7', '8', '9','/'},
+                                              {'4', '5', '6','*'},
+                                              {'1', '2', '3','-'},
+                                              {'&', '0', '=','+'}
+                                             };
 error_t Keypad_Init(keypad_t * pKeypad)
 {
     error_t retErrorState = kNoError;
@@ -13,14 +20,18 @@ error_t Keypad_Init(keypad_t * pKeypad)
          #if MCU_TYPE == _AVR
         for (i = 0; i < Keypad_numberOfRows; i++)
         {
-            GPIO_SetPinPullup(pKeypad->Keypad_RowArr[i].port,
-                              pKeypad->Keypad_RowArr[i].pin);
+            GPIO_SetPinDirection(pKeypad->Keypad_RowArr[i].port,
+                              pKeypad->Keypad_RowArr[i].pin,kInput);
+            GPIO_SetPinValue(pKeypad->Keypad_RowArr[i].port,
+                             pKeypad->Keypad_RowArr[i].pin,
+                             kHigh);
+
         }
         #elif MCU_TYPE == _PIC
         for (i = 0; i < Keypad_numberOfRows; i++)
         {
             GPIO_SetPinDirection(pKeypad->Keypad_RowArr[i].port,
-                              pKeypad->Keypad_RowArr[i].pin);
+                              pKeypad->Keypad_RowArr[i].pin,kInput);
         }
         #endif
         /*--------Set Columns Pin as Output Pin---------*/
@@ -65,7 +76,7 @@ uint8_t Keypad_GetPressedButton(keypad_t * pKeypad)
             if (buttonValue == buttonIsPressed)
             {
                 retValueButton = keypadButtons[rowCount][colCount];
-            }
+            
             while (buttonValue == buttonIsPressed)
             {
                 GPIO_GetPinValue(pKeypad->Keypad_RowArr[rowCount].port,
@@ -73,7 +84,7 @@ uint8_t Keypad_GetPressedButton(keypad_t * pKeypad)
                                  &buttonValue);
             }
             return retValueButton;
-        }
+            }}
         GPIO_SetPinValue(pKeypad->Keypad_COLArr[colCount].port,
                          pKeypad->Keypad_COLArr[colCount].pin,
                          kHigh);
