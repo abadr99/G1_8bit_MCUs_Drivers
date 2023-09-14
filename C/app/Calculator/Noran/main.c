@@ -35,66 +35,86 @@ k.Keypad_COLArr[2].pin=kPIN6;
 k.Keypad_COLArr[3].pin=kPIN7;
 LCD_Init(&lcd);
 Keypad_Init(&k);
-uint8_t arr[OPERATOR_SIZE];
-sint16 ar[NUMBER_SIZE];
-sint16 i=0,j=0;
-sint16 num=0;
-while(1){ 
+uint8_t operatorStack[OPERATOR_SIZE];
+sint32 numStack[NUMBER_SIZE];
+sint16 operatorStackIterator=0, numStackIterator=0, iterator=0;
+sint32 num=0;
+while (1)
+{
     uint8_t keyVal;
-    do{
-     keyVal=Keypad_GetPressedButton(&k);}
-    while(keyVal==NOT_PRESSED);
-LCD_SendChar(&lcd,keyVal);
-if(keyVal!='='){ 
-    if(ISNUM(keyVal)) 
-    { 
-        num=(num*10)+(keyVal-'0'); 
-    } 
-    else 
-    {if(arr[i-1]!='-'){ 
-        ar[j]=num;} 
-        else 
-        { 
-             arr[i-1]='+'; 
-             ar[j]=-num; 
-        } 
-    j++; 
-    num=0; 
-        if(i==0) 
-        { 
-            arr[i]=keyVal; 
-            i++; 
-        } 
-        else 
-        { 
-            if(getPrecedence(keyVal)<getPrecedence(arr[i-1])) 
-            { 
-                int result=operatr(ar[j-2],ar[j-1],arr[i-1]); 
-                arr[i-1]=keyVal; 
-                ar[j-2]=result; 
-                j--; 
-            } 
-            else 
-            { 
-                arr[i]=keyVal; 
-                i++; 
-            } 
- 
-        } 
-    } 
- 
-} 
-else{ 
-ar[j]=num; 
-j++; 
-
-while(i>0) 
-{ 
-    int result=operatr(ar[j-2],ar[j-1],arr[i-1]); 
-                ar[j-2]=result; 
-                j--; 
-                i--; 
-} 
-LCD_SendNumber(&lcd,ar[0]);
-break;}}
-return 0;}
+    do
+    {
+     keyVal=Keypad_GetPressedButton(&k);
+    }
+    while (keyVal==NOT_PRESSED);
+    iterator++;
+if (keyVal=='&')
+{
+    LCD_ClearScreen(&lcd);
+    operatorStackIterator=0;
+    numStackIterator=0;
+    num=0;
+    iterator=0;
+}
+else if (keyVal!='=')
+{
+    if (iterator==16)
+    {
+    LCD_SetPosition(&lcd, LCD_ROW_2, LCD_COL_1);
+    }
+    LCD_SendChar(&lcd, keyVal);
+    if (ISNUM(keyVal))
+    {
+        num=(num*10)+(keyVal-'0');
+    }
+    else
+    {
+        if (operatorStack[operatorStackIterator-1]!='-')
+        {
+            numStack[numStackIterator]=num;
+        }
+        else
+        {
+             operatorStack[operatorStackIterator-1]='+';
+             numStack[numStackIterator]=-num;
+        }
+        numStackIterator++;
+        num=0;
+        if (operatorStackIterator==0)
+        {
+            operatorStack[operatorStackIterator]=keyVal;
+            operatorStackIterator++;
+        }
+        else
+        {
+            if (GetPrecedence(keyVal)<
+                GetPrecedence(operatorStack[operatorStackIterator-1]))
+            {
+                sint32 result=Operate(numStack[numStackIterator-2],
+                                      numStack[numStackIterator-1],
+                                      operatorStack[operatorStackIterator-1]);
+                operatorStack[operatorStackIterator-1]=keyVal;
+                numStack[numStackIterator-2]=result;
+                numStackIterator--;
+            }
+            else
+            {
+                operatorStack[operatorStackIterator]=keyVal;
+                operatorStackIterator++;
+            }
+        }
+    }
+}
+else
+{
+  numStack[numStackIterator]=num;
+  numStackIterator++;
+  Evaluate(numStack, operatorStack, numStackIterator, operatorStackIterator);
+  LCD_ClearScreen(&lcd);
+  LCD_SendChar(&lcd, '=');
+  LCD_SendNumber(&lcd, numStack[0]);
+break;
+}
+}
+return 0;
+}
