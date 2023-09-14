@@ -11,13 +11,13 @@ void Stack_Push(Stack_t *stack, STACK_DATA_TYPE Data)
   stack->StackArr[stack->LastIndex]=Data;
   stack->LastIndex++;
 }
-void Stack_Pop(Stack_t *stack)
+STACK_DATA_TYPE Stack_Pop(Stack_t *stack)
 {
-  stack->LastIndex--;
+  return stack->StackArr[stack->LastIndex--];
 }
-void Stack_Top(Stack_t *stack, STACK_DATA_TYPE *Data)
+STACK_DATA_TYPE Stack_Top(Stack_t *stack)
 {
-  *Data= stack->StackArr[(stack->LastIndex)-1];
+  return stack->StackArr[(stack->LastIndex)-1];
 }
 void Stack_GetSize(Stack_t *stack, STACK_DATA_TYPE *size)
 {
@@ -65,9 +65,9 @@ void Stack_Push(Stack_t *stack, STACK_DATA_TYPE Data)
 	stack->pTop=p;
 	(stack->size)++;
 }
-void Stack_Top(Stack_t *stack, STACK_DATA_TYPE *TopVal)
+STACK_DATA_TYPE Stack_Top(Stack_t *stack)
 {
-	*TopVal=stack->pTop->Value;
+	return stack->pTop->Value;
 }
 STACK_DATA_TYPE Stack_Pop(Stack_t *stack)
 {

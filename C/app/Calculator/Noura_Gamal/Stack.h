@@ -24,7 +24,7 @@ typedef struct
 void Stack_Init(Stack_t *stack);
 void Stack_Push(Stack_t *stack, STACK_DATA_TYPE Data);
 STACK_DATA_TYPE Stack_Pop(Stack_t *stack);
-void Stack_Top(Stack_t *stack, STACK_DATA_TYPE *Data);
+STACK_DATA_TYPE Stack_Top(Stack_t *stack);
 void Stack_GetSize(Stack_t *stack, STACK_DATA_TYPE *size);
 void Stack_Traverse(Stack_t *stack, void (*ptr_func)(STACK_DATA_TYPE* x));
 STACK_DATA_TYPE Is_Empty(Stack_t *stack);

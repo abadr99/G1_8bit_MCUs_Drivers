@@ -1,11 +1,12 @@
-
 #ifndef STACK_CONFIG_H_
 #define STACK_CONFIG_H_
+
 #include "../../../common/Types.h"
 #include <stdlib.h>
 #include <stdint.h>
-#define STACK_ARRAY    3
-#define LINKED_STACK   6
+
+#define STACK_ARRAY    (3)
+#define LINKED_STACK   (6)
 //Data Type
 /*
  * The following line is used to define Data type of the data
