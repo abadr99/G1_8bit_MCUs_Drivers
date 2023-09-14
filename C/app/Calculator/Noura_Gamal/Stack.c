@@ -115,6 +115,6 @@ void Clear_Stack(Stack_t* stack)
 		p=p->pPrevNode;
     	free(p);
     	stack->pTop=p;
-	}	
+	}
 }
 #endif
