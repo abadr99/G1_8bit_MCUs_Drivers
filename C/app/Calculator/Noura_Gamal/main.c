@@ -41,6 +41,6 @@ int main() {
         {
             key = Keypad_GetPressedButton(&keypad1);
         } while (key == NOT_PRESSED);
-        Calculator(&opStack,&numStack,&lcd1,key);
+        Calculator(&opStack, &numStack, &lcd1, key);
     }
 }
