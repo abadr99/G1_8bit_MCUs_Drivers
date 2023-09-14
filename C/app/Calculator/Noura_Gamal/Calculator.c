@@ -24,9 +24,10 @@ void Calculator(Stack_t *opStack, Stack_t *numStack, lcd_t *lcd, uint8_t key)
         else if ((key == '+') || (key == '-') || (key == '*') || (key == '/'))
         {
             LCD_SendChar(lcd, key);
-            if(!Is_Empty(opStack))
+            if ( Is_Empty(opStack) == 0)
             {
-                if (IsHigherPriority(Stack_Top(opStack)) > IsHigherPriority(key))
+                if (IsHigherPriority(Stack_Top(opStack)) 
+                                > IsHigherPriority(key))
                 {
                     num2 = Stack_Pop(numStack);
                     num1 = Stack_Pop(numStack);
@@ -41,12 +42,13 @@ void Calculator(Stack_t *opStack, Stack_t *numStack, lcd_t *lcd, uint8_t key)
                     Stack_Push(numStack, num);
                     Stack_Push(opStack, key);
                 }
-                else if (IsHigherPriority(Stack_Top(opStack)) == IsHigherPriority(key))
+                else if (IsHigherPriority(Stack_Top(opStack)) 
+                                    == IsHigherPriority(key))
                 {
                     num2 = Stack_Pop(numStack);
                     num1 = Stack_Pop(numStack);
                     op = Stack_Pop(opStack);
-                    if(op == '/' && num2 == 0)
+                    if (op == '/' && num2 == 0)
                     {
                         LCD_SetPosition(lcd, LCD_ROW_2, LCD_COL_1);
                         LCD_SendString(lcd, String);
@@ -64,7 +66,8 @@ void Calculator(Stack_t *opStack, Stack_t *numStack, lcd_t *lcd, uint8_t key)
         }
         else if (key == '=')
         {
-            while (!Is_Empty(numStack) && !Is_Empty(opStack))
+            while ((Is_Empty(numStack) == 0) 
+                && (Is_Empty(opStack) == 0))
             {
                 num2 = Stack_Pop(numStack);
                 num1 = Stack_Pop(numStack);
