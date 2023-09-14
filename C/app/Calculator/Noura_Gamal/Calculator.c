@@ -26,7 +26,7 @@ void Calculator(Stack_t *opStack, Stack_t *numStack, lcd_t *lcd, uint8_t key)
             LCD_SendChar(lcd, key);
             if ( Is_Empty(opStack) == 0)
             {
-                if (IsHigherPriority(Stack_Top(opStack)) 
+                if (IsHigherPriority(Stack_Top(opStack))
                                 > IsHigherPriority(key))
                 {
                     num2 = Stack_Pop(numStack);
@@ -42,7 +42,7 @@ void Calculator(Stack_t *opStack, Stack_t *numStack, lcd_t *lcd, uint8_t key)
                     Stack_Push(numStack, num);
                     Stack_Push(opStack, key);
                 }
-                else if (IsHigherPriority(Stack_Top(opStack)) 
+                else if (IsHigherPriority(Stack_Top(opStack))
                                     == IsHigherPriority(key))
                 {
                     num2 = Stack_Pop(numStack);
@@ -66,7 +66,7 @@ void Calculator(Stack_t *opStack, Stack_t *numStack, lcd_t *lcd, uint8_t key)
         }
         else if (key == '=')
         {
-            while ((Is_Empty(numStack) == 0) 
+            while ((Is_Empty(numStack) == 0)
                 && (Is_Empty(opStack) == 0))
             {
                 num2 = Stack_Pop(numStack);

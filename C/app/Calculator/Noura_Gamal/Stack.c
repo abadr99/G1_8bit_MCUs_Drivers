@@ -34,16 +34,24 @@ void Stack_Traverse(Stack_t *stack, void (*ptr_func)(STACK_DATA_TYPE* x))
 STACK_DATA_TYPE Is_Empty(Stack_t*stack)
 {
 	if (stack->LastIndex == 0)
+	{
 		return 1;
+	}
 	else
+	{
 		return 0;
+	}
 }
 STACK_DATA_TYPE Is_Full(Stack_t *stack)
 {
 	if ((stack->LastIndex)==(STACK_SIZE-1))
+	{
 		return 1;
+	}
 	else
+	{
 		return 0;
+	}
 }
 void Clear_Stack(Stack_t* stack)
 {
