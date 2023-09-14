@@ -83,8 +83,6 @@ uint8_t Keypad_GetPressedButton(keypad_t * pKeypad)
                                  &buttonValue);
             }
             return retValueButton;
-            }
-        }
         GPIO_SetPinValue(pKeypad->Keypad_COLArr[colCount].port,
                          pKeypad->Keypad_COLArr[colCount].pin,
                          kHigh);
