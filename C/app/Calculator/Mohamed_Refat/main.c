@@ -6,8 +6,10 @@
 #include "../../../mcal/GPIO/GPIO.h"
 #include "file.h"
 
-int main() {
-    while(1) {
-        test();
+int main()
+{
+    while (1)
+    {
+        Test();
     }
 }

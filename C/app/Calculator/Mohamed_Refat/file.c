@@ -6,6 +6,7 @@
 #include "../../../mcal/GPIO/GPIO.h"
 #include "file.h"
 
-void test(void) {
+void Test(void)
+{
     GPIO_SetPinDirection(kPORTA, kPIN0, kOutput);
 }
