@@ -12,16 +12,15 @@
 
 void Keypad_Cfg(keypad_t * pKeypad);
 void LCD_Cfg(lcd_t * pLCD);
-int main() {
+int main()
+{
     keypad_t keypad;
     lcd_t lcd;
 
     Keypad_Cfg(&keypad);
     LCD_Cfg(&lcd);
 
-
     Calculator(&keypad, &lcd);
-    
 }
 void Keypad_Cfg(keypad_t * pKeypad)
 {

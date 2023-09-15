@@ -21,11 +21,11 @@ typedef struct
 }Stack_t;
 #endif
 void Stack_Init(Stack_t *stack);
-void Stack_Push(Stack_t *stack,STACK_DATA_TYPE Data);
+void Stack_Push(Stack_t *stack, STACK_DATA_TYPE Data);
 void Stack_Pop(Stack_t *stack);
-void Stack_Top(Stack_t *stack , STACK_DATA_TYPE *Data);
-void Stack_GetSize(Stack_t *stack , STACK_DATA_TYPE *size);
-void Stack_Traverse(Stack_t *stack,void (*ptr_func)(STACK_DATA_TYPE* x));
+void Stack_Top(Stack_t *stack, STACK_DATA_TYPE *Data);
+void Stack_GetSize(Stack_t *stack, STACK_DATA_TYPE *size);
+void Stack_Traverse(Stack_t *stack, void (*ptr_func)(STACK_DATA_TYPE* x));
 STACK_DATA_TYPE Is_Empty(Stack_t*stack);
 STACK_DATA_TYPE Is_Full(Stack_t*stack);
 void Clear_Stack(Stack_t* stack);

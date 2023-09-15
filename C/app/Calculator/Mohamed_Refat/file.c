@@ -5,7 +5,3 @@
 #include "../../../mcal/GPIO/GPIOPrivate.h"
 #include "../../../mcal/GPIO/GPIO.h"
 #include "file.h"
-
-void test(void) {
-    GPIO_SetPinDirection(kPORTA, kPIN0, kOutput);
-}

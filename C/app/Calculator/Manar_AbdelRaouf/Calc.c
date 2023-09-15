@@ -13,21 +13,21 @@
 error_t Calculator(keypad_t * pKeypad, lcd_t * pLCD)
 {
     error_t retErrorState = kNoError;
-    if(pKeypad != NULL_PTR && pLCD != NULL_PTR)
+    if (pKeypad != NULL_PTR && pLCD != NULL_PTR)
     {
         f32_t inputChar;
         f32_t inputNum=0;
         f32_t result;
-        Stack_t numStack,opStack;
+        Stack_t numStack, opStack;
         Stack_Init(& numStack);
         Stack_Init(&opStack);
         while (1)
         {
             inputChar = Input(pKeypad);
             if (inputChar != NOT_PRESSED)
-            {   
+            {
                 Output(pLCD, inputChar);
-                if(inputChar >= '0' && inputChar <= '9')
+                if (inputChar >= '0' && inputChar <= '9')
                 {
                     inputNum = inputNum *10 +(inputChar - '0');
                 }
@@ -48,7 +48,7 @@ error_t Calculator(keypad_t * pKeypad, lcd_t * pLCD)
                     Clear_Stack(&opStack);
                     inputNum=0;
                 }
-                else 
+                else
                 {
                     Stack_Push(&numStack, inputNum);
                     inputNum=0;
@@ -57,7 +57,7 @@ error_t Calculator(keypad_t * pKeypad, lcd_t * pLCD)
             }
         }
     }
-    else 
+    else
     {
         retErrorState = kFunctionParameterError;
     }
@@ -72,17 +72,19 @@ f32_t Input(keypad_t * pKeypad)
 void Output(lcd_t * pLCD, f32_t outputChar)
 {
     if (outputChar != '=')
+    {
     LCD_SendChar(pLCD, (uint8_t)outputChar);
+    }
 }
 f32_t Evaluate(f32_t num1, f32_t num2, f32_t op)
 {
     f32_t result=0;
     switch ((uint8_t)op)
     {
-    case '+': result = num1 + num2 ; break;
-    case '-': result = num1 - num2 ; break;
-    case '*': result = num1 * num2 ; break;
-    case '/': result = num1 / num2 ; break;
+    case '+': result = num1 + num2; break;
+    case '-': result = num1 - num2; break;
+    case '*': result = num1 * num2; break;
+    case '/': result = num1 / num2; break;
     }
     return result;
 }
@@ -102,7 +104,7 @@ uint8_t Priority(f32_t op)
 }
 void PushOp(Stack_t * opStack, Stack_t * numStack, f32_t op)
 {
-    f32_t num1,num2,result;
+    f32_t num1, num2, result;
     if (Is_Empty (opStack))
     {
         Stack_Push(opStack, op);
@@ -131,18 +133,18 @@ void PushOp(Stack_t * opStack, Stack_t * numStack, f32_t op)
 }
 f32_t  IsEqual(Stack_t * opStack, Stack_t * numStack)
 {
-    f32_t num1,num2,result;
-    while (!Is_Empty(opStack))
+    f32_t num1, num2, result;
+    while (!(Is_Empty(opStack)))
     {
         num1=0;
         num2=0;
         num2 = numStack->pTop->Value;
-            Stack_Pop(numStack);
-            num1 = numStack->pTop->Value;
-            Stack_Pop(numStack);
-            result = Evaluate(num1, num2, opStack->pTop->Value);
-            Stack_Push (numStack, result);
-            Stack_Pop(opStack);           
+        Stack_Pop(numStack);
+        num1 = numStack->pTop->Value;
+        Stack_Pop(numStack);
+        result = Evaluate(num1, num2, opStack->pTop->Value);
+        Stack_Push (numStack, result);
+        Stack_Pop(opStack);
     }
     result = numStack->pTop->Value;
     return result;
