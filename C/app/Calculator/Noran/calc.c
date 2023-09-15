@@ -48,7 +48,7 @@ void Evaluate(sint32 *ar, uint8_t *arr, sint16 size1, sint16 size2)
 {
 while (size2>0)
 {
-    sint32 result=operatr(ar[size1-2], ar[size1-1], arr[size2-1]);
+    sint32 result=Operate(ar[size1-2], ar[size1-1], arr[size2-1]);
     ar[size1-2]=result;
     size1--;
     size2--;
