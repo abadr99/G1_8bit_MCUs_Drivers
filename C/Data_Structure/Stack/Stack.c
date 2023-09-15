@@ -109,12 +109,12 @@ void Stack_GetSize(Stack_t *stack, STACK_DATA_TYPE *size)
 }
 void Clear_Stack(Stack_t* stack)
 {
-    Node_t*p=stack->pTop;
-    while (p)
+	Node_t*p=stack->pTop;
+	while (p)
 	{
-    	p=p->pPrevNode;
-    	free(p);
-    	stack->pTop=p;
-     }
+		p=p->pPrevNode;
+		free(p);
+		stack->pTop=p;
+	}
 }
 #endif
