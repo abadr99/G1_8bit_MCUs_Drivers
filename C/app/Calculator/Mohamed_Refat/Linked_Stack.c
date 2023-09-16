@@ -9,7 +9,7 @@ void LinkedStack_creatStack(Stack_t *stack)
 
 }
 
-void LinkedStack_Push(Stack_t *stack , STACK_DATA_TYPE Data)
+void LinkedStack_Push(Stack_t *stack, STACK_DATA_TYPE Data)
 {
 	Node_t *pNode = (Node_t *)malloc(sizeof(Node_t));
 	pNode->Entry = Data;
@@ -20,7 +20,7 @@ void LinkedStack_Push(Stack_t *stack , STACK_DATA_TYPE Data)
 
 STACK_DATA_TYPE LinkedStack_GetTop(Stack_t *stack )
 {
-	return stack->Top->Entry ;
+	return stack->Top->Entry;
 
 }
 
@@ -36,19 +36,19 @@ STACK_DATA_TYPE LinkedStack_Pop(Stack_t *stack)
 
 uint8_t LinkedStack_IsEmpty(Stack_t *stack)
 {
-	uint8_t LocalReturn;
-	if(NULL_PTR==stack->Top)
+	uint8_t localReturn;
+	if (NULL_PTR==stack->Top)
 	{
-		LocalReturn=1;
-	}else if(NULL_PTR!=stack->Top)
+		localReturn=1;
+	}else if (NULL_PTR!=stack->Top)
 	{
-		LocalReturn=0;
+		localReturn=0;
 	}else
 	{
 		/*Do Nothing*/
 	}
 
-	return LocalReturn ;
+	return localReturn;
 }
 
 uint8_t LinkedStack_IsFull (Stack_t stack)
@@ -62,10 +62,10 @@ uint32 LinkedStack_GetSize(Stack_t *pStack )
 	return pStack->StackSize;
 }
 
-void LinkedStack_Traverse(Stack_t *pStack , void (*pFun)(STACK_DATA_TYPE data))
+void LinkedStack_Traverse(Stack_t *pStack, void (*pFun)(STACK_DATA_TYPE data))
 {
 	Node_t *Local_pTop = pStack->Top;
-	while(Local_pTop !=NULL_PTR)
+	while (Local_pTop !=NULL_PTR)
 	{
 		pFun(Local_pTop->Entry);
 		Local_pTop = Local_pTop->Next;

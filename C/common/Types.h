@@ -46,7 +46,7 @@ typedef enum
     kFunctionParameterError
 }error_t;
 
-typedef enum 
+typedef enum
 {
     kFALSE,
     kTRUE

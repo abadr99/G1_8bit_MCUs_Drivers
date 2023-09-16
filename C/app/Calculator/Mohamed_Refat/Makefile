@@ -36,7 +36,7 @@ STYLE_CHECK_SCRIPT := ../scripts/style-checking/style-check.sh
 .PHONY: all clean build
 
 all: $(OBJS)
-	$(MAKE) -C ../../../ -f Makefile build
+	@$(MAKE) -C ../../../ -f Makefile build
 	@$(CC) $(CCFLAGS) $(OBJS) -o $(ELF_TARGET)
 	@avr-objcopy -j .text -j .data -O ihex $(ELF_TARGET) $(HEX_TARGET)
 	@echo "\n[Makefile] : Compiled successfully."
@@ -50,7 +50,7 @@ upload: $(HEX)
 	@$(AVRDUDE) -c $(AVRDUDE_PROGRAMMER) -p $(AVRDUDE_MCU) -P $(AVRDUDE_PORT) -U flash:w:$(TARGET).hex:i
 
 clean:
-	$(MAKE) -C ../../../ -f Makefile clean
+	@$(MAKE) -C ../../../ -f Makefile clean
 	@find . -name "*.o" -type f -delete
 	@rm -rf *.o
 	@rm -rf *.bin

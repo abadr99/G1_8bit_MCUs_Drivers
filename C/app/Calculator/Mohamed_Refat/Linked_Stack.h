@@ -18,7 +18,7 @@ typedef struct stack
  * 					pointer to the stack that data will be bushed in.
  *
  * @ret  : None
- * @note : This function must be used every time you want to creat Linked stack .
+ * @note :This function must be used every time you want to creat Linked stack.
  *
  * */
 void LinkedStack_creatStack(Stack_t *stack);
@@ -30,19 +30,21 @@ void LinkedStack_creatStack(Stack_t *stack);
  * 			Data  ::
  *					The data that will be pushed to the stack
  * @ret  : None
- * @note  : This function must be used every time you want to push the data to the stack.
+ * @note : This function must be used every time you want to
+ * 			push the data to the stack.
  *
  * */
-void LinkedStack_Push(Stack_t *stack , STACK_DATA_TYPE Data);
-
+void LinkedStack_Push(Stack_t *stack, STACK_DATA_TYPE Data);
 
 
 /* @brief: This function is used to return the last data at the linked stack
  * @para : *stack ::
- * 					pointer to the stack that you want to read the last data  from it (from linked stack)
+ * 					pointer to the stack that you want to
+ * 						read the last data  from it (from linked stack)
  *
  * 		   *Data  ::
- *					pointer to a variable (Data) that you want to store the last data at the stack in it
+ *					pointer to a variable (Data) that you want to
+ *						store the last data at the stack in it
  * @ret   : None
  * @note  : None
  *
@@ -52,9 +54,10 @@ STACK_DATA_TYPE LinkedStack_GetTop(Stack_t *stack );
 
 /* @brief: This function is used to pop data from the stack
  * @para : *stack ::
- * 					pointer to the stack that the data will be popped out from it.
+ * 				pointer to the stack that the data will be popped out from it.
  * @ret  : None
- * @note  :This function must be used every time you want to pop the data from the linked stack.
+ * @note :This function must be used every time you want to
+ * 			 pop the data from the linked stack.
  *
  * */
 STACK_DATA_TYPE LinkedStack_Pop(Stack_t *stack);
@@ -62,7 +65,7 @@ STACK_DATA_TYPE LinkedStack_Pop(Stack_t *stack);
 
 /* @brief: This function is used to check if stack empty or not
  * @para : stack ::
- * 					Copy from  the stack that you want to check if it empty or not
+ * 				Copy from the stack that you want to check if it empty or not
  *
  * @ret  : Return 1 --> if the stack is empty
  *  	   Return 0 --> if the stack is not empty
@@ -89,7 +92,7 @@ uint8_t LinkedStack_IsFull (Stack_t stack);
 
 /* @brief: This function is used to get the size of the linked stack
  * @para : *stack:
- * 					pointer to the stack that you want to know the size of it	
+ * 					pointer to the stack that you want to know the size of it
  *
  * @ret  : Size of the stack
  * @note : None
@@ -98,19 +101,17 @@ uint8_t LinkedStack_IsFull (Stack_t stack);
 uint32 LinkedStack_GetSize(Stack_t *pStack );
 
 
-
-
 /* @brief: This function is used to traverse each element in the stack
  * @para : *stack ::
  * 					pointer to the stack that you want to traverse it
  *
  *		   void (*ptr)(STACK_DATA_TYPE Data)::
- *					ptr is a pointer to function which take one argument of the stack type
- *					and return nothing
+ *					ptr is a pointer to function which take one argument of
+ * 					the stack type and return nothing
  * @ret  : None
- * @note  : None
+ * @note : None
  *
  * */
-void LinkedStack_Traverse(Stack_t *pStack , void (*pFun)(STACK_DATA_TYPE data));
+void LinkedStack_Traverse(Stack_t *pStack, void (*pFun)(STACK_DATA_TYPE data));
 
 #endif /* LINKED_STACK_H*/

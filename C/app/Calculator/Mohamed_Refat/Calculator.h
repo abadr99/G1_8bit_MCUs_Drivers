@@ -3,7 +3,8 @@
 
 #define EXPRESSION_SIZE (50)
 
-typedef enum {
+typedef enum
+{
 	NoError,
 	SyntaxError,
 	DivideByZero,
@@ -11,7 +12,8 @@ typedef enum {
 }Calc_Error_t;
 
 Calc_Error_t GetPostfixExp(uint8_t *pInfixExp, uint8_t pPostfixExp[]);
-Calc_Error_t EvaluatePostfixExp(uint8_t pPostfixExp[], f32_t *pResult, Calc_Error_t PostfixState);
+Calc_Error_t EvaluatePostfixExp(uint8_t pPostfixExp[], f32_t *pResult,
+											 		Calc_Error_t postfixState);
 f32_t GetResult(f32_t _1stNum, f32_t _2ndNum, uint8_t operator);
 bool_t IsOperator(uint8_t character);
 void SeparateExp(uint8_t pExp[]);
