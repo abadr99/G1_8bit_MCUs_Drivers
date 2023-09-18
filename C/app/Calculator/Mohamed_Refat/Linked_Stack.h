@@ -41,23 +41,15 @@ void LinkedStack_Push(Stack_t *stack, STACK_DATA_TYPE Data);
  * @para : *stack ::
  * 					pointer to the stack that you want to
  * 						read the last data  from it (from linked stack)
- *
- * 		   *Data  ::
- *					pointer to a variable (Data) that you want to
- *						store the last data at the stack in it
- * @ret   : None
- * @note  : None
+ * @ret  : STACK_DATA_TYPE :: Top of the stack
  *
  * */
-
 STACK_DATA_TYPE LinkedStack_GetTop(Stack_t *stack );
 
 /* @brief: This function is used to pop data from the stack
  * @para : *stack ::
  * 				pointer to the stack that the data will be popped out from it.
- * @ret  : None
- * @note :This function must be used every time you want to
- * 			 pop the data from the linked stack.
+ * @ret  : STACK_DATA_TYPE :: Last data poped  from the stack
  *
  * */
 STACK_DATA_TYPE LinkedStack_Pop(Stack_t *stack);
@@ -87,7 +79,6 @@ uint8_t LinkedStack_IsEmpty(Stack_t *stack);
  *
  * */
 uint8_t LinkedStack_IsFull (Stack_t stack);
-
 
 
 /* @brief: This function is used to get the size of the linked stack

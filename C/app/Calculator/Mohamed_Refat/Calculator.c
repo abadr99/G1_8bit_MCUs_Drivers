@@ -8,6 +8,15 @@
 #include "Linked_Stack.h"
 #include "Calculator.h"
 
+Calc_Error_t Run_Calculator(uint8_t pInfixExp[], f32_t *pResult)
+{
+    Calc_Error_t kErrorState = NoError;
+    uint8_t postfixExp[EXPRESSION_SIZE]={};
+    kErrorState = GetPostfixExp(pInfixExp, postfixExp);
+    kErrorState = EvaluatePostfixExp(postfixExp, pResult, kErrorState);
+    return kErrorState;
+}
+
 Calc_Error_t GetPostfixExp(uint8_t pInfixExp[], uint8_t pPostfixExp[])
 {
 	Calc_Error_t kErrorState = NoError;

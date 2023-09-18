@@ -10,34 +10,14 @@
 #include "../../../hal/Keypad/Keypad_only_one.h"
 #include "Calculator.h"
 
-
+void APP_INIT(lcd_t *pLCD, keypad_t *pkeyPad);
 int main()
 {
-    lcd_t lcd =
-			{LCD_4Bit, kPORTC, kPORTA, kPIN0, kPIN1, kPIN2, LCD_HIGH_NIBBLE};
-    keypadPin_t row1 = {kPORTD, kPIN0};
-    keypadPin_t row2 = {kPORTD, kPIN1};
-    keypadPin_t row3 = {kPORTD, kPIN2};
-    keypadPin_t row4 = {kPORTD, kPIN3};
-    keypadPin_t col1 = {kPORTD, kPIN4};
-    keypadPin_t col2 = {kPORTD, kPIN5};
-    keypadPin_t col3 = {kPORTD, kPIN6};
-    keypadPin_t col4 = {kPORTD, kPIN7};
-    keypad_t keyPad =
-    {
-        .Keypad_RowArr[0] = row1,
-        .Keypad_RowArr[1] = row2,
-        .Keypad_RowArr[2] = row3,
-        .Keypad_RowArr[3] = row4,
-        .Keypad_COLArr[0] = col1,
-        .Keypad_COLArr[1] = col2,
-        .Keypad_COLArr[2] = col3,
-        .Keypad_COLArr[3] = col4,
-    };
+    lcd_t lcd;
+    keypad_t keyPad;
 
 	Calc_Error_t kErrorState = NoError;
 	uint8_t infixExp[EXPRESSION_SIZE]={};
-	uint8_t postfixExp[EXPRESSION_SIZE]={};
 	uint8_t strResult[11] = "Result = ";
 	uint8_t strSyntaxError[14] = "Syntax Error ";
 	uint8_t strMathError[12] = "Math Error";
@@ -45,8 +25,7 @@ int main()
 	f32_t result;
 	uint8_t kPressedValue = NOT_PRESSED;
 
-    LCD_Init(&lcd);
-	Keypad_Init(&keyPad);
+	APP_INIT(&lcd, &keyPad);
 	while (1)
 	{
 		iterator = 0;
@@ -74,11 +53,11 @@ int main()
 			}
 		}
 
+		/* Print Result */
 		if ( kPressedValue == '=' )
 		{
 
-			kErrorState = GetPostfixExp(infixExp, postfixExp);
-			kErrorState = EvaluatePostfixExp(postfixExp, &result, kErrorState);
+			kErrorState = Run_Calculator(infixExp, &result);
 			LCD_SetPosition(&lcd, LCD_ROW_2, LCD_COL_1);
 
 			/* iterator == 0 --> to handle case  that the  user doesn't
@@ -115,10 +94,42 @@ int main()
 		while (iterator < EXPRESSION_SIZE)
 		{
 			infixExp[iterator] = '\0';
-			postfixExp[iterator] = '\0';
 			iterator++;
 		}
 		LCD_ClearScreen(&lcd);
 	}
+
+}
+void APP_INIT(lcd_t *pLCD, keypad_t *pkeyPad)
+{
+
+	pLCD->kLcdMode =  LCD_4Bit;
+	pLCD->kLcdDataPort = kPORTC;
+	pLCD->kLcdControlPort = kPORTA;
+	pLCD->kRS_PinNum = kPIN0;
+	pLCD->kRW_PinNum = kPIN1;
+	pLCD->kEN_PinNum = kPIN2;
+	pLCD->kLcd_4bitDataPin = LCD_HIGH_NIBBLE;
+
+
+    keypadPin_t row1 = {kPORTD, kPIN0};
+    keypadPin_t row2 = {kPORTD, kPIN1};
+    keypadPin_t row3 = {kPORTD, kPIN2};
+    keypadPin_t row4 = {kPORTD, kPIN3};
+    keypadPin_t col1 = {kPORTD, kPIN4};
+    keypadPin_t col2 = {kPORTD, kPIN5};
+    keypadPin_t col3 = {kPORTD, kPIN6};
+    keypadPin_t col4 = {kPORTD, kPIN7};
+
+    pkeyPad->Keypad_RowArr[0] = row1;
+    pkeyPad->Keypad_RowArr[1] = row2;
+    pkeyPad->Keypad_RowArr[2] = row3;
+    pkeyPad->Keypad_RowArr[3] = row4;
+    pkeyPad->Keypad_COLArr[0] = col1;
+    pkeyPad->Keypad_COLArr[1] = col2;
+    pkeyPad->Keypad_COLArr[2] = col3;
+    pkeyPad->Keypad_COLArr[3] = col4;
+	LCD_Init(pLCD);
+	Keypad_Init(pkeyPad);
 
 }
