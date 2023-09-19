@@ -2,7 +2,7 @@ CC:= avr-gcc
 MCU:= atmega32a
 CLK:= 8000000
 
-CCFLAGS:= -g -Wall -DF_CPU=$(CLK) -mmcu=$(MCU) -gdwarf-2 -DMCU_TYPE=1 -O3 -Werror
+CCFLAGS:= -g -Wall -DF_CPU=$(CLK) -mmcu=$(MCU) -gdwarf-2 -DMCU_TYPE=1 -O2 -Werror
  
 
 TARGET:= avr
