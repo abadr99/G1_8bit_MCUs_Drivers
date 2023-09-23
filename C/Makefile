@@ -81,17 +81,17 @@ clean:
 	@rm -rf *.hex
 	@rm -rf avr
 help:
-	@echo "make build                		  : Build and generate elf and hex files (for debugging and development mode)"
-	@echo "make opt-build            		  : Build and generate elf and hex files (for release mode)"
-	@echo "make style-check          		  : Run vera rules and check if code follow our coding style"
-	@echo "make doxygen              		  : Run doxygen and generate html file"
-	@echo "make upload               		  : Upload hex file for target"
-	@echo "make clean                		  : Clean generated files"
-	@echo "make run-regression all   		  : Run all regression test"
-	@echo "make run-regression elf/path/dir   : Run specific regression test"
-	@echo "NOTE                      		  : For issues related to doxygen contact @ManarAbdelraouf"
-	@echo "                          		  : For issues related to style-check contact @MohamedRefat13"
-	@echo "                          		  : For issues related to build contact @AbdelrahmanBadr22"
+	@echo "make build                		  		  : Build and generate elf and hex files (for debugging and development mode)"
+	@echo "make opt-build            		  		  : Build and generate elf and hex files (for release mode)"
+	@echo "make style-check          		  		  : Run vera rules and check if code follow our coding style"
+	@echo "make doxygen              		  		  : Run doxygen and generate html file"
+	@echo "make upload               		  		  : Upload hex file for target"
+	@echo "make clean                		  		  : Clean generated files"
+	@echo "make run-regression filter=all   		  : Run all regression test"
+	@echo "make run-regression filter=elf/path/dir    : Run specific regression test"
+	@echo "NOTE                      		  		  : For issues related to doxygen contact @ManarAbdelraouf"
+	@echo "                          		  		  : For issues related to style-check contact @MohamedRefat13"
+	@echo "                          		  		  : For issues related to build contact @AbdelrahmanBadr22"
 
 
 
