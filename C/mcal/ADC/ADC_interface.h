@@ -25,6 +25,7 @@ error_t ADC_Init (void);
 void ADC_ENABLE(void);
 void ADC_DISABLE(void);
 void ADC_INTERRUPT_ENABLE(void);
+void ADC_INTERRUPT_DISABLE(void);
 error_t ADC_Prescaler (uint8_t prescalerVal);
 error_t ADC_GetResultSynch(uint8_t channel, uint16* result);
 error_t ADC_StartConvASynch(uint8_t channel, uint16* result,

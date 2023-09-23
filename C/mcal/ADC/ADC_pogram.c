@@ -134,3 +134,18 @@ error_t ADC_StartConvASynch(uint8_t channel, uint16* result,
     }
     return kErrorState;
 }
+void __vector_16(void) __attribute__((signal));
+void __vector_16(void)
+{
+             #if ADC_ADJUSTMENT == RIGHT_ADJUSTMENT
+                *aSynchResult = ADCL_REG | (ADCH_REG<<8);
+
+            #elif ADC_ADJUSTMENT == LEFT_ADJUSTMENT
+                *aSynchResult = ADCH_REG;
+
+            #else
+                kErrorState = kFunctionParameterError;
+            #endif
+            ISRfunction();
+            CLR_BIT(ADCSRA_REG, ADCSRA_ADIE);
+}
