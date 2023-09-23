@@ -2,7 +2,7 @@ CC:= avr-gcc
 MCU:= atmega32a
 CLK:= 8000000
 
-CCFLAGS:= -g -Wall -DF_CPU=$(CLK) -mmcu=$(MCU) -gdwarf-2 -DMCU_TYPE=1 -O0 -Werror -Wno-cpp
+CCFLAGS:= -g -Wall -DF_CPU=$(CLK) -mmcu=$(MCU) -gdwarf-2 -DMCU_TYPE=1 -O2 -Werror -Wno-cpp
 OPT_CCFLAGS:= -g -Wall -DF_CPU=$(CLK) -mmcu=$(MCU) -gdwarf-2 -DMCU_TYPE=1 -O3 -Werror
 
 TARGET:= avr
@@ -38,7 +38,7 @@ DOXYGEN_CONFIG = ./doxygen.cnf
 all:build style-check
 	@echo -n "[Doxygen] : "
 	@sh $(DOXYGEN_SCRIPT) $(DOXYGEN_CONFIG) $(TREAT_WARN_AS_WARN)
-
+	
 build: $(OBJS)
 	@$(CC) $(CCFLAGS) $(OBJS) -o $(ELF_TARGET)
 	@avr-objcopy -j .text -j .data -O ihex $(ELF_TARGET) $(HEX_TARGET)
