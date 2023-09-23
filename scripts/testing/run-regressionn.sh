@@ -25,6 +25,10 @@ case $1 in
     do
         test_dir=$(dirname "$test_file")
         sh ../scripts/testing/run-regressionn.sh $test_dir
+        if [ $? -eq 1 ]
+        then
+            exit 1
+        fi
     done
     ;;
   *)
