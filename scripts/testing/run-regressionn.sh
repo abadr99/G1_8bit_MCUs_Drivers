@@ -20,7 +20,7 @@ case $1 in
 
   all)
     test_files=$(find "$main_test_directory" -type f -name "*.elf")
-    @echo "Testing: $test_files"
+    echo "Testing: $test_files"
     for test_file in $test_files
     do
         test_dir=$(dirname "$test_file")
