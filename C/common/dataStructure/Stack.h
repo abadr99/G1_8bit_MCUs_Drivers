@@ -12,7 +12,7 @@ typedef struct
 
 void StackInit(Stack_t *stack);
 void StackPush(Stack_t *stack, void* Data);
-void StackPop(Stack_t *stack);
+void* StackPop(Stack_t *stack);
 void* StackTop(Stack_t *stack );
 uint8_t Is_Empty(Stack_t*stack);
 void Stack_GetSize(Stack_t *stack, uint8_t*size);
