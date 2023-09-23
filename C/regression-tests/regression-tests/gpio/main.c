@@ -3,34 +3,36 @@
 #include "../../../common/Config.h"
 #include "../../../common/Registes.h"
 
-#define special_output_port (*((volatile char *)0x20))
-#define special_input_port (*((volatile char *)0x22))
+#define SPECIAL_OUTPUT_PORT (*((volatile char *)0x20))
+#define SPECIAL_INPUT_PORT  (*((volatile char *)0x22))
 
 void print_str(const char *str)
 {
     const char *c;
-    for(c = str; *c; c++)
-        special_output_port = *c;
+    for (c = str; *c != NULL ; c++)
+    {
+        SPECIAL_OUTPUT_PORT = *c;
+    }
 }
 
 void print_num(int num)
 {
     char str[15];
     int i = 0;
-    while(num != 0)
+    while (num != 0)
     {
         str[i++] = (num % 10) + '0';
         num /= 10;
     }
-    for(int j = i - 1 ; j >= 0 ; j--)
+    for (int j = i - 1 ; j >= 0 ; j--)
     {
-        special_output_port = str[j]; 
+        SPECIAL_OUTPUT_PORT = str[j];
     }
 }
 
 static void SET_BIT_Test(uint8_t* var)
 {
-    for(uint8_t i = 0; i < 4; i++)
+    for (uint8_t i = 0; i < 4; i++)
     {
         SET_BIT(*var, i);
     }
@@ -38,7 +40,7 @@ static void SET_BIT_Test(uint8_t* var)
 
 static void CLR_BIT_Test(uint8_t* var)
 {
-    for(uint8_t i = 0; i < 4; i++)
+    for (uint8_t i = 0; i < 4; i++)
     {
         CLR_BIT(*var, i);
     }
@@ -46,7 +48,7 @@ static void CLR_BIT_Test(uint8_t* var)
 
 static void TOG_BIT_Test(uint8_t* var)
 {
-    for(uint8_t i = 0; i < 8; i++)
+    for (uint8_t i = 0; i < 8; i++)
     {
         TOG_BIT(*var, i);
     }
