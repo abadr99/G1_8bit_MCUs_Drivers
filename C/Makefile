@@ -33,12 +33,15 @@ TREAT_WARN_AS_ERROR = YES
 TREAT_WARN_AS_WARN = NO
 DOXYGEN_CONFIG = ./doxygen.cnf
 
+# ---- TESTING 
+REGRESSION_TEST_SCRIPT = ../scripts/testing/run-regressionn.sh
+
 .PHONY: all clean build 
 
 all:build style-check
 	@echo -n "[Doxygen] : "
 	@sh $(DOXYGEN_SCRIPT) $(DOXYGEN_CONFIG) $(TREAT_WARN_AS_WARN)
-	
+
 build: $(OBJS)
 	@$(CC) $(CCFLAGS) $(OBJS) -o $(ELF_TARGET)
 	@avr-objcopy -j .text -j .data -O ihex $(ELF_TARGET) $(HEX_TARGET)
@@ -48,6 +51,10 @@ opt-build:
 	@$(CC) $(OPT_CCFLAGS) $(OBJS) -o $(ELF_TARGET)
 	@avr-objcopy -j .text -j .data -O ihex $(ELF_TARGET) $(HEX_TARGET)
 	@echo "\n[Makefile][opt-build] : Compiled successfully."	
+
+run-regression:
+	@sh $(REGRESSION_TEST_SCRIPT) $(filter)
+	@echo "\n[Makefile][Regression-Testing] : Running tests successfully."
 
 style-check:
 	@echo -n "[Style-check] : "
@@ -64,6 +71,7 @@ doxygen:
 
 upload: $(HEX)
 	@$(AVRDUDE) -c $(AVRDUDE_PROGRAMMER) -p $(AVRDUDE_MCU) -P $(AVRDUDE_PORT) -U flash:w:$(TARGET).hex:i
+
 clean:
 	@find . -name "*.o" -type f -delete
 	@rm -rf *.o
@@ -73,15 +81,17 @@ clean:
 	@rm -rf *.hex
 	@rm -rf avr
 help:
-	@echo "make build         : Build and generate elf and hex files (for debugging and development mode)"
-	@echo "make opt-build     : Build and generate elf and hex files (for release mode)"
-	@echo "make style-check   : Run vera rules and check if code follow our coding style"
-	@echo "make doxygen       : Run doxygen and generate html file"
-	@echo "make upload        : Upload hex file for target"
-	@echo "make clean         : Clean generated files"
-	@echo "NOTE               : For issues related to doxygen contact @ManarAbdelraouf"
-	@echo "                   : For issues related to style-check contact @MohamedRefat13"
-	@echo "                   : For issues related to build contact @AbdelrahmanBadr22"
+	@echo "make build                		  : Build and generate elf and hex files (for debugging and development mode)"
+	@echo "make opt-build            		  : Build and generate elf and hex files (for release mode)"
+	@echo "make style-check          		  : Run vera rules and check if code follow our coding style"
+	@echo "make doxygen              		  : Run doxygen and generate html file"
+	@echo "make upload               		  : Upload hex file for target"
+	@echo "make clean                		  : Clean generated files"
+	@echo "make run-regression all   		  : Run all regression test"
+	@echo "make run-regression elf/path/dir   : Run specific regression test"
+	@echo "NOTE                      		  : For issues related to doxygen contact @ManarAbdelraouf"
+	@echo "                          		  : For issues related to style-check contact @MohamedRefat13"
+	@echo "                          		  : For issues related to build contact @AbdelrahmanBadr22"
 
 
 
