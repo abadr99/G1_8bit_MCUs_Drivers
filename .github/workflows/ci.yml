@@ -39,6 +39,8 @@ jobs:
     - name: Configure Tests
       run: sh /home/runner/work/G1_8bit_MCUs_Drivers/G1_8bit_MCUs_Drivers/.github/workflows/configure-test.sh
     - name: Testing For C Version
-      run: source /home/runner/work/G1_8bit_MCUs_Drivers/G1_8bit_MCUs_Drivers/scripts/testing/run-regressions.sh all
+      run: sh /home/runner/work/G1_8bit_MCUs_Drivers/G1_8bit_MCUs_Drivers/scripts/testing/run-regressions.sh all> script_output.log 2>&1
+    - name: Display Script Output
+      run: cat script_output.log
     - name: Clean
       run: sh /home/runner/work/G1_8bit_MCUs_Drivers/G1_8bit_MCUs_Drivers/.github/workflows/clean-test.sh 
