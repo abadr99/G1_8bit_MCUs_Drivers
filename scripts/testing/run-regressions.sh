@@ -20,7 +20,13 @@ fi
 case $1 in
 
   all)
-    test_files=$(find "$main_C_test_directory" -type f -name "*.elf")
+
+    if [ -d "$main_C_test_directory" ]; then
+      test_files=$(find "$main_C_test_directory" -type f -name "*.elf")
+    else
+      echo "Directory not found: $directory_to_search"
+      exit 1 
+    fi
     for test_file in $test_files
     do
         echo "Testing: $test_file"
@@ -33,7 +39,12 @@ case $1 in
     done
     ;;
   *)
-    test_file=$(find "$1" -type f -name "*.elf" | grep "\.elf$")
+    if [ -d "$1" ]; then
+      test_file=$(find "$1" -type f -name "*.elf" | grep "\.elf$")
+    else
+      echo "Directory not found: $directory_to_search"
+      exit 1 
+    fi
     test_dir=$(dirname "$test_file")
     if [ -s "$test_file" ]
     then
@@ -61,7 +72,6 @@ case $1 in
     if [ $? -eq 0 ]
     then 
         echo "[$test_file]:$GREEN PASS $RESET" 
-        exit 0
     else
         echo "[$test_file]:$RED FAIL$RESET"
         exit 1
@@ -69,5 +79,6 @@ case $1 in
     ;;
 esac
 rm -rf $test_dir/results.output
+exit 0
 
 
