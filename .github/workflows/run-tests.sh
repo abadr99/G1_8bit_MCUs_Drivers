@@ -1,2 +1,3 @@
 cd ./C
-sh ../scripts/testing/run-regressions.sh all
+make run-regressions filter=all
+cd -
