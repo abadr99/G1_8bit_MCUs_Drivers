@@ -8,7 +8,7 @@ GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
 RESET='\033[0m'  # Reset color to default
 
-main_test_directory=regression-tests/regression-tests/
+main_C_test_directory=../../C/regression-tests/regression-tests
 
 if [ $# != 1 ]
 then 
@@ -19,8 +19,7 @@ fi
 case $1 in
 
   all)
-    echo "all"
-    test_files=$(find "$main_test_directory" -type f -name "*.elf")
+    test_files=$(find "$main_C_test_directory" -type f -name "*.elf")
     echo "Testing: $test_files"
     for test_file in $test_files
     do
@@ -33,7 +32,6 @@ case $1 in
     done
     ;;
   *)
-    echo "specific: $1"
     test_file=$(find "$1" -type f -name "*.elf" | grep "\.elf$")
     test_dir=$(dirname "$test_file")
     if [ -s "$test_file" ]
