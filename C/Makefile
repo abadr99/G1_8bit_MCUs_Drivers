@@ -53,7 +53,6 @@ opt-build:
 	@echo "\n[Makefile][opt-build] : Compiled successfully."	
 
 run-regressions:
-	pwd
 	@echo -n "[Regression-tests] : "
 	@sh $(REGRESSION_TEST_SCRIPT) $(filter)
 	@echo "\n[Makefile][Regression-Testing] : Running tests successfully."
