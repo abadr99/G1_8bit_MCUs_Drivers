@@ -34,7 +34,7 @@ TREAT_WARN_AS_WARN = NO
 DOXYGEN_CONFIG = ./doxygen.cnf
 
 # ---- TESTING 
-REGRESSION_TEST_SCRIPT = ../scripts/testing/run-regressions.sh
+REGRESSION_TEST_SCRIPT = ../scripts/testing/run-regressins.sh
 
 .PHONY: all clean build 
 
