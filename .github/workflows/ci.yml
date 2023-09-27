@@ -28,8 +28,8 @@ jobs:
       run: sh /home/runner/work/G1_8bit_MCUs_Drivers/G1_8bit_MCUs_Drivers/.github/workflows/configure.sh
     - name: Building C Version
       run: make build -C C
-    - name: Clean
-      run: sh /home/runner/work/G1_8bit_MCUs_Drivers/G1_8bit_MCUs_Drivers/.github/workflows/clean.sh 
+    # - name: Clean
+    #   run: sh /home/runner/work/G1_8bit_MCUs_Drivers/G1_8bit_MCUs_Drivers/.github/workflows/clean.sh 
   
   regression-test:
     runs-on: ubuntu-latest

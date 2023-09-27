@@ -52,7 +52,7 @@ opt-build:
 	@avr-objcopy -j .text -j .data -O ihex $(ELF_TARGET) $(HEX_TARGET)
 	@echo "\n[Makefile][opt-build] : Compiled successfully."	
 
-run-regressions:build
+run-regressions:
 	@echo -n "[Regression-tests] : RUN REGRESSIONS\n"
 	@sh $(REGRESSION_TEST_SCRIPT) $(filter)
 	@echo "\n[Makefile][Regression-Testing] : Running tests successfully."
