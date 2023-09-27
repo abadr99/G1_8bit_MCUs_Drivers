@@ -54,7 +54,7 @@ opt-build:
 
 run-regressions:
 	@echo -n "[Regression-tests] : RUN REGRESSIONS\n"
-	@stdbuf -o0 sh $(REGRESSION_TEST_SCRIPT) $(filter)
+	@sh $(REGRESSION_TEST_SCRIPT) $(filter) > output.log 2>&1
 	@echo "\n[Makefile][Regression-Testing] : Running tests successfully."
 
 style-check:
