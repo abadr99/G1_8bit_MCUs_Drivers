@@ -19,6 +19,7 @@ fi
 case $1 in
 
   all)
+    echo "all"
     test_files=$(find "$main_test_directory" -type f -name "*.elf")
     echo "Testing: $test_files"
     for test_file in $test_files
@@ -32,6 +33,7 @@ case $1 in
     done
     ;;
   *)
+    echo "specific: $1"
     test_file=$(find "$1" -type f -name "*.elf" | grep "\.elf$")
     test_dir=$(dirname "$test_file")
     if [ -s "$test_file" ]
