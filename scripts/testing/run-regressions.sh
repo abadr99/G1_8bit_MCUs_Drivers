@@ -8,7 +8,7 @@ GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
 RESET='\033[0m'  # Reset color to default
 
-main_C_test_directory=../../C/regression-tests/regression-tests
+main_C_test_directory=regression-tests/regression-tests
 
 if [ $# != 1 ]
 then 
