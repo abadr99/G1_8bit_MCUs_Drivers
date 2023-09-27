@@ -20,9 +20,9 @@ case $1 in
 
   all)
     test_files=$(find "$main_C_test_directory" -type f -name "*.elf")
-    echo "Testing: $test_files"
     for test_file in $test_files
     do
+        echo "Testing: $test_file"
         test_dir=$(dirname "$test_file")
         sh ../scripts/testing/run-regressionn.sh $test_dir
         if [ $? -eq 1 ]
@@ -67,5 +67,6 @@ case $1 in
     fi
     ;;
 esac
+rm -rf $test_dir/results.output
 
 
