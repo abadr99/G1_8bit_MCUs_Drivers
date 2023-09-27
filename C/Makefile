@@ -54,8 +54,8 @@ opt-build:
 
 run-regressions:
 	@echo -n "[Regression-tests] : RUN REGRESSIONS\n"
-	@sh $(REGRESSION_TEST_SCRIPT) $(filter) > output.log 2>&1
-	@echo "\n[Makefile][Regression-Testing] : Running tests successfully."
+	@sh $(REGRESSION_TEST_SCRIPT) $(filter) 
+	@echo "\n[Makefile][Regression-Testing] : Tests have been run successfully."
 
 style-check:
 	@echo -n "[Style-check] : "
@@ -93,9 +93,6 @@ help:
 	@echo "NOTE                      		  		  : For issues related to doxygen contact @ManarAbdelraouf"
 	@echo "                          		  		  : For issues related to style-check contact @MohamedRefat13"
 	@echo "                          		  		  : For issues related to build contact @AbdelrahmanBadr22"
-
-
-
 
 
 
