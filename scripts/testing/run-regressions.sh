@@ -6,7 +6,7 @@
 # Define ANSI color codes
 RED='\033[0;31m'
 BOLD_RED='\033[1;31m'
-GREEN='\033[0;32m'
+GREEN='\033[1;32m'
 YELLOW='\033[1;33m'
 Magenta='\033[1;35m'
 RESET='\033[0m'  # Reset color to default
@@ -20,34 +20,40 @@ then
     exit 1
 fi
 
-# -- Find .elf file for 
+
 if [ -d "$1" ]
 then
+  echo "$GREEN [--- OK ---]:$RESET Directory has been found successfully: $1"
   test_file=$(find "$1" -type f -name "*.elf" | grep "\.elf$")
+  if [ -s "$test_file" ]
+  then
+    echo "$GREEN [--- OK ---]:$RESET Test-elf file has been found : $test_file" 
+  else
+    echo "$RED No elf file found in the directory $RESET"
+    exit 1
+  fi
 else
   echo "$RED Directory not found $RESET: $directory_to_search"
   exit 1 
 fi
 
 test_dir=$(dirname "$test_file")
-if [ -s "$test_file" ]
-then
-  echo "$YELLOW Testing: $test_file $RESET" 
-else
-  echo "$RED No elf file found in the directory $RESET"
-  exit 1
-fi
+echo "$YELLOW Testing: $test_file $RESET" 
 
 if [ -s "$test_dir/results.expected" ]
 then
-  echo "Comparing $Magenta$test_dir/results.output $RESET vs. $Magenta$test_dir/results.expected$RESET "
+  echo "$GREEN [--- OK ---]:$RESET Expected results file have been found : $test_file"
 else
   echo "$RED No results.expected file found in the directory$RESET: $test_dir"
   exit 1
 fi
 
-
 simulavr -d atmega32 -f $test_file -W 0x20,- -R 0x22,- -T exit > $test_dir/results.output
+if [ -s "$test_dir/results.output" ]
+then
+  echo "$GREEN [--- OK ---]:$RESET Output file has been generated successfully : $test_file"
+fi
+
 diff $test_dir/results.output $test_dir/results.expected
 
 if [ $? -eq 0 ]
