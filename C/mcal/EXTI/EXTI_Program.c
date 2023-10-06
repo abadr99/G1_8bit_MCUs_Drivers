@@ -140,27 +140,42 @@ error_t EXTI_SetSenseControl (uint8_t kInterruptSource, uint8_t kSenseControl)
     {
         switch (kSenseControl)
         {
-            case EXTI_FALLING_EDGE : CLR_BIT(INTCON2, INTCON2_INTEDG0); break;
-            case EXTI_RISING_EDGE  : SET_BIT(INTCON2, INTCON2_INTEDG0); break;
-            default: kErrorState = kFunctionParameterError;             break;
+            case EXTI_FALLING_EDGE : CLR_BIT(INTCON2_REG,
+                                             INTCON2_INTEDG0);
+                                             break;
+            case EXTI_RISING_EDGE  : SET_BIT(INTCON2_REG,
+                                             INTCON2_INTEDG0);
+                                             break;
+            default: kErrorState = kFunctionParameterError;
+                                             break;
         }
     }
     else if (kInterruptSource == EXTI_INT1)
     {
         switch (kSenseControl)
         {
-            case EXTI_FALLING_EDGE : CLR_BIT(INTCON2, INTCON2_INTEDG1); break;
-            case EXTI_RISING_EDGE  : SET_BIT(INTCON2, INTCON2_INTEDG1); break;
-            default: kErrorState = kFunctionParameterError;             break;
+            case EXTI_FALLING_EDGE : CLR_BIT(INTCON2_REG,
+                                             INTCON2_INTEDG1);
+                                             break;
+            case EXTI_RISING_EDGE  : SET_BIT(INTCON2_REG,
+                                             INTCON2_INTEDG1);
+                                             break;
+            default: kErrorState = kFunctionParameterError;
+                                             break;
         }
     }
     else if (kInterruptSource == EXTI_INT2)
     {
         switch (kSenseControl)
         {
-            case EXTI_FALLING_EDGE : CLR_BIT(INTCON2, INTCON2_INTEDG2); break;
-            case EXTI_RISING_EDGE  : SET_BIT(INTCON2, INTCON2_INTEDG2); break;
-            default: kErrorState = kFunctionParameterError;             break;
+            case EXTI_FALLING_EDGE : CLR_BIT(INTCON2_REG,
+                                             INTCON2_INTEDG2);
+                                             break;
+            case EXTI_RISING_EDGE  : SET_BIT(INTCON2_REG,
+                                             INTCON2_INTEDG2);
+                                             break;
+            default: kErrorState = kFunctionParameterError;
+                                             break;
         }
     }
 

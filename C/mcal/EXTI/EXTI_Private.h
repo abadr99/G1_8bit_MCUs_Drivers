@@ -23,6 +23,9 @@
 
 #elif MCU_TYPE == _PIC
 
+#define EXIT_LOW_PRIORITY  (0)
+#define EXIT_HIGH_PRIORITY (1)
+
 #define INTCON_RBIF        (0)      /**<RB Port Change Interrupt Flag bit*/
 #define INTCON_INT0F       (1)      /**<INT0 External Interrupt Flag bit*/
 #define INTCON_RBIE        (3)      /**<RB Port Change Interrupt Enable bit*/
