@@ -56,9 +56,9 @@ opt-build:
 run-regressions:
 	@echo -n "[Regression-tests] : Run Regressions\n"
 ifeq ($(filter), all)	
-		sh -e $(REGRESSION_ALL_TEST_SCRIPT) 
+	@sh -e $(REGRESSION_ALL_TEST_SCRIPT) 
 else
-		sh -e $(REGRESSION_TEST_SCRIPT) $(filter) 
+	@sh -e $(REGRESSION_TEST_SCRIPT) $(filter) 
 endif
 	
 	@echo "\n[Makefile][Regression-Testing] : Tests have been run successfully."

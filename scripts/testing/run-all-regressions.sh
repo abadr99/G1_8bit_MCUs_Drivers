@@ -8,11 +8,10 @@ else
   echo "Directory not found: $main_C_test_directory"
   exit 1 
 fi
-echo $test_files_dirs
 
 # Loop over the tests directories
 for test_file_dir in $test_files_dirs
 do
-    echo "Running test: $main_C_test_directory/$test_file_dir"
-    sh -e ../scripts/testing/run-regressions.sh $main_C_test_directory/$test_file_dir
+    #echo "Running test: $main_C_test_directory/$test_file_dir"
+    sh ../scripts/testing/run-regressions.sh $main_C_test_directory/$test_file_dir
 done
