@@ -12,6 +12,12 @@ typedef signed short int    sint16;
 #ifndef NULL
 #define NULL ((void*)0)
 #endif
+
+typedef enum
+{
+    kLow,
+    kHigh
+}state_t;
 typedef enum
 {
     kPORTA,
