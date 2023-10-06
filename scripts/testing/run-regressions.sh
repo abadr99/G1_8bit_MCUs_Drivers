@@ -9,7 +9,7 @@ GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
 RESET='\033[0m'  # Reset color to default
 
-main_C_test_directory=C/regression-tests/regression-tests
+main_C_test_directory=regression-tests/regression-tests
 
 if [ $# != 1 ]
 then 
@@ -31,7 +31,7 @@ case $1 in
     do
         echo "Testing: $test_file"
         test_dir=$(dirname "$test_file")
-        sh scripts/testing/run-regressions.sh $test_dir
+        sh ../scripts/testing/run-regressions.sh $test_dir
         if [ $? -eq 1 ]
         then
             exit 1
