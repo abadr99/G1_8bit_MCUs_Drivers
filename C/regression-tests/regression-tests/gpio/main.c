@@ -36,42 +36,42 @@ int main()
 {
     GPIO_SetPinDirection(kPORTA, kPIN0, kOutput);
     print_str("DDRA_REG: ");
-    print_num(DDRA_REG); 
+    print_num(DDRA_REG);
     print_str("\n");
 
     GPIO_SetPinDirection(kPORTA, kPIN1, kInput);
     print_str("DDRA_REG: ");
-    print_num(DDRA_REG); 
+    print_num(DDRA_REG);
     print_str("\n");
 
     GPIO_SetPinDirection(kPORTA, kPIN2, kOutput);
     print_str("DDRA_REG: ");
-    print_num(DDRA_REG); 
+    print_num(DDRA_REG);
     print_str("\n");
 
     GPIO_SetPinDirection(kPORTA, kPIN3, kInput);
     print_str("DDRA_REG: ");
-    print_num(DDRA_REG); 
+    print_num(DDRA_REG);
     print_str("\n");
 
     GPIO_SetPinDirection(kPORTA, kPIN4, kOutput);
     print_str("DDRA_REG: ");
-    print_num(DDRA_REG); 
+    print_num(DDRA_REG);
     print_str("\n");
 
     GPIO_SetPinDirection(kPORTA, kPIN5, kInput);
     print_str("DDRA_REG: ");
-    print_num(DDRA_REG); 
+    print_num(DDRA_REG);
     print_str("\n");
 
     GPIO_SetPinDirection(kPORTA, kPIN6, kInput);
     print_str("DDRA_REG: ");
-    print_num(DDRA_REG); 
+    print_num(DDRA_REG);
     print_str("\n");
 
     GPIO_SetPinDirection(kPORTA, kPIN7, kOutput);
     print_str("DDRA_REG: ");
-    print_num(DDRA_REG); 
+    print_num(DDRA_REG);
     print_str("\n");
 
 }
