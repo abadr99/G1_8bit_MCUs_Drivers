@@ -14,7 +14,7 @@ SOURCES_CTR:=0
 INC:=  $(foreach dir,$(DIRS), -I$(dir))
 OBJS:= $(SOURCES:.c=.o)
 
-ELF_TARGET:=$(TARGET).elf
+ELF_TARGET:=$(TARGET).testelf
 
 .PHONY: all clean build 
 
