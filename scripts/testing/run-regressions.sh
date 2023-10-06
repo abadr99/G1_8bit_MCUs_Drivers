@@ -13,14 +13,13 @@ main_C_test_directory=regression-tests/regression-tests
 
 if [ $# != 1 ]
 then 
-    #echo "[run-regression]: Usage run-regression path/to/elf/dir or Usage run-regression all to run all tests"
+    echo "[run-regression]: Usage run-regression path/to/elf/dir or Usage run-regression all to run all tests"
     exit 1
 fi
 
 case $1 in
 
   all)
-
     if [ -d "$main_C_test_directory" ]; then
       test_files=$(find "$main_C_test_directory" -type f -name "*.elf")
     else
@@ -42,7 +41,7 @@ case $1 in
     if [ -d "$1" ]; then
       test_file=$(find "$1" -type f -name "*.elf" | grep "\.elf$")
     else
-      #echo "Directory not found: $directory_to_search"
+      echo "Directory not found: $directory_to_search"
       exit 1 
     fi
     test_dir=$(dirname "$test_file")
