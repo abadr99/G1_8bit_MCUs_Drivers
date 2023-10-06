@@ -49,9 +49,9 @@ case $1 in
     if [ -s "$test_file" ]
     then
       #echo "$YELLOW========================================================================================================================================================$RESET"
-      #echo "RUNNING $test_file test"  
+      echo "RUNNING $test_file test"  
     else
-      #echo "No elf file found in the directory"
+      echo "No elf file found in the directory"
       exit 1
     fi
 
@@ -72,6 +72,7 @@ case $1 in
     if [ $? -eq 0 ]
     then 
         #echo "[$test_file]:$GREEN PASS $RESET" 
+        echo "[$test_file]: PASS" 
     else
         #echo "[$test_file]:$RED FAIL$RESET"
         exit 1
