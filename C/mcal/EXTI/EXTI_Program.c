@@ -5,6 +5,7 @@
  * @version:0.1
  * @date   :2023-08-16
  */
+#include "../../common/Config.h"
 #include "../../common/Types.h"
 #include "../../common/Utils.h"
 #include "../../common/Registes.h"

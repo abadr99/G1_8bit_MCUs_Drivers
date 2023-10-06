@@ -8,17 +8,14 @@ typedef enum
 }BuzzerState_t;
 
 /**
- * @brief Buzzer_t    : is the data type to define the Buzzer
- *        port        : for avr [kPORTA ... kPORTD], for pic [kPORTA ... kPORTE]
- *        pin         : [kPIN0 ... kPIN7]
- *        activeState : [kBuzzerActiveLow, kBuzzerActiveHigh]
+ * @brief A structure to represent Buzzer pin
  *
  */
 typedef struct
 {
-    port_t port;
-    pin_t pin;
-    BuzzerState_t activeState;
+    port_t port;                 /**< the port number*/
+    pin_t pin;                  /**< the pin number*/
+    BuzzerState_t activeState; /**< the Buzzer state*/
 }Buzzer_t;
 /**
  * @brief This Function is used to initialize the Buzzer
