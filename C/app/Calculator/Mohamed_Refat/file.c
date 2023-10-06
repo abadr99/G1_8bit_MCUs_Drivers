@@ -5,3 +5,4 @@
 #include "../../../mcal/GPIO/GPIOPrivate.h"
 #include "../../../mcal/GPIO/GPIO.h"
 #include "file.h"
+ main

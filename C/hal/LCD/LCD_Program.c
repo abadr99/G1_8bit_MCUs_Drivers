@@ -308,9 +308,14 @@ error_t LCD_SendFloat(lcd_t *pLcdConfig, f32_t number)
 	error_t kErrorState = kNoError;
 	if (pLcdConfig != NULL_PTR)
 	{
-		float Fraction_Part = number - (uint32_t)number;
-		uint16 Real_Part = number;
-		Fraction_Part *=1000;
+		uint16 Real_Part = (uint16)number;
+		uint16 Fraction_Part = (uint16) ( (number - Real_Part)*100);
+		if (number < 0)
+		{
+			Fraction_Part *= -1;
+			Real_Part *= -1;
+			LCD_SendChar(pLcdConfig, '-');
+		}
 		LCD_SendNumber(pLcdConfig, Real_Part);
 		LCD_SendChar(pLcdConfig, '.');
 		LCD_SendNumber(pLcdConfig, (uint16)Fraction_Part);
