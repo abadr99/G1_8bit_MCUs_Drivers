@@ -10,7 +10,9 @@
 # RESET='\033[0m'  # Reset color to default
 
 main_C_test_directory=regression-tests/regression-tests
+echo "bla-bla"
 exit 1
+
 if [ $# != 1 ]
 then 
     echo "[run-regression]: Usage run-regression path/to/elf/dir or Usage run-regression all to run all tests"
