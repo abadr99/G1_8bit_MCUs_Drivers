@@ -177,7 +177,6 @@ error_t EXTI_ClearFlag(uint8_t kInterruptSource)
     case EXTI_INT0 : CLR_BIT(INTCON_REG, INTCON_INT0F);     break;
     case EXTI_INT1 : CLR_BIT(INTCON3_REG, INTCON3_INT1IF);  break;
     case EXTI_INT2 : CLR_BIT(INTCON3_REG, INTCON3_INT2IF);  break;
-    case EXTI_RB   : CLR_BIT(INTCON_REG, INTCON_RBIF);      break;
     default: kErrorState = kFunctionParameterError;         break;
     }
     return kErrorState;
@@ -191,7 +190,6 @@ error_t EXTI_SetPriority(uint8_t kInterruptSource, uint8_t kInterruptPriority)
         {
         case EXTI_INT1 : SET_BIT(INTCON3_REG, INTCON3_INT1IP);  break;
         case EXTI_INT2 : SET_BIT(INTCON3_REG, INTCON3_INT2IP);  break;
-        case EXTI_RB   : SET_BIT(INTCON2_REG, INTCON_RBIP);     break;
         default: kErrorState = kFunctionParameterError;         break;
         }
     }
@@ -201,7 +199,6 @@ error_t EXTI_SetPriority(uint8_t kInterruptSource, uint8_t kInterruptPriority)
         {
         case EXTI_INT1 : CLR_BIT(INTCON3_REG, INTCON3_INT1IP);  break;
         case EXTI_INT2 : CLR_BIT(INTCON3_REG, INTCON3_INT2IP);  break;
-        case EXTI_RB   : CLR_BIT(INTCON2_REG, INTCON_RBIP);     break;
         default: kErrorState = kFunctionParameterError;         break;
         }
     }

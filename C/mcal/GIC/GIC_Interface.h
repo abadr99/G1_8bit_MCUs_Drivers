@@ -25,6 +25,16 @@
  *                   kFunctionParameterError -->Error in function parameter
  */
 error_t GIC_voidGlobalInterruptControl(uint8_t copyControl);
+/**
+ * @brief : This function is used to Enable priority levels on interrupts
+ *
+ * @param copyControl :  OPTIONS:
+ *                          Priority_INTERRUPT_ENABLE
+ *                          Priority_INTERRUPT_DISABLE
+ *
+ * @return error_t = kNoError --> There is no error in function parameter
+ *                   kFunctionParameterError -->Error in function parameter
+ */
 error_t GIC_voidPriorityInterruptControl(uint8_t copyControl);
 
 #endif /* MCAL_GIC_INTERFACE_H_ */
