@@ -1,10 +1,11 @@
 #ifndef GPIO_H
 #define GPIO_H
 
-typedef enum {
+typedef enum
+{
     kLow,
     kHigh
-             }state_t;
+}state_t;
 
 typedef enum {
     kInput,

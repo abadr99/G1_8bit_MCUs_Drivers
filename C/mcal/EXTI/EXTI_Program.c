@@ -10,9 +10,7 @@
 #include "../../common/Registes.h"
 #include "EXTI_Private.h"
 #include "EXTI_Interface.h"
-
-
-void (*EXTI_pCallBackFun[3]) (void) = {NULL_PTR};
+#include "../ISR/ISR.h"
 
 error_t EXTI_InterruptEnable (uint8_t kInterruptSource)
 {
@@ -116,7 +114,7 @@ error_t EXTI_SetSenseControl (uint8_t kInterruptSource, uint8_t kSenseControl)
                 break;
 
             case EXTI_RISING_EDGE:
-                ET_BIT(MCUCR_REG, MCUCR_ISC10);
+                SET_BIT(MCUCR_REG, MCUCR_ISC10);
                 SET_BIT(MCUCR_REG, MCUCR_ISC11);
                 break;
 
@@ -217,9 +215,9 @@ error_t EXTI_SetCallBackFun  (uint8_t kInterruptSource, void (*pFun)(void))
     {
         switch (kInterruptSource)
         {
-            case EXTI_INT0 : EXTI_pCallBackFun[0] = pFun; break;
-            case EXTI_INT1 : EXTI_pCallBackFun[1] = pFun; break;
-            case EXTI_INT2 : EXTI_pCallBackFun[2] = pFun; break;
+            case EXTI_INT0 : ISR_Init(EXTI_INT0, pFun); break;
+            case EXTI_INT1 : ISR_Init(EXTI_INT1, pFun); break;
+            case EXTI_INT2 : ISR_Init(EXTI_INT2, pFun); break;
 
             default: kErrorState = kFunctionParameterError;
         }
@@ -229,30 +227,4 @@ error_t EXTI_SetCallBackFun  (uint8_t kInterruptSource, void (*pFun)(void))
     }
     #endif
     return kErrorState;
-}
-
-/* ISR Implementation   */
-void __vector_1(void) __attribute__((signal));
-void __vector_1(void)
-{
-    if (EXTI_pCallBackFun[0]!=NULL_PTR)
-    {
-        EXTI_pCallBackFun[0]();
-    }
-}
-void __vector_2(void) __attribute__((signal));
-void __vector_2(void)
-{
-    if (EXTI_pCallBackFun[1]!=NULL_PTR)
-    {
-        EXTI_pCallBackFun[1]();
-    }
-}
-void __vector_3(void) __attribute__((signal));
-void __vector_3(void)
-{
-    if (EXTI_pCallBackFun[2]!=NULL_PTR)
-    {
-        EXTI_pCallBackFun[2]();
-    }
 }
