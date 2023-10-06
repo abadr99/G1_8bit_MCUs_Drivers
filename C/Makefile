@@ -35,6 +35,7 @@ DOXYGEN_CONFIG = ./doxygen.cnf
 
 # ---- TESTING 
 REGRESSION_TEST_SCRIPT = ../scripts/testing/run-regressions.sh
+REGRESSION_ALL_TEST_SCRIPT = ../scripts/testing/run-all-regressions.sh
 
 .PHONY: all clean build 
 
@@ -54,9 +55,14 @@ opt-build:
 
 run-regressions:
 	@echo -n "[Regression-tests] : Run Regressions\n"
-	@echo $(REGRESSION_TEST_SCRIPT)
-	sh -e $(REGRESSION_TEST_SCRIPT) $(filter) 
+ifeq ($(filter), all)	
+		sh -e $(REGRESSION_ALL_TEST_SCRIPT) 
+else
+		sh -e $(REGRESSION_TEST_SCRIPT) $(filter) 
+endif
+	
 	@echo "\n[Makefile][Regression-Testing] : Tests have been run successfully."
+
 style-check:
 	@echo -n "[Style-check] : "
 	@sh $(STYLE_CHECK_SCRIPT) . ../scripts/style-checking/rules-scripts
