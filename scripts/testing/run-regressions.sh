@@ -66,7 +66,7 @@ then
     echo "\n"
     exit 0
 else
-    echo "$BOLD_RED[FAIL]:$RESET $test_file"
+    echo "$BOLD_RED[--- FAIL  ---]::$RESET $test_file"
     rm -rf $test_dir/results.output
     echo "\n"
     exit 1
