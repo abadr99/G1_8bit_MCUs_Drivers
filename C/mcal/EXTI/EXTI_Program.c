@@ -208,7 +208,6 @@ error_t EXTI_SetPriority(uint8_t kInterruptSource, uint8_t kInterruptPriority)
 error_t EXTI_SetCallBackFun  (uint8_t kInterruptSource, void (*pFun)(void))
 {
     error_t kErrorState = kNoError;
-    #if MCU_TYPE ==_AVR
     if (pFun != NULL_PTR)
     {
         switch (kInterruptSource)
@@ -223,6 +222,5 @@ error_t EXTI_SetCallBackFun  (uint8_t kInterruptSource, void (*pFun)(void))
     {
         kErrorState = kFunctionParameterError;
     }
-    #endif
     return kErrorState;
 }
