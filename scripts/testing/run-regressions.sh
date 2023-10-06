@@ -10,7 +10,7 @@ GREEN='\033[1;32m'
 YELLOW='\033[1;33m'
 Magenta='\033[1;35m'
 RESET='\033[0m'  # Reset color to default
-OK='\033[1;32m [---- OK  ----]:\033[0m'
+OK='\033[1;34m [---- OK  ----]:\033[0m'
 OPS='\033[0;31m [--- Ooops ---]:\033[0m'
 
 main_C_test_directory=regression-tests/regression-tests
@@ -25,6 +25,7 @@ fi
 
 if [ -d "$1" ]
 then
+  echo "$YELLOW[-- RUNNING --]:$RESET $1"
   echo "$OK Directory has been found successfully: $1"
   test_file=$(find "$1" -type f -name "*.testelf" | grep "\.testelf$")
   if [ -s "$test_file" ]
@@ -40,7 +41,7 @@ else
 fi
 
 test_dir=$(dirname "$test_file")
-echo "$YELLOW [-- TESTING --]: $test_file $RESET" 
+echo "\033[1;36m [-- TESTING --]:$RESET $test_file $RESET" 
 
 if [ -s "$test_dir/results.expected" ]
 then
@@ -59,12 +60,14 @@ fi
 diff $test_dir/results.output $test_dir/results.expected
 
 if [ $? -eq 0 ]
-then 
-    echo "[$test_file]:$GREEN PASS $RESET" 
+then  
+    echo "$GREEN [--- PASS  ---]: $RESET: $test_file" 
     rm -rf $test_dir/results.output
+    echo "\n"
     exit 0
 else
     echo "$BOLD_RED[FAIL]:$RESET $test_file"
     rm -rf $test_dir/results.output
+    echo "\n"
     exit 1
 fi
