@@ -21,7 +21,7 @@ void print_num(int num)
     {
         SPECIAL_OUTPUT_PORT = '0';
     }
-    else 
+    else
     {
         while (num != 0)
         {
@@ -41,4 +41,4 @@ void print_char(char C)
     SPECIAL_OUTPUT_PORT = C;
 }
 
-#endif // TEST_H_
+#endif /* TEST_H_ */

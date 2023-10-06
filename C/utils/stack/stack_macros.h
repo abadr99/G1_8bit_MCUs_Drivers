@@ -72,7 +72,7 @@
                                     return STACK_SUCCESS; \
                                 }\
                                 return STACK_FAILURE; \
-                            } 
+                            }
 
 /**
  * @brief Generic macro which is used to define stack_pop
@@ -101,7 +101,8 @@
  *        similar to templates in cpp so this macro should be
  *        instantiated with specific types.
  */
-#define Stack_GetSize(type_)    uint32_t type_##Stack_GetSize(type_##Stack_t* S)\
+#define Stack_GetSize(type_)    uint32_t \
+                                type_##Stack_GetSize(type_##Stack_t* S)\
                                 {\
                                     if (S != NULL)\
                                     {\

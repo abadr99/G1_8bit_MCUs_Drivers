@@ -9,80 +9,80 @@
 int main()
 {
     // ------------- CHAR STACK
-    charStack_t CS;
+    charStack_t cS;
     
     print_str("Char Stack:\n");
-    charStack_Init(&CS);
+    charStack_Init(&cS);
     
     print_str("sizeof stack member:");
-    print_num(sizeof(CS.stackArr[0])); // 1byte
+    print_num(sizeof(cS.stackArr[0])); // 1byte
     
     print_str("\nsize: ");
-    print_num(charStack_GetSize(&CS)); // Expected 0
+    print_num(charStack_GetSize(&cS)); // Expected 0
     print_str("\ntop: ");
-    print_num(CS.top);  // Expected 0
+    print_num(cS.top);  // Expected 0
     
-    charStack_Push(&CS, 'a');
-    charStack_Push(&CS, 'b');
-    charStack_Push(&CS, 'c');
+    charStack_Push(&cS, 'a');
+    charStack_Push(&cS, 'b');
+    charStack_Push(&cS, 'c');
     
     print_str("\nsize: ");
-    print_num(charStack_GetSize(&CS)); // Expected 3
+    print_num(charStack_GetSize(&cS)); // Expected 3
     print_str("\ntop-val: ");
-    print_char(charStack_GetTop(&CS));  // Expected 'c'
+    print_char(charStack_GetTop(&cS));  // Expected 'c'
     
-    charStack_Pop(&CS);
+    charStack_Pop(&cS);
     print_str("\nsize: ");
-    print_num(charStack_GetSize(&CS)); // Expected 2
+    print_num(charStack_GetSize(&cS)); // Expected 2
     print_str("\ntop-val: ");
-    print_char(charStack_GetTop(&CS));  // Expected 'b'
+    print_char(charStack_GetTop(&cS));  // Expected 'b'
 
-    charStack_Pop(&CS);
+    charStack_Pop(&cS);
     print_str("\nsize: ");
-    print_num(charStack_GetSize(&CS)); // Expected 1
+    print_num(charStack_GetSize(&cS)); // Expected 1
     print_str("\ntop-val: ");
-    print_char(charStack_GetTop(&CS));  // Expected 'a'
+    print_char(charStack_GetTop(&cS));  // Expected 'a'
 
-    charStack_Pop(&CS);
+    charStack_Pop(&cS);
     print_str("\nsize: ");
-    print_num(charStack_GetSize(&CS)); // Expected 0
+    print_num(charStack_GetSize(&cS)); // Expected 0
 
     print_str("\n");
 
     // ------------- INT STACK
-    uint32_tStack_t IS;
+    uint32_tStack_t iS;
     print_str("\nINT Stack:\n");
-    uint32_tStack_Init(&IS);
+    uint32_tStack_Init(&iS);
     print_str("sizeof stack member:");
-    print_num(sizeof(IS.stackArr[0])); // 4byte
+    print_num(sizeof(iS.stackArr[0])); // 4byte
     print_str("\nStack members\n");
     print_str("size: ");
-    print_num(uint32_tStack_GetSize(&IS)); // Expected 0
+    print_num(uint32_tStack_GetSize(&iS)); // Expected 0
     print_str("\ntop: ");
-    print_num(IS.top);  // Expected 0
+    print_num(iS.top);  // Expected 0
     
-    uint32_tStack_Push(&IS, 100);
-    uint32_tStack_Push(&IS, 200);
-    uint32_tStack_Push(&IS, 230);
+    uint32_tStack_Push(&iS, 100);
+    uint32_tStack_Push(&iS, 200);
+    uint32_tStack_Push(&iS, 230);
     
     print_str("\nsize: ");
-    print_num(uint32_tStack_GetSize(&IS)); // Expected 3
+    print_num(uint32_tStack_GetSize(&iS)); // Expected 3
     print_str("\ntop-val: ");
-    print_num(uint32_tStack_GetTop(&IS));  // Expected '230'
+    print_num(uint32_tStack_GetTop(&iS));  // Expected '230'
     
-    uint32_tStack_Pop(&IS);
+    uint32_tStack_Pop(&iS);
     print_str("\nsize: ");
-    print_num(uint32_tStack_GetSize(&IS)); // Expected 2
+    print_num(uint32_tStack_GetSize(&iS)); // Expected 2
     print_str("\ntop-val: ");
-    print_num(uint32_tStack_GetTop(&IS));  // Expected '200'
+    print_num(uint32_tStack_GetTop(&iS));  // Expected '200'
 
-    uint32_tStack_Pop(&IS);
+    uint32_tStack_Pop(&iS);
     print_str("\nsize: ");
-    print_num(uint32_tStack_GetSize(&IS)); // Expected 1
+    print_num(uint32_tStack_GetSize(&iS)); // Expected 1
     print_str("\ntop-val: ");
-    print_num(uint32_tStack_GetTop(&IS));  // Expected '100'
+    print_num(uint32_tStack_GetTop(&iS));  // Expected '100'
 
-    uint32_tStack_Pop(&IS);
+    uint32_tStack_Pop(&iS);
     print_str("\nsize: ");
-    print_num(uint32_tStack_GetSize(&IS)); // Expected 0
+    print_num(uint32_tStack_GetSize(&iS)); // Expected 0
 }
