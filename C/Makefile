@@ -53,6 +53,7 @@ opt-build:
 	@echo "\n[Makefile][opt-build] : Compiled successfully."	
 
 run-regressions:
+	@echo $(TERM)
 	@echo -n "[Regression-tests] : Run Regressions\n"
 	@sh $(REGRESSION_TEST_SCRIPT) $(filter) 
 	@echo $?
