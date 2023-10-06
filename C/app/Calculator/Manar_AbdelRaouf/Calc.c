@@ -134,7 +134,7 @@ void PushOp(Stack_t * opStack, Stack_t * numStack, f32_t op)
 f32_t  IsEqual(Stack_t * opStack, Stack_t * numStack)
 {
     f32_t num1, num2, result;
-    while (!(Is_Empty(opStack)))
+    while ((Is_Empty(opStack)) == 0)
     {
         num1=0;
         num2=0;
