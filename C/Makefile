@@ -25,7 +25,7 @@ AVRDUDE = avrdude
 AVRDUDE_PROGRAMMER = usbasp
 AVRDUDE_MCU = m32
 AVRDUDE_PORT = /dev/ACM0
-STYLE_CHECK_SCRIPT = ../scripts/style-checking/style-check.sh
+STYLE_CHECK_SCRIPT = ./scripts/style-checking/style-check.sh
 
 # ---- DOXYGEN OPTIONS
 DOXYGEN_SCRIPT = ../scripts/doxygen/doxygen.sh
