@@ -72,6 +72,7 @@ case $1 in
     then 
         #echo "[$test_file]:$GREEN PASS $RESET" 
         echo "[$test_file]: PASS" 
+        exit 0
     else
         #echo "[$test_file]:$RED FAIL$RESET"
         exit 1
