@@ -1,9 +1,6 @@
 {
     "files.associations": {
-        "config.h": "c",
         "gpio.h": "c",
-        "gpioprivate.h": "c",
-        "registes.h": "c",
         "utils.h": "c"
     }
 }
