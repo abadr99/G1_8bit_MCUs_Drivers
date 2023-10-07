@@ -110,7 +110,8 @@ else
   numStack[numStackIterator]=num;
   numStackIterator++;
   Evaluate(numStack, operatorStack, numStackIterator, operatorStackIterator);
-  if(iterator==33){
+  if (iterator==33)
+  {
   LCD_ClearScreen(&lcd);
   }
   LCD_SendChar(&lcd, '=');
