@@ -1,12 +1,18 @@
 #ifndef MCAL_ADC_INTERFACE_H_
 #define MCAL_ADC_INTERFACE_H_
 
-#define ADC_AREF (0)
-#define ADC_AVCC (1)
-#define ADC_INTERNAL_2_56 (3)
+#define ADC_AREF            (0)
+#define ADC_AVCC            (1)
 
-#define RIGHT_ADJUSTMENT (0)
-#define LEFT_ADJUSTMENT  (1)
+#define RIGHT_ADJUSTMENT    (0)
+#define LEFT_ADJUSTMENT     (1)
+
+#define ADC_EXT_REF         (0)
+#define ADC_INT_REF         (1)
+#define ADC_INTERNAL_2_56   (3)
+
+#define ADC_POSITIVE_REF    (0)
+#define ADC_NEGATIVE_REF    (1)
 
 typedef enum
 {

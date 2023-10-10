@@ -9,6 +9,18 @@
 #define MCAL_GIC_GIE_PRIVATE_H_
 
 
-#define SREG_I (7)
+#define SREG_I        (7)
+
+#define RCON_IPEN     (7)    /**<Interrupt Priority Enable bit*/
+
+#define Priority_Pin  (GET_BIT(RCON_REG, RCON_IPEN))  /**<Read RCON_IPEN Bit*/
+
+#if Priority_Pin == Priority_INTERRUPT_ENABLE
+#define INTCON_GIEH   (7)     /**<High Priority Interrupt Enable bit*/
+#define INTCON_GIEL   (6)     /**<Low Priority Interrupt Enable bit*/
+#elif Priority_Pin == Priority_INTERRUPT_DISABLE
+#define INTCON_GIE    (7)    /**<Global Interrupt Enable bit*/
+#define INTCON_PEIE   (6)    /**<Peripheral Interrupt Enable bit*/
+#endif
 
 #endif /* MCAL_GIC_GIE_PRIVATE_H_ */

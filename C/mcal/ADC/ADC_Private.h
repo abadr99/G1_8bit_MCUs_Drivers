@@ -10,6 +10,12 @@
 #define ADCSRA_ADSC (6)
 #define ADCSRA_ADEN (7)
 
+#define ADCON0_ADON (0)
+#define ADCON1_VFG1 (5)
+#define ADCON1_VFG0 (4)
+#define ADCON2_ADFM (7)
+#define PIE1_ADIE   (6)
+
 #define ADC_PRE_MASK (0b1111000)
 #define ADC_CH_MASK (0b1110000)
 

@@ -11,7 +11,13 @@
             ADC_INTERNAL_2_56 --> internal voltage
  */
 #define ADC_VREF (ADC_AVCC)
-
+/* Options:
+            ADC_POSITIVE_SUP
+            ADC_NEGATIVE_SUP
+*/
+#if MCU_TYPE == _PIC
+#define ADC_SUP (ADC_NEGATIVE_SUP)
+#endif
 /* Options:
             LEFT_ADJUSTMENT
             RIGHT_ADJUSTMENT
@@ -26,6 +32,7 @@
             ADC_PRESCALER_16
             ADC_PRESCALER_32
             ADC_PRESCALER_64
+            if MCU_TYPE == _AVR
             ADC_PRESCALER_128
  */
 #define ADC_PRESCALER (ADC_PRESCALER_128)
