@@ -53,9 +53,9 @@
     #define INTCON_REG   *((volatile uint8_t *)0xFF2)
     #define INTCON2_REG  *((volatile uint8_t *)0xFF1)
     #define INTCON3_REG  *((volatile uint8_t *)0xFF0)
-    #define PIE1_REG    *((volatile uint8_t *)0xF9D)
-
-
+    #define PIE1_REG     *((volatile uint8_t *)0xF9D)
+    #define PIR1_REG     *((volatile uint8_t *)0xF9E)
+    #define ADC_DATA_REG *((volatile uint16 *)0XFC3)
 #endif  // MCU_TYPE
 
 #endif //_REGISTERS_H_

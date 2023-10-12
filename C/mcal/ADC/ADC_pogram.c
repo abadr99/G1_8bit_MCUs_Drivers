@@ -129,6 +129,7 @@ error_t ADC_GetResultSynch(uint8_t channel, uint16* result)
     error_t kErrorState = kNoError;
     if (result!=NULL)
     {
+        #if MCU_TYPE
         /* Select Channel */
         ADMUX_REG &=ADC_CH_MASK;
         ADMUX_REG |=channel;
@@ -160,6 +161,32 @@ error_t ADC_GetResultSynch(uint8_t channel, uint16* result)
                 kErrorState = kFunctionParameterError;
             #endif
         }
+        #elif MCU_TYPE == _PIC
+        /* Select Channel */
+        ADCON0_REG &= 0b11000011;
+        ADCON0_REG |= channel;
+
+        /* Start Conversion */
+        SET_BIT(ADCON0_REG, ADCON0_GODONE);
+
+        while ((GET_BIT(ADCON0_REG, ADCON0_GODONE) == 1)
+            && (GET_BIT(PIR1_REG, PIR1_ADIF) == 0))
+        {
+
+        }
+        /* Clear ADC Interrupt Flag */
+        CLR_BIT(PIR1_REG, PIR1_ADIF);
+
+        #if ADC_ADJUSTMENT == RIGHT_ADJUSTMENT
+            *result = ADRESL_REG | (ADRESH_REG<<8);
+
+        #elif ADC_ADJUSTMENT == LEFT_ADJUSTMENT
+            *result = (ADRESH_REG>>6) | (ADRESL_REG<<2);
+
+        #else
+            kErrorState = kFunctionParameterError;
+        #endif
+        #endif
     }
     else
     {

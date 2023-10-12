@@ -23,7 +23,14 @@ typedef enum
     ADC_CHANNEL4,
     ADC_CHANNEL5,
     ADC_CHANNEL6,
-    ADC_CHANNEL7
+    ADC_CHANNEL7,
+    #if MCU_TYPE == _PIC
+    ADC_CHANNEL8,
+    ADC_CHANNEL9,
+    ADC_CHANNEL10,
+    ADC_CHANNEL11,
+    ADC_CHANNEL12
+    #endif
 }ADC_Channel_t;
 
 
