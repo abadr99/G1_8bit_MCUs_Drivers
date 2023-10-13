@@ -13,12 +13,34 @@ typedef enum
     kOutput
 }direction_t;
 
-
 typedef enum
 {
     kOutput_PORT = 0xff,
     kInput_PORT  = 0x00
 }port_direction_t;
+
+typedef enum
+{
+    kPORTA,
+    kPORTB,
+    kPORTC,
+    kPORTD,
+    #if MCU_TYPE == _PIC
+    kPORTE,
+    #endif
+}port_t;
+
+typedef enum
+{
+    kPIN0,
+    kPIN1,
+    kPIN2,
+    kPIN3,
+    kPIN4,
+    kPIN5,
+    kPIN6,
+    kPIN7
+}pin_t;
 
 error_t GPIO_SetPinDirection(port_t pPortNumber,
                              pin_t pin,

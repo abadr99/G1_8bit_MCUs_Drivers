@@ -15,28 +15,6 @@ typedef signed   long sint32_t;                  //IGNORE-STYLE-CHECK[B004]
 #ifndef NULL
 #define NULL ((void*)0)
 #endif
-typedef enum
-{
-    kPORTA,
-    kPORTB,
-    kPORTC,
-    kPORTD,
-    #if MCU_TYPE == PIC
-    kPORTE
-   #endif
-}port_t;
-
-typedef enum
-{
-    kPIN0,
-    kPIN1,
-    kPIN2,
-    kPIN3,
-    kPIN4,
-    kPIN5,
-    kPIN6,
-    kPIN7
-}pin_t;
 
 // typedef unsigned short uint16_t;
 // typedef signed   short sint16_t;
