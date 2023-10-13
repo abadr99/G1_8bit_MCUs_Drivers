@@ -9,7 +9,10 @@
 #include "../../../Data_Structure/Stack/Stack_Config.h"
 #include "../../../Data_Structure/Stack/Stack.h"
 #include "Calc.h"
-
+void Calculator_Init()
+{
+    
+}
 error_t Calculator(keypad_t * pKeypad, lcd_t * pLCD)
 {
     error_t retErrorState = kNoError;

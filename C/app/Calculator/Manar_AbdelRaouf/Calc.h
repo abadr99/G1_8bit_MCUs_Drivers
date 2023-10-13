@@ -7,6 +7,7 @@
  * @param pLCD    pointer to LCD is used
  * @return error_t
  */
+void Calculator_Init();
 error_t Calculator(keypad_t * pKeypad, lcd_t * pLCD);
 f32_t Input(keypad_t * pKeypad);
 void Output(lcd_t * pLCD, f32_t outputChar);

@@ -10,19 +10,20 @@
 #include "../../../Data_Structure/Stack/Stack.h"
 #include "Calc.h"
 
-void Keypad_Cfg(keypad_t * pKeypad);
-void LCD_Cfg(lcd_t * pLCD);
+void Keypad_LCD_Cfg(keypad_t * pKeypad, lcd_t * pLCD);
 int main()
 {
     keypad_t keypad;
     lcd_t lcd;
 
-    Keypad_Cfg(&keypad);
-    LCD_Cfg(&lcd);
-
+    Keypad_LCD_Cfg(&keypad, &lcd);
+    Calculator_Init();
+    while (1)
+    {
     Calculator(&keypad, &lcd);
+    }
 }
-void Keypad_Cfg(keypad_t * pKeypad)
+void Keypad_LCD_Cfg(keypad_t * pKeypad, lcd_t * pLCD)
 {
     pKeypad->Keypad_RowArr[0].port=kPORTC;
     pKeypad->Keypad_RowArr[1].port=kPORTC;
@@ -45,9 +46,7 @@ void Keypad_Cfg(keypad_t * pKeypad)
     pKeypad->Keypad_COLArr[3].pin=kPIN7;
 
     Keypad_Init(pKeypad);
-}
-void LCD_Cfg(lcd_t * pLCD)
-{
+
     pLCD->kLcdMode = LCD_8Bit;
     pLCD->kLcdDataPort = kPORTB;
     pLCD->kLcdControlPort = kPORTA;
@@ -57,3 +56,4 @@ void LCD_Cfg(lcd_t * pLCD)
 
     LCD_Init(pLCD);
 }
+
