@@ -1,4 +1,6 @@
+#if MCU_TYPE == _AVR
 #include <util/delay.h>
+#endif
 #include "common/Types.h"
 #include "common/Utils.h"
 #include "hal/DC_Motor/DC_Motor.h"
