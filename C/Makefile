@@ -5,7 +5,7 @@ CCFLAGS:= -g -Wall -DF_CPU=$(CLK) -mmcu=$(MCU) -gdwarf-2 -DMCU_TYPE=1 -O2 -Werro
 OPT_CCFLAGS:= -g -Wall -DF_CPU=$(CLK) -mmcu=$(MCU) -gdwarf-2 -DMCU_TYPE=1 -O3 -Werror
 TARGET:= avr
 
-XC8:= /opt/microchip/xc8/v2.45/bin/xc8 # PIC COMPILER
+XC8:= /opt/microchip/xc8/v2.45/bin/xc8 # _PIC COMPILER
 PIC_MCU:= 18F46K20
 XC8_FLAGS:= -g -Wall --chip=$(PIC_MCU) -DMCU_TYPE=2 -Werror -Wno-cpp
 PIC_TARGET:= pic
@@ -85,7 +85,7 @@ doxygen:
 	@$(eval SOURCES_CTR=$(shell echo $$(($(SOURCES_CTR)+1))))
 	@echo "[Makefile] : [$(SOURCES_CTR)/$(words $(SOURCES))] $<"
 
-# FOR PIC
+# FOR _PIC
 %.p1 : %.c
 	$(XC8) $(XC8_FLAGS) $(INC) --pass1 $< 
 	@$(eval SOURCES_CTR=$(shell echo $$(($(SOURCES_CTR)+1))))
