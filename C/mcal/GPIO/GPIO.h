@@ -3,6 +3,12 @@
 
 typedef enum
 {
+    kLow,
+    kHigh
+}state_t;
+
+typedef enum
+{
     kInput,
     kOutput
 }direction_t;

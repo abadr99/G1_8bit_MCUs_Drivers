@@ -15,12 +15,6 @@ typedef signed   long sint32_t;                  //IGNORE-STYLE-CHECK[B004]
 #ifndef NULL
 #define NULL ((void*)0)
 #endif
-
-typedef enum
-{
-    kLow,
-    kHigh
-}state_t;
 typedef enum
 {
     kPORTA,
