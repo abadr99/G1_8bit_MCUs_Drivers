@@ -16,8 +16,7 @@
 #define EXTI_FALLING_EDGE (4)
 #define EXTI_RISING_EDGE  (5)
 #define EXTI_LOW_LEVEL    (6)
-#define EXTI_ON_CHANGE    (7)
-
+#define EXTI_ON_CHANGE   (7)
 
 error_t EXTI_InterruptEnable (uint8_t kInterruptSource);
 /**
@@ -62,28 +61,4 @@ error_t EXTI_SetSenseControl(uint8_t kInterruptSource, uint8_t kSenseControl);
  *                         if function  parameter is wrong
  */
 error_t EXTI_SetCallBackFun  (uint8_t kInterruptSource, void (*pFun)(void));
-#if MCU_TYPE == _PIC
-/**
- * @brief       : This Function is used to Clear Flag of External Interrupt bit
- *
- * @param kInterruptSource :    copy from EXTI Number   OPTIONS:
- *                             [EXTI_INT0 ,EXTI_INT0 , EXTI_INT0]
- * @return error_t         :    :NoError:
- *                          if function  parameter is Correct
- *                    :kFunctionParameterError:
- *                          if function  parameter is wrong
- */
-error_t EXTI_ClearFlag(uint8_t kInterruptSource);
-/**
- * @brief       : This Function is used to Set Priority of External Interrupt
- *
- * @param kInterruptSource :    copy from EXTI Number   OPTIONS:
- *                             [EXTI_INT0 ,EXTI_INT0 , EXTI_INT0]
- * @param kInterruptPriority :  copy from EXIT Priority OPTIONS:
- *                             [EXIT_HIGH_PRIORITY, EXIT_LOW_PRIORITY ]
- * @return error_t
- */
-error_t EXTI_SetPriority(uint8_t kInterruptSource, uint8_t kInterruptPriority);
-#endif
-
 #endif /* MCAL_EXTI_EXTI_INTERFACE_H_ */
