@@ -9,14 +9,14 @@ error_t Keypad_Initiate(keypad_t * pKeypad)
     if (pKeypad != NULL)
     {
         uint8_t i;
-        /*--------Set Rows Pin as Pullup Pin if AVR-------------*/
+        /*--------Set Rows Pin as Pullup Pin if _AVR-------------*/
         #if MCU_TYPE == _AVR
         for (i = 0; i < Keypad_numberOfRows; i++)
         {
             GPIO_SetPinPullup(pKeypad->Keypad_RowArr[i].port,
                               pKeypad->Keypad_RowArr[i].pin);
         }
-        /*--------Set Rows Pin as input  Pin if PIC-------------*/
+        /*--------Set Rows Pin as input  Pin if _PIC-------------*/
         #elif MCU_TYPE == _PIC
         for (i = 0; i < Keypad_numberOfRows; i++)
         {
