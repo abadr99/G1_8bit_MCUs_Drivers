@@ -1,4 +1,6 @@
+#if MCU_TYPE == _AVR
 #include <util/delay.h>
+#endif
 #include "common/Types.h"
 #include "common/Utils.h"
 #include "hal/Buzzer/Buzzer.h"
@@ -35,7 +37,9 @@ void TEST_buzzerActiveLow(Buzzer_t *pBuzzer)
   _delay_ms(5000);
 }
 /*
+#if MCU_TYPE == _AVR
 #include <util/delay.h>
+#endif
 #include "common/Types.h"
 #include "common/Utils.h"
 int main()
