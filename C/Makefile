@@ -1,13 +1,15 @@
 CC:= avr-gcc
 MCU:= atmega32a
 CLK:= 8000000
-
 CCFLAGS:= -g -Wall -DF_CPU=$(CLK) -mmcu=$(MCU) -gdwarf-2 -DMCU_TYPE=1 -O2 -Werror -Wno-cpp
 OPT_CCFLAGS:= -g -Wall -DF_CPU=$(CLK) -mmcu=$(MCU) -gdwarf-2 -DMCU_TYPE=1 -O3 -Werror
-
 TARGET:= avr
 
-#DIRS := $(shell cat ./build.dir)
+XC8:= /opt/microchip/xc8/v2.45/bin/xc8 # PIC COMPILER
+PIC_MCU:= 18F46K20
+XC8_FLAGS:= -g -Wall --chip=$(PIC_MCU) -DMCU_TYPE=2 -Werror -Wno-cpp
+PIC_TARGET:= pic
+
 DIRS := $(shell find . -maxdepth 5 -type d | grep -E '\./hal/|\./common|\./mcal/')
 SRC_PATH :=  $(foreach dir,$(DIRS),$(dir)) 
 SOURCES  :=  $(foreach S,$(SRC_PATH),$(wildcard $(S)/*.c))
@@ -16,10 +18,14 @@ SOURCES_CTR:=0
 SOURCES += ./main.c
 INC:=  $(foreach dir,$(DIRS), -I$(dir))
 OBJS:= $(SOURCES:.c=.o)
-
+PIC_INTERMEDIATES:= $(SOURCES:.c=.p1)
 # Hex file
 HEX_TARGET:= $(TARGET).hex
 ELF_TARGET:=$(TARGET).elf
+
+PIC_HEX_TARGET:= $(PIC_TARGET).hex
+PIC_ELF_TARGET:= $(PIC_TARGET).elf
+
 # AVRDUDE options
 AVRDUDE = avrdude
 AVRDUDE_PROGRAMMER = usbasp
@@ -47,6 +53,9 @@ build: $(OBJS)
 	@$(CC) $(CCFLAGS) $(OBJS) -o $(ELF_TARGET)
 	@avr-objcopy -j .text -j .data -O ihex $(ELF_TARGET) $(HEX_TARGET)
 	@echo "\n[Makefile][build] : Compiled successfully."
+
+build-pic: $(PIC_INTERMEDIATES)
+	$(XC8) $(XC8_FLAGS) $(PIC_INTERMEDIATES) 
 
 opt-build:
 	@$(CC) $(OPT_CCFLAGS) $(OBJS) -o $(ELF_TARGET)
@@ -76,11 +85,22 @@ doxygen:
 	@$(eval SOURCES_CTR=$(shell echo $$(($(SOURCES_CTR)+1))))
 	@echo "[Makefile] : [$(SOURCES_CTR)/$(words $(SOURCES))] $<"
 
+# FOR PIC
+%.p1 : %.c
+	$(XC8) $(XC8_FLAGS) $(INC) --pass1 $< 
+	@$(eval SOURCES_CTR=$(shell echo $$(($(SOURCES_CTR)+1))))
+	@echo "[Makefile] : [$(SOURCES_CTR)/$(words $(SOURCES))] $<"
+
 upload: $(HEX)
 	@$(AVRDUDE) -c $(AVRDUDE_PROGRAMMER) -p $(AVRDUDE_MCU) -P $(AVRDUDE_PORT) -U flash:w:$(TARGET).hex:i
 
 clean:
 	@find . -name "*.o" -type f -delete
+	@find . -name "*.pre" -type f -delete
+	@find . -name "*.d" -type f -delete
+	@find . -name "*.as" -type f -delete
+	@find . -name "*.sdb" -type f -delete
+	@find . -name "*.p1" -type f -delete
 	@rm -rf *.o
 	@rm -rf *.bin
 	@rm -rf *.exe
