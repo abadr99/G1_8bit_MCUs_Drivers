@@ -13,6 +13,8 @@
 
 #define OPERATOR_SIZE (30)
 #define NUMBER_SIZE (31)
+void CalcInit(lcd_t* lcd, keypad_t* keypad,
+              port_t lcdDataPort, port_t lcdControlPort, port_t keypadPort);
  /**
   * @brief This Function is used to detremine
   *        if the keyval is number or operator
@@ -35,6 +37,7 @@ uint8_t GetPrecedence(uint8_t operator);
  * @param operator the operator
  * @return sint32 the result from this operation
  */
-sint32 Operate(sint32 num1, sint32 num2, uint8_t operator);
-void Evaluate(sint32 *ar, uint8_t *arr, sint16 size1, sint16 size2);
+sint32_t Operate(sint32_t num1, sint32_t num2, char operator);
+void Evaluate(sint32_tStack_t *ar, charStack_t *arr,
+              sint16 size1, sint16 size2);
 #endif

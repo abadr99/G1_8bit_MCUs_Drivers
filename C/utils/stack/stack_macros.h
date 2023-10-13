@@ -127,6 +127,10 @@
                                     }\
                                     return STACK_FAILURE;\
                                 }
-
+#define Stack_Clear(type_)       void type_##Stack_Clear(type_##Stack_t* S)\
+                                {\
+                                    S->size = 0;\
+                                    S->top = 0;\
+                                }
 
 #endif /*STACK_MACROS_H_*/

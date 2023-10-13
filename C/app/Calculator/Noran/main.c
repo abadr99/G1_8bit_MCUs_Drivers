@@ -7,38 +7,24 @@
 #include "../../../hal/Keypad/Keypad_config_only_one.h"
 #include "../../../hal/Keypad/Keypad_only_one.h"
 #include "../../../hal/LCD/LCD_Interface.h"
+#include "../../../utils/stack/stack_macros.h"
+#include "../../../utils/stack/stack.h"
 #include "calc.h"
+void CalcEval(uint8_t keyVal, lcd_t* lcd,
+              keypad_t* k, charStack_t* operatorStack,
+              sint32_tStack_t* numStack);
+sint32_t num=0;
+sint16 operatorStackIterator=0, numStackIterator=0, iterator=0;
 int main(void)
 {lcd_t lcd;
-lcd.kLcdMode=LCD_8Bit;
-lcd.kLcdDataPort=kPORTC;
-lcd.kLcdControlPort=kPORTD;
-lcd.kRS_PinNum=kPIN0;
-lcd.kRW_PinNum=kPIN1;
-lcd.kEN_PinNum=kPIN2;
 keypad_t k;
-k.Keypad_RowArr[0].port=kPORTA;
-k.Keypad_RowArr[1].port=kPORTA;
-k.Keypad_RowArr[2].port=kPORTA;
-k.Keypad_RowArr[3].port=kPORTA;
-k.Keypad_COLArr[0].port=kPORTA;
-k.Keypad_COLArr[1].port=kPORTA;
-k.Keypad_COLArr[2].port=kPORTA;
-k.Keypad_COLArr[3].port=kPORTA;
-k.Keypad_RowArr[0].pin=kPIN0;
-k.Keypad_RowArr[1].pin=kPIN1;
-k.Keypad_RowArr[2].pin=kPIN2;
-k.Keypad_RowArr[3].pin=kPIN3;
-k.Keypad_COLArr[0].pin=kPIN4;
-k.Keypad_COLArr[1].pin=kPIN5;
-k.Keypad_COLArr[2].pin=kPIN6;
-k.Keypad_COLArr[3].pin=kPIN7;
-LCD_Init(&lcd);
-Keypad_Init(&k);
-uint8_t operatorStack[OPERATOR_SIZE];
-sint32 numStack[NUMBER_SIZE];
-sint16 operatorStackIterator=0, numStackIterator=0, iterator=0;
-sint32 num=0;
+CalcInit(&lcd, &k, kPORTC, kPORTD, kPORTA);
+charStack_t operatorStack;
+sint32_tStack_t  numStack;
+charStack_Init(&operatorStack);
+sint32_tStack_Init(&numStack);
+//uint8_t operatorStack[OPERATOR_SIZE];
+//sint32 numStack[NUMBER_SIZE];
 while (1)
 {
     uint8_t keyVal;
@@ -48,58 +34,69 @@ while (1)
     }
     while (keyVal==NOT_PRESSED);
     iterator++;
+CalcEval(keyVal, &lcd, &k, &operatorStack, &numStack);
+
+}
+return 0;
+}
+void CalcEval(uint8_t keyVal, lcd_t* lcd, keypad_t* k,
+              charStack_t* operatorStack,
+              sint32_tStack_t* numStack)
+{
 if (keyVal=='&')
 {
-    LCD_ClearScreen(&lcd);
-    operatorStackIterator=0;
-    numStackIterator=0;
+    LCD_ClearScreen(lcd);
     num=0;
     iterator=0;
+    charStack_Clear(operatorStack);
+    sint32_tStack_Clear(numStack);
 }
 else if (keyVal!='=')
 {
     if (iterator==16)
     {
-    LCD_SetPosition(&lcd, LCD_ROW_2, LCD_COL_1);
+    LCD_SetPosition(lcd, LCD_ROW_2, LCD_COL_1);
     }
-    LCD_SendChar(&lcd, keyVal);
+    LCD_SendChar(lcd, keyVal);
     if (ISNUM(keyVal))
     {
         num=(num*10)+(keyVal-'0');
     }
     else
     {
-        if (operatorStack[operatorStackIterator-1]!='-')
+        if (charStack_GetTop(operatorStack)!='-')
         {
-            numStack[numStackIterator]=num;
+            sint32_tStack_Push(numStack, num);
         }
         else
         {
-             operatorStack[operatorStackIterator-1]='+';
-             numStack[numStackIterator]=-num;
+            charStack_Pop(operatorStack);
+             charStack_Push(operatorStack, '+');
+             num=-num;
+             sint32_tStack_Push(numStack, num);
         }
         numStackIterator++;
         num=0;
-        if (operatorStackIterator==0)
+        if (charStack_GetSize(operatorStack)==0)
         {
-            operatorStack[operatorStackIterator]=keyVal;
+            charStack_Push(operatorStack, keyVal);
             operatorStackIterator++;
         }
         else
         {
             if (GetPrecedence(keyVal)<
-                GetPrecedence(operatorStack[operatorStackIterator-1]))
-            {
-                sint32 result=Operate(numStack[numStackIterator-2],
-                                      numStack[numStackIterator-1],
-                                      operatorStack[operatorStackIterator-1]);
-                operatorStack[operatorStackIterator-1]=keyVal;
-                numStack[numStackIterator-2]=result;
+                GetPrecedence(charStack_GetTop(operatorStack)))
+            {sint32_t num1=sint32_tStack_Pop(numStack);
+            sint32_t num2=sint32_tStack_Pop(numStack);
+                sint32_t result=Operate(num2, num1,
+                                       charStack_Pop(operatorStack));
+                charStack_Push(operatorStack, keyVal);
+                sint32_tStack_Push(numStack, result);
                 numStackIterator--;
             }
             else
             {
-                operatorStack[operatorStackIterator]=keyVal;
+                charStack_Push(operatorStack, keyVal);
                 operatorStackIterator++;
             }
         }
@@ -107,16 +104,14 @@ else if (keyVal!='=')
 }
 else
 {
-  numStack[numStackIterator]=num;
+  sint32_tStack_Push(numStack, num);
   numStackIterator++;
   Evaluate(numStack, operatorStack, numStackIterator, operatorStackIterator);
   if (iterator==33)
   {
-  LCD_ClearScreen(&lcd);
+  LCD_ClearScreen(lcd);
   }
-  LCD_SendChar(&lcd, '=');
-  LCD_SendNumber(&lcd, numStack[0]);
+  LCD_SendChar(lcd, '=');
+  LCD_SendNumber(lcd, sint32_tStack_GetTop(numStack));
 }
-}
-return 0;
 }
