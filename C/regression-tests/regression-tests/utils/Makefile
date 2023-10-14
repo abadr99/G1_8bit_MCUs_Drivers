@@ -21,10 +21,11 @@ ELF_TARGET:=$(TARGET).testelf
 all:build
 
 build-avr:
-	make -C ../../../ build 
+	@make -C ../../../ build 
 	
 build: $(OBJS)
-	$(CC) $(CCFLAGS) ./main.c $(OBJS) -o $(ELF_TARGET)
+	@rm -rf *.testelf
+	@$(CC) $(CCFLAGS) ./main.c $(OBJS) -o $(ELF_TARGET)
 	@echo "\n[Makefile] : Compiled successfully."
 
 clean:
