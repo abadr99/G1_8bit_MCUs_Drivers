@@ -6,7 +6,7 @@ CCFLAGS:= -g -Wall -DF_CPU=$(CLK) -mmcu=$(MCU) -gdwarf-2 -DMCU_TYPE=1 -O1
 
 TARGET:= stack-test
 
-DIRS := $(shell find . -maxdepth 5 -type d | grep -E '\./hal/|\./common|\./mcal/|\./utils/')
+DIRS := $(shell find ../../../ -maxdepth 5 -type d | grep -E '\./hal/|\./common|\./mcal/|\./utils/')
 SRC_PATH :=  $(foreach dir,$(DIRS),$(dir)) 
 SOURCES  :=  $(foreach S,$(SRC_PATH),$(wildcard $(S)/*.c)) 
 SOURCES_COUNT:= $(words $(SOURCES))
@@ -24,6 +24,8 @@ build-avr:
 	@make -C ../../../ build 
 	
 build: $(OBJS)
+	echo $(SOURCES)
+	@echo $(OBJS)
 	@rm -rf *.testelf
 	@$(CC) $(CCFLAGS) ./main.c $(OBJS) -o $(ELF_TARGET)
 	@echo "\n[Makefile] : Compiled successfully."
