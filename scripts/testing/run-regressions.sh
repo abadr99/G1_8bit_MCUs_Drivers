@@ -48,9 +48,11 @@ rm -rf $test_dir/results.output
 
 if [ -d "$DIR" ]
 then
-  echo "$YELLOW[-- RUNNING --]:$RESET $DIR"
+  echo "$YELLOW[-- RUNNING --]: $DIR $RESET"
   echo "$OK Directory has been found successfully: $DIR"
+  echo "$OK Linking with test: $DIR"
   make -C $DIR
+  echo "$OK Linking has been finished successfully"
   test_file=$(find "$DIR" -type f -name "*.testelf" | grep "\.testelf$")
   if [ -s "$test_file" ]
   then
@@ -90,6 +92,7 @@ then
     then
     rm -rf $test_dir/results.output
     fi
+    rm -rf $DIR/*.testelf
     echo "\n"
     exit 0
 else
@@ -98,6 +101,7 @@ else
     then
     rm -rf $test_dir/results.output
     fi
+    rm -rf $DIR/*.testelf
     echo "\n"
     exit 1
 fi

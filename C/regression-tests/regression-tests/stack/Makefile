@@ -24,8 +24,6 @@ build-avr:
 	@make -C ../../../ build 
 	
 build: $(OBJS)
-	echo $(SOURCES)
-	@echo $(OBJS)
 	@rm -rf *.testelf
 	@$(CC) $(CCFLAGS) ./main.c $(OBJS) -o $(ELF_TARGET)
 	@echo "\n[Makefile] : Compiled successfully."
