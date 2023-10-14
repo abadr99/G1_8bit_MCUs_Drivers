@@ -27,6 +27,7 @@ if [ -d "$1" ]
 then
   echo "$YELLOW[-- RUNNING --]:$RESET $1"
   echo "$OK Directory has been found successfully: $1"
+  make -C $1
   test_file=$(find "$1" -type f -name "*.testelf" | grep "\.testelf$")
   if [ -s "$test_file" ]
   then
