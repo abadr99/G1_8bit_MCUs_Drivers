@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <util/delay.h>
 #include "../../common/Types.h"
 #include "../../mcal/GPIO/GPIO.h"
