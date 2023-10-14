@@ -6,5 +6,6 @@
 avr
 pic
 ../.vscode
+../.vscode/*.json
 doxygen-documents/*
 regression-tests/regression-tests/**/*.testelf
