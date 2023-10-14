@@ -21,4 +21,7 @@ do
     fi
 done
 
+echo "Tests Summary:\n"
+cat $main_C_test_directory/summary
+rm -rf $main_C_test_directory/summary
 exit $EXIT

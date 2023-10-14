@@ -1,18 +1,11 @@
 CC:= avr-gcc
 MCU:= atmega32a
 CLK:= 8000000
-
+MAIN_DIR:= ../../../
 CCFLAGS:= -g -Wall -DF_CPU=$(CLK) -mmcu=$(MCU) -gdwarf-2 -DMCU_TYPE=1 -O1
 
-TARGET:= utils-test
-
-DIRS := $(shell find ../../.. -maxdepth 5 -type d | grep -E '\./hal/|\./common|\./mcal/')
-SRC_PATH :=  $(foreach dir,$(DIRS),$(dir)) 
-SOURCES  :=  $(foreach S,$(SRC_PATH),$(wildcard $(S)/*.c)) 
-SOURCES_COUNT:= $(words $(SOURCES))
-SOURCES_CTR:=0
-INC:=  $(foreach dir,$(DIRS), -I$(dir))
-OBJS:= $(SOURCES:.c=.o)
+TARGET := $(shell basename "$$(pwd)")
+OBJS:= $(shell find $(MAIN_DIR) -type f -name *.o)
 
 ELF_TARGET:=$(TARGET).testelf
 
@@ -23,9 +16,10 @@ all:build
 build-avr:
 	@make -C ../../../ build 
 	
-build: $(OBJS)
+build:
+	@echo "TARGET = $(TARGET)"	
 	@rm -rf *.testelf
-	@$(CC) $(CCFLAGS) ./main.c $(OBJS) -o $(ELF_TARGET)
+	$(CC) $(CCFLAGS) ./main.c $(OBJS) -o $(ELF_TARGET)
 	@echo "\n[Makefile] : Compiled successfully."
 
 clean:

@@ -87,7 +87,7 @@ diff $test_dir/results.output $test_dir/results.expected
 
 if [ $? -eq 0 ]
 then  
-    echo "$GREEN [--- PASS  ---]: $RESET: $test_file" 
+    echo "$GREEN [--- PASS  ---]: $RESET: $test_file" >> $main_C_test_directory/summary
     if [ $KEEP_MODE -ne 1 ]
     then
     rm -rf $test_dir/results.output
@@ -96,7 +96,7 @@ then
     echo "\n"
     exit 0
 else
-    echo "$BOLD_RED[--- FAIL  ---]::$RESET $test_file"
+    echo "$BOLD_RED[--- FAIL  ---]::$RESET $test_file" >> $main_C_test_directory/summary
     if [ $KEEP_MODE -ne 1 ]
     then
     rm -rf $test_dir/results.output
