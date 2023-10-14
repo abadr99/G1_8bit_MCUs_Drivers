@@ -58,7 +58,7 @@ run-regressions:
 ifeq ($(filter), all)	
 	@sh -e $(REGRESSION_ALL_TEST_SCRIPT) 
 else
-	@sh -e $(REGRESSION_TEST_SCRIPT) $(filter) 
+	@sh -e $(REGRESSION_TEST_SCRIPT) -d $(filter) -k $(keep)
 endif
 	
 	@echo "\n[Makefile][Regression-Testing] : Tests have been run successfully."

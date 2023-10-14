@@ -13,7 +13,7 @@ fi
 # Loop over the tests directories
 for test_file_dir in $test_files_dirs
 do
-    if sh ../scripts/testing/run-regressions.sh $main_C_test_directory/$test_file_dir 
+    if sh ../scripts/testing/run-regressions.sh -d $main_C_test_directory/$test_file_dir 
     then
         :   # NOP command
     else 
