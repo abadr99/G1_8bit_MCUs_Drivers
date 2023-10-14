@@ -8,7 +8,7 @@ OPT_CCFLAGS:= -g -Wall -DF_CPU=$(CLK) -mmcu=$(MCU) -gdwarf-2 -DMCU_TYPE=1 -O3 -W
 TARGET:= avr
 
 #DIRS := $(shell cat ./build.dir)
-DIRS := $(shell find . -maxdepth 5 -type d | grep -E '\./hal/|\./common|\./mcal/')
+DIRS := $(shell find . -maxdepth 5 -type d | grep -E '\./hal/|\./common|\./mcal/|\./utils/')
 SRC_PATH :=  $(foreach dir,$(DIRS),$(dir)) 
 SOURCES  :=  $(foreach S,$(SRC_PATH),$(wildcard $(S)/*.c))
 SOURCES_COUNT:= $(words $(SOURCES))

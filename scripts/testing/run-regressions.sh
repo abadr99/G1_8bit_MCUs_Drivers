@@ -57,7 +57,7 @@ if [ -s "$test_dir/results.output" ]
 then
   echo "$OK Output file has been generated successfully : $test_file"
 fi
-
+rm -rf *.testelf
 diff $test_dir/results.output $test_dir/results.expected
 
 if [ $? -eq 0 ]
