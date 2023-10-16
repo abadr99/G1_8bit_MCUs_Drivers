@@ -1,16 +1,9 @@
-#include "../../../common/Types.h"
-#include "../../../common/Utils.h"
-#include "../../../common/Config.h"
-#include "../../../common/Registes.h"
-#include "../../../mcal/GPIO/GPIOPrivate.h"
-#include "../../../mcal/GPIO/GPIO.h"
-
-#include "Linked_Stack.h"
+#include "STD_TYPES.h"
 #include "Calculator.h"
-
+#include "Linked_Stack.h"
 Calc_Error_t Run_Calculator(uint8_t pInfixExp[], f32_t *pResult)
 {
-    Calc_Error_t kErrorState = NoError;
+    Calc_Error_t kErrorState = kNoError;
     uint8_t postfixExp[EXPRESSION_SIZE]={};
     kErrorState = GetPostfixExp(pInfixExp, postfixExp);
     kErrorState = EvaluatePostfixExp(postfixExp, pResult, kErrorState);
@@ -19,7 +12,7 @@ Calc_Error_t Run_Calculator(uint8_t pInfixExp[], f32_t *pResult)
 
 Calc_Error_t GetPostfixExp(uint8_t pInfixExp[], uint8_t pPostfixExp[])
 {
-	Calc_Error_t kErrorState = NoError;
+	Calc_Error_t kErrorState = kNoError;
     Stack_t Calc_stack;                 //IGNORE-STYLE-CHECK[B004]
     int iterator1 = 0;
     int iterator2 = 0;
@@ -47,17 +40,21 @@ Calc_Error_t GetPostfixExp(uint8_t pInfixExp[], uint8_t pPostfixExp[])
     }
     while (pInfixExp[iterator1] != '\0')
     {
-    	/* Case value is Number --> add it to the Post fix expression*/
-        if ( IsOperator(pInfixExp[iterator1]) == kFALSE)
+    	/* Case value is Number --> add it to the Post fix expression
+            also if there is a negative number
+        */
+        if ( (pInfixExp[iterator1] == '-' && IsNumber(pInfixExp[iterator1+1]) == kTRUE ) ||
+        		IsOperator(pInfixExp[iterator1]) == kFALSE )
         {
-            pPostfixExp[iterator2++] = pInfixExp[iterator1++];
+
+            pPostfixExp[iterator2++] = pInfixExp[iterator1];
         }
-        /* case value is operator or space */
-        else
+        /* case value is operator  */
+        else if( IsOperator(pInfixExp[iterator1]) == kTRUE)
         {
             if ( LinkedStack_IsEmpty(&Calc_stack)   )
             {
-                LinkedStack_Push(&Calc_stack, pInfixExp[iterator1++]);
+                LinkedStack_Push(&Calc_stack, pInfixExp[iterator1]);
 
             }
             /**
@@ -71,7 +68,7 @@ Calc_Error_t GetPostfixExp(uint8_t pInfixExp[], uint8_t pPostfixExp[])
                     pPostfixExp[iterator2++] =
                                         (uint8_t)LinkedStack_Pop(&Calc_stack);
                 }
-                LinkedStack_Push(&Calc_stack, pInfixExp[iterator1++]);
+                LinkedStack_Push(&Calc_stack, pInfixExp[iterator1]);
             }
             /**
              *  Case operator is a High Priority operator [ * , / ]
@@ -85,9 +82,10 @@ Calc_Error_t GetPostfixExp(uint8_t pInfixExp[], uint8_t pPostfixExp[])
                     pPostfixExp[iterator2++] =
                                         (uint8_t)LinkedStack_Pop(&Calc_stack);
                 }
-                LinkedStack_Push(&Calc_stack, pInfixExp[iterator1++]);
+                LinkedStack_Push(&Calc_stack, pInfixExp[iterator1]);
             }
         }
+        iterator1++;
     }
     /**
      * Popping all the operators that remain in the stack
@@ -102,7 +100,7 @@ Calc_Error_t GetPostfixExp(uint8_t pInfixExp[], uint8_t pPostfixExp[])
 Calc_Error_t EvaluatePostfixExp(uint8_t pPostfixExp[],
                                 f32_t *pResult, Calc_Error_t postfixState)
 {
-	Calc_Error_t retErrorState  = NoError;
+	Calc_Error_t retErrorState  = kNoError;
 	Stack_t Calc_stack;     //IGNORE-STYLE-CHECK[B004]
     uint16 iterator1 = 0;
     uint16 iterator2 = 0;
@@ -111,6 +109,7 @@ Calc_Error_t EvaluatePostfixExp(uint8_t pPostfixExp[],
     f32_t operand1 = 0;
     f32_t operand2 = 0;
     f32_t result = 0;
+    bool_t negativeOperandFlag = kFALSE;
     /* Handle case if the first number of the expression is Negative */
     if (postfixState == _1stNumIsNeg)
     {
@@ -122,7 +121,15 @@ Calc_Error_t EvaluatePostfixExp(uint8_t pPostfixExp[],
 
     while ( pPostfixExp[iterator1] != '\0')
     {
-        uint16 kNum = 0;
+        sint32 kNum = 0;
+
+        /* Case there is a negative number */
+        if (pPostfixExp[iterator1] == '-' &&
+            IsNumber(pPostfixExp[iterator1+1]) == kTRUE)
+        {
+            negativeOperandFlag = kTRUE;
+            iterator1++;
+        }
         if (IsNumber( pPostfixExp[iterator1] ) )
         {
             /**
@@ -143,6 +150,12 @@ Calc_Error_t EvaluatePostfixExp(uint8_t pPostfixExp[],
              *  kNum = (5413)decimal
              */
             kNum = ConvertStringToInteger(arrNum, iterator2);
+
+            if (negativeOperandFlag == kTRUE )
+            {
+                kNum *= -1;
+                negativeOperandFlag = kFALSE;
+            }
             iterator2 = 0;
             LinkedStack_Push(&Calc_stack, kNum);
 
@@ -226,9 +239,16 @@ void SeparateExp(uint8_t pExp[])
 
         if (IsOperator(TempExp[interator1]) )
         {
-          pExp[interator2++] = ' ';
-          pExp[interator2++] = TempExp[interator1++];
-          pExp[interator2++] = ' ';
+            pExp[interator2++] = ' ';
+            pExp[interator2++] = TempExp[interator1++];
+            pExp[interator2++] = ' ';
+
+            /* Case if there is a negative Number */
+            if ( TempExp[interator1] == '-')
+            {
+                pExp[interator2++] = '-';
+                interator1++;
+            }
 
         }else
         {
