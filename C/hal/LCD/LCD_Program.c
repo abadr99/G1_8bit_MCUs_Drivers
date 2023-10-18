@@ -189,7 +189,7 @@ error_t LCD_ClearScreen(lcd_t *pLcdConfig)
 	return kErrorState;
 }
 
-error_t LCD_SendChar(lcd_t *pLcdConfig, sint8_t character)
+error_t LCD_SendChar(lcd_t *pLcdConfig, char character)
 {
 	error_t kErrorState = kNoError;
 	if (pLcdConfig != NULL_PTR)
@@ -202,7 +202,7 @@ error_t LCD_SendChar(lcd_t *pLcdConfig, sint8_t character)
 	return kErrorState;
 }
 
-error_t LCD_SendString(lcd_t *pLcdConfig, sint8_t str[])
+error_t LCD_SendString(lcd_t *pLcdConfig, char str[])
 {
 	error_t kErrorState = kNoError;
 	if (pLcdConfig != NULL_PTR)
@@ -259,7 +259,7 @@ error_t LCD_SendNumber(lcd_t *pLcdConfig, sint16 number)
 		uint8_t iterator1 = 0;
 		uint8_t iterator2 = 0;
 		uint8_t negativeFlag = 0;
-		sint8_t numArr[5] = {0};
+		char numArr[5] = {0};
 		/* Store Number in numArr as a string
 			but the number will be stored in reverse order in the array
 				so we need to reverse this array again
@@ -283,7 +283,7 @@ error_t LCD_SendNumber(lcd_t *pLcdConfig, sint16 number)
 		/* Revers numArr */
 		for (iterator2 = 0; iterator2 < iterator1/2; iterator2++)
 		{
-			sint8_t temp = numArr[iterator2];
+			char temp = numArr[iterator2];
 			numArr[iterator2 ] = numArr[iterator1-iterator2-1];
 			numArr[iterator1-iterator2-1] = temp;
 		}
@@ -326,7 +326,7 @@ error_t LCD_SendFloat(lcd_t *pLcdConfig, f32_t number)
 	}
 	return kErrorState;
 }
-error_t LCD_StoreCustomChar(lcd_t *pLcdConfig, uint8_t pChar_Arr[],
+error_t LCD_StoreCustomChar(lcd_t *pLcdConfig, char pChar_Arr[],
 														uint8_t location)
 {
 	error_t kErrorState = kNoError;
