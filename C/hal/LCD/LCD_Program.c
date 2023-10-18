@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <util/delay.h>
 #include "../../common/Types.h"
 #include "../../mcal/GPIO/GPIO.h"
@@ -189,7 +188,7 @@ error_t LCD_ClearScreen(lcd_t *pLcdConfig)
 	return kErrorState;
 }
 
-error_t LCD_SendChar(lcd_t *pLcdConfig, uint8_t character)
+error_t LCD_SendChar(lcd_t *pLcdConfig, char character)
 {
 	error_t kErrorState = kNoError;
 	if (pLcdConfig != NULL_PTR)
@@ -202,7 +201,7 @@ error_t LCD_SendChar(lcd_t *pLcdConfig, uint8_t character)
 	return kErrorState;
 }
 
-error_t LCD_SendString(lcd_t *pLcdConfig, uint8_t str[])
+error_t LCD_SendString(lcd_t *pLcdConfig, char str[])
 {
 	error_t kErrorState = kNoError;
 	if (pLcdConfig != NULL_PTR)
@@ -308,14 +307,9 @@ error_t LCD_SendFloat(lcd_t *pLcdConfig, f32_t number)
 	error_t kErrorState = kNoError;
 	if (pLcdConfig != NULL_PTR)
 	{
-		uint16 Real_Part = (uint16)number;
-		uint16 Fraction_Part = (uint16)((number - Real_Part)*100);
-		if (number < 0)
-		{
-			Fraction_Part *= -1;
-			Real_Part *= -1;
-			LCD_SendChar(pLcdConfig, '-');
-		}
+		float Fraction_Part = number - (uint32_t)number;
+		uint16 Real_Part = number;
+		Fraction_Part *=1000;
 		LCD_SendNumber(pLcdConfig, Real_Part);
 		LCD_SendChar(pLcdConfig, '.');
 		LCD_SendNumber(pLcdConfig, (uint16)Fraction_Part);
@@ -326,7 +320,7 @@ error_t LCD_SendFloat(lcd_t *pLcdConfig, f32_t number)
 	}
 	return kErrorState;
 }
-error_t LCD_StoreCustomChar(lcd_t *pLcdConfig, uint8_t pChar_Arr[],
+error_t LCD_StoreCustomChar(lcd_t *pLcdConfig, char pChar_Arr[],
 														uint8_t location)
 {
 	error_t kErrorState = kNoError;
