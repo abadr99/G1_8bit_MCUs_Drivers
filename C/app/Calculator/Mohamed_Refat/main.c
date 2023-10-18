@@ -1,3 +1,12 @@
+/**
+ * @file main.c
+ * @author Mohamed Refat 
+ * @brief 
+ * @version 0.1
+ * 
+ * @copyright Copyright (c) 2023
+ * 
+ */
 #include <util/delay.h>
 #include "../../../common/Types.h"
 #include "../../../common/Utils.h"
