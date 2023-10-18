@@ -1,13 +1,111 @@
-#include "STD_TYPES.h"
+#include "../../../common/Types.h"
+#include "../../../hal/LCD/LCD_Interface.h"
+#include "../../../hal/Keypad/Keypad_config_only_one.h"
+#include "../../../hal/Keypad/Keypad_only_one.h"
+
 #include "Calculator.h"
 #include "Linked_Stack.h"
-Calc_Error_t Run_Calculator(uint8_t pInfixExp[], f32_t *pResult)
+
+#define STR_RESULT  ("Result = ")
+#define STR_SYNTAX_ERROR "Syntax Error "
+#define STR_MATH_ERROR "Math Error"
+
+void APP_INIT(lcd_t *pLCD, keypad_t *pkeyPad)
 {
-    Calc_Error_t kErrorState = kNoError;
+
+	pLCD->kLcdMode =  LCD_4Bit;
+	pLCD->kLcdDataPort = kPORTC;
+	pLCD->kLcdControlPort = kPORTA;
+	pLCD->kRS_PinNum = kPIN0;
+	pLCD->kRW_PinNum = kPIN1;
+	pLCD->kEN_PinNum = kPIN2;
+	pLCD->kLcd_4bitDataPin = LCD_HIGH_NIBBLE;
+
+
+    keypadPin_t row1 = {kPORTD, kPIN0};
+    keypadPin_t row2 = {kPORTD, kPIN1};
+    keypadPin_t row3 = {kPORTD, kPIN2};
+    keypadPin_t row4 = {kPORTD, kPIN3};
+    keypadPin_t col1 = {kPORTD, kPIN4};
+    keypadPin_t col2 = {kPORTD, kPIN5};
+    keypadPin_t col3 = {kPORTD, kPIN6};
+    keypadPin_t col4 = {kPORTD, kPIN7};
+
+    pkeyPad->Keypad_RowArr[0] = row1;
+    pkeyPad->Keypad_RowArr[1] = row2;
+    pkeyPad->Keypad_RowArr[2] = row3;
+    pkeyPad->Keypad_RowArr[3] = row4;
+    pkeyPad->Keypad_COLArr[0] = col1;
+    pkeyPad->Keypad_COLArr[1] = col2;
+    pkeyPad->Keypad_COLArr[2] = col3;
+    pkeyPad->Keypad_COLArr[3] = col4;
+	LCD_Init(pLCD);
+	Keypad_Init(pkeyPad);
+
+}
+void Run_Calculator(lcd_t *pLCD, keypad_t *pkeyPad)
+{
+
+	Calc_Error_t kErrorState = NoError;
+	uint8_t infixExp[EXPRESSION_SIZE]={};
     uint8_t postfixExp[EXPRESSION_SIZE]={};
-    kErrorState = GetPostfixExp(pInfixExp, postfixExp);
-    kErrorState = EvaluatePostfixExp(postfixExp, pResult, kErrorState);
-    return kErrorState;
+
+	uint8_t iterator = 0;
+	f32_t result;
+	static uint8_t kPressedValue = NOT_PRESSED;
+
+	/* Take The infix expression From the user */
+	while (iterator < EXPRESSION_SIZE )
+	{
+		/* Wait until the keypad is pressed */
+		while (kPressedValue == NOT_PRESSED)
+		{
+			kPressedValue = Keypad_GetPressedButton(pkeyPad);
+		}
+		/* Case entered value is Number or operator not = or C 'Terminate' */
+		if (kPressedValue != '=' && kPressedValue != 'C')
+		{
+			LCD_SendChar(pLCD, kPressedValue);
+			infixExp[iterator++] = kPressedValue;
+			kPressedValue = NOT_PRESSED;
+		}
+		/* Case entered value is  = or C 'Terminate' */
+		else
+		{
+			break;
+		}
+	}
+	/* Print Result */
+	if ( kPressedValue == '=' )
+	{
+		kErrorState = GetPostfixExp(infixExp, postfixExp);
+    	kErrorState = EvaluatePostfixExp(postfixExp, &result, kErrorState);
+		LCD_SetPosition(pLCD, LCD_ROW_2, LCD_COL_1);
+		/* iterator == 0 --> to handle case  that the  user doesn't
+			entered eny expression but he entered '='
+			so the previous result will appear
+		*/
+		if ( (kErrorState == NoError || iterator == 0 ) )
+		{
+			LCD_SendString(pLCD, STR_RESULT);
+			LCD_SendFloat(pLCD, result);
+		}else if (kErrorState == SyntaxError)
+		{
+			LCD_SendString(pLCD, STR_SYNTAX_ERROR);
+		}else if ( kErrorState == DivideByZero )
+		{
+			LCD_SendString(pLCD, STR_MATH_ERROR);
+		}
+	}
+	/* After user enter '=' or 'C' wait until he entered
+		new value to start again */
+	kPressedValue = Keypad_GetPressedButton(pkeyPad);
+	while (kPressedValue == NOT_PRESSED)
+	{
+		kPressedValue = Keypad_GetPressedButton(pkeyPad);
+	}
+	LCD_ClearScreen(pLCD);
+
 }
 
 Calc_Error_t GetPostfixExp(uint8_t pInfixExp[], uint8_t pPostfixExp[])
@@ -43,14 +141,15 @@ Calc_Error_t GetPostfixExp(uint8_t pInfixExp[], uint8_t pPostfixExp[])
     	/* Case value is Number --> add it to the Post fix expression
             also if there is a negative number
         */
-        if ( (pInfixExp[iterator1] == '-' && IsNumber(pInfixExp[iterator1+1]) == kTRUE ) ||
+        if (  (  pInfixExp[iterator1] == '-' &&
+                IsNumber(pInfixExp[iterator1+1]) == kTRUE  )||
         		IsOperator(pInfixExp[iterator1]) == kFALSE )
         {
 
             pPostfixExp[iterator2++] = pInfixExp[iterator1];
         }
         /* case value is operator  */
-        else if( IsOperator(pInfixExp[iterator1]) == kTRUE)
+        else if ( IsOperator(pInfixExp[iterator1]) == kTRUE)
         {
             if ( LinkedStack_IsEmpty(&Calc_stack)   )
             {

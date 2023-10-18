@@ -11,7 +11,9 @@ typedef enum
 	_1stNumIsNeg
 }Calc_Error_t;
 
-Calc_Error_t Run_Calculator(uint8_t *pInfixExp, f32_t *pResult);
+
+void APP_INIT(lcd_t *pLCD, keypad_t *pkeyPad);
+void Run_Calculator(lcd_t *pLCD, keypad_t *pkeyPad);
 Calc_Error_t GetPostfixExp(uint8_t *pInfixExp, uint8_t pPostfixExp[]);
 Calc_Error_t EvaluatePostfixExp(uint8_t pPostfixExp[], f32_t *pResult,
 											 		Calc_Error_t postfixState);
