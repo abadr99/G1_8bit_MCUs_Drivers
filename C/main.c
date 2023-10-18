@@ -1,15 +1,12 @@
-#include <util/delay.h>
-#include <stdio.h>
 #include "common/Types.h"
 #include "common/Utils.h"
-#include "mcal/GPIO/GPIO.h"
-#include "hal/Keypad/Keypad.h"
+#include "common/Config.h"
+#include "common/Registes.h"
 
-
-int main(void)
+int main()
 {
-while (1)
-{
-
-}
+    while (1)
+    {
+        /* code */
+    }
 }
