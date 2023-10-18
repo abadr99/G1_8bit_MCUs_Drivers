@@ -18,13 +18,17 @@ KEEP_MODE=0
 DIR=0
 
 # Parse command-line options
-while getopts ":d:k:" opt; do
+while getopts ":d:k:help:" opt; do
   case $opt in
     d)
       DIR="$OPTARG"
       ;;
     k)
       KEEP_MODE="$OPTARG"
+      ;;
+    help)
+      echo "d: Specify test directory"
+      echo "k: Keep result.output file"
       ;;
     \?)
       echo "Invalid option: -$OPTARG" >&2
@@ -71,7 +75,7 @@ echo "\033[1;36m [-- TESTING --]:$RESET $test_file $RESET"
 
 if [ -s "$test_dir/results.expected" ]
 then
-  echo "$OK Expected results file have been found : $test_file"
+  echo "$OK Expected results file have been found : $test_dir/results.expected"
 else
   echo "$OPS No results.expected file found in the directory: $test_dir"
   exit 1
@@ -80,7 +84,7 @@ fi
 simulavr -d atmega32 -f $test_file -W 0x20,- -R 0x22,- -T exit > $test_dir/results.output
 if [ -s "$test_dir/results.output" ]
 then
-  echo "$OK Output file has been generated successfully : $test_file"
+  echo "$OK Output file has been generated successfully : $test_dir/results.output"
 fi
 
 diff $test_dir/results.output $test_dir/results.expected
@@ -88,6 +92,7 @@ diff $test_dir/results.output $test_dir/results.expected
 if [ $? -eq 0 ]
 then  
     echo "$GREEN [--- PASS  ---]: $RESET: $test_file" >> $main_C_test_directory/summary
+    echo "$GREEN [--- PASS  ---]: $RESET: $test_file" 
     if [ $KEEP_MODE -ne 1 ]
     then
     rm -rf $test_dir/results.output
@@ -97,6 +102,7 @@ then
     exit 0
 else
     echo "$BOLD_RED[--- FAIL  ---]::$RESET $test_file" >> $main_C_test_directory/summary
+    echo "$BOLD_RED[--- FAIL  ---]::$RESET $test_file" 
     if [ $KEEP_MODE -ne 1 ]
     then
     rm -rf $test_dir/results.output
