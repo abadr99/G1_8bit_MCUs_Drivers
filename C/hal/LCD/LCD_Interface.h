@@ -52,8 +52,8 @@ typedef struct {
 
 error_t LCD_Init(lcd_t *pLcdConfig);
 error_t LCD_ClearScreen(lcd_t *pLcdConfig);
-error_t LCD_SendChar(lcd_t *pLcdConfig, uint8_t character);
-error_t LCD_SendString(lcd_t *pLcdConfig, uint8_t str[]);
+error_t LCD_SendChar(lcd_t *pLcdConfig, sint8_t character);
+error_t LCD_SendString(lcd_t *pLcdConfig, sint8_t str[]);
 error_t LCD_StoreCustomChar(lcd_t *pLcdConfig, uint8_t pChar_Arr[],
                                                     uint8_t location);
 
