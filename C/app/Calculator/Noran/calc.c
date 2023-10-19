@@ -47,8 +47,7 @@ uint8_t ISNUM(uint8_t key)
     return state;
 }
 uint8_t GetPrecedence(uint8_t operator)
-{
-    uint8_t state;
+{uint8_t state;
     if (operator=='-'||operator=='+')
     {
         state=1;
@@ -84,9 +83,9 @@ while (size2>0)
 {char operator=charStack_Pop(arr);
 sint32_t num1=sint32_tStack_Pop(ar);
 sint32_t num2=sint32_tStack_Pop(ar);
-sint32_t result=Operate(num2, num1, operator);
-sint32_tStack_Push(ar, result);
-size1--;
-size2--;
+    sint32_t result=Operate(num2, num1, operator);
+    sint32_tStack_Push(ar, result);
+    size1--;
+    size2--;
 }
 }

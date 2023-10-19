@@ -10,46 +10,39 @@
 #include "../../../utils/stack/stack_macros.h"
 #include "../../../utils/stack/stack.h"
 #include "calc.h"
-void CalcEval(uint8_t keyVal, lcd_t* lcd,
+void CalcEval(uint8_t keyVal, uint8_t lastVal, lcd_t* lcd,
               keypad_t* k, charStack_t* operatorStack,
               sint32_tStack_t* numStack);
 sint32_t num=0;
-sint16 operatorStackIterator=0, numStackIterator=0, iterator=0;
+uint8_t keyVal, lastval;
+sint16 operatorStackIterator=0, numStackIterator=0, iterator=0, count;
 int main(void)
 {lcd_t lcd;
 keypad_t k;
 CalcInit(&lcd, &k, kPORTC, kPORTD, kPORTA);
 charStack_t operatorStack;
 sint32_tStack_t  numStack;
-charStack_Init(&operatorStack);
-sint32_tStack_Init(&numStack);
-//uint8_t operatorStack[OPERATOR_SIZE];
-//sint32 numStack[NUMBER_SIZE];
 while (1)
-{
-    uint8_t keyVal;
+{lastval=keyVal;
     do
     {
      keyVal=Keypad_GetPressedButton(&k);
     }
     while (keyVal==NOT_PRESSED);
     iterator++;
-CalcEval(keyVal, &lcd, &k, &operatorStack, &numStack);
+CalcEval(keyVal, lastval, &lcd, &k, &operatorStack, &numStack);
 
 }
 return 0;
 }
-void CalcEval(uint8_t keyVal, lcd_t* lcd, keypad_t* k,
-              charStack_t* operatorStack,
-              sint32_tStack_t* numStack)
+void CalcEval(uint8_t keyVal, uint8_t lastVal, lcd_t* lcd, keypad_t* k,
+              charStack_t* operatorStack, sint32_tStack_t* numStack)
 {
 if (keyVal=='&')
 {
     LCD_ClearScreen(lcd);
     num=0;
     iterator=0;
-    charStack_Clear(operatorStack);
-    sint32_tStack_Clear(numStack);
 }
 else if (keyVal!='=')
 {
@@ -61,9 +54,31 @@ else if (keyVal!='=')
     if (ISNUM(keyVal))
     {
         num=(num*10)+(keyVal-'0');
+        count=0;
+    }
+    else if (ISNUM(lastVal)==0)
+    {count++;
+        if (lastVal==keyVal)
+        {if (keyVal=='-')
+            {
+            charStack_Pop(operatorStack);
+             charStack_Push(operatorStack, '+');
+            }
+        }
+        else if (lastVal!=keyVal&&charStack_GetSize(operatorStack)!=1)
+        {uint8_t arr[]="ERROR";
+        LCD_ClearScreen(lcd);
+            LCD_SendString(lcd, arr);
+        }
+        else if (charStack_GetSize(operatorStack)==1&&keyVal!='-')
+        {
+         uint8_t arr[]="ERROR";
+        LCD_ClearScreen(lcd);
+        LCD_SendString(lcd, arr);
+        }
     }
     else
-    {
+    {count++;
         if (charStack_GetTop(operatorStack)!='-')
         {
             sint32_tStack_Push(numStack, num);

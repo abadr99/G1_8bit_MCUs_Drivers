@@ -13,8 +13,8 @@
 
 #define OPERATOR_SIZE (30)
 #define NUMBER_SIZE (31)
-void CalcInit(lcd_t* lcd, keypad_t* keypad,
-              port_t lcdDataPort, port_t lcdControlPort, port_t keypadPort);
+void CalcInit(lcd_t* lcd, keypad_t* keypad, port_t lcdDataPort,
+              port_t lcdControlPort, port_t keypadPort);
  /**
   * @brief This Function is used to detremine
   *        if the keyval is number or operator
