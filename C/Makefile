@@ -8,14 +8,16 @@ OPT_CCFLAGS:= -g -Wall -DF_CPU=$(CLK) -mmcu=$(MCU) -gdwarf-2 -DMCU_TYPE=1 -O3 -W
 TARGET:= avr
 
 #DIRS := $(shell cat ./build.dir)
-DIRS := $(shell find . -maxdepth 5 -type d | grep -E '\./hal/|\./common|\./mcal/|\./Data_Structure')
+DIRS := $(shell find . -maxdepth 5 -type d | grep -E '\./hal/|\./common|\./mcal/|\./utils/')
 SRC_PATH :=  $(foreach dir,$(DIRS),$(dir)) 
 SOURCES  :=  $(foreach S,$(SRC_PATH),$(wildcard $(S)/*.c))
+SRC_NAMES:= $(notdir $(SOURCES))
 SOURCES_COUNT:= $(words $(SOURCES))
 SOURCES_CTR:=0
 SOURCES += ./main.c
 INC:=  $(foreach dir,$(DIRS), -I$(dir))
-OBJS:= $(SOURCES:.c=.o)
+OBJDIR := .build/obj
+OBJS:= $(patsubst %.c,$(OBJDIR)/%.o,$(SRC_NAMES))
 
 # Hex file
 HEX_TARGET:= $(TARGET).hex
@@ -41,10 +43,9 @@ REGRESSION_ALL_TEST_SCRIPT = ../scripts/testing/run-all-regressions.sh
 
 all:build style-check
 	@echo -n "[Doxygen] : "
-	@sh $(DOXYGEN_SCRIPT) $(DOXYGEN_CONFIG) $(TREAT_WARN_AS_WARN)
-
+	@sh $(DOXYGEN_SCRIPT) $(DOXYGEN_CONFIG) $(TREAT_WARN_AS_WARN) 
 build: $(OBJS)
-	@$(CC) $(CCFLAGS) $(OBJS) -o $(ELF_TARGET)
+	@$(CC) $(CCFLAGS) $(OBJS) main.c -o $(ELF_TARGET)
 	@avr-objcopy -j .text -j .data -O ihex $(ELF_TARGET) $(HEX_TARGET)
 	@echo "\n[Makefile][build] : Compiled successfully."
 
@@ -53,12 +54,12 @@ opt-build:
 	@avr-objcopy -j .text -j .data -O ihex $(ELF_TARGET) $(HEX_TARGET)
 	@echo "\n[Makefile][opt-build] : Compiled successfully."	
 
-run-regressions:
+run-regressions: $(OBJS)
 	@echo -n "[Regression-tests] : Run Regressions\n"
 ifeq ($(filter), all)	
 	@sh -e $(REGRESSION_ALL_TEST_SCRIPT) 
 else
-	@sh -e $(REGRESSION_TEST_SCRIPT) $(filter) 
+	@sh -e $(REGRESSION_TEST_SCRIPT) -d $(filter) -k $(keep)
 endif
 	
 	@echo "\n[Makefile][Regression-Testing] : Tests have been run successfully."
@@ -71,7 +72,8 @@ doxygen:
 	@echo -n "[Doxygen] : "
 	@sh $(DOXYGEN_SCRIPT) $(DOXYGEN_CONFIG) $(TREAT_WARN_AS_ERROR)
 
-%.o : %.c
+$(OBJDIR)/%.o : **/**/%.c
+	@mkdir -p .build/obj
 	@$(CC) $(CCFLAGS) $(INC) -c $< -o $@
 	@$(eval SOURCES_CTR=$(shell echo $$(($(SOURCES_CTR)+1))))
 	@echo "[Makefile] : [$(SOURCES_CTR)/$(words $(SOURCES))] $<"
@@ -87,6 +89,7 @@ clean:
 	@rm -rf *.elf
 	@rm -rf *.hex
 	@rm -rf avr
+	@rm -rf .build
 help:
 	@echo "make build                		  		  : Build and generate elf and hex files (for debugging and development mode)"
 	@echo "make opt-build            		  		  : Build and generate elf and hex files (for release mode)"
