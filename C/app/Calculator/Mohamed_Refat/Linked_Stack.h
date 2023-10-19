@@ -11,7 +11,7 @@ typedef struct Node_t
 typedef struct stack
 {
 	Node_t *Top;
-	uint32_t StackSize;
+	uint32_t kStackSize;
 }Stack_t;
 /* @brief: This function is used to creat Linked stack
  * @para : *stack ::

@@ -5,7 +5,7 @@
 void LinkedStack_creatStack(Stack_t *stack)
 {
 	stack->Top = NULL_PTR;
-	stack->StackSize=0;
+	stack->kStackSize=0;
 
 }
 
@@ -15,7 +15,7 @@ void LinkedStack_Push(Stack_t *stack, STACK_DATA_TYPE Data)
 	pNode->Entry = Data;
 	pNode->Next = stack->Top;
 	stack->Top = pNode;
-	stack->StackSize++;
+	stack->kStackSize++;
 }
 
 STACK_DATA_TYPE LinkedStack_GetTop(Stack_t *stack )
@@ -30,7 +30,7 @@ STACK_DATA_TYPE LinkedStack_Pop(Stack_t *stack)
 	Node_t *pLocalNode = stack->Top;
 	stack->Top=pLocalNode->Next;
 	free(pLocalNode);
-	stack->StackSize--;
+	stack->kStackSize--;
 	return DeletedData;
 }
 
@@ -59,7 +59,7 @@ uint8_t LinkedStack_IsFull (Stack_t stack)
 uint32_t LinkedStack_GetSize(Stack_t *pStack )
 {
 
-	return pStack->StackSize;
+	return pStack->kStackSize;
 }
 
 void LinkedStack_Traverse(Stack_t *pStack, void (*pFun)(STACK_DATA_TYPE data))
