@@ -41,7 +41,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Configure Building C Version For Target PIC
-      run: sh /home/runner/work/G1_8bit_MCUs_Drivers/G1_8bit_MCUs_Drivers/.github/workflows/configure.sh
+      run: sh /home/runner/work/G1_8bit_MCUs_Drivers/G1_8bit_MCUs_Drivers/.github/workflows/configure-build-pic.sh
     - name: Building C Version For Target PIC
       run: make build-pic -C C
     - name: Upload objects artifact
