@@ -66,15 +66,24 @@ build-avr-opt:$(AVR_OBJS)
 build-app:
 	@echo "NOT IMPLEMENTED"
 
+# --------------------------------------------------------
+# Rule to compile test 
+# make compile-test src=path/to/main/file target=test_name
+# --------------------------------------------------------
+compile-test:$(AVR_OBJS)
+	$(AVR_GCC) $(AVR_GCC_TEST_FLAGS) $(AVR_OBJS) $(src) -o $(target).testelf
+	@echo "\n[Makefile]: Test compiled successfully."
+
 # ------------------------------------------
 # Rule to run regression tests
 # There are two modes depending on filter value:
 # 1] Run all regressions
 # 	 make run-regressions filter=all 
 # 2] Run specific regression test
-#	make run-regressions filter=regression-tests/regression-tests/test
+#	 make run-regressions filter=regression-tests/regression-tests/test keep=1
+#	 to keep output files
 # ------------------------------------------
-run-regressions: $(AVR_OBJDIR)
+run-regressions: $(AVR_OBJDIR) $(build-avr)
 	@echo -n "[Regression-tests] : Run Regressions\n"
 ifeq ($(filter), all)	
 	@sh -e $(REGRESSION_ALL_TEST_SCRIPT) 

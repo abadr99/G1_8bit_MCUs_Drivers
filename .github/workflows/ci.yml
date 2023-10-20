@@ -63,7 +63,7 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: objects-artifact
-        path: /home/runner/work/G1_8bit_MCUs_Drivers/G1_8bit_MCUs_Drivers/C/.build
+        path: /home/runner/work/G1_8bit_MCUs_Drivers/G1_8bit_MCUs_Drivers/C/.build/avr
     - name: Configure Tests
       run: sh /home/runner/work/G1_8bit_MCUs_Drivers/G1_8bit_MCUs_Drivers/.github/workflows/configure-test.sh
     - name: Testing For C Version
