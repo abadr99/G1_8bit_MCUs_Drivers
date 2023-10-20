@@ -2,5 +2,4 @@ wget -O xc8-v2.45-linux.run https://ww1.microchip.com/downloads/aemDocuments/doc
 chmod +x xc8-v2.45-linux.run
 sudo ./xc8-v2.45-linux.run --mode unattended --unattendedmodeui none --netservername localhost > file
 
-ls /opt/microchip/xc8/v2.45/bin
-export PATH="/opt/microchip/xc8/v2.45/bin/:$PATH"
+#export PATH="/opt/microchip/xc8/v2.45/bin/:$PATH"
