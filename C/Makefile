@@ -52,8 +52,8 @@ build-pic: $(PIC_OBJS)
 # Rule to build avr for real applications
 # make opt-build-avr
 # ------------------------------------------
-opt-build-avr:
-	@$(AVR_GCC) $(AVR_OPT_CCFLAGS) $(AVR_OBJS) -o $(AVR_ELF_TARGET)
+build-avr-opt:$(AVR_OBJS)
+	@$(AVR_GCC) $(AVR_OPT_CCFLAGS) $(AVR_OBJS) ./main.c -o $(AVR_ELF_TARGET)
 	@$(AVR_OBJ_COPY) $(AVR_OBJ_COPY_OPTS) $(AVR_ELF_TARGET) $(AVR_HEX_TARGET)
 	@echo "\n[Makefile][opt-build] : Compiled successfully."	
 
