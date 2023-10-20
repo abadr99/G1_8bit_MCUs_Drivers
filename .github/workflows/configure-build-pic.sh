@@ -5,3 +5,4 @@ chmod +x xc8-v1.20-linux.run
 #sudo ./xc8-v1.20-linux.run
 
 sudo ./xc8-v1.20-linux.run --mode unattended --unattendedmodeui none --netservername localhost
+export PATH="/opt/microchip/xc8/v2.45/bin/:$PATH"
