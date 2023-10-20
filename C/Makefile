@@ -8,6 +8,7 @@ SOURCES_CTR:=0
 INC:=  $(foreach dir,$(DIRS), -I$(dir))
 
 include avr.mk
+include pic.mk
 
 # ---- STYLE CHECKING 
 STYLE_CHECK_SCRIPT = ../scripts/style-checking/style-check.sh
@@ -38,6 +39,14 @@ build-avr: $(AVR_OBJS)
 	@echo "\n[Makefile][build] : Compiled successfully."
 
 # ------------------------------------------
+# Rule to build pic for debug and test mode 
+# make build-avr
+# ------------------------------------------
+build-pic: $(PIC_OBJS)
+	@$(PIC_XC8) $(PIC_XC8FLAGS) $(PIC_OBJS) ./main.c -o $(PIC_ELF_TARGET)
+	@echo "\n[Makefile][build] : Compiled successfully."
+
+# ------------------------------------------
 # Rule to build avr for real applications
 # make opt-build-avr
 # ------------------------------------------
@@ -53,7 +62,7 @@ opt-build-avr:
 # TODO(@Mariamahmed44): #97 Implement this rule
 # ------------------------------------------
 build-app:
-	echo "NOT IMPLEMENTED"
+	@echo "NOT IMPLEMENTED"
 
 # ------------------------------------------
 # Rule to run regression tests
