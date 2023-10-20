@@ -1,32 +1,15 @@
-CC:= avr-gcc
-MCU:= atmega32a
-CLK:= 8000000
 
-CCFLAGS:= -g -Wall -DF_CPU=$(CLK) -mmcu=$(MCU) -gdwarf-2 -DMCU_TYPE=1 -O2 -Werror -Wno-cpp
-OPT_CCFLAGS:= -g -Wall -DF_CPU=$(CLK) -mmcu=$(MCU) -gdwarf-2 -DMCU_TYPE=1 -O3 -Werror
-
-TARGET:= avr
-
-#DIRS := $(shell cat ./build.dir)
 DIRS := $(shell find . -maxdepth 5 -type d | grep -E '\./hal/|\./common|\./mcal/|\./utils/')
 SRC_PATH :=  $(foreach dir,$(DIRS),$(dir)) 
 SOURCES  :=  $(foreach S,$(SRC_PATH),$(wildcard $(S)/*.c))
 SRC_NAMES:= $(notdir $(SOURCES))
 SOURCES_COUNT:= $(words $(SOURCES))
 SOURCES_CTR:=0
-SOURCES += ./main.c
 INC:=  $(foreach dir,$(DIRS), -I$(dir))
-OBJDIR := .build/obj
-OBJS:= $(patsubst %.c,$(OBJDIR)/%.o,$(SRC_NAMES))
 
-# Hex file
-HEX_TARGET:= $(TARGET).hex
-ELF_TARGET:=$(TARGET).elf
-# AVRDUDE options
-AVRDUDE = avrdude
-AVRDUDE_PROGRAMMER = usbasp
-AVRDUDE_MCU = m32
-AVRDUDE_PORT = /dev/ACM0
+include avr.mk
+
+# ---- STYLE CHECKING 
 STYLE_CHECK_SCRIPT = ../scripts/style-checking/style-check.sh
 
 # ---- DOXYGEN OPTIONS
@@ -41,48 +24,78 @@ REGRESSION_ALL_TEST_SCRIPT = ../scripts/testing/run-all-regressions.sh
 
 .PHONY: all clean build 
 
-all:build style-check
+all:build-avr style-check
 	@echo -n "[Doxygen] : "
 	@sh $(DOXYGEN_SCRIPT) $(DOXYGEN_CONFIG) $(TREAT_WARN_AS_WARN) 
-build: $(OBJS)
-	@$(CC) $(CCFLAGS) $(OBJS) main.c -o $(ELF_TARGET)
-	@avr-objcopy -j .text -j .data -O ihex $(ELF_TARGET) $(HEX_TARGET)
+
+# ------------------------------------------
+# Rule to build avr for debug and test mode 
+# make build-avr
+# ------------------------------------------
+build-avr: $(AVR_OBJS)
+	@$(AVR_GCC) $(AVR_GCCFLAGS) $(AVR_OBJS) ./main.c -o $(AVR_ELF_TARGET)
+	@$(AVR_OBJ_COPY) $(AVR_OBJ_COPY_OPTS) $(AVR_ELF_TARGET) $(AVR_HEX_TARGET)
 	@echo "\n[Makefile][build] : Compiled successfully."
 
-opt-build:
-	@$(CC) $(OPT_CCFLAGS) $(OBJS) -o $(ELF_TARGET)
-	@avr-objcopy -j .text -j .data -O ihex $(ELF_TARGET) $(HEX_TARGET)
+# ------------------------------------------
+# Rule to build avr for real applications
+# make opt-build-avr
+# ------------------------------------------
+opt-build-avr:
+	@$(AVR_GCC) $(AVR_OPT_CCFLAGS) $(AVR_OBJS) -o $(AVR_ELF_TARGET)
+	@$(AVR_OBJ_COPY) $(AVR_OBJ_COPY_OPTS) $(AVR_ELF_TARGET) $(AVR_HEX_TARGET)
 	@echo "\n[Makefile][opt-build] : Compiled successfully."	
 
-run-regressions: $(OBJS)
+# ------------------------------------------
+# Rule to build application linked to these 
+# files in repo
+# make build-app path=path/to/app
+# TODO(@Mariamahmed44): #97 Implement this rule
+# ------------------------------------------
+build-app:
+	echo "NOT IMPLEMENTED"
+
+# ------------------------------------------
+# Rule to run regression tests
+# There are two modes depending on filter value:
+# 1] Run all regressions
+# 	 make run-regressions filter=all 
+# 2] Run specific regression test
+#	make run-regressions filter=regression-tests/regression-tests/test
+# ------------------------------------------
+run-regressions: $(AVR_OBJDIR)
 	@echo -n "[Regression-tests] : Run Regressions\n"
 ifeq ($(filter), all)	
 	@sh -e $(REGRESSION_ALL_TEST_SCRIPT) 
 else
 	@sh -e $(REGRESSION_TEST_SCRIPT) -d $(filter) -k $(keep)
-endif
-	
+endif	
 	@echo "\n[Makefile][Regression-Testing] : Tests have been run successfully."
 
+# ----------------------------------------------------
+# Rule to run style check rules in sources and headers
+# make style-check
+# ----------------------------------------------------
 style-check:
 	@echo -n "[Style-check] : "
 	@sh $(STYLE_CHECK_SCRIPT) . ../scripts/style-checking/rules-scripts
 
+# ----------------------------------------------------
+# Rule to run doxygen and generate warnings for lines
+# that not be documented
+# make doxygen
+# ----------------------------------------------------
 doxygen:
 	@echo -n "[Doxygen] : "
 	@sh $(DOXYGEN_SCRIPT) $(DOXYGEN_CONFIG) $(TREAT_WARN_AS_ERROR)
 
-$(OBJDIR)/%.o : **/**/%.c
-	@mkdir -p .build/obj
-	@$(CC) $(CCFLAGS) $(INC) -c $< -o $@
-	@$(eval SOURCES_CTR=$(shell echo $$(($(SOURCES_CTR)+1))))
-	@echo "[Makefile] : [$(SOURCES_CTR)/$(words $(SOURCES))] $<"
-
-upload: $(HEX)
-	@$(AVRDUDE) -c $(AVRDUDE_PROGRAMMER) -p $(AVRDUDE_MCU) -P $(AVRDUDE_PORT) -U flash:w:$(TARGET).hex:i
-
+# ----------------------------------------------------
+# Rule clean all generated files through build process
+# make clean
+# ----------------------------------------------------
 clean:
 	@find . -name "*.o" -type f -delete
+	@rm -rf .build
 	@rm -rf *.o
 	@rm -rf *.bin
 	@rm -rf *.exe
@@ -90,6 +103,12 @@ clean:
 	@rm -rf *.hex
 	@rm -rf avr
 	@rm -rf .build
+
+# ----------------------------------------------------
+# Rule to display help message
+# make help
+# TODO(@Mariamahmed44): #96 Fix this help messages
+# ----------------------------------------------------
 help:
 	@echo "make build                		  		  : Build and generate elf and hex files (for debugging and development mode)"
 	@echo "make opt-build            		  		  : Build and generate elf and hex files (for release mode)"
@@ -99,9 +118,6 @@ help:
 	@echo "make clean                		  		  : Clean generated files"
 	@echo "make run-regression filter=all   		  : Run all regression test"
 	@echo "make run-regression filter=elf/path/dir    : Run specific regression test"
-	@echo "NOTE                      		  		  : For issues related to doxygen contact @ManarAbdelraouf"
-	@echo "                          		  		  : For issues related to style-check contact @MohamedRefat13"
-	@echo "                          		  		  : For issues related to build contact @AbdelrahmanBadr22"
 
 
 
