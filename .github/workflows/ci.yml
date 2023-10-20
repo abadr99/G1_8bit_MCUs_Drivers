@@ -54,7 +54,7 @@ jobs:
 
   regression-test:
     runs-on: ubuntu-latest
-    needs: [build]
+    needs: [avr-build]
     steps:
     - uses: actions/checkout@v3
     - name: Configure Test Build
