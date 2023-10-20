@@ -6,16 +6,15 @@
 #include "../../../hal/Keypad/Keypad_only_one.h"
 #include "../../../hal/LCD/LCD_Interface.h"
 #include "calc.h"
-
 int main()
 {
     keypad_t keypad;
     lcd_t lcd;
     CalcConf(&keypad, &lcd);
-    uint8_t key = 0;
+    uint8_t key =0;
     charStack_t opStack;
-    sint32_tStack_t numStack;
     charStack_Init(&opStack);
+    sint32_tStack_t numStack;
     sint32_tStack_Init(&numStack);
     while (1)
     {

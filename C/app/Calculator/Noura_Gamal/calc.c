@@ -7,10 +7,7 @@
 #include "../../../hal/LCD/LCD_Interface.h"
 #include "calc.h"
 
-static uint8_t IsHigherPriority(uint8_t op);
-static sint8_t Calculate(uint8_t op, sint8_t operand1, sint8_t operand2);
-
-sint32_t num =0, num1=0, num2=0, op = 0;
+sint32_t num =0, num1=0, num2=0, op = 0,flagErr = 0;
 uint8_t String[] = "Error";
 
 void CalcConf(keypad_t *pKeypad, lcd_t *pLcd)
@@ -46,56 +43,109 @@ void CalcConf(keypad_t *pKeypad, lcd_t *pLcd)
 void Calculator(charStack_t *opStack,
                  sint32_tStack_t *numStack, lcd_t *lcd, uint8_t key)
 {
-    num =0, num1=0, num2=0, op = 0;
+    num1=0, num2=0, op = 0;
     if ((key >= '0') && (key <= '9'))
     {
         LCD_SendChar(lcd, key);
         num = (num * 10) + (key -'0');
-        sint32_tStack_Push(numStack, num);
-        num =0;
     }
     else if ((key == '+') || (key == '-') || (key == '*') || (key == '/'))
     {
         LCD_SendChar(lcd, key);
+        if ((sint32_tStack_GetSize(numStack) == 0)&&    //first char is * or - or + or /
+            charStack_GetSize(opStack) == 1)
+        {
+            if (charStack_GetTop(opStack) == '-')
+            {
+                charStack_Pop(opStack);
+                num  *= -1;
+            }
+            else if (charStack_GetTop(opStack) == '+')
+            {
+                charStack_Pop(opStack);
+            }
+            else if ((charStack_GetTop(opStack) == '*')||
+            (charStack_GetTop(opStack) == '/'))
+            {
+                flagErr =1;
+            }
+        }
+        if (num!=0) //don't push 0 number
+        {
+            sint32_tStack_Push(numStack, num);
+        }
+        num =0;
+        if ((charStack_GetSize(opStack) == 1)&&
+            (sint32_tStack_GetSize(numStack)==1)) //to test more operators one after the other
+        {
+            if (charStack_GetTop(opStack) == key)
+            {
+                if ((charStack_GetTop(opStack)!='*')&&
+                    (charStack_GetTop(opStack)!='/'))
+                {
+                    if (key == '-') //5--2 or 5---2
+                    {
+                        charStack_Pop(opStack);
+                        key = '+';
+                    }
+                    else if (key == '+')    //5+++2 or 5++2
+                    {
+                        charStack_Pop(opStack);
+                    }
+                }
+                else
+                {
+                    flagErr = 1;    //5***1
+                }
+            }
+            else if (charStack_GetTop(opStack) != key)
+            {
+                if ((charStack_GetTop(opStack)!='*')&&
+                    (charStack_GetTop(opStack)!='/'))
+                {
+                    if (key == '-')     //5+-2
+                    {
+                       charStack_Pop(opStack); 
+                    }
+                    else if (key == '+')    //5-+2
+                    {
+                        charStack_Pop(opStack);
+                        key = '-';
+                    }
+                }
+                else if ((key == '*')||(key =='/')) //5+*2
+                {
+                    flagErr = 1;
+                }
+                else if (key == '-' || key == '+')
+                {
+                    charStack_Push(opStack, key);
+                }
+            }
+        }
         if (charStack_GetSize(opStack) != 0)
         {
-            if (IsHigherPriority(charStack_GetTop(opStack))
-                            > IsHigherPriority(key))
+            if (IsHigherPriority(charStack_GetTop(opStack)) //5*2+1
+                            >= IsHigherPriority(key)
+                &&(sint32_tStack_GetSize(numStack)>1))
             {
                 num2 = sint32_tStack_Pop(numStack);
                 num1 = sint32_tStack_Pop(numStack);
                 op = charStack_Pop(opStack);
                 if (op == '/' && num2 == 0)
                 {
-                    LCD_SetPosition(lcd, LCD_ROW_2, LCD_COL_1);
-                    LCD_SendString(lcd, String);
-                    return;
+                    flagErr = 1;
                 }
                 num = Calculate(op, num1, num2);
                 sint32_tStack_Push(numStack, num);
                 charStack_Push(opStack, key);
             }
-            else if ((IsHigherPriority(charStack_GetTop(opStack))
-                        == IsHigherPriority(key)))
-            {
-                num2 = sint32_tStack_Pop(numStack);
-                num1 = sint32_tStack_Pop(numStack);
-                op = charStack_Pop(opStack);
-                if (op == '/' && num2 == 0)
-                {
-                    LCD_SetPosition(lcd, LCD_ROW_2, LCD_COL_1);
-                    LCD_SendString(lcd, String);
-                    return;
-                }
-                num = Calculate(op, num1, num2);
-                sint32_tStack_Push(numStack, num);
-                charStack_Push(opStack, key);
-            }
-            else if (IsHigherPriority(charStack_GetTop(opStack))
+            else if (IsHigherPriority(charStack_GetTop(opStack))//5-2-1
                             < IsHigherPriority(key))
             {
                 charStack_Push(opStack, key);
             }
+            num =0;
         }
         else
         {
@@ -104,35 +154,61 @@ void Calculator(charStack_t *opStack,
     }
     else if (key == '=')
     {
-        while ((charStack_GetSize(opStack) != 0)
-            && (sint32_tStack_GetSize(numStack) != 0))
+        sint32_tStack_Push(numStack, num);
+        num=0;
+        if ((charStack_GetSize(opStack))>=(sint32_tStack_GetSize(numStack)))
         {
-            num2 = sint32_tStack_Pop(numStack);
-            num1 = sint32_tStack_Pop(numStack);
-            op = charStack_Pop(opStack);
-            if (op == '/' && num2 == 0)
+            if (charStack_GetTop(opStack) == '-')   //5*-2
             {
-                LCD_SetPosition(lcd, LCD_ROW_2, LCD_COL_1);
-                LCD_SendString(lcd, String);
-                return;
+                charStack_Pop(opStack);
+                num = sint32_tStack_Pop(numStack)*-1;
+                sint32_tStack_Push(numStack, num);
             }
-            num = Calculate(op, num1, num2);
-            sint32_tStack_Push(numStack, num);
+            else if (charStack_GetTop(opStack) == '+')//5*+2
+            {
+                charStack_Pop(opStack);
+            }
+            else
+            {
+                flagErr = 1;
+            }
         }
-        LCD_SetPosition(lcd, LCD_ROW_2, LCD_COL_1);
-        LCD_SendNumber(lcd, sint32_tStack_Pop(numStack));
+        num =0;
+        if ((charStack_GetTop(opStack)=='/')&&
+            (sint32_tStack_GetTop(numStack)==0))//1/0
+        {
+            flagErr = 1;
+        }
+        if (flagErr == 1)
+        {
+            IsError(lcd, opStack,numStack);
+        }
+        else
+        {
+            while ((charStack_GetSize(opStack) != 0)
+                && (sint32_tStack_GetSize(numStack) != 0))
+            {
+                num2 = sint32_tStack_Pop(numStack);
+                num1 = sint32_tStack_Pop(numStack);
+                op = charStack_Pop(opStack);
+                if (op == '/' && num2 == 0)
+                {
+                    flagErr = 1;
+                }
+                num = Calculate(op, num1, num2);
+                sint32_tStack_Push(numStack, num);
+            }
+            LCD_SetPosition(lcd, LCD_ROW_2, LCD_COL_1);
+            LCD_SendNumber(lcd, sint32_tStack_Pop(numStack));
+        }
     }
     else if (key == '&')
     {
         LCD_ClearScreen(lcd);
         key = 0;
         num = 0, num1 = 0, num2 = 0;
-
-        opStack ->size = 0;
-        opStack ->top = 0;
-
-        numStack ->size = 0;
-        opStack ->top = 0;
+        flagErr = 0;
+        ClearStack(opStack, numStack);
     }
 }
 uint8_t IsHigherPriority(uint8_t op)
@@ -148,7 +224,7 @@ uint8_t IsHigherPriority(uint8_t op)
     }
     return flag;
 }
-sint8_t Calculate(uint8_t op, sint8_t operand1, sint8_t operand2)
+sint32_t Calculate(uint8_t op, sint8_t operand1, sint8_t operand2)
 {
     switch (op)
     {
@@ -158,4 +234,18 @@ sint8_t Calculate(uint8_t op, sint8_t operand1, sint8_t operand2)
     case '*':return (operand1 * operand2);
     default: return 0;
     }
+}
+void ClearStack(charStack_t *opStack, sint32_tStack_t *numStack)
+{
+    opStack ->size = 0;
+    opStack ->top = 0;
+    numStack ->size = 0;
+    numStack ->top = 0;
+}
+void IsError(lcd_t *lcd, charStack_t *opStack, sint32_tStack_t *numStack)
+{
+    LCD_SetPosition(lcd, LCD_ROW_2, LCD_COL_1);
+    LCD_SendString(lcd, String);
+    ClearStack(opStack, numStack);
+    return;
 }
