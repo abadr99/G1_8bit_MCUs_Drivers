@@ -6,8 +6,6 @@
 #include "../../../hal/Keypad/Keypad_config_only_one.h"
 #include "../../../hal/Keypad/Keypad_only_one.h"
 #include "../../../hal/LCD/LCD_Interface.h"
-#include "../../../Data_Structure/Stack/Stack_Config.h"
-#include "../../../Data_Structure/Stack/Stack.h"
 #include "Calc.h"
 
 void Keypad_LCD_Cfg(keypad_t * pKeypad, lcd_t * pLCD);
@@ -17,11 +15,9 @@ int main()
     lcd_t lcd;
 
     Keypad_LCD_Cfg(&keypad, &lcd);
-    Calculator_Init();
-    while (1)
-    {
+
     Calculator(&keypad, &lcd);
-    }
+    
 }
 void Keypad_LCD_Cfg(keypad_t * pKeypad, lcd_t * pLCD)
 {
@@ -56,4 +52,3 @@ void Keypad_LCD_Cfg(keypad_t * pKeypad, lcd_t * pLCD)
 
     LCD_Init(pLCD);
 }
-
