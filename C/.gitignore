@@ -9,3 +9,11 @@ pic
 ../.vscode/*.json
 doxygen-documents/*
 regression-tests/regression-tests/**/*.testelf
+**/pic.cmf
+**/pic.hxl
+**/pic.s
+**/pic.sdb
+**/pic.sym
+**/startup.lst
+**/startup.rlf
+**/startup.s

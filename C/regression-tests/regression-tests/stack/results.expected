@@ -24,4 +24,3 @@ top-val: 200
 size: 1
 top-val: 100
 size: 0SystemClock::Endless stopped
-number of cpu cycles simulated: 9562
