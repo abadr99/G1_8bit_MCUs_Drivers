@@ -16,7 +16,6 @@ OPS='\033[0;31m [--- Ooops ---]:\033[0m'
 main_C_test_directory=regression-tests/regression-tests
 KEEP_MODE=0
 DIR=0
-
 # Parse command-line options
 while getopts ":d:k:help:" opt; do
   case $opt in
@@ -41,6 +40,7 @@ while getopts ":d:k:help:" opt; do
   esac
 done
 
+BASE_DIR=$(basename "$DIR")
 # -- Check for passed arguments
 if [ $# < 1 ]
 then 
@@ -55,9 +55,12 @@ then
   echo "$YELLOW[-- RUNNING --]: $DIR $RESET"
   echo "$OK Directory has been found successfully: $DIR"
   echo "$OK Linking with test: $DIR"
-  make -C $DIR
+
+  make compile-test src="$DIR/main.c" target="$DIR/$BASE_DIR"
   echo "$OK Linking has been finished successfully"
-  test_file=$(find "$DIR" -type f -name "*.testelf" | grep "\.testelf$")
+  
+  test_file=$(find "$DIR" -type f -name "*.testelf")
+  
   if [ -s "$test_file" ]
   then
     echo "$OK $RESET Test-elf file has been found : $test_file" 
@@ -81,7 +84,10 @@ else
   exit 1
 fi
 
-simulavr -d atmega32 -f $test_file -W 0x20,- -R 0x22,- -T exit > $test_dir/results.output
+simulavr -d atmega32 -f $test_file -W 0x20,- -R 0x22,- -T exit > $test_dir/resultss.output
+head -n -1 $test_dir/resultss.output > $test_dir/results.output
+rm -rf $test_dir/resultss.output
+
 if [ -s "$test_dir/results.output" ]
 then
   echo "$OK Output file has been generated successfully : $test_dir/results.output"
@@ -91,8 +97,8 @@ diff $test_dir/results.output $test_dir/results.expected
 
 if [ $? -eq 0 ]
 then  
-    echo "$GREEN [--- PASS  ---]: $RESET: $test_file" >> $main_C_test_directory/summary
-    echo "$GREEN [--- PASS  ---]: $RESET: $test_file" 
+    echo "$GREEN[--- PASS  ---] $RESET: $test_file" >> $main_C_test_directory/summary
+    echo "$GREEN[--- PASS  ---] $RESET: $test_file" 
     if [ $KEEP_MODE -ne 1 ]
     then
     rm -rf $test_dir/results.output
@@ -101,8 +107,8 @@ then
     echo "\n"
     exit 0
 else
-    echo "$BOLD_RED[--- FAIL  ---]::$RESET $test_file" >> $main_C_test_directory/summary
-    echo "$BOLD_RED[--- FAIL  ---]::$RESET $test_file" 
+    echo "$BOLD_RED[--- FAIL  ---] $RESET: $test_file" >> $main_C_test_directory/summary
+    echo "$BOLD_RED[--- FAIL  ---] $RESET: $test_file" 
     if [ $KEEP_MODE -ne 1 ]
     then
     rm -rf $test_dir/results.output

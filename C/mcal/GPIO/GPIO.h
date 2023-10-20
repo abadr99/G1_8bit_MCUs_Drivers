@@ -3,6 +3,29 @@
 
 typedef enum
 {
+    kPORTA,
+    kPORTB,
+    kPORTC,
+    kPORTD,
+    #if MCU_TYPE == _PIC
+    kPORTE,
+    #endif // MCU_TYPE
+}port_t;
+
+typedef enum
+{
+    kPIN0,
+    kPIN1,
+    kPIN2,
+    kPIN3,
+    kPIN4,
+    kPIN5,
+    kPIN6,
+    kPIN7
+}pin_t;
+
+typedef enum
+{
     kLow,
     kHigh
 }state_t;

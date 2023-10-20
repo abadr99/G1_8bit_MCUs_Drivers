@@ -7,4 +7,3 @@ DDRA_REG: 21
 DDRA_REG: 21
 DDRA_REG: 149
 SystemClock::Endless stopped
-number of cpu cycles simulated: 5337
