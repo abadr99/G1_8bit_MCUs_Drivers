@@ -8,12 +8,12 @@ PIC_OPT_XC8FLAGS:= -Og -mdownload-hex -wall -mosccal=$(PIC_CLK) -mcpu=$(PIC_MCU)
 
 PIC_TARGET:= pic
 PIC_OBJDIR := .build/pic/obj
-PIC_OBJS:= $(patsubst %.c,$(PIC_OBJDIR)/%.o,$(SRC_NAMES))
+PIC_OBJS:= $(patsubst %.c,$(PIC_OBJDIR)/%.p1,$(SRC_NAMES))
 
 PIC_HEX_TARGET:= $(PIC_TARGET).hex
 PIC_ELF_TARGET:= $(PIC_TARGET).elf
 
-$(PIC_OBJDIR)/%.o : **/**/%.c
+$(PIC_OBJDIR)/%.p1 : **/**/%.c
 	@mkdir -p $(PIC_OBJDIR)
 	@$(PIC_XC8) $(PIC_XC8FLAGS) $(INC) -c $< -o $@
 	@$(eval SOURCES_CTR=$(shell echo $$(($(SOURCES_CTR)+1))))
