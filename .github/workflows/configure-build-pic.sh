@@ -2,6 +2,6 @@ wget -O xc8-v1.20-linux.run https://ww1.microchip.com/downloads/aemDocuments/doc
 #chmod +x xc8_installer.run
 	
 chmod +x xc8-v1.20-linux.run
-sudo ./xc8-v1.20-linux.run
+#sudo ./xc8-v1.20-linux.run
 
-sudo xc8_installer.run --mode unattended --unattendedmodeui none --netservername localhost
+sudo ./xc8-v1.20-linux.run --mode unattended --unattendedmodeui none --netservername localhost
