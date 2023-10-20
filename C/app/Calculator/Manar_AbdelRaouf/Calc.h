@@ -15,6 +15,6 @@ void Output(lcd_t * pLCD, uint8_t outputChar);
 f32_t Evaluate(f32_t num1, f32_t num2, uint8_t op);
 uint8_t Priority(char op);
 f32_t  IsEqual(charStack_t * opStack, f32_tStack_t * numStack);
-void PushOp(charStack_t * opStack, f32_tStack_t * numStack, uint8_t op, lcd_t * pLCD);
+void PushOp(charStack_t * opStack, f32_tStack_t * numStack, uint8_t op);
 void DisplayResult(lcd_t  * pLCD, f32_t result);
 #endif

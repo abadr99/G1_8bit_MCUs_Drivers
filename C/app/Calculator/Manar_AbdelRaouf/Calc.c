@@ -52,7 +52,7 @@ error_t Calculator(keypad_t * pKeypad, lcd_t * pLCD)
                 {
                     f32_tStack_Push(&numStack, inputNum);
                     inputNum=0;
-                    PushOp(&opStack, &numStack, inputChar, pLCD);
+                    PushOp(&opStack, &numStack, inputChar);
                 }
             }
         }
@@ -102,7 +102,7 @@ uint8_t Priority(char op)
     }
     return retVal;
 }
-void PushOp(charStack_t * opStack, f32_tStack_t * numStack, uint8_t op, lcd_t * pLCD)
+void PushOp(charStack_t * opStack, f32_tStack_t * numStack, uint8_t op)
 {
     f32_t num1, num2, result;
     if (charStack_GetSize(opStack) == 0)
