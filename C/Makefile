@@ -44,6 +44,7 @@ build-avr: $(AVR_OBJS)
 # ------------------------------------------
 build-pic: $(PIC_OBJS)
 	@$(PIC_XC8) $(PIC_XC8FLAGS) $(PIC_OBJS) ./main.c -o $(PIC_HEX_TARGET)
+	@mv pic.cmf pic.hxl pic.s pic.sdb pic.sym startup.* $(PIC_OBJDIR)
 	@rm -rf main.cmf main.d main.hxl main.p1 main.s main.sdb main.sym
 	@echo "\n[Makefile][build] : Compiled successfully."
 
