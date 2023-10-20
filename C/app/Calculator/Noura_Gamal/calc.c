@@ -7,7 +7,7 @@
 #include "../../../hal/LCD/LCD_Interface.h"
 #include "calc.h"
 
-sint32_t num =0, num1=0, num2=0, op = 0,flagErr = 0;
+sint32_t num =0, num1=0, num2=0, op = 0, flagErr = 0;
 uint8_t String[] = "Error";
 
 void CalcConf(keypad_t *pKeypad, lcd_t *pLcd)
@@ -52,7 +52,8 @@ void Calculator(charStack_t *opStack,
     else if ((key == '+') || (key == '-') || (key == '*') || (key == '/'))
     {
         LCD_SendChar(lcd, key);
-        if ((sint32_tStack_GetSize(numStack) == 0)&&    //first char is * or - or + or /
+        //first char is * or - or + or /
+        if ((sint32_tStack_GetSize(numStack) == 0)&&
             charStack_GetSize(opStack) == 1)
         {
             if (charStack_GetTop(opStack) == '-')
@@ -75,8 +76,9 @@ void Calculator(charStack_t *opStack,
             sint32_tStack_Push(numStack, num);
         }
         num =0;
+        //to test more operators one after the other
         if ((charStack_GetSize(opStack) == 1)&&
-            (sint32_tStack_GetSize(numStack)==1)) //to test more operators one after the other
+            (sint32_tStack_GetSize(numStack)==1))
         {
             if (charStack_GetTop(opStack) == key)
             {
@@ -105,7 +107,7 @@ void Calculator(charStack_t *opStack,
                 {
                     if (key == '-')     //5+-2
                     {
-                       charStack_Pop(opStack); 
+                       charStack_Pop(opStack);
                     }
                     else if (key == '+')    //5-+2
                     {
@@ -181,7 +183,7 @@ void Calculator(charStack_t *opStack,
         }
         if (flagErr == 1)
         {
-            IsError(lcd, opStack,numStack);
+            IsError(lcd, opStack, numStack);
         }
         else
         {
