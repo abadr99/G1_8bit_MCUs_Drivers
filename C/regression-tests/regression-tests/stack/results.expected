@@ -9,6 +9,8 @@ top-val: b
 size: 1
 top-val: a
 size: 0
+size: 1
+top-val: m
 
 INT Stack:
 sizeof stack member:4
@@ -22,4 +24,3 @@ top-val: 200
 size: 1
 top-val: 100
 size: 0SystemClock::Endless stopped
-number of cpu cycles simulated: 9562
