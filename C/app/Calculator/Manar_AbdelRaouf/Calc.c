@@ -24,7 +24,7 @@ error_t Calculator(keypad_t * pKeypad, lcd_t * pLCD)
         charStack_t opStack;
         f32_tStack_Init(&numStack);
         charStack_Init(&opStack);
-        calc_error_t Error = kNoERROR;
+        calc_error_terror= kNoERROR;
         while (1)
         {
             inputChar = Input(pKeypad);
@@ -53,7 +53,7 @@ error_t Calculator(keypad_t * pKeypad, lcd_t * pLCD)
                     else
                     {
                         f32_tStack_Push(&numStack, inputNum);
-                        Error = IsEqual(&opStack, &numStack, &result);
+                       error= IsEqual(&opStack, &numStack, &result);
                         if (Error != kNoERROR)
                         {
                             DisplayERROR(pLCD, kMATH_ERROR);
@@ -75,7 +75,8 @@ error_t Calculator(keypad_t * pKeypad, lcd_t * pLCD)
                 }
                 else
                 {
-                    if ((IsOp(preInputChar) == kTRUE && IsOp(inputChar) == kTRUE )
+                    if ((IsOp(preInputChar) == kTRUE
+                              && IsOp(inputChar) == kTRUE)
                         || (preInputChar == NOT))
                     {
                         if (inputChar == '*' || inputChar == '/')
@@ -94,7 +95,7 @@ error_t Calculator(keypad_t * pKeypad, lcd_t * pLCD)
                     {
                         f32_tStack_Push(&numStack, inputNum);
                         inputNum=0;
-                        Error = PushOp(&opStack, &numStack, inputChar);
+                       error= PushOp(&opStack, &numStack, inputChar);
                         if (Error != kNoERROR)
                         {
                             DisplayERROR(pLCD, kMATH_ERROR);
@@ -179,16 +180,20 @@ calc_error_t PushOp(charStack_t * opStack, f32_tStack_t * numStack, uint8_t op)
             f32_tStack_Pop(numStack);
             num1 = f32_tStack_GetTop(numStack);
             f32_tStack_Pop(numStack);
-            retErrorState = Evaluate(num1, num2, charStack_GetTop(opStack), &result);
+            retErrorState = Evaluate(num1, num2,
+                                     charStack_GetTop(opStack),
+                                     &result);
             f32_tStack_Push (numStack, result);
             charStack_Pop(opStack);
             }
             charStack_Push(opStack, op);
         }
     }
-    return retErrorState ;
+    return retErrorState;
 }
-calc_error_t  IsEqual(charStack_t * opStack, f32_tStack_t * numStack, f32_t * result)
+calc_error_t  IsEqual(charStack_t * opStack,
+                      f32_tStack_t * numStack,
+                      f32_t * result)
 {
     f32_t num1, num2;
     calc_error_t retErrorState = kNoERROR;

@@ -15,7 +15,7 @@ int main()
     lcd_t lcd;
 
     Keypad_LCD_Cfg(&keypad, &lcd);
-    while(1)
+    while (1)
     {
         Calculator(&keypad, &lcd);
     }
