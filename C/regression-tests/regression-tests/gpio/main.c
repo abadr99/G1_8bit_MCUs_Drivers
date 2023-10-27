@@ -1,36 +1,12 @@
 #include "../../../common/Types.h"
+#include "../../../common/test.h"
 #include "../../../common/Utils.h"
 #include "../../../common/Config.h"
 #include "../../../common/Registes.h"
 #include "../../../mcal/GPIO/GPIOPrivate.h"
 #include "../../../mcal/GPIO/GPIO.h"
 
-#define SPECIAL_OUTPUT_PORT (*((volatile char *)0x20))
-#define SPECIAL_INPUT_PORT  (*((volatile char *)0x22))
 
-void print_str(const char *str)
-{
-    const char *c;
-    for (c = str; *c != NULL ; c++)
-    {
-        SPECIAL_OUTPUT_PORT = *c;
-    }
-}
-
-void print_num(int num)
-{
-    char str[15];
-    int i = 0;
-    while (num != 0)
-    {
-        str[i++] = (num % 10) + '0';
-        num /= 10;
-    }
-    for (int j = i - 1 ; j >= 0 ; j--)
-    {
-        SPECIAL_OUTPUT_PORT = str[j];
-    }
-}
 
 int main()
 {
@@ -73,5 +49,113 @@ int main()
     print_str("DDRA_REG: ");
     print_num(DDRA_REG);
     print_str("\n");
-
+    
+    GPIO_SetPinValue(kPORTA,kPIN0,kHigh);
+    print_str("PORTA_REG: ");
+    print_num(PORTA_REG);
+    print_str("\n");
+        
+    GPIO_SetPinValue(kPORTA,kPIN1,kLow);
+    print_str("PORTA_REG: ");
+    print_num(PORTA_REG);
+    print_str("\n");
+        
+    GPIO_SetPinValue(kPORTA,kPIN2,kHigh);
+    print_str("PORTA_REG: ");
+    print_num(PORTA_REG);
+    print_str("\n");
+        
+    GPIO_SetPinValue(kPORTA,kPIN3,kLow);
+    print_str("PORTA_REG: ");
+    print_num(PORTA_REG);
+    print_str("\n");
+        
+    GPIO_SetPinValue(kPORTA,kPIN4,kLow);
+    print_str("PORTA_REG: ");
+    print_num(PORTA_REG);
+    print_str("\n");
+        
+        
+    GPIO_SetPinValue(kPORTA,kPIN5,kHigh);
+    print_str("PORTA_REG: ");
+    print_num(PORTA_REG);
+    print_str("\n");
+        
+        
+    GPIO_SetPinValue(kPORTA,kPIN6,kLow);
+    print_str("PORTA_REG: ");
+    print_num(PORTA_REG);
+    print_str("\n");
+        
+    GPIO_SetPinValue(kPORTA,kPIN7,kHigh);
+    print_str("PORTA_REG: ");
+    print_num(PORTA_REG);
+    print_str("\n");
+        
+    GPIO_SetPortDirection(kPORTB,kOutput_PORT);
+    print_str("DDRB_REG: ");
+    print_num(DDRB_REG);
+    print_str("\n");
+    
+    GPIO_SetPortDirection(kPORTC,kInput_PORT);
+    print_str("DDRC_REG: ");
+    print_num(DDRC_REG);
+    print_str("\n");
+    
+    GPIO_SetPortValue(kPORTB,kOutput_PORT);
+    print_str("PORTB_REG: ");
+    print_num(PORTB_REG);
+    print_str("\n");
+    
+    GPIO_SetPortValue(kPORTB,kInput_PORT);
+    print_str("PORTB_REG: ");
+    print_num(PORTB_REG);
+    print_str("\n");
+    
+    GPIO_SetPinPullup(kPORTC,kPIN0);
+    print_str("PORTC_REG: ");
+    print_num(PORTC_REG);
+    print_str("\n");
+    
+    GPIO_SetLowNibbleValue(kPORTB,0x00001111);
+    print_str("PORTB_REG: ");
+    print_num(PORTB_REG);
+    print_str("\n");
+    
+    GPIO_SetLowNibbleValue(kPORTB,0x00000000);
+    print_str("PORTB_REG: ");
+    print_num(PORTB_REG);
+    print_str("\n");
+    
+    GPIO_SetHighNibbleValue(kPORTB,0x11110000);
+    print_str("PORTB_REG: ");
+    print_num(PORTB_REG);
+    print_str("\n");
+    
+    GPIO_SetHighNibbleValue(kPORTB,0x00000000);
+    print_str("PORTB_REG: ");
+    print_num(PORTB_REG);
+    print_str("\n");
+    
+    GPIO_SetHighNibbleDirection(kPORTB,0x00000000);
+    print_str("DDRB_REG: ");
+    print_num(DDRB_REG);
+    print_str("\n");
+    
+    GPIO_SetHighNibbleDirection(kPORTB,0x11110000);
+    print_str("DDRB_REG: ");
+    print_num(DDRB_REG);
+    print_str("\n");
+    
+    GPIO_SetLowNibbleDirection(kPORTB,0x00000000);  
+    print_str("DDRB_REG: ");
+    print_num(DDRB_REG);
+    print_str("\n");  
+    
+    GPIO_SetLowNibbleDirection(kPORTB,0x00001111);  
+    print_str("DDRB_REG: ");
+    print_num(DDRB_REG);
+    print_str("\n"); 
+    
+    
 }
