@@ -63,8 +63,10 @@ build-avr-opt:$(AVR_OBJS)
 # make build-app path=path/to/app
 # TODO(@Mariamahmed44): #97 Implement this rule
 # ------------------------------------------
-build-app:
-	@echo "NOT IMPLEMENTED"
+build-app: $(AVR_OBJS)
+	@$(AVR_GCC) $(AVR_GCCFLAGS) $(AVR_OBJS) $(path)/*.c -o $(path)/$(AVR_ELF_TARGET)
+	@$(AVR_OBJ_COPY) $(AVR_OBJ_COPY_OPTS) $(path)/$(AVR_ELF_TARGET) $(path)/$(AVR_HEX_TARGET)
+	@echo "\n[Makefile][build-app] : Compiled successfully."
 
 # --------------------------------------------------------
 # Rule to compile test 
@@ -123,6 +125,10 @@ clean:
 	@rm -rf *.hex
 	@rm -rf avr
 	@rm -rf .build
+	@find app/* -name "*.hex" -type f -delete
+	@find app/* -name "*.elf" -type f -delete
+	@find regression-tests/* -name "*.testelf" -type f -delete
+        
 
 # ----------------------------------------------------
 # Rule to display help message
@@ -138,7 +144,6 @@ help:
 	@echo "make clean                		  		  : Clean generated files"
 	@echo "make run-regression filter=all   		  : Run all regression test"
 	@echo "make run-regression filter=elf/path/dir    : Run specific regression test"
-
 
 
 
