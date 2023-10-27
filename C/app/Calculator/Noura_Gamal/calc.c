@@ -47,7 +47,7 @@ void Calculator(charStack_t *opStack,
     if ((key >= '0') && (key <= '9'))
     {
         LCD_SendChar(lcd, key);
-        num = (num * 10) + (key -'0');
+        num = (num * 10) + (key -'0')
         //first char is * or - or + or /
         if ((sint32_tStack_GetSize(numStack) == 0)&&
             charStack_GetSize(opStack) == 1)
@@ -160,7 +160,7 @@ void Calculator(charStack_t *opStack,
         {
             sint32_tStack_Push(numStack, num);
         }
-        num =0;
+        num=0;
         if ((charStack_GetSize(opStack))>=(sint32_tStack_GetSize(numStack)))
         {
             if ((charStack_GetTop(opStack) == '-')&&
