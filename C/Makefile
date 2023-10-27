@@ -127,7 +127,6 @@ clean:
 	@rm -rf .build
 	@find app/* -name "*.hex" -type f -delete
 	@find app/* -name "*.elf" -type f -delete
-	@find regression-tests/* -name "*.testelf" -type f -delete
         
 
 # ----------------------------------------------------
@@ -144,6 +143,7 @@ help:
 	@echo "make clean                		  		  : Clean generated files"
 	@echo "make run-regression filter=all   		  : Run all regression test"
 	@echo "make run-regression filter=elf/path/dir    : Run specific regression test"
+
 
 
 
