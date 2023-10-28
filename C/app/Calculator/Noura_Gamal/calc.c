@@ -47,11 +47,7 @@ void Calculator(charStack_t *opStack,
     if ((key >= '0') && (key <= '9'))
     {
         LCD_SendChar(lcd, key);
-        num = (num * 10) + (key -'0');
-    }
-    else if ((key == '+') || (key == '-') || (key == '*') || (key == '/'))
-    {
-        LCD_SendChar(lcd, key);
+        num = (num * 10) + (key -'0')
         //first char is * or - or + or /
         if ((sint32_tStack_GetSize(numStack) == 0)&&
             charStack_GetSize(opStack) == 1)
@@ -71,6 +67,10 @@ void Calculator(charStack_t *opStack,
                 flagErr =1;
             }
         }
+    }
+    else if ((key == '+') || (key == '-') || (key == '*') || (key == '/'))
+    {
+        LCD_SendChar(lcd, key);
         if (num!=0) //don't push 0 number
         {
             sint32_tStack_Push(numStack, num);
@@ -156,17 +156,22 @@ void Calculator(charStack_t *opStack,
     }
     else if (key == '=')
     {
-        sint32_tStack_Push(numStack, num);
+        if (num!=0) //don't push 0 number
+        {
+            sint32_tStack_Push(numStack, num);
+        }
         num=0;
         if ((charStack_GetSize(opStack))>=(sint32_tStack_GetSize(numStack)))
         {
-            if (charStack_GetTop(opStack) == '-')   //5*-2
+            if ((charStack_GetTop(opStack) == '-')&&
+                (sint32_tStack_GetSize(numStack)>1))   //5*-2
             {
                 charStack_Pop(opStack);
                 num = sint32_tStack_Pop(numStack)*-1;
                 sint32_tStack_Push(numStack, num);
             }
-            else if (charStack_GetTop(opStack) == '+')//5*+2
+            else if ((charStack_GetTop(opStack) == '+')&&
+                (sint32_tStack_GetSize(numStack)>1))//5*+2
             {
                 charStack_Pop(opStack);
             }
