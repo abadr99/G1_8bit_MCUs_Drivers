@@ -64,18 +64,20 @@ build-avr-opt:$(AVR_OBJS)
 # TODO(@Mariamahmed44): #97 Implement this rule
 # ------------------------------------------
 build-app: $(AVR_OBJS) $(AVR_OBJDIR)
-ifdef path
-ifeq ($(findstring $(app/), $(APP_OBJS)), $(app/))
+ifndef path 
+	$(error "enter your path")
 	
-	@$(AVR_GCC) $(AVR_GCCFLAGS) $(AVR_OBJS) $(wildcard $(path)/*.c) $(INC) -o $(path)/$(AVR_ELF_TARGET)
-	@$(AVR_OBJ_COPY) $(AVR_OBJ_COPY_OPTS) $(path)/$(AVR_ELF_TARGET) $(path)/$(AVR_HEX_TARGET)
-	@echo "\n[Makefile][build-app] : Compiled successfully."
-else
-        @echo "enter a valid path"
 endif
+ifeq ($(findstring app/, $(path)), app)
+	
+		@$(AVR_GCC) $(AVR_GCCFLAGS) $(AVR_OBJS) $(wildcard $(path)/*.c) $(INC) -o $(path)/$(AVR_ELF_TARGET)
+		@$(AVR_OBJ_COPY) $(AVR_OBJ_COPY_OPTS) $(path)/$(AVR_ELF_TARGET) $(path)/$(AVR_HEX_TARGET)
+		@echo "\n[Makefile][build-app] : Compiled successfully."
 else
-	@echo "enter your path"
-endif	
+	$(error "enter a valid path")
+endif
+
+	
 	
 
 
