@@ -68,7 +68,7 @@ ifndef path
 	$(error "enter your path")
 	
 endif
-ifeq ($(findstring app/, $(path)), app)
+ifeq ($(findstring app/, $(path)), app/)
 	
 		@$(AVR_GCC) $(AVR_GCCFLAGS) $(AVR_OBJS) $(wildcard $(path)/*.c) $(INC) -o $(path)/$(AVR_ELF_TARGET)
 		@$(AVR_OBJ_COPY) $(AVR_OBJ_COPY_OPTS) $(path)/$(AVR_ELF_TARGET) $(path)/$(AVR_HEX_TARGET)
