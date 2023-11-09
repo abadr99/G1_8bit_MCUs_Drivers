@@ -23,22 +23,28 @@ error_t UART_Init(void)
     //#endif
     return kErrorState;
 }
-error_t UART_Transmit(uint8_t Data)
+error_t UART_Transmit(uint8_t data)
 {
     error_t kErrorState = kNoError;
     #if MCU_TYPE == _PIC
-    while ((GET_BIT(TXSTA_REG, TXSTA_TRMT)) == 0);
+    while ((GET_BIT(TXSTA_REG, TXSTA_TRMT)) == 0)
+    {
+
+    }
     TXREG_REG = Data;
     #endif
     return kErrorState;
 }
-error_t UART_Receive(uint8_t * Data)
+error_t UART_Receive(uint8_t *data)
 {
     error_t kErrorState = kNoError;
     #if MCU_TYPE == _PIC
     if (Data != NULL)
     {
-        while ((GET_BIT(PIR1_REG, PIR1_RCIF)) == 0);
+        while ((GET_BIT(PIR1_REG, PIR1_RCIF)) == 0)
+        {
+            
+        }
         *Data = RCREG_REG;
     }
     else
