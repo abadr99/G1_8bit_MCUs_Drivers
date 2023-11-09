@@ -1,3 +1,4 @@
+#include "../../common/Config.h"
 #include "../../common/Types.h"
 #include "../../common/Utils.h"
 #include "../../common/Registes.h"
@@ -7,7 +8,6 @@
 error_t UART_Init(void)
 {
     error_t kErrorState = kNoError;
-    //#if MCU_TYPE == _PIC
     /*Asynchronous mode*/
     SET_BIT(RCSTA_REG, RCSTA_SPEN);
     CLR_BIT(TXSTA_REG, TXSTA_SYNC);
@@ -20,48 +20,41 @@ error_t UART_Init(void)
     SET_BIT(TXSTA_REG, TXSTA_TXEN);
     /*Receiver Enable*/
     SET_BIT(RCSTA_REG, RCSTA_CREN);
-    //#endif
     return kErrorState;
 }
 error_t UART_Transmit(uint8_t data)
 {
     error_t kErrorState = kNoError;
-    #if MCU_TYPE == _PIC
     while ((GET_BIT(TXSTA_REG, TXSTA_TRMT)) == 0)
     {
 
     }
-    TXREG_REG = Data;
-    #endif
+    TXREG_REG = data;
     return kErrorState;
 }
 error_t UART_Receive(uint8_t *data)
 {
     error_t kErrorState = kNoError;
-    #if MCU_TYPE == _PIC
-    if (Data != NULL)
+    if (data != NULL)
     {
         while ((GET_BIT(PIR1_REG, PIR1_RCIF)) == 0)
         {
-            
+
         }
-        *Data = RCREG_REG;
+        *data = RCREG_REG;
     }
     else
     {
         kErrorState = kFunctionParameterError;
     }
-    #endif
     return kErrorState;
 }
 error_t ClearFlag(void)
 {
     error_t kErrorState = kNoError;
-    #if MCU_TYPE == _PIC
     if ((GET_BIT(PIR1_REG, PIR1_RCIF)) == 1)
     {
       CLR_BIT(PIR1_REG, PIR1_RCIF);
     }
-    #endif
     return kErrorState;
 }
