@@ -1,17 +1,21 @@
 #ifndef UART_PRIVATE_H_
 #define UART_PRIVATE_H_
 
+#define TXSTA_TX9           (6)
 #define TXSTA_TXEN          (5)
 #define TXSTA_SYNC          (4)
 #define TXSTA_BRGH          (2)
 #define TXSTA_TRMT          (1)
 
 #define RCSTA_SPEN          (7)
+#define RCSTA_RX9           (6)
 #define RCSTA_CREN          (4)
 
 #define TRISC_TRISC7        (7)
 
 #define PIR1_RCIF           (5)
+
+#define BAUDCTL_BRG16       (3)
 
 #define DISABLE             (0)
 #define EVEN_PARITY         (1)

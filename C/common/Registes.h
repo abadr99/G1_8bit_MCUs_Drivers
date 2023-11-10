@@ -56,6 +56,7 @@
     #define RCSTA_REG   *((volatile uint8_t *)0xFAB)
     #define TRISC_REG   *((volatile uint8_t *)0xF94)
     #define PIR1_REG    *((volatile uint8_t *)0xF9E)
+    #define BAUDCTL_REG *((volatile uint8_t *)0xFB8)
 #endif  // MCU_TYPE
 
 #endif //_REGISTERS_H_
