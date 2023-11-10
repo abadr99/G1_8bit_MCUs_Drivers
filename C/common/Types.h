@@ -26,5 +26,10 @@ typedef enum
     kFunctionParameterError
 }error_t;
 
+typedef enum
+{
+	kFALSE,
+    kTRUE
+}bool_t;
 
 #endif //_types_H_
