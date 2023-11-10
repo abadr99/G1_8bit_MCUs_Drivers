@@ -26,8 +26,13 @@
     #define ADCL_REG   *((volatile uint8_t *)0X24)
     #define SFIOR_REG  *((volatile uint8_t *)0X50)
     #define ADC_DATA_REG *((volatile uint16 *)0X24)
-
-
+    #define UCSRA_REG   *((volatile uint8_t *)0X2B)
+    #define UCSRB_REG   *((volatile uint8_t *)0X2A)
+    #define UCSRC_REG   *((volatile uint8_t *)0X40)
+    #define UBRRL_REG   *((volatile uint8_t *)0X29)
+    #define UBRRH_REG   *((volatile uint8_t *)0X40)
+    #define UDR_REG     *((volatile uint8_t *)0X2C)
+    
 #elif MCU_TYPE == _PIC
     #define TRISA_REG   *((volatile uint8_t *)0xF92)
     #define TRISB_REG   *((volatile uint8_t *)0xF93)
