@@ -11,11 +11,12 @@
 #include "../../../utils/stack/stack.h"
 #include "calc.h"
 void CalcEval(uint8_t keyVal, uint8_t lastVal, lcd_t* lcd,
-              keypad_t* k, charStack_t* operatorStack,
+              charStack_t* operatorStack,
               sint32_tStack_t* numStack);
-sint32_t num=0;
+sint32_t num=0,sign=1;
 uint8_t keyVal, lastval;
-sint16 operatorStackIterator=0, numStackIterator=0, iterator=0, count;
+sint16 operatorStackIterator=0, numStackIterator=0, iterator=0;
+calcerror_t error;
 int main(void)
 {lcd_t lcd;
 keypad_t k;
@@ -30,19 +31,20 @@ while (1)
     }
     while (keyVal==NOT_PRESSED);
     iterator++;
-CalcEval(keyVal, lastval, &lcd, &k, &operatorStack, &numStack);
+CalcEval(keyVal, lastval, &lcd, &operatorStack, &numStack);
 
 }
 return 0;
 }
-void CalcEval(uint8_t keyVal, uint8_t lastVal, lcd_t* lcd, keypad_t* k,
+void CalcEval(uint8_t keyVal, uint8_t lastVal, lcd_t* lcd,
               charStack_t* operatorStack, sint32_tStack_t* numStack)
 {
+/*if user wants to clear previous operations*/
 if (keyVal=='&')
 {
-    LCD_ClearScreen(lcd);
     num=0;
     iterator=0;
+    Clear(operatorStack, numStack,lcd);
 }
 else if (keyVal!='=')
 {
@@ -54,34 +56,26 @@ else if (keyVal!='=')
     if (ISNUM(keyVal))
     {
         num=(num*10)+(keyVal-'0');
-        count=0;
+        lastVal=num;
     }
     else if (ISNUM(lastVal)==0)
-    {count++;
-        if (lastVal==keyVal)
-        {if (keyVal=='-')
-            {
-            charStack_Pop(operatorStack);
-             charStack_Push(operatorStack, '+');
-            }
-        }
-        else if (lastVal!=keyVal&&charStack_GetSize(operatorStack)!=1)
-        {uint8_t arr[]="ERROR";
-        LCD_ClearScreen(lcd);
-            LCD_SendString(lcd, arr);
-        }
-        else if (charStack_GetSize(operatorStack)==1&&keyVal!='-')
+    {
+        /* handeling expressions like 3-*6 */
+        if(GetPrecedence(keyVal)>GetPrecedence(charStack_GetTop(operatorStack)))
         {
-         uint8_t arr[]="ERROR";
-        LCD_ClearScreen(lcd);
-        LCD_SendString(lcd, arr);
+            error=unvalidoperationError;
+        }
+        else if(keyVal=='-')
+        {
+            sign*=-1;
         }
     }
     else
-    {count++;
+    {
         if (charStack_GetTop(operatorStack)!='-')
         {
-            sint32_tStack_Push(numStack, num);
+            sint32_tStack_Push(numStack, sign*num);
+            sign=1;
         }
         else
         {
@@ -90,8 +84,10 @@ else if (keyVal!='=')
              num=-num;
              sint32_tStack_Push(numStack, num);
         }
+
         numStackIterator++;
         num=0;
+        /* if it is the first operator so no need to check precedence*/
         if (charStack_GetSize(operatorStack)==0)
         {
             charStack_Push(operatorStack, keyVal);
@@ -115,18 +111,39 @@ else if (keyVal!='=')
                 operatorStackIterator++;
             }
         }
+        
+
     }
+    lastVal=keyVal;
+   
 }
 else
 {
-  sint32_tStack_Push(numStack, num);
+  sint32_tStack_Push(numStack, num*sign);
   numStackIterator++;
-  Evaluate(numStack, operatorStack, numStackIterator, operatorStackIterator);
-  if (iterator==33)
+  if(error==noError)
+  {
+  error=Evaluate(numStack, operatorStack, numStackIterator, operatorStackIterator);
+  }
+  if(error==0)
+  {
+if (iterator==33)
   {
   LCD_ClearScreen(lcd);
   }
   LCD_SendChar(lcd, '=');
   LCD_SendNumber(lcd, sint32_tStack_GetTop(numStack));
+  }
+  else
+  {
+     LCD_ClearScreen(lcd);
+     if(error)
+    {LCD_SendString(lcd,"runtime error");
+    }
+    else
+    {
+        LCD_SendString(lcd,"unvalid syntax");
+    }
+  }
 }
 }

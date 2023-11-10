@@ -13,6 +13,12 @@
 
 #define OPERATOR_SIZE (30)
 #define NUMBER_SIZE (31)
+typedef enum
+{
+  noError,
+	runtimeError,
+  unvalidoperationError
+}calcerror_t;
 void CalcInit(lcd_t* lcd, keypad_t* keypad, port_t lcdDataPort,
               port_t lcdControlPort, port_t keypadPort);
  /**
@@ -38,6 +44,13 @@ uint8_t GetPrecedence(uint8_t operator);
  * @return sint32 the result from this operation
  */
 sint32_t Operate(sint32_t num1, sint32_t num2, char operator);
-void Evaluate(sint32_tStack_t *ar, charStack_t *arr,
+calcerror_t Evaluate(sint32_tStack_t *ar, charStack_t *arr,
               sint16 size1, sint16 size2);
+/**
+ * @brief This Function is used to clear previous operations
+ * @param operatorStack stack that contains operators
+ * @param numStack stack that contains numbers
+ * @param lcd 
+ */
+void Clear(charStack_t* operatorStack, sint32_tStack_t* numStack,lcd_t* lcd);
 #endif

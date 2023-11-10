@@ -77,15 +77,28 @@ sint32_t Operate(sint32_t num1, sint32_t num2, char operator)
     }
     return result;
 }
-void Evaluate(sint32_tStack_t *ar, charStack_t *arr, sint16 size1, sint16 size2)
-{
+calcerror_t Evaluate(sint32_tStack_t *ar, charStack_t *arr, sint16 size1, sint16 size2)
+{calcerror_t error=noError;
 while (size2>0)
 {char operator=charStack_Pop(arr);
 sint32_t num1=sint32_tStack_Pop(ar);
 sint32_t num2=sint32_tStack_Pop(ar);
+if(operator=='/'&&num1==0)
+{
+    error =runtimeError;
+}
     sint32_t result=Operate(num2, num1, operator);
     sint32_tStack_Push(ar, result);
     size1--;
     size2--;
 }
+return error;
+}
+void Clear(charStack_t* operatorStack, sint32_tStack_t* numStack,lcd_t* lcd)
+{
+    LCD_ClearScreen(lcd);
+    operatorStack->size=0;
+    operatorStack->top=0;
+    numStack->size=0;
+    numStack->top=0;
 }
