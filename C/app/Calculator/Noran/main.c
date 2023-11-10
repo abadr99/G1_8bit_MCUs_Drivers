@@ -13,7 +13,7 @@
 void CalcEval(uint8_t keyVal, uint8_t lastVal, lcd_t* lcd,
               charStack_t* operatorStack,
               sint32_tStack_t* numStack);
-sint32_t num=0,sign=1;
+sint32_t num=0, sign=1;
 uint8_t keyVal, lastval;
 sint16 operatorStackIterator=0, numStackIterator=0, iterator=0;
 calcerror_t error;
@@ -44,7 +44,7 @@ if (keyVal=='&')
 {
     num=0;
     iterator=0;
-    Clear(operatorStack, numStack,lcd);
+    Clear(operatorStack, numStack, lcd);
 }
 else if (keyVal!='=')
 {
@@ -61,11 +61,12 @@ else if (keyVal!='=')
     else if (ISNUM(lastVal)==0)
     {
         /* handeling expressions like 3-*6 */
-        if(GetPrecedence(keyVal)>GetPrecedence(charStack_GetTop(operatorStack)))
+        if (GetPrecedence(keyVal)>
+            GetPrecedence(charStack_GetTop(operatorStack)))
         {
             error=unvalidoperationError;
         }
-        else if(keyVal=='-')
+        else if (keyVal=='-')
         {
             sign*=-1;
         }
@@ -115,17 +116,17 @@ else if (keyVal!='=')
 
     }
     lastVal=keyVal;
-   
 }
 else
 {
   sint32_tStack_Push(numStack, num*sign);
   numStackIterator++;
-  if(error==noError)
+  if (error==noError)
   {
-  error=Evaluate(numStack, operatorStack, numStackIterator, operatorStackIterator);
+  error=Evaluate(numStack, operatorStack,
+                 numStackIterator, operatorStackIterator);
   }
-  if(error==0)
+  if (error==0)
   {
 if (iterator==33)
   {
@@ -137,12 +138,12 @@ if (iterator==33)
   else
   {
      LCD_ClearScreen(lcd);
-     if(error)
-    {LCD_SendString(lcd,"runtime error");
+     if (error)
+    {LCD_SendString(lcd, "runtime error");
     }
     else
     {
-        LCD_SendString(lcd,"unvalid syntax");
+        LCD_SendString(lcd, "unvalid syntax");
     }
   }
 }

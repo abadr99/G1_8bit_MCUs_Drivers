@@ -50,7 +50,7 @@ calcerror_t Evaluate(sint32_tStack_t *ar, charStack_t *arr,
  * @brief This Function is used to clear previous operations
  * @param operatorStack stack that contains operators
  * @param numStack stack that contains numbers
- * @param lcd 
+ * @param lcd
  */
-void Clear(charStack_t* operatorStack, sint32_tStack_t* numStack,lcd_t* lcd);
+void Clear(charStack_t* operatorStack, sint32_tStack_t* numStack, lcd_t* lcd);
 #endif
