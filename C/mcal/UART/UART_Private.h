@@ -1,9 +1,6 @@
 #ifndef UART_PRIVATE_H_
 #define UART_PRIVATE_H_
 
-#define USART_PARITY_MODE  (DISABLE)
-#define USART_DATA_SIZE    (DATA_SIZE_8_BIT)
-
 #define TXSTA_TXEN          (5)
 #define TXSTA_SYNC          (4)
 #define TXSTA_BRGH          (2)
