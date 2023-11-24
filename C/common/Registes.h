@@ -44,8 +44,11 @@
     #define LATC_REG    *((volatile uint8_t *)0xF8B)
     #define LATD_REG    *((volatile uint8_t *)0xF8C)
     #define LATE_REG    *((volatile uint8_t *)0xF8D)
-
-
+    #define TMR0H_REG   *((volatile uint8_t *)0xFD7)
+    #define TMR0L_REG   *((volatile uint8_t *)0xFD6)
+    #define T0CON_REG   *((volatile uint8_t *)0xFD5)
+    #define INTCON_REG  *((volatile uint8_t *)0xFF2)
+    
 #endif  // MCU_TYPE
 
 #endif //_REGISTERS_H_
