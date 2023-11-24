@@ -1,4 +1,4 @@
-#ifndef TIMER_PRIVATE_H_ 
+#ifndef TIMER_PRIVATE_H_
 #define TIMER_PRIVATE_H_
 
 #define TIMER0_TMR0ON       (7)

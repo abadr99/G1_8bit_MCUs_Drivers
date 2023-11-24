@@ -8,7 +8,7 @@
 #include "TIMER_Interface.h"
 
 //#define T0CON_REG  (1)
-static uint16 preload_value = 0; 
+static uint16 preload_value = 0;
 static void ( * Interrupt_Action) (void)=NULL_PTR;
 error_t TIMER0_Init()
 {
@@ -34,7 +34,7 @@ error_t TIMER0_Init()
             CLR_BIT(T0CON_REG, TIMER0_T0SE);
         #elif TIMER0_COUNTER_EDGE == FALING_EDGE
             SET_BIT(T0CON_REG, TIMER0_T0SE);
-        #else 
+        #else
             retErrorState = kFunctionParameterError;
         #endif
     #else
