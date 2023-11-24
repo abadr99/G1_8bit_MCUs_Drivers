@@ -7,7 +7,7 @@
 #include "TIMER_Config.h"
 #include "TIMER_Interface.h"
 
-//#define T0CON_REG  (1)
+#if MCU_TYPE == _PIC
 static uint16 preload_value = 0;
 static void ( * Interrupt_Action) (void)=NULL_PTR;
 error_t TIMER0_Init()
@@ -114,3 +114,4 @@ void __interrupt() ISR(void)
         Interrupt_Action();
     }
 }
+#endif
