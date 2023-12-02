@@ -83,7 +83,7 @@ int main()
     print_str("MCUCR_REG: ");
     print_num(MCUCR_REG);
     print_str("\n");
-       /***********************INT2*******************/ 
+    /***********************INT2*******************/ 
     GPIO_SetPinDirection(kPORTB, kPIN2, kInput);
     print_str("DDRB_REG: ");
     print_num(DDRB_REG);
