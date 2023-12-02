@@ -17,7 +17,6 @@ int main()
     print_str("SREG_REG: ");
     print_num(SREG);
     print_str("\n");
-    /***********************INT0*******************/
     GPIO_SetPinDirection(kPORTD, kPIN2, kInput);
     print_str("DDRD_REG: ");
     print_num(DDRD_REG);
@@ -50,7 +49,6 @@ int main()
     print_str("MCUCR_REG: ");
     print_num(MCUCR_REG);
     print_str("\n");
-    /***********************INT1*******************/
     GPIO_SetPinDirection(kPORTD, kPIN3, kInput);
     print_str("DDRD_REG: ");
     print_num(DDRD_REG);
@@ -83,7 +81,6 @@ int main()
     print_str("MCUCR_REG: ");
     print_num(MCUCR_REG);
     print_str("\n");
-    /***********************INT2*******************/ 
     GPIO_SetPinDirection(kPORTB, kPIN2, kInput);
     print_str("DDRB_REG: ");
     print_num(DDRB_REG);
