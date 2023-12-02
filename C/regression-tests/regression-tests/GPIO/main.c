@@ -70,7 +70,7 @@ int main()
     GPIO_SetPinValue(kPORTA, kPIN7, kHigh);
     print_str("PORTA_REG: ");
     print_num(PORTA_REG);
-    print_str("\n"); 
+    print_str("\n");
     GPIO_SetPortDirection(kPORTB, kOutput_PORT);
     print_str("DDRB_REG: ");
     print_num(DDRB_REG);
