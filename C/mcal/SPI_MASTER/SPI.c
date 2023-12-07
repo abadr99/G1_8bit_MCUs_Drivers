@@ -1,0 +1,65 @@
+#include "../../common/Config.h"
+#include "../../common/Types.h"
+#include "../../common/Utils.h"
+#include "../../common/Registes.h"
+#include "SPI_prv.h"
+#include "SPI_conf.h"
+#include "SPI.h"
+
+void SPI_MASTER_Init()
+{
+    #if MCU_TYPE == _PIC
+    //Set SCK Rate To Fosc/4
+    #if SPI_CLK_MODE == CLK_4
+    CLR_BIT(SSPCON1_REG, SSPCON1_SSMP0);
+    CLR_BIT(SSPCON1_REG, SSPCON1_SSMP1);
+    CLR_BIT(SSPCON1_REG, SSPCON1_SSMP2);
+    CLR_BIT(SSPCON1_REG, SSPCON1_SSMP3);
+    #elif SPI_CLK_MODE == CLK_16
+    SET_BIT(SSPCON1_REG, SSPCON1_SSMP0);
+    CLR_BIT(SSPCON1_REG, SSPCON1_SSMP1);
+    CLR_BIT(SSPCON1_REG, SSPCON1_SSMP2);
+    CLR_BIT(SSPCON1_REG, SSPCON1_SSMP3);
+    #elif SPI_CLK_MODE == CLK_64
+    CLR_BIT(SSPCON1_REG, SSPCON1_SSMP0);
+    SET_BIT(SSPCON1_REG, SSPCON1_SSMP1);
+    CLR_BIT(SSPCON1_REG, SSPCON1_SSMP2);
+    CLR_BIT(SSPCON1_REG, SSPCON1_SSMP3);
+    #elif SPI_CLK_MODE == TMR2_output_2 
+    SET_BIT(SSPCON1_REG, SSPCON1_SSMP0);
+    SET_BIT(SSPCON1_REG, SSPCON1_SSMP1);
+    CLR_BIT(SSPCON1_REG, SSPCON1_SSMP2);
+    CLR_BIT(SSPCON1_REG, SSPCON1_SSMP3);
+    #endif
+
+    //Synchronous Serial Port Enable bit
+    SET_BIT(SSPCON1_REG, SSPCON1_SSPEN);
+
+    //SPI BUS MODES
+    #if SPI_MODE == MODE_1
+    CLR_BIT(SSPCON1_REG, SSPCON1_CKP);
+    SET_BIT(SSPSTAT_REG, SSPSTAT_CKE);
+    #elif SPI_MODE == MODE_2
+    CLR_BIT(SSPCON1_REG, SSPCON1_CKP);
+    CLR_BIT(SSPSTAT_REG, SSPSTAT_CKE);
+    #elif SPI_MODE == MODE_3
+    SET_BIT(SSPCON1_REG, SSPCON1_CKP);
+    SET_BIT(SSPSTAT_REG, SSPSTAT_CKE);
+    #elif SPI_MODE == MODE_4
+    SET_BIT(SSPCON1_REG, SSPCON1_CKP);
+    CLR_BIT(SSPSTAT_REG, SSPSTAT_CKE);
+    #endif
+
+    //Sample mode
+    #if SAMPLE_MODE == END
+    SET_BIT(SSPSTAT_REG, SSPSTAT_SMP);
+    #elif SAMPLE_MODE == MIDDLE
+    CLR_BIT(SSPSTAT_REG, SSPSTAT_SMP);
+    #endif
+
+    //Configure The I/O Pins For SPI Master Mode
+    CLR_BIT(TRISC_REG, TRISC_TRISC3);//SCK
+    SET_BIT(TRISC_REG, TRISC_TRISC4);//SDI
+    CLR_BIT(TRISC_REG, TRISC_TRISC5);//SDO
+    #endif
+}

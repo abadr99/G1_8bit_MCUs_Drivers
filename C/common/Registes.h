@@ -29,23 +29,24 @@
 
 
 #elif MCU_TYPE == _PIC
-    #define TRISA_REG   *((volatile uint8_t *)0xF92)
-    #define TRISB_REG   *((volatile uint8_t *)0xF93)
-    #define TRISC_REG   *((volatile uint8_t *)0xF94)
-    #define TRISD_REG   *((volatile uint8_t *)0xF95)
-    #define TRISE_REG   *((volatile uint8_t *)0xF96)
-    #define PORTA_REG   *((volatile uint8_t *)0xF80)
-    #define PORTB_REG   *((volatile uint8_t *)0xF81)
-    #define PORTC_REG   *((volatile uint8_t *)0xF82)
-    #define PORTD_REG   *((volatile uint8_t *)0xF83)
-    #define PORTE_REG   *((volatile uint8_t *)0xF84)
-    #define LATA_REG    *((volatile uint8_t *)0xF89)
-    #define LATB_REG    *((volatile uint8_t *)0xF8A)
-    #define LATC_REG    *((volatile uint8_t *)0xF8B)
-    #define LATD_REG    *((volatile uint8_t *)0xF8C)
-    #define LATE_REG    *((volatile uint8_t *)0xF8D)
-
-
+    #define TRISA_REG      *((volatile uint8_t *)0xF92)
+    #define TRISB_REG      *((volatile uint8_t *)0xF93)
+    #define TRISC_REG      *((volatile uint8_t *)0xF94)
+    #define TRISD_REG      *((volatile uint8_t *)0xF95)
+    #define TRISE_REG      *((volatile uint8_t *)0xF96)
+    #define PORTA_REG      *((volatile uint8_t *)0xF80)
+    #define PORTB_REG      *((volatile uint8_t *)0xF81)
+    #define PORTC_REG      *((volatile uint8_t *)0xF82)
+    #define PORTD_REG      *((volatile uint8_t *)0xF83)
+    #define PORTE_REG      *((volatile uint8_t *)0xF84)
+    #define LATA_REG       *((volatile uint8_t *)0xF89)
+    #define LATB_REG       *((volatile uint8_t *)0xF8A)
+    #define LATC_REG       *((volatile uint8_t *)0xF8B)
+    #define LATD_REG       *((volatile uint8_t *)0xF8C)
+    #define LATE_REG       *((volatile uint8_t *)0xF8D)
+    #define SSPSTAT_REG    *((volatile uint8_t *)0xFC7)
+    #define SSPCON1_REG    *((volatile uint8_t *)0xFC6)
+    #define SSPBUF_REG     *((volatile uint8_t *)0xFC9)
 #endif  // MCU_TYPE
 
 #endif //_REGISTERS_H_
