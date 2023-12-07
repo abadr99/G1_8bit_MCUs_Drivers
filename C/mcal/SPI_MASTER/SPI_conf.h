@@ -4,19 +4,19 @@
  * options:         1-CLK_4
  *                  2-CLK_16
  *                  3-CLK_64
- *                  4-TMR2_output_2 
+ *                  4-TMR2_output_2
 */
-#define SPI_CLK_MODE            CLK_4
+#define SPI_CLK_MODE            (CLK_4)
 /**
  * options:         1-MODE_1
  *                  2-MODE_2
  *                  3-MODE_3
- *                  4-MODE_4 
+ *                  4-MODE_4
 */
-#define SPI_MODE                MODE_1
+#define SPI_MODE                (MODE_1)
 /**
  * options:         1-END
  *                  2-MIDDLE
 */
-#define SAMPLE_MODE             MIDDLE
+#define SAMPLE_MODE             (MIDDLE)
 #endif
