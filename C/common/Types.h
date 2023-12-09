@@ -16,6 +16,8 @@ typedef signed   long sint32_t;                  //IGNORE-STYLE-CHECK[B004]
 #define NULL ((void*)0)
 #endif
 
+#define HIGH (1)
+#define LOW  (0)
 
 // typedef unsigned short uint16_t;
 // typedef signed   short sint16_t;
@@ -31,5 +33,6 @@ typedef enum
 	kFALSE,
     kTRUE
 }bool_t;
+
 
 #endif //_types_H_
