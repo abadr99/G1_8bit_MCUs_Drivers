@@ -69,7 +69,7 @@ then
     exit 1
   fi
 else
-  echo "$OPS :$RESET $directory_to_search"
+  echo "$OPS :$RESET Directory not found $DIR"
   exit 1 
 fi
 
