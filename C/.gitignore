@@ -17,3 +17,4 @@ regression-tests/regression-tests/**/*.testelf
 **/startup.lst
 **/startup.rlf
 **/startup.s
+regression-tests/regression-tests/summary
