@@ -42,7 +42,7 @@ done
 
 BASE_DIR=$(basename "$DIR")
 # -- Check for passed arguments
-if [ $# < 1 ]
+if [ $# -lt 1 ]
 then 
     echo "$RED[run-regression]:$RESET Usage run-regression -d path/to/elf/dir -k 1 or Usage run-regression all to run all tests"
     exit 1
