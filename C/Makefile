@@ -77,11 +77,6 @@ else
 	$(error "enter a valid path")
 endif
 
-	
-	
-
-
-
 # --------------------------------------------------------
 # Rule to compile test 
 # make compile-test src=path/to/main/file target=test_name
