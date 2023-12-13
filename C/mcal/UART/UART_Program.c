@@ -4,7 +4,7 @@
 #include "../../common/Registes.h"
 #include "UART_Config.h"
 #include "UART_Private.h"
-#include "UART.h"
+#include "UART.Interface.h"
 
 error_t UART_Init(void)
 {
