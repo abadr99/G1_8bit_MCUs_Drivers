@@ -2,9 +2,9 @@
 #include "../../common/Types.h"
 #include "../../common/Utils.h"
 #include "../../common/Registes.h"
-#include "SPI_prv.h"
-#include "SPI_conf.h"
-#include "SPI.h"
+#include "SPI_private.h"
+#include "SPI_config.h"
+#include "SPI_interface.h"
 
 void SPI_MASTER_Init()
 {
