@@ -47,7 +47,13 @@
     #define TCCR2        *((volatile uint8_t *)0X45)
     #define TCNT2        *((volatile uint8_t *)0X44)
     #define OCR2         *((volatile uint8_t *)0X43)
-
+    
+    #define UCSRA_REG   *((volatile uint8_t *)0X2B)
+    #define UCSRB_REG   *((volatile uint8_t *)0X2A)
+    #define UCSRC_REG   *((volatile uint8_t *)0X40)
+    #define UBRRL_REG   *((volatile uint8_t *)0X29)
+    #define UBRRH_REG   *((volatile uint8_t *)0X40)
+    #define UDR_REG     *((volatile uint8_t *)0X2C)
 
 #elif MCU_TYPE == _PIC
     #define TRISA_REG   *((volatile uint8_t *)0xF92)
@@ -65,8 +71,14 @@
     #define LATC_REG    *((volatile uint8_t *)0xF8B)
     #define LATD_REG    *((volatile uint8_t *)0xF8C)
     #define LATE_REG    *((volatile uint8_t *)0xF8D)
-
-
+    #define SPBRGH_REG  *((volatile uint8_t *)0xFB0)
+    #define RCREG_REG   *((volatile uint8_t *)0xFAE)
+    #define TXREG_REG   *((volatile uint8_t *)0xFAD)
+    #define TXSTA_REG   *((volatile uint8_t *)0xFAC)
+    #define RCSTA_REG   *((volatile uint8_t *)0xFAB)
+    #define TRISC_REG   *((volatile uint8_t *)0xF94)
+    #define PIR1_REG    *((volatile uint8_t *)0xF9E)
+    #define BAUDCTL_REG *((volatile uint8_t *)0xFB8)
 #endif  // MCU_TYPE
 
 #endif //_REGISTERS_H_
