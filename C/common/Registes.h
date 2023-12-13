@@ -55,8 +55,6 @@
     #define UBRRH_REG   *((volatile uint8_t *)0X40)
     #define UDR_REG     *((volatile uint8_t *)0X2C)
 
-
-
 #elif MCU_TYPE == _PIC
     #define TRISA_REG   *((volatile uint8_t *)0xF92)
     #define TRISB_REG   *((volatile uint8_t *)0xF93)
