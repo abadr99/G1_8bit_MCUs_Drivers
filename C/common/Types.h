@@ -25,7 +25,8 @@ typedef signed   long sint32_t;                  //IGNORE-STYLE-CHECK[B004]
 typedef enum
 {
 	kNoError,
-    kFunctionParameterError
+    kFunctionParameterError,
+    kTimeoutError
 }error_t;
 
 typedef enum
