@@ -54,6 +54,11 @@
     #define UBRRL_REG   *((volatile uint8_t *)0X29)
     #define UBRRH_REG   *((volatile uint8_t *)0X40)
     #define UDR_REG     *((volatile uint8_t *)0X2C)
+    #define TWCR       *((volatile uint8_t *)0x56) /* TWI Control Register */
+    #define TWDR       *((volatile uint8_t *)0x23) /* TWI Data Register */
+    #define TWAR       *((volatile uint8_t *)0x22) /* TWI Address Register */
+    #define TWSR       *((volatile uint8_t *)0x21) /* TWI Status Register */
+    #define TWBR       *((volatile uint8_t *)0x20) /* TWI Bit Rate Register */
 
 #elif MCU_TYPE == _PIC
     #define TRISA_REG   *((volatile uint8_t *)0xF92)
