@@ -34,4 +34,7 @@
 #define ADC_PRESCALER_64   (6)
 #define ADC_PRESCALER_128  (7)
 
+#define RCON_IPEN           (7)
+#define INTCON_PEIE         (6)
+#define INTCON_GIE          (7)
 #endif

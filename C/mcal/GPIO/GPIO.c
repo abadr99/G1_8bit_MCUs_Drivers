@@ -22,7 +22,7 @@ error_t GPIO_SetPinDirection(port_t portNumber, pin_t pinNumber,
 				case kPORTC : SET_DIR_OUTPUT(GPIOC_DIR_REG, pinNumber); break;
 				case kPORTD : SET_DIR_OUTPUT(GPIOD_DIR_REG, pinNumber); break;
 				#if MCU_TYPE == _PIC
-				case kPORTE : SET_DIR_OUTPUT(GPIO_DIRECTION_REGE, pinNumber); break;
+				case kPORTE : SET_DIR_OUTPUT(GPIOE_DIR_REG, pinNumber); break;
 				#endif
 			}
 		}
@@ -35,7 +35,7 @@ error_t GPIO_SetPinDirection(port_t portNumber, pin_t pinNumber,
 				case kPORTC : SET_DIR_INPUT(GPIOC_DIR_REG, pinNumber); break;
 				case kPORTD : SET_DIR_INPUT(GPIOD_DIR_REG, pinNumber); break;
 				#if MCU_TYPE == _PIC
-				case kPORTE : SET_DIR_INPUT(GPIO_DIRECTION_REGE, pinNumber); break;
+				case kPORTE : SET_DIR_INPUT(GPIOE_DIR_REG, pinNumber); break;
 				#endif
 			}
 		}
@@ -63,7 +63,7 @@ error_t GPIO_SetPinValue(port_t portNumber, pin_t pinNumber,
 				case kPORTC : SET_BIT(GPIOC_OUT_REG, pinNumber); break;
 				case kPORTD : SET_BIT(GPIOD_OUT_REG, pinNumber); break;
 				#if MCU_TYPE == _PIC
-				case kPORTE : SET_BIT(GPIO_OUTPUT_REGE, pinNumber); break;
+				case kPORTE : SET_BIT(GPIOE_OUT_REG, pinNumber); break;
 				#endif
 			}
 		}
@@ -76,7 +76,7 @@ error_t GPIO_SetPinValue(port_t portNumber, pin_t pinNumber,
 				case kPORTC : CLR_BIT(GPIOC_OUT_REG, pinNumber); break;
 				case kPORTD : CLR_BIT(GPIOD_OUT_REG, pinNumber); break;
 				#if MCU_TYPE == _PIC
-				case kPORTE : CLR_BIT(GPIO_OUTPUT_REGE, pinNumber); break;
+				case kPORTE : CLR_BIT(GPIOE_OUT_REG, pinNumber); break;
 				#endif
 			}
 		}
@@ -99,7 +99,7 @@ error_t GPIO_GetPinValue(port_t portNumber, pin_t pinNumber, state_t * state)
       case kPORTC : *state= GET_BIT(GPIOC_IN_REG, pinNumber); break;
       case kPORTD : *state =GET_BIT(GPIOD_IN_REG, pinNumber); break;
 	  #if MCU_TYPE == _PIC
-	  case kPORTE : *state =GET_BIT(GPIO_INPUT_REGE, pinNumber); break;
+	  case kPORTE : *state =GET_BIT(GPIOE_IN_REG, pinNumber); break;
 	  #endif
     }
    }
@@ -120,22 +120,22 @@ error_t GPIO_SetPortDirection(port_t portNumber, uint8_t direction)
 
     switch (portNumber)
     {
-     case kPORTA : GPIOA_DIR_REG =direction; break;
-     case kPORTB : GPIOB_DIR_REG =direction; break;
-     case kPORTC : GPIOC_DIR_REG =direction; break;
-     case kPORTD : GPIOD_DIR_REG =direction; break;
-	  #if MCU_TYPE == _PIC
-	  case kPORTE : GPIO_DIRECTION_REGE =direction; break;
-	  #endif
+     case kPORTA : GPIOA_DIR_REG = direction; break;
+     case kPORTB : GPIOB_DIR_REG = direction; break;
+     case kPORTC : GPIOC_DIR_REG = direction; break;
+     case kPORTD : GPIOD_DIR_REG = direction; break;
+	 #if MCU_TYPE == _PIC
+	 case kPORTE : GPIOE_DIR_REG = direction; break;
+	 #endif
     }
-
-  }else
+  }
+  else
   {
    retErrorState = kFunctionParameterError;
   }
-
   return retErrorState;
 }
+
 error_t GPIO_SetPortValue(port_t portNumber, uint8_t pintVoltageLevel)
 {
  /* Make sure that the Port number is in the valid range */
@@ -144,45 +144,46 @@ error_t GPIO_SetPortValue(port_t portNumber, uint8_t pintVoltageLevel)
  {
    switch (portNumber)
    {
-    case kPORTA : GPIOA_OUT_REG =pintVoltageLevel; break;
-    case kPORTB : GPIOB_OUT_REG =pintVoltageLevel; break;
-    case kPORTC : GPIOC_OUT_REG =pintVoltageLevel; break;
-    case kPORTD : GPIOD_OUT_REG =pintVoltageLevel; break;
+    case kPORTA : GPIOA_OUT_REG = pintVoltageLevel; break;
+    case kPORTB : GPIOB_OUT_REG = pintVoltageLevel; break;
+    case kPORTC : GPIOC_OUT_REG = pintVoltageLevel; break;
+    case kPORTD : GPIOD_OUT_REG = pintVoltageLevel; break;
 	#if MCU_TYPE == _PIC
-	case kPORTE : GPIO_DIRECTION_REGE =pintVoltageLevel; break;
+	case kPORTE : GPIOE_OUT_REG = pintVoltageLevel; break;
 	#endif
    }
-
- }else
+ }
+ else
  {
   retErrorState = kFunctionParameterError;
  }
  return retErrorState;
 }
+
 error_t GPIO_GetPortValue(port_t portNumber, uint8_t * state)
 {
-
  /* Make sure that the Port number is in the valid range */
   error_t retErrorState = kNoError;
   if (portNumber <= GPIO_LAST_REG  )
   {
     switch (portNumber)
     {
-     case kPORTA : *state=GPIOA_IN_REG; break;
-     case kPORTB : *state=GPIOB_IN_REG; break;
-     case kPORTC : *state=GPIOC_IN_REG; break;
-     case kPORTD : *state=GPIOD_IN_REG; break;
+     case kPORTA : *state = GPIOA_IN_REG; break;
+     case kPORTB : *state = GPIOB_IN_REG; break;
+     case kPORTC : *state = GPIOC_IN_REG; break;
+     case kPORTD : *state = GPIOD_IN_REG; break;
 	 #if MCU_TYPE == _PIC
-	 case kPORTE : *state =GPIO_INPUT_REGE; break;
-	  #endif
+	 case kPORTE : *state = GPIOE_IN_REG; break;
+	 #endif
     }
-
-  }else
+  }
+  else
   {
    retErrorState = kFunctionParameterError;
   }
   return retErrorState;
 }
+
 error_t GPIO_SetPinPullup(port_t portNumber, pin_t pinNumber)
 {
 	error_t retErrorState = kNoError;
@@ -191,16 +192,16 @@ error_t GPIO_SetPinPullup(port_t portNumber, pin_t pinNumber)
 		switch ( portNumber)
 		{
 			case kPORTA : SET_DIR_INPUT(GPIOA_DIR_REG, pinNumber);
-						  SET_BIT(GPIOA_OUT_REG, kHigh);
+						  SET_BIT(GPIOA_OUT_REG, pinNumber);
 						  break;
 			case kPORTB : SET_DIR_INPUT(GPIOB_DIR_REG, pinNumber);
-						  SET_BIT(GPIOB_OUT_REG, kHigh);
+						  SET_BIT(GPIOB_OUT_REG, pinNumber);
 						  break;
 			case kPORTC : SET_DIR_INPUT(GPIOC_DIR_REG, pinNumber);
-						  SET_BIT(GPIOC_OUT_REG, kHigh);
+						  SET_BIT(GPIOC_OUT_REG, pinNumber);
 						  break;
 			case kPORTD : SET_DIR_INPUT(GPIOD_DIR_REG, pinNumber);
-						  SET_BIT(GPIOD_OUT_REG, kHigh);
+						  SET_BIT(GPIOD_OUT_REG, pinNumber);
 						  break;
 			#if MCU_TYPE == _PIC
 			case kPORTE : SET_DIR_INPUT(GPIOE_DIR_REG, pinNumber);
@@ -208,12 +209,14 @@ error_t GPIO_SetPinPullup(port_t portNumber, pin_t pinNumber)
 						  break;
 			#endif
 		}
-	}else
+	}
+	else
 	{
 		retErrorState = kFunctionParameterError;
 	}
 	return retErrorState;
 }
+
 error_t GPIO_SetLowNibbleValue(port_t portNumber, uint8_t value)
 {
 	error_t kErrorState = kNoError;
@@ -225,6 +228,7 @@ error_t GPIO_SetLowNibbleValue(port_t portNumber, uint8_t value)
 		case kPORTB : GPIOB_OUT_REG &= 0XF0; GPIOB_OUT_REG |= value;  break;
 		case kPORTC : GPIOC_OUT_REG &= 0XF0; GPIOC_OUT_REG |= value;  break;
 		case kPORTD : GPIOD_OUT_REG &= 0XF0; GPIOD_OUT_REG |= value;  break;
+		// TODO(@ManarAbdelraouf): #99 Support GPIO_SetLowNibbleValue for pic family
 		default:      kErrorState = kFunctionParameterError;  break;
 	}
 	return kErrorState;

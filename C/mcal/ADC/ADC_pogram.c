@@ -2,9 +2,10 @@
 #include "../../common/Types.h"
 #include "../../common/Utils.h"
 #include "../../common/Registes.h"
-#include "ADC_interface.h"
 #include "ADC_Private.h"
 #include "ADC_config.h"
+#include "ADC_interface.h"
+
 
 static void (*ISRfunction)(void) =NULL;
 static uint16* aSynchResult;
@@ -64,7 +65,7 @@ error_t ADC_Init (void)
     ADCSRA_REG |= ADC_PRESCALER;
     #elif MCU_TYPE == _PIC
     ADCON2_REG &= ADC_PRE_MASK;
-    ADCON2_REG |= ADC_PRESCALER
+    ADCON2_REG |= ADC_PRESCALER;
     #endif
     return kErrorState;
 }
@@ -129,7 +130,7 @@ error_t ADC_GetResultSynch(uint8_t channel, uint16* result)
     error_t kErrorState = kNoError;
     if (result!=NULL)
     {
-        #if MCU_TYPE
+        #if MCU_TYPE == _AVR
         /* Select Channel */
         ADMUX_REG &=ADC_CH_MASK;
         ADMUX_REG |=channel;
@@ -200,12 +201,32 @@ error_t ADC_StartConvASynch(uint8_t channel, uint16* result,
     error_t kErrorState = kNoError;
     if (result!=NULL)
     {
+        #if MCU_TYPE == _AVR
         aSynchResult=result;
         ISRfunction=function;
         ADMUX_REG &=ADC_CH_MASK;
         ADMUX_REG =channel;
         SET_BIT(ADCSRA_REG, ADCSRA_ADSC);
         ADC_INTERRUPT_ENABLE();
+        #elif MCU_TYPE == _PIC
+        aSynchResult = result;
+        ISRfunction=function;
+        ADCON0_REG &= 0b11000011;
+        ADCON0_REG |= channel;
+        /* Start Conversion */
+        SET_BIT(ADCON0_REG, ADCON0_GODONE);
+        /*Enable Interrupt*/
+        //Clear ADC interrupt flag
+        CLR_BIT(PIR1_REG, PIR1_ADIF);
+        //Enable ADC interrupt
+        SET_BIT(PIE1_REG, PIE1_ADIE);
+        /*Disable priority*/
+        CLR_BIT(RCON_REG, RCON_IPEN);
+        //Enable peripheral interrupt
+        SET_BIT(INTCON_REG, INTCON_PEIE);
+        //Enable global interrupt
+        SET_BIT(INTCON_REG, INTCON_GIE);
+        #endif
     }
     else
     {
@@ -213,6 +234,7 @@ error_t ADC_StartConvASynch(uint8_t channel, uint16* result,
     }
     return kErrorState;
 }
+#if MCU_TYPE == _AVR
 void __vector_16(void) __attribute__((signal));
 void __vector_16(void)
 {
@@ -228,3 +250,20 @@ void __vector_16(void)
             ISRfunction();
             CLR_BIT(ADCSRA_REG, ADCSRA_ADIE);
 }
+#elif MCU_TYPE == _PIC
+void __interrupt() ADC()
+{
+    #if ADC_ADJUSTMENT == RIGHT_ADJUSTMENT
+        *aSynchResult = ADRESL_REG | (ADRESH_REG<<8);
+
+    #elif ADC_ADJUSTMENT == LEFT_ADJUSTMENT
+        *aSynchResult = (ADRESH_REG>>6) | (ADRESL_REG<<2);
+
+    #else
+        kErrorState = kFunctionParameterError;
+    #endif
+    ISRfunction();
+    //Disable ADC interrupt
+    CLR_BIT(PIE1_REG, PIE1_ADIE);
+}
+#endif
