@@ -54,7 +54,6 @@
     #define UBRRL_REG   *((volatile uint8_t *)0X29)
     #define UBRRH_REG   *((volatile uint8_t *)0X40)
     #define UDR_REG     *((volatile uint8_t *)0X2C)
-  
     #define TWCR       *((volatile uint8_t *)0x56) /* TWI Control Register */
     #define TWDR       *((volatile uint8_t *)0x23) /* TWI Data Register */
     #define TWAR       *((volatile uint8_t *)0x22) /* TWI Address Register */
