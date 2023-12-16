@@ -39,6 +39,12 @@ void print_num_binary(int num)
 {
     int str[sizeof(int)*8];
     int i = 0;
+    if(num==0)
+    {
+    SPECIAL_OUTPUT_PORT ='0';
+    }
+    else
+    {
     for (i=0;num>0;i++)
     {
     str[i]=num%2;
@@ -47,6 +53,7 @@ void print_num_binary(int num)
     for (i=i-1;i>=0;i--)
     {
     SPECIAL_OUTPUT_PORT = str[i]+'0';
+    }
     }
 }
 
