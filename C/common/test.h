@@ -39,7 +39,7 @@ void print_num_binary(int num)
 {
     int str[sizeof(int)*8];
     int i = 0;
-    if(num==0)
+    if (num==0)
     {
     SPECIAL_OUTPUT_PORT ='0';
     }
