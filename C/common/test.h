@@ -41,6 +41,7 @@ void print_num_binary(int num)
     int i = 0;
     if (num==0)
     {
+    print_str("0b");
     SPECIAL_OUTPUT_PORT ='0';
     }
     else
@@ -50,6 +51,7 @@ void print_num_binary(int num)
     str[i]=num%2;
     num=num/2;
     }
+    print_str("0b");
     for (i=i-1;i>=0;i--)
     {
     SPECIAL_OUTPUT_PORT = str[i]+'0';
