@@ -25,7 +25,7 @@ error_t Keypad_Initiate(keypad_t * pKeypad)
         }
         #endif
         /*--------Set Columns Pin as Output Pin---------*/
-        for (i = 0; i < pKeypad->numOfCol; i++)
+        for (i = 0; i < pKeypad->numOfCol; ++i)
         {
             GPIO_SetPinDirection(pKeypad->Keypad_COLArr[i].port,
                                  pKeypad->Keypad_COLArr[i].pin,
