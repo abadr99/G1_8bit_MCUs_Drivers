@@ -51,7 +51,7 @@ uint8_t Keypad_GetPressedKey(keypad_t * pKeypad, uint8_t keypadButtons[MAXROW][M
     uint8_t colCount;
     state_t buttonValue;
     state_t buttonIsPressed = kLow;
-    for (colCount = 0; colCount<pKeypad->numOfCol; colCount++)
+    for (colCount = 0; colCount<pKeypad->numOfCol; ++colCount)
     {
         GPIO_SetPinValue(pKeypad->Keypad_COLArr[colCount].port,
                          pKeypad->Keypad_COLArr[colCount].pin,
